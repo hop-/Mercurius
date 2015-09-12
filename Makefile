@@ -7,7 +7,7 @@ SDL_LIBS ?= -lSDL2 -lSDL2_image
 SRC_DIR ?= src
 OBJ_DIR ?= objs
 # name of executable (program)
-execable ?= monopoly
+execable ?= mercurius
 # autodetect projects in SRC_DIR
 PROJECT_DIRS := $(dir $(wildcard $(SRC_DIR)/*/*.hpp))
 # includes
@@ -27,7 +27,7 @@ _setDebug:
 	$(eval CXXFLAGS += -g)
 	@echo -e "\e[33mDebug.\e[0m"
 _setMingw:
-	$(eval execable := monopoly.exe)
+	$(eval execable := mercurius.exe)
 	$(eval LIBS += -mwindows -lmingw32 -lsdl2main)
 	@echo -e "\e[32mMinGW.\e[0m"
 _makeODir:
