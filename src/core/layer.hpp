@@ -10,17 +10,17 @@ class Event;
 
 class Layer
 {
-    Core::Gui* m_gui;
-    Core::Logic* m_logic;
+	Gui* m_gui;
+    Logic* m_logic;
 
 public:
     Layer();
-    Layer(Core::Gui* gui, Core::Logic* logic);
-    void init(Core::Gui* gui, Core::Logic* logic);
-    bool processEvent(Core::Event*);
+    Layer(Gui* gui, Logic* logic);
+    void init(Gui* gui, Logic* logic);
+    bool processEvent(Event*);
     void update();
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_LAYER_HPP_

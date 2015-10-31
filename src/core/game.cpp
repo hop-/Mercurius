@@ -1,15 +1,20 @@
-#include <game.hpp>
+#include "game.hpp"
 
-#include <layer.hpp>
-#include <frame.hpp>
+#include "layer.hpp"
+#include "frame.hpp"
 
-void Core::Game::mainLoop()
+namespace Core
+{
+
+void Game::mainLoop()
 {
     // TODO
 }
 
-void Core::Game::start()
+void Game::start()
 {
     m_frame->init();
     mainLoop();
 }
+
+} // namespace core

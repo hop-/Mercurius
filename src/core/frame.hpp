@@ -10,7 +10,7 @@ class Frame
 {
 public:
     virtual void init() = 0;
-    virtual void drawTexture(Core::Texture* texture) = 0; // TODO Texture
+    virtual void drawTexture(Texture* texture) = 0; // TODO Texture
 };
 
 } /// namespace Core

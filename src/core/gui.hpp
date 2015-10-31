@@ -10,6 +10,6 @@ public:
     virtual void draw() = 0;
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_GUI_HPP_

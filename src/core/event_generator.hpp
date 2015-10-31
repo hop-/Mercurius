@@ -13,8 +13,8 @@ class EventGenerator
 public:
     virtual void catchEvent() = 0;
     virtual unsigned getTicks();
-    Core::Event* getEvent();
-    Core::Command* getCommand(Core::Layer*);
+    Event* getEvent();
+    Command* getCommand(Layer*);
 };
 
 } /// namespace Core

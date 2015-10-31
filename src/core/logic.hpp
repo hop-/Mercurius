@@ -10,6 +10,6 @@ public:
     virtual void update() = 0;
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_LOGIC_HPP_
