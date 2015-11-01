@@ -11,6 +11,7 @@ class Command;
 class EventGenerator
 {
 public:
+    virtual ~EventGenerator() = default;
     virtual void catchEvent() = 0;
     virtual unsigned getTicks();
     Event* getEvent();

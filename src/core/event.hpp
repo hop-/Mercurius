@@ -18,7 +18,7 @@ public:
     };
 
 public:
-    virtual ~Event(){};
+    virtual ~Event() = default;
     virtual int getType() const = 0;
 };
 

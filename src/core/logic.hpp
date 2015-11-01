@@ -7,6 +7,7 @@ namespace Core
 class Logic
 {
 public:
+    virtual ~Logic() = default;
     virtual void update() = 0;
 };
 

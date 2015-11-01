@@ -7,6 +7,7 @@ namespace Core
 class Gui
 {
 public:
+    virtual ~Gui() = default;
     virtual void draw() = 0;
 };
 

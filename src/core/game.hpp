@@ -7,19 +7,22 @@ namespace Core
 {
 
 class Frame;
+class EventGenerator;
 class Layer;
 
 class Game
 {
     Frame* m_frame;
-    std::vector<Layer*> m_layer;
+    EventGenerator* m_eventGenerator;
+    std::vector<Layer*> m_layers;
 
 private:
     void mainLoop();
 
 public:
-    virtual ~Game() = default;
     void start();
+    void pushLayer(Layer* layer);
+    void popLayer();
 };
 
 } // namespace core
