@@ -1,6 +1,8 @@
 #ifndef _LAYER_HPP_
 #define _LAYER_HPP_
 
+#include "controls.hpp"
+
 namespace Core
 {
 
@@ -8,16 +10,26 @@ class Gui;
 class Logic;
 class Event;
 class Frame;
+class Command;
 
 class Layer
 {
 	Gui* m_gui;
     Logic* m_logic;
+    Controls m_controls;
     bool m_stopped;
+    bool m_hidden;
+    bool m_ignoreEvent;
 
 public:
     Layer();
-    Layer(Gui* gui, Logic* logic);
+    Layer(Gui* gui, Logic* logic, Controls controls,
+            bool stopped = false, 
+            bool hidden = false, 
+            bool ignoreEvents = false);
+    void changeControls(Controls controls);
+    Controls getControls();
+    Command* getCommand(Event* event);
     void init(Gui* gui, Logic* logic);
     bool processEvent(Event*);
     void stop(bool stop);
