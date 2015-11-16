@@ -3,6 +3,7 @@
 #include "layer.hpp"
 #include "frame.hpp"
 #include "event_generator.hpp"
+#include "command.hpp"
 
 namespace Core
 {
@@ -24,7 +25,7 @@ void Game::mainLoop()
             if (layer->isStopped()) {
                 continue;
             }
-            // TODO get commands for layer and execute them
+            m_eventGenerator->getCommand(layer)->execute();
             lag = realLag;
             while (lag >= msToUpdate) {
                 layer->update();
