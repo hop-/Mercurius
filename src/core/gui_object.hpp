@@ -7,7 +7,7 @@ namespace Core
 {
 
 class Gui_object :
-    Observer
+    public Observer
 {
 // TODO
 };

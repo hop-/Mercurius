@@ -14,6 +14,9 @@ PROJECT_DIRS := $(sort $(dir $(abspath $(wildcard $(SRC_DIR)/*/*.hpp))))
 INCLUDES := $(addprefix -I,$(PROJECT_DIRS))
 # autodetect *.cpp files
 CPPS := $(wildcard $(SRC_DIR)/*/*.cpp) $(wildcard $(SRC_DIR)/main.cpp)
+ifdef SKIP
+    CPPS := $(filter-out $(wildcard $(SKIP)), $(CPPS))
+endif
 # all object files
 OBJS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(CPPS:.cpp=.o))
 # setting colored output
@@ -35,7 +38,6 @@ ifdef INTERACTIVE
     endif
 endif
 #########################################
-
 
 _default: _makeODir $(execable)
 	@echo -e "$(GREEN)Compiled.$(RCOLOR)"
@@ -79,6 +81,8 @@ info:
 	@echo -e "\tby default: '$(MAGENTA)$(CXX)$(RCOLOR)'"
 	@echo -e "$(YELLOW)CXXFLAGS$(RCOLOR)\n\tfor set compilation flags."
 	@echo -e "\tby default: '$(MAGENTA)$(CXXFLAGS)$(RCOLOR)'"
+	@echo -e "$(YELLOW)SKIP$(RCOLOR)\n\tlist of skipping files(can be used windcard)."
+	@echo -e "\tby default: '$(MAGENTA)$(SKIP)$(RCOLOR)'"
 	@echo -e "$(YELLOW)SDL_LIBS$(RCOLOR)\n\tfor set SDL libs."
 	@echo -e "\tby default: '$(MAGENTA)$(SDL_LIBS)$(RCOLOR)'"
 	@echo -e "$(YELLOW)LIBS$(RCOLOR)\n\tfor set other libs."

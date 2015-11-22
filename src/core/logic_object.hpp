@@ -7,7 +7,7 @@ namespace Core
 {
 
 class Logic_object :
-    Subject
+    public Subject
 {
 // TODO
 };

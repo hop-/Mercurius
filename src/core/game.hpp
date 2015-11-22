@@ -16,13 +16,13 @@ class Game
     EventGenerator* m_eventGenerator;
     std::vector<Layer*> m_layers;
 
-private:
-    void mainLoop();
-
 public:
     void start();
     void pushLayer(Layer* layer);
     void popLayer();
+
+private:
+    void mainLoop();
 };
 
 } // namespace core

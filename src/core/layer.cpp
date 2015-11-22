@@ -27,8 +27,7 @@ Controls Layer::getControls()
 
 Command* Layer::getCommand(Event* event)
 {
-    // TODO
-    return 0; // for clean compilation, must be removed in implementation
+    return m_controls.getCommand(event);
 }
 
 void Layer::stop(bool stop)
