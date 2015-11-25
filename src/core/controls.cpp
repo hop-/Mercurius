@@ -1,7 +1,5 @@
 #include "controls.hpp"
 
-#include "event.hpp"
-
 namespace Core
 {
 

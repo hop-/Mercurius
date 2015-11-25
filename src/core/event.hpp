@@ -17,9 +17,22 @@ public:
         operator int() const;
     };
 
+    struct Less
+    {
+        bool operator() (Event* lEvent, Event* rEvent)
+        {
+            if (lEvent->getType() == rEvent->getType()) {
+                return lEvent->less(rEvent);
+            }
+            return lEvent->getType() < rEvent->getType();
+        }
+        typedef Event* first_argument_type;
+        typedef Event* second_argument_type;
+        typedef bool result_type;
+    };
+
     virtual ~Event() = default;
     virtual int getType() const = 0;
-    // TODO implement less operator for std::map which should work with pointers.
 
 private:
     virtual bool less(Event* event) = 0;

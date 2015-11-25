@@ -2,16 +2,16 @@
 #define _CONTROLS_HPP_
 
 #include <map>
+#include "event.hpp"
 
 namespace Core
 {
 
 class Command;
-class Event;
 
 class Controls
 {
-    std::map<Event*, Command*> m_controlMap;
+    std::map<Event*, Command*, Event::Less> m_controlMap;
 
 public:
     void add(Event* event, Command* command);
