@@ -19,6 +19,6 @@ public:
     Command* getCommand(Event* event);
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_CONTROLS_HPP_

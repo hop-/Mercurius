@@ -11,6 +11,6 @@ public:
     virtual void execute() = 0;
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_COMMAND_HPP_

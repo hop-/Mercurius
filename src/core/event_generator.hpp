@@ -20,6 +20,6 @@ public:
     Command* getCommand(Layer*);
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_EVENT_GENERATOR_HPP_

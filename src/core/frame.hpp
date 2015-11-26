@@ -17,6 +17,6 @@ public:
     const unsigned msPerUpdate() const;
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_FRAME_HPP_

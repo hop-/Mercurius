@@ -18,4 +18,4 @@ Command* Controls::getCommand(Event* event)
     return m_controlMap[event];
 }
 
-} /// namespace Core
+} // namespace Core

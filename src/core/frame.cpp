@@ -8,4 +8,4 @@ const unsigned Frame::msPerUpdate() const
     return m_msPerUpdate;
 }
 
-} /// namespace Core
+} // namespace Core
