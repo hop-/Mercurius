@@ -1,8 +1,10 @@
 #ifndef _CONTROLS_HPP_
 #define _CONTROLS_HPP_
 
-#include <map>
+
 #include "event.hpp"
+
+#include <map>
 
 namespace Core
 {

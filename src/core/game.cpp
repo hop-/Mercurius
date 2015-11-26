@@ -5,8 +5,25 @@
 #include "event_generator.hpp"
 #include "command.hpp"
 
+#include <cassert>
+
 namespace Core
 {
+
+Game::Game()
+    : m_frame(0)
+    , m_eventGenerator(0)
+{}
+
+Game::~Game()
+{
+    assert(0 != m_frame);
+    assert(0 != m_eventGenerator);
+    delete m_frame;
+    m_frame = 0;
+    delete m_eventGenerator;
+    m_eventGenerator = 0;
+}
 
 void Game::mainLoop()
 {
@@ -15,6 +32,7 @@ void Game::mainLoop()
     const unsigned msToUpdate = m_frame->msPerUpdate();
     // game loop
     while (m_layers.size()) {
+        assert(0 != m_eventGenerator);
         unsigned currentTicks = m_eventGenerator->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
         previousTicks = currentTicks;
@@ -22,10 +40,13 @@ void Game::mainLoop()
         unsigned lag = realLag;
         // run update for each layer
         for (Layer* layer : m_layers) {
+            assert(0 != layer);
             if (layer->isStopped()) {
                 continue;
             }
-            m_eventGenerator->getCommand(layer)->execute();
+            Command* cmd = m_eventGenerator->getCommand(layer);
+            assert(0 != cmd);
+            cmd->execute();
             lag = realLag;
             while (lag >= msToUpdate) {
                 layer->update();
@@ -39,6 +60,7 @@ void Game::mainLoop()
 
 void Game::start()
 {
+    assert(0 != m_frame);
     m_frame->init();
     mainLoop();
 }

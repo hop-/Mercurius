@@ -3,8 +3,14 @@
 #include "event.hpp"
 #include "layer.hpp"
 
+#include <cassert>
+
 namespace Core
 {
+
+EventGenerator::EventGenerator()
+    : m_catchedEvent(0)
+{}
 
 Event* EventGenerator::getEvent()
 {
@@ -13,6 +19,7 @@ Event* EventGenerator::getEvent()
 
 Command* EventGenerator::getCommand(Layer* layer)
 {
+    assert(0 != layer);
     return layer->getCommand(m_catchedEvent);
 }
 

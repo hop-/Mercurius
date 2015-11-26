@@ -13,6 +13,9 @@ class EventGenerator
     Event* m_catchedEvent;
 
 public:
+    EventGenerator();
+		
+public:
     virtual ~EventGenerator() = default;
     virtual void catchEvent() = 0;
     virtual unsigned getTicks() = 0;

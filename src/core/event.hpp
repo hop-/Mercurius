@@ -1,6 +1,8 @@
 #ifndef _EVENT_HPP_
 #define _EVENT_HPP_
 
+#include <cassert>
+
 namespace Core
 {
 
@@ -21,6 +23,8 @@ public:
     {
         bool operator() (Event* lEvent, Event* rEvent)
         {
+            assert(0 != lEvent);
+            assert(0 != rEvent);
             if (lEvent->getType() == rEvent->getType()) {
                 return lEvent->less(rEvent);
             }

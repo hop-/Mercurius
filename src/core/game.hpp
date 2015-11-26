@@ -17,6 +17,10 @@ class Game
     std::vector<Layer*> m_layers;
 
 public:
+    Game();
+    ~Game();
+
+public:
     void start();
     void pushLayer(Layer* layer);
     void popLayer();

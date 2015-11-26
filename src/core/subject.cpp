@@ -2,23 +2,28 @@
 
 #include "observer.hpp"
 
+#include <cassert>
+
 namespace Core
 {
 
 void Subject::notify()
 {
     for (Observer* observer : m_observersToNotify) {
+        assert(0 != observer);
         observer->onNotify();
     }
 }
 
 void Subject::addObserver(Observer* observer)
 {
+    assert(0 != observer);
     m_observersToNotify.push_back(observer);
 }
 
 void Subject::removeObserver(Observer* observer)
 {
+    assert(0 != observer);
     m_observersToNotify.remove(observer);
 }
 
