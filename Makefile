@@ -6,6 +6,8 @@ SDL_LIBS ?= -lSDL2 -lSDL2_image
 # source and objcet directorys
 SRC_DIR ?= src
 OBJ_DIR ?= objs
+# definitions
+DEF_FLAGS := $(addprefix -D, $(DEFINES))
 # name of executable (program)
 execable ?= mercurius
 # autodetect projects in SRC_DIR
@@ -43,11 +45,16 @@ _default: _makeODir $(execable)
 	@echo -e "$(GREEN)Compiled.$(RCOLOR)"
 debug: _setDebug _default
 
+noassert: _setNoassert _default
+
 mingw: _setMingw _default
 
 _setDebug:
 	$(eval CXXFLAGS += -g)
 	@echo -e "$(YELLOW)Debug.$(RCOLOR)"
+_setNoassert:
+	$(eval DEF_FLAGS += -DNDEBUG)
+	@echo -e "$(GREEN)Noassert.$(RCOLOR)"
 _setMingw:
 	$(eval execable := mercurius.exe)
 	$(eval LIBS += -mwindows -lmingw32 -lsdl2main)
@@ -56,11 +63,11 @@ _makeODir:
 	@mkdir -p $(OBJ_DIR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
-	@echo -e "$(BOLD)$(YELLOW)$(CXX) $(CXXFLAGS) -c $< -o $@$(RCOLOR)"
-	@$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
+	@echo -e "$(BOLD)$(YELLOW)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) -c $< -o $@$(RCOLOR)"
+	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -c $< -o $@
 $(execable): $(OBJS)
-	@echo -e "$(BOLD)$(GREEN)$(CXX) $(CXXFLAGS) <obj_files> -o $@ $(LIBS) $(SDL_LIBS)$(RCOLOR)"
-	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(OBJS) -o $@ $(LIBS) $(SDL_LIBS)
+	@echo -e "$(BOLD)$(GREEN)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) <obj_files> -o $@ $(LIBS) $(SDL_LIBS)$(RCOLOR)"
+	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) $(OBJS) -o $@ $(LIBS) $(SDL_LIBS)
 clean:
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(execable)
@@ -83,6 +90,8 @@ info:
 	@echo -e "\tby default: '$(MAGENTA)$(CXXFLAGS)$(RCOLOR)'"
 	@echo -e "$(YELLOW)SKIP$(RCOLOR)\n\tlist of skipping files(can be used windcard)."
 	@echo -e "\tby default: '$(MAGENTA)$(SKIP)$(RCOLOR)'"
+	@echo -e "$(YELLOW)DEFINES$(RCOLOR)\n\tlist of defined macros."
+	@echo -e "\tby default: '$(MAGENTA)$(DEFINES)$(RCOLOR)'"
 	@echo -e "$(YELLOW)SDL_LIBS$(RCOLOR)\n\tfor set SDL libs."
 	@echo -e "\tby default: '$(MAGENTA)$(SDL_LIBS)$(RCOLOR)'"
 	@echo -e "$(YELLOW)LIBS$(RCOLOR)\n\tfor set other libs."
