@@ -1,7 +1,6 @@
 #ifndef _CONTROLS_HPP_
 #define _CONTROLS_HPP_
 
-
 #include "event.hpp"
 
 #include <map>

@@ -30,7 +30,6 @@ public:
     void changeControls(Controls controls);
     Controls getControls();
     Command* getCommand(Event* event);
-    void init(Gui* gui, Logic* logic);
     bool processEvent(Event*);
     void stop(bool stop);
     void hide(bool hide);

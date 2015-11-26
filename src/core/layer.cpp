@@ -2,18 +2,23 @@
 
 #include "frame.hpp"
 
+#include <cassert>
+
 namespace Core
 {
 
 Layer::Layer(Gui* gui, Logic* logic, Controls controls,
         bool stopped, bool hidden, bool ignoreEvents) :
-    m_gui{gui},
-    m_logic{logic},
+    m_gui(gui),
+    m_logic(logic),
     m_controls(controls),
-    m_stopped{stopped},
-    m_hidden{hidden},
-    m_ignoreEvent{ignoreEvents}
-{}
+    m_stopped(stopped),
+    m_hidden(hidden),
+    m_ignoreEvent(ignoreEvents)
+{
+    assert(0 != gui);
+    assert(0 != logic);
+}
 
 void Layer::changeControls(Controls controls)
 {
@@ -27,6 +32,7 @@ Controls Layer::getControls()
 
 Command* Layer::getCommand(Event* event)
 {
+    assert(0 != event);
     return m_controls.getCommand(event);
 }
 

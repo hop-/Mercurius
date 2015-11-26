@@ -23,4 +23,10 @@ Command* EventGenerator::getCommand(Layer* layer)
     return layer->getCommand(m_catchedEvent);
 }
 
+void EventGenerator::setCatchedEvent(Event* e)
+{
+    assert(0 != e);
+    m_catchedEvent = e;
+}
+
 } // namespace core

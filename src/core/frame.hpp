@@ -10,6 +10,9 @@ class Frame
 {
     unsigned m_msPerUpdate;
 
+protected:
+    void setmsPerUpdate(unsigned ms);
+    
 public:
     virtual ~Frame() = default;
     virtual void init() = 0;

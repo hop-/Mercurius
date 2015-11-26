@@ -11,6 +11,6 @@ public:
     virtual void onNotify() = 0;
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_OBSERVER_HPP_

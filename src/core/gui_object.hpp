@@ -6,12 +6,11 @@
 namespace Core
 {
 
-class Gui_object :
-    public Observer
+class Gui_object :public Observer
 {
 // TODO
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_GUI_OBJECT_HPP_

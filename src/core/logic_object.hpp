@@ -6,12 +6,11 @@
 namespace Core
 {
 
-class Logic_object :
-    public Subject
+class Logic_object :public Subject
 {
 // TODO
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_LOGIC_OBJECT_HPP_
