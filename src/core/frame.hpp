@@ -16,7 +16,7 @@ protected:
 public:
     virtual ~Frame() = default;
     virtual void init() = 0;
-    virtual void drawTexture(Texture* texture) = 0; // TODO Texture
+    virtual void drawTexture(Texture* texture) = 0;
     const unsigned msPerUpdate() const;
 };
 

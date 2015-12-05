@@ -15,15 +15,15 @@ class EventGenerator
 public:
     EventGenerator();
     virtual ~EventGenerator() = default;
-	
-protected:
-    void setCatchedEvent(Event*);
    
 public:
     virtual void catchEvent() = 0;
     virtual unsigned getTicks() = 0;
     Event* getEvent();
     Command* getCommand(Layer*);
+	
+protected:
+    void setCatchedEvent(Event*);
 };
 
 } // namespace Core
