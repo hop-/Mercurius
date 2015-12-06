@@ -1,5 +1,5 @@
-#ifndef _POSITION_HPP_
-#define _POSITION_HPP_
+#ifndef _CORE_POSITION_HPP_
+#define _CORE_POSITION_HPP_
 
 #include "units.hpp"
 #include "vector.hpp"
@@ -26,4 +26,4 @@ public:
 
 } // namespace Core
 
-#endif //_POSITION_HPP_
+#endif //_CORE_POSITION_HPP_

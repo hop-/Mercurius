@@ -1,5 +1,5 @@
-#ifndef _EVENT_HPP_
-#define _EVENT_HPP_
+#ifndef _CORE_EVENT_HPP_
+#define _CORE_EVENT_HPP_
 
 #include <cassert>
 
@@ -60,4 +60,4 @@ const Event::ID EventCreator<T>::type;
 
 } // namespace Core
 
-#endif //_EVENT_HPP_
+#endif //_CORE_EVENT_HPP_

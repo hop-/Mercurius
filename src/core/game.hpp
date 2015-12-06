@@ -1,5 +1,5 @@
-#ifndef _GAME_HPP_
-#define _GAME_HPP_
+#ifndef _CORE_GAME_HPP_
+#define _CORE_GAME_HPP_
 
 #include <vector>
 
@@ -31,4 +31,4 @@ private:
 
 } // namespace core
 
-#endif //_GAME_HPP_
+#endif //_CORE_GAME_HPP_

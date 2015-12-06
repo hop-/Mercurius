@@ -1,5 +1,5 @@
-#ifndef _COMMAND_HPP_
-#define _COMMAND_HPP_
+#ifndef _CORE_COMMAND_HPP_
+#define _CORE_COMMAND_HPP_
 
 namespace Core
 {
@@ -13,4 +13,4 @@ public:
 
 } // namespace Core
 
-#endif //_COMMAND_HPP_
+#endif //_CORE_COMMAND_HPP_

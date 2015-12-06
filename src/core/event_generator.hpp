@@ -1,5 +1,5 @@
-#ifndef _EVENT_GENERATOR_HPP_
-#define _EVENT_GENERATOR_HPP_
+#ifndef _CORE_EVENT_GENERATOR_HPP_
+#define _CORE_EVENT_GENERATOR_HPP_
 
 namespace Core
 {
@@ -28,4 +28,4 @@ protected:
 
 } // namespace Core
 
-#endif //_EVENT_GENERATOR_HPP_
+#endif //_CORE_EVENT_GENERATOR_HPP_

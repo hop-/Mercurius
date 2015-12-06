@@ -1,5 +1,5 @@
-#ifndef _LOGIC_HPP_
-#define _LOGIC_HPP_
+#ifndef _CORE_LOGIC_HPP_
+#define _CORE_LOGIC_HPP_
 
 namespace Core
 {
@@ -13,4 +13,4 @@ public:
 
 } // namespace Core
 
-#endif //_LOGIC_HPP_
+#endif //_CORE_LOGIC_HPP_

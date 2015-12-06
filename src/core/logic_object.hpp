@@ -1,5 +1,5 @@
-#ifndef _LOGIC_OBJECT_HPP_
-#define _LOGIC_OBJECT_HPP_
+#ifndef _CORE_LOGIC_OBJECT_HPP_
+#define _CORE_LOGIC_OBJECT_HPP_
 
 #include "subject.hpp"
 #include "shape.hpp"
@@ -23,4 +23,4 @@ public:
 
 } // namespace Core
 
-#endif //_LOGIC_OBJECT_HPP_
+#endif //_CORE_LOGIC_OBJECT_HPP_

@@ -1,5 +1,5 @@
-#ifndef _GUI_HPP_
-#define _GUI_HPP_
+#ifndef _CORE_GUI_HPP_
+#define _CORE_GUI_HPP_
 
 namespace Core
 {
@@ -13,4 +13,4 @@ public:
 
 } // namespace Core
 
-#endif //_GUI_HPP_
+#endif //_CORE_GUI_HPP_

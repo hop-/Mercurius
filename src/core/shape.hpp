@@ -1,5 +1,5 @@
-#ifndef _SHAPE_HPP_
-#define _SHAPE_HPP_
+#ifndef _CORE_SHAPE_HPP_
+#define _CORE_SHAPE_HPP_
 
 #include "units.hpp"
 
@@ -24,4 +24,4 @@ public:
 
 } // namespace Core
 
-#endif //_SHAPE_HPP_
+#endif //_CORE_SHAPE_HPP_

@@ -1,5 +1,5 @@
-#ifndef _STATIC_OBJECT_HPP_
-#define _STATIC_OBJECT_HPP_
+#ifndef _CORE_STATIC_OBJECT_HPP_
+#define _CORE_STATIC_OBJECT_HPP_
 
 #include "logic_object.hpp"
 
@@ -14,4 +14,4 @@ class StaticObject :
 
 } // namespace Core
 
-#endif //_STATIC_OBJECT_HPP_
+#endif //_CORE_STATIC_OBJECT_HPP_

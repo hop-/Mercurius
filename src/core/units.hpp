@@ -1,5 +1,5 @@
-#ifndef _UNITS_HPP_
-#define _UNITS_HPP_
+#ifndef _CORE_UNITS_HPP_
+#define _CORE_UNITS_HPP_
 
 namespace Core
 {
@@ -11,4 +11,4 @@ using UserUnit = float;
 
 } // namespace Core
 
-#endif //_UNITS_HPP_
+#endif //_CORE_UNITS_HPP_

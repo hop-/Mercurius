@@ -1,5 +1,5 @@
-#ifndef _CONTROLS_HPP_
-#define _CONTROLS_HPP_
+#ifndef _CORE_CONTROLS_HPP_
+#define _CORE_CONTROLS_HPP_
 
 #include "event.hpp"
 
@@ -22,4 +22,4 @@ public:
 
 } // namespace Core
 
-#endif //_CONTROLS_HPP_
+#endif //_CORE_CONTROLS_HPP_

@@ -1,5 +1,5 @@
-#ifndef _SUBJECT_HPP_
-#define _SUBJECT_HPP_
+#ifndef _CORE_SUBJECT_HPP_
+#define _CORE_SUBJECT_HPP_
 
 #include <list>
 
@@ -20,4 +20,4 @@ public:
 
 } // namespace Core
 
-#endif //_SUBJECT_HPP_
+#endif //_CORE_SUBJECT_HPP_

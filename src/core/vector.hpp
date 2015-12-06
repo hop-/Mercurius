@@ -1,5 +1,5 @@
-#ifndef _VECTOR_HPP_
-#define _VECTOR_HPP_
+#ifndef _CORE_VECTOR_HPP_
+#define _CORE_VECTOR_HPP_
 
 #include "units.hpp"
 
@@ -32,4 +32,4 @@ Vector& operator*(Vector& vector, float& multiplier);
 Vector& operator*(float& multiplier, Vector& vector);
 } // namespace Core
 
-#endif //_VECTOR_HPP_
+#endif //_CORE_VECTOR_HPP_

@@ -1,5 +1,5 @@
-#ifndef _DYNAMIC_OBJECT_HPP_
-#define _DYNAMIC_OBJECT_HPP_
+#ifndef _CORE_DYNAMIC_OBJECT_HPP_
+#define _CORE_DYNAMIC_OBJECT_HPP_
 
 #include "logic_object.hpp"
 
@@ -17,4 +17,4 @@ public:
 
 } // namespace Core
 
-#endif //_DYNAMIC_OBJECT_HPP_
+#endif //_CORE_DYNAMIC_OBJECT_HPP_

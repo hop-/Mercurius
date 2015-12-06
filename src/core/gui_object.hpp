@@ -1,5 +1,5 @@
-#ifndef _GUI_OBJECT_HPP_
-#define _GUI_OBJECT_HPP_
+#ifndef _CORE_GUI_OBJECT_HPP_
+#define _CORE_GUI_OBJECT_HPP_
 
 #include "observer.hpp"
 #include "mml.hpp"
@@ -23,4 +23,4 @@ public:
 
 } // namespace Core
 
-#endif //_GUI_OBJECT_HPP_
+#endif //_CORE_GUI_OBJECT_HPP_

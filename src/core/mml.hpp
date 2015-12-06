@@ -1,5 +1,5 @@
-#ifndef _MML_HPP_
-#define _MML_HPP_
+#ifndef _CORE_MML_HPP_
+#define _CORE_MML_HPP_
 
 #include <string>
 
@@ -15,4 +15,4 @@ public:
 
 } // namespace Core
 
-#endif //_MML_HPP_
+#endif //_CORE_MML_HPP_

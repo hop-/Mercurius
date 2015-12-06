@@ -1,5 +1,5 @@
-#ifndef _LAYER_HPP_
-#define _LAYER_HPP_
+#ifndef _CORE_LAYER_HPP_
+#define _CORE_LAYER_HPP_
 
 #include "controls.hpp"
 
@@ -41,4 +41,4 @@ public:
 
 } // namespace Core
 
-#endif //_LAYER_HPP_
+#endif //_CORE_LAYER_HPP_

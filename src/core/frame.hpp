@@ -1,5 +1,5 @@
-#ifndef _FRAME_HPP_
-#define _FRAME_HPP_
+#ifndef _CORE_FRAME_HPP_
+#define _CORE_FRAME_HPP_
 
 namespace Core
 {
@@ -22,4 +22,4 @@ public:
 
 } // namespace Core
 
-#endif //_FRAME_HPP_
+#endif //_CORE_FRAME_HPP_
