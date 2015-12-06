@@ -2,13 +2,23 @@
 #define _GUI_OBJECT_HPP_
 
 #include "observer.hpp"
+#include "mml.hpp"
+
+#include <string>
 
 namespace Core
 {
 
-class Gui_object :public Observer
+class GuiObject :
+    public Observer
 {
-// TODO
+    MML m_mml;
+
+protected:
+    GuiObject(std::string config);
+
+public:
+    virtual ~GuiObject() = default;
 };
 
 } // namespace Core

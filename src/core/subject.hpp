@@ -18,6 +18,6 @@ public:
     void removeObserver(Observer* observer);
 };
 
-} /// namespace Core
+} // namespace Core
 
 #endif //_SUBJECT_HPP_

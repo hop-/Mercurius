@@ -27,4 +27,4 @@ void Subject::removeObserver(Observer* observer)
     m_observersToNotify.remove(observer);
 }
 
-} /// namespace Core
+} // namespace Core

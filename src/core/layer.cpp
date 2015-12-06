@@ -66,4 +66,4 @@ void Layer::draw(Frame* frame)
     // TODO
 }
 
-} /// namespace Core
+} // namespace Core
