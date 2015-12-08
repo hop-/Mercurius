@@ -21,6 +21,8 @@ ifdef SKIP
 endif
 # all object files
 OBJS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(CPPS:.cpp=.o))
+# all dependensy files
+DEPS := $(OBJS:.o=.d)
 # setting colored output
 INTERACTIVE := $(shell [ -t 0 ] && echo 1)
 NOCOLORS := 0
@@ -61,15 +63,20 @@ _setMingw:
 	@echo -e "$(GREEN)MinGW.$(RCOLOR)"
 _makeODir:
 	@mkdir -p $(OBJ_DIR)
+resolve:
+	@echo -e "$(GREEN)Resolved.$(RCOLOR)"
+	@find $(OBJ_DIR) -name *.d | xargs rm -rf
+$(OBJ_DIR)/%.d: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)
+	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -MM $< -o $@
+	@sed -i 's|$(notdir $*).o:|$(@:.d=.o):|g' $@
 
--include $(OBJS:.o=.d)
+-include $(DEPS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	@echo -e "$(BOLD)$(YELLOW)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) -c $< -o $@$(RCOLOR)"
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -c $< -o $@
-	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -MM $< > $(OBJ_DIR)/$*.d
-	@sed -i 's|$(notdir $*).o:|$@:|g' $(OBJ_DIR)/$*.d
 $(execable): $(OBJS)
 	@echo -e "$(BOLD)$(GREEN)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) <obj_files> -o $@ $(LIBS) $(SDL_LIBS)$(RCOLOR)"
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) $(OBJS) -o $@ $(LIBS) $(SDL_LIBS)
@@ -83,10 +90,12 @@ help: info
 info:
 	@echo -e "\nMakefile, for compile $(BOLD)$(GREEN)$(execable)$(RCOLOR)\n"
 	@echo -e "------$(RED) Use the following targets $(RCOLOR)-----------------"
-	@echo -e "$(MAGENTA)<None>$(RCOLOR)\n\tto make the $(BOLD)$(GREEN)$(execable)$(RCOLOR)."
+	@echo -e "$(MAGENTA)<None>$(RCOLOR) | $(CYAN)default$(RCOLOR)\n\tto make the $(BOLD)$(GREEN)$(execable)$(RCOLOR)."
 	@echo -e "$(CYAN)debug$(RCOLOR)\n\tto compile the $(BOLD)$(GREEN)$(execable)$(RCOLOR) with debugging flags."
+	@echo -e "$(CYAN)noassert$(RCOLOR)\n\tto compile the $(BOLD)$(GREEN)$(execable)$(RCOLOR) without asserts."
 	@echo -e "$(CYAN)mingw$(RCOLOR)\n\tto compile the $(BOLD)$(GREEN)$(execable)$(RCOLOR) with mingw flags."
 	@echo -e "$(CYAN)clean$(RCOLOR)\n\tto cleanup."
+	@echo -e "$(CYAN)resolve$(RCOLOR)\n\tto resolve dependencies after hierarchical changes."
 	@echo -e "$(CYAN)help$(RCOLOR) | $(CYAN)info$(RCOLOR)\n\tto type this message."
 	@echo -e "------$(RED) Setable variables $(RCOLOR)-------------------------"
 	@echo -e "$(YELLOW)CXX$(RCOLOR)\n\tfor set the compiler."

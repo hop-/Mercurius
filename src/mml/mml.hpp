@@ -8,7 +8,7 @@ namespace Core
 
 class MML
 {
-    // TODO
+    // TODO Mercurius Modeling Language parser
 public:
     MML(std::string config);
 };

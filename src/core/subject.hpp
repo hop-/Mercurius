@@ -12,6 +12,9 @@ class Subject
 {
     std::list<Observer*> m_observersToNotify;
 
+protected:
+    Subject() = default;
+
 public:
     void notify();
     void addObserver(Observer* observer);
