@@ -25,7 +25,7 @@ OBJS := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(CPPS:.cpp=.o))
 INTERACTIVE := $(shell [ -t 0 ] && echo 1)
 NOCOLORS := 0
 ifdef INTERACTIVE
-    NOCOLORS := $(shell tput colors)
+    NOCOLORS := $(shell tput colors 2> /dev/null)
     ifeq ($(NOCOLORS), 8)
         BOLD := $(shell tput bold)
         RCOLOR := $(shell tput sgr0)
@@ -61,10 +61,15 @@ _setMingw:
 	@echo -e "$(GREEN)MinGW.$(RCOLOR)"
 _makeODir:
 	@mkdir -p $(OBJ_DIR)
+
+-include $(OBJS:.o=.d)
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	@echo -e "$(BOLD)$(YELLOW)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) -c $< -o $@$(RCOLOR)"
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -c $< -o $@
+	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -MM $< > $(OBJ_DIR)/$*.d
+	@sed -i 's|$(notdir $*).o:|$@:|g' $(OBJ_DIR)/$*.d
 $(execable): $(OBJS)
 	@echo -e "$(BOLD)$(GREEN)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) <obj_files> -o $@ $(LIBS) $(SDL_LIBS)$(RCOLOR)"
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) $(OBJS) -o $@ $(LIBS) $(SDL_LIBS)
