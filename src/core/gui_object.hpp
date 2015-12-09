@@ -9,8 +9,8 @@
 namespace Core
 {
 
-class GuiObject :
-    public Observer
+class GuiObject
+    : public Observer
 {
     MML m_mml;
 

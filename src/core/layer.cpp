@@ -8,13 +8,13 @@ namespace Core
 {
 
 Layer::Layer(Gui* gui, Logic* logic, Controls controls,
-        bool stopped, bool hidden, bool ignoreEvents) :
-    m_gui(gui),
-    m_logic(logic),
-    m_controls(controls),
-    m_stopped(stopped),
-    m_hidden(hidden),
-    m_ignoreEvent(ignoreEvents)
+        bool stopped, bool hidden, bool ignoreEvents)
+    : m_gui(gui)
+    , m_logic(logic)
+    , m_controls(controls)
+    , m_stopped(stopped)
+    , m_hidden(hidden)
+    , m_ignoreEvent(ignoreEvents)
 {
     assert(0 != gui);
     assert(0 != logic);
@@ -58,12 +58,15 @@ bool Layer::isStopped()
 
 void Layer::update()
 {
-    // TODO
+    m_logic->update();
 }
 
 void Layer::draw(Frame* frame)
 {
-    // TODO
+    // TODO gui draw on frame
+    if (!hide) {
+        gui->draw();
+    }
 }
 
 } // namespace Core

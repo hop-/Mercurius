@@ -43,8 +43,8 @@ private:
 };
 
 template <class T>
-class EventCreator :
-    public Event
+class EventCreator
+    : public Event
 {
     static const ID type;
 

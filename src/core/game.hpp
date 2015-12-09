@@ -17,7 +17,7 @@ class Game
     std::vector<Layer*> m_layers;
 
 public:
-    Game();
+    Game(Frame* frame, EventGenerator* eventGenerator);
     ~Game();
 
 public:

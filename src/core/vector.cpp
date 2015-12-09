@@ -11,14 +11,14 @@
 namespace Core
 {
 
-Vector::Vector() :
-    m_x(0),
-    m_y(0)
+Vector::Vector()
+    : m_x(0)
+    , m_y(0)
 {}
 
-Vector::Vector(EngineUnit magnitude, float angle) :
-    m_x(magnitude* std::cos(angle *_PI / 180)),
-    m_y(magnitude* std::sin(angle *_PI / 180))
+Vector::Vector(EngineUnit magnitude, float angle)
+    : m_x(magnitude* std::cos(angle *_PI / 180))
+    , m_y(magnitude* std::sin(angle *_PI / 180))
 {}
 
 EngineUnit Vector::x()

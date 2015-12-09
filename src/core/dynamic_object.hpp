@@ -6,13 +6,13 @@
 namespace Core
 {
 
-class DynamicObject :
-    public LogicObject
+class DynamicObject
+    : public LogicObject
 {
     Vector m_velocity;
 
 public:
-    // TODO
+    void addVector(Vector vector);
 };
 
 } // namespace Core

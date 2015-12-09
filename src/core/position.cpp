@@ -3,13 +3,13 @@
 namespace Core
 {
 
-Position::Position(EngineUnit x, EngineUnit y) :
-    m_x(x),
-    m_y(y)
+Position::Position(EngineUnit x, EngineUnit y)
+    : m_x(x)
+    , m_y(y)
 {}
 
-Position::Position() :
-    Position(0, 0)
+Position::Position()
+    : Position(0, 0)
 {}
 
 EngineUnit Position::x()

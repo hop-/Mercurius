@@ -8,8 +8,8 @@
 namespace Core
 {
 
-class LogicObject :
-    public Subject
+class LogicObject
+    : public Subject
 {
     Shape m_shape;
     Position m_position;
@@ -19,6 +19,10 @@ protected:
 
 public:
     virtual ~LogicObject() = default;
+    void setShape(Shape shape);
+    void setPosition(Position position);
+    Shape shape();
+    Position position();
 };
 
 } // namespace Core

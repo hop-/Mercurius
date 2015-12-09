@@ -6,8 +6,8 @@
 namespace Core
 {
 
-class StaticObject :
-    public LogicObject
+class StaticObject
+    : public LogicObject
 {
     // TODO
 };

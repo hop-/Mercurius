@@ -10,12 +10,10 @@
 namespace Core
 {
 
-Game::Game()
-    : m_frame(0)
-    , m_eventGenerator(0)
-{
-    // TODO init frame and event generator
-}
+Game::Game(Frame* frame, EventGenerator* eventGenerator)
+    : m_frame(frame)
+    , m_eventGenerator(eventGenerator)
+{}
 
 Game::~Game()
 {
