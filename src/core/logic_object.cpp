@@ -20,7 +20,7 @@ Shape LogicObject::shape()
 
 Position LogicObject::position()
 {
-    return position;
+    return m_position;
 }
 
 } // namespace Core

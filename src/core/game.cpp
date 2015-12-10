@@ -15,6 +15,10 @@ Game::Game(Frame* frame, EventGenerator* eventGenerator)
     , m_eventGenerator(eventGenerator)
 {}
 
+Game::Game()
+    : Game(0, 0)
+{}
+
 Game::~Game()
 {
     assert(0 != m_frame);

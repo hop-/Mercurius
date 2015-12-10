@@ -18,6 +18,7 @@ class Game
 
 public:
     Game(Frame* frame, EventGenerator* eventGenerator);
+    Game();
     ~Game();
 
 public:

@@ -1,6 +1,8 @@
 #include "layer.hpp"
 
 #include "frame.hpp"
+#include "logic.hpp"
+#include "gui.hpp"
 
 #include <cassert>
 
@@ -64,8 +66,8 @@ void Layer::update()
 void Layer::draw(Frame* frame)
 {
     // TODO gui draw on frame
-    if (!hide) {
-        gui->draw();
+    if (!m_hidden) {
+        m_gui->draw();
     }
 }
 
