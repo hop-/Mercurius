@@ -2,7 +2,7 @@
 
 namespace Core
 {
-MML::MML(std::string confing)
+MML::MML(const std::string& confing)
 {
     // TODO
 }
