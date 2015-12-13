@@ -2,20 +2,34 @@
 #define _MML_MML_OBJECT_HPP
 
 #include <string>
+#include <vector>
 
 namespace MML
 {
+
+class MMLAttribute;
 
 class MMLObject
 {
 public:
     MMLObject() = default;
-    virtual ~MMLObjectct()
+    virtual ~MMLObject()
     {}
 
 public:
-    const std::string& get_type() = 0;
+    const std::string& getType() = 0;
 
+public:
+    typedef std::vector<MMLAttribute*> MMLAttributes;
+    typedef const MMLAttributes CMMLAttributes;
+
+    CMMLAttributes& getAttributes() const;
+
+protected:
+    void addAttribute(MMLAttribute*);
+
+private:
+    MMLAttributes m_attributes;
 };
 
 } // namespace MML
