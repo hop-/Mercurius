@@ -1,5 +1,5 @@
-#ifndef _MML_MML_OBJECT_HPP
-#define _MML_MML_OBJECT_HPP
+#ifndef _MML_MMLOBJECT_HPP
+#define _MML_MMLOBJECT_HPP
 
 #include <string>
 #include <vector>
@@ -12,12 +12,11 @@ class MMLAttribute;
 class MMLObject
 {
 public:
-    MMLObject() = default;
-    virtual ~MMLObject()
-    {}
+    MMLObject(const std::string&, MMLObject* = 0);
+    virtual ~MMLObject() = 0;
 
 public:
-    const std::string& getType() = 0;
+    const std::string& getType();
 
 public:
     typedef std::vector<MMLAttribute*> MMLAttributes;
@@ -25,13 +24,24 @@ public:
 
     CMMLAttributes& getAttributes() const;
 
+public:
+    const std::string& getName() const;
+
+public:
+    void setParent(MMLObject*);
+    const MMLObject* getParent() const;
+
 protected:
     void addAttribute(MMLAttribute*);
+    void setType(const std::string&);
 
 private:
     MMLAttributes m_attributes;
+    const std::string m_name;
+    std::string m_type;
+    MMLObject* m_parent;
 };
 
 } // namespace MML
 
-#endif // _MML_MML_OBJECT_HPP
+#endif // _MML_MMLOBJECT_HPP
