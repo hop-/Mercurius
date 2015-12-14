@@ -16,20 +16,26 @@ public:
     Vector(EngineUnit magnitude, float angle);
 
 public:
-    EngineUnit x();
-    EngineUnit y();
-    void setX(EngineUnit x);
-    void setY(EngineUnit y);
+    inline const EngineUnit& x() const
+    {
+        return m_x;
+    }
+
+    inline const EngineUnit& y() const
+    {
+        return m_y;
+    }
+
     EngineUnit magnitude();
     float angle();
     float angleInRadians();
-    Vector& operator+=(Vector& vector);
-    Vector& operator*=(float& multiplier);
+    Vector& operator+=(const Vector& vector);
+    Vector& operator*=(const float& multiplier);
 };
 
-Vector& operator+(Vector& vector1, Vector& vector2);
-Vector& operator*(Vector& vector, float& multiplier);
-Vector& operator*(float& multiplier, Vector& vector);
+Vector& operator+(const Vector& vector1, const Vector& vector2);
+Vector& operator*(const Vector& vector, const float& multiplier);
+Vector& operator*(const float& multiplier, const Vector& vector);
 } // namespace Core
 
 #endif //_CORE_VECTOR_HPP_

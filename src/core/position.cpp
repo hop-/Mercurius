@@ -12,26 +12,6 @@ Position::Position()
     : Position(0, 0)
 {}
 
-EngineUnit Position::x()
-{
-    return m_x;
-}
-
-EngineUnit Position::y()
-{
-    return m_y;
-}
-
-void Position::setX(EngineUnit x)
-{
-    m_x = x;
-}
-
-void Position::setY(EngineUnit y)
-{
-    m_y = y;
-}
-
 void Position::move(Vector vector)
 {
     m_x += vector.x();

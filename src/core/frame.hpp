@@ -11,13 +11,20 @@ class Frame
     unsigned m_msPerUpdate;
 
 protected:
-    void setmsPerUpdate(unsigned ms);
+    inline void setmsPerUpdate(const unsigned& ms)
+    {
+        m_msPerUpdate = ms;
+    }
     
 public:
     virtual ~Frame() = default;
     virtual void init() = 0;
     virtual void drawTexture(Texture* texture) = 0;
-    const unsigned msPerUpdate() const;
+
+    inline const unsigned& msPerUpdate() const
+    {
+        return m_msPerUpdate;
+    }
 };
 
 } // namespace Core

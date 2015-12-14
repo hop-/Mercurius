@@ -17,10 +17,26 @@ public:
     Position();
 
 public:
-    EngineUnit x();
-    EngineUnit y();
-    void setX(EngineUnit x);
-    void setY(EngineUnit y);
+    inline const EngineUnit& x() const
+    {
+        return m_x;
+    }
+
+    inline const EngineUnit& y() const
+    {
+        return m_y;
+    }
+
+    inline void setX(const EngineUnit& x)
+    {
+        m_x = x;
+    }
+
+    inline void setY(const EngineUnit& y)
+    {
+        m_y = y;
+    }
+
     void move(Vector vector);
 };
 

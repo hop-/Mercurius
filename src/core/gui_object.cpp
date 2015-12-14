@@ -2,7 +2,9 @@
 
 namespace Core
 {
-GuiObject::GuiObject(std::string config)
+
+GuiObject::GuiObject(const std::string& config)
     : m_mml(config)
 {}
+
 } // namespace Core

@@ -16,10 +16,25 @@ public:
     Shape();
 
 public:
-    EngineUnit width();
-    EngineUnit height();
-    void setWidth(EngineUnit width);
-    void setHeight(EngineUnit height);
+    inline const EngineUnit& width() const
+    {
+        return m_width;
+    }
+
+    inline const EngineUnit& height() const
+    {
+        return m_height;
+    }
+
+    inline void setWidth(const EngineUnit& width)
+    {
+        m_width = width;
+    }
+
+    inline void setHeight(const EngineUnit& height)
+    {
+        m_height = height;
+    }
 };
 
 } // namespace Core
