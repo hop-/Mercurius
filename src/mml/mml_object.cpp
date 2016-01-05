@@ -14,6 +14,10 @@ MMLObject(const std::string& n, MMLObject* p)
     assert(!n.empty());
 }
 
+MMLObject::
+~MMLObject()
+{}
+
 const std::string& MMLObject::
 getName() const
 {
