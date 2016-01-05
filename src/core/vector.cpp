@@ -21,26 +21,6 @@ Vector::Vector(EngineUnit magnitude, float angle)
     , m_y(magnitude* std::sin(angle *_PI / 180))
 {}
 
-EngineUnit Vector::x()
-{
-    return m_x;
-}
-
-EngineUnit Vector::y()
-{
-    return m_y;
-}
-
-void Vector::setX(EngineUnit x)
-{
-    m_x = x;
-}
-
-void Vector::setY(EngineUnit y)
-{
-    m_y = y;
-}
-
 EngineUnit Vector::magnitude()
 {
     return std::sqrt(m_x*m_x + m_y*m_y);
@@ -56,33 +36,33 @@ float Vector::angleInRadians()
     return std::atan2(m_y, m_x);
 }
 
-Vector& Vector::operator+=(Vector& vector)
+Vector& Vector::operator+=(const Vector& vector)
 {
     m_x += vector.x();
     m_y += vector.y();
     return *this;
 }
 
-Vector& Vector::operator*=(float& multiplier)
+Vector& Vector::operator*=(const float& multiplier)
 {
     m_x *= multiplier;
     m_y *= multiplier;
     return *this;
 }
 
-Vector& operator+(Vector& vector1, Vector& vector2)
+Vector& operator+(const Vector& vector1, const Vector& vector2)
 {
     Vector v = vector1;
     return v += vector2;
 }
 
-Vector& operator*(float& multiplier, Vector& vector)
+Vector& operator*(const float& multiplier, const Vector& vector)
 {
     Vector v = vector;
     return v *= multiplier;
 }
 
-Vector& operator*(Vector& vector, float& multiplier)
+Vector& operator*(const Vector& vector, const float& multiplier)
 {
     Vector v = vector;
     return v *= multiplier;

@@ -27,14 +27,35 @@ public:
             bool stopped = false, 
             bool hidden = false, 
             bool ignoreEvents = false);
+
+    inline const Controls& controls() const
+    {
+        return m_controls;
+    }
+    
+    inline void stop(bool stop)
+    {
+        m_stopped = stop;
+    }
+    
+    inline void hide(bool hide)
+    {
+        m_hidden = hide;
+    }
+    
+    inline void ignoreEvents(bool ignoreEvents)
+    {
+        m_ignoreEvent = ignoreEvents;
+    }
+    
+    inline bool isStopped() const
+    {
+        return m_stopped;
+    }
+
     void changeControls(Controls controls);
-    Controls getControls();
     Command* getCommand(Event* event);
     bool processEvent(Event*);
-    void stop(bool stop);
-    void hide(bool hide);
-    void ignoreEvents(bool ingoreEvents);
-    bool isStopped();
     void update();
     void draw(Frame* frame);
 };

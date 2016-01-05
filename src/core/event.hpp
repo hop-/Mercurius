@@ -21,15 +21,7 @@ public:
 
     struct Less
     {
-        bool operator() (Event* lEvent, Event* rEvent)
-        {
-            assert(0 != lEvent);
-            assert(0 != rEvent);
-            if (lEvent->getType() == rEvent->getType()) {
-                return lEvent->less(rEvent);
-            }
-            return lEvent->getType() < rEvent->getType();
-        }
+        bool operator() (Event* lEvent, Event* rEvent) const;
         typedef Event* first_argument_type;
         typedef Event* second_argument_type;
         typedef bool result_type;

@@ -15,7 +15,7 @@ class GuiObject
     MML m_mml;
 
 protected:
-    GuiObject(std::string config);
+    GuiObject(const std::string& config);
 
 public:
     virtual ~GuiObject() = default;

@@ -27,35 +27,10 @@ void Layer::changeControls(Controls controls)
     m_controls = controls;
 }
 
-Controls Layer::getControls()
-{
-    return m_controls;
-}
-
 Command* Layer::getCommand(Event* event)
 {
     assert(0 != event);
     return m_controls.getCommand(event);
-}
-
-void Layer::stop(bool stop)
-{
-    m_stopped = stop;
-}
-
-void Layer::hide(bool hide)
-{
-    m_hidden = hide;
-}
-
-void Layer::ignoreEvents(bool ignoreEvents)
-{
-    m_ignoreEvent = ignoreEvents;
-}
-
-bool Layer::isStopped()
-{
-    return m_stopped;
 }
 
 void Layer::update()
