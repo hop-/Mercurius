@@ -1,6 +1,7 @@
 #include "mml_object.hpp"
 #include "mml_attribute.hpp"
 
+#include <algorithm>
 #include <cassert>
 
 namespace MML
@@ -9,14 +10,19 @@ namespace MML
 MMLObject::
 MMLObject(const std::string& n, MMLObject* p)
     : m_name(n)
-    , m_parent(p)
+    , m_parent(0)
 {
     assert(!n.empty());
+    setParent(p);
 }
 
 MMLObject::
 ~MMLObject()
-{}
+{
+    std::for_each(m_children.begin(), m_children.end(),
+                  [](MMLObject* o) { assert(o != 0); delete o;});
+    m_children.clear();
+}
 
 const std::string& MMLObject::
 getName() const
@@ -54,13 +60,37 @@ setType(const std::string& type)
 void MMLObject::
 setParent(MMLObject* p)
 {
+    if (m_parent != 0) {
+        m_parent->removeChild(this);
+    }
     m_parent = p;
+    p->addChild(this);
 }
 
 const MMLObject* MMLObject::
 getParent() const
 {
     return m_parent;
+}
+
+void MMLObject::
+addChild(MMLObject* o)
+{
+    assert(0 != o);
+    assert(o != this);
+    Children::iterator i = std::find(m_children.begin(), m_children.end(), o);
+    assert(i == m_children.end());
+    m_children.push_back(o);
+}
+
+void MMLObject::
+removeChild(MMLObject* o)
+{
+    assert(0 != o);
+    assert(o != this);
+    Children::iterator i = std::find(m_children.begin(), m_children.end(), o);
+    assert(i != m_children.end());
+    m_children.erase(i);
 }
 
 } // namespace MML

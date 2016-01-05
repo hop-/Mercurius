@@ -34,12 +34,16 @@ public:
 protected:
     void addAttribute(MMLAttribute*);
     void setType(const std::string&);
+    void addChild(MMLObject*);
+    void removeChild(MMLObject*);
 
 private:
     MMLAttributes m_attributes;
     const std::string m_name;
     std::string m_type;
     MMLObject* m_parent;
+    typedef std::vector<MMLObject*> Children;
+    Children m_children;
 };
 
 } // namespace MML
