@@ -36,6 +36,20 @@ getAttributes() const
     return m_attributes;
 }
 
+MMLAttribute* MMLObject::
+getAttribute(const std::string& n)
+{
+    assert(!n.empty());
+    MMLAttributes::iterator i =
+                std::find_if(m_attributes.begin(), m_attributes.end(),
+                [&](MMLAttribute* a)
+                {
+                    assert(0 != a);
+                    return a->getName() == n;
+                });
+    return (i != m_attributes.end()) ? (*i): 0;
+}
+
 void MMLObject::
 addAttribute(MMLAttribute* a)
 {

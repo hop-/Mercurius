@@ -25,6 +25,9 @@ public:
     CMMLAttributes& getAttributes() const;
 
 public:
+    MMLAttribute* getAttribute(const std::string&);
+
+public:
     const std::string& getName() const;
 
 public:
