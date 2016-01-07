@@ -29,4 +29,7 @@ void LogicObject::init()
     }
 }
 
+LogicObject::Component::~Component()
+{}
+
 } // namespace Core
