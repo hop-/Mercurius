@@ -2,8 +2,9 @@
 #define _CORE_LOGIC_OBJECT_HPP_
 
 #include "subject.hpp"
-#include "shape.hpp"
-#include "position.hpp"
+
+#include <vector>
+#include <cassert>
 
 namespace Core
 {
@@ -11,34 +12,41 @@ namespace Core
 class LogicObject
     : public Subject
 {
-    Shape m_shape;
-    Position m_position;
+public:
+    class Component 
+    {
+        friend class LogicObject; // can be restructured
+    public:
+        virtual ~Component() = 0;
+    private:
+        virtual void update() {};
+        virtual void init() {};
+    };
 
-protected:
-    LogicObject() = default;
+private:
+    std::vector<Component*> m_components;
 
 public:
-    virtual ~LogicObject() = default;
+    LogicObject();
 
-    inline void setShape(const Shape& shape)
+public:
+    void update();
+    void addComponent(Component* component);
+    template <class T>
+    T getComponent()
     {
-        m_shape = shape;
-    }
-    
-    inline void setPosition(const Position& position)
-    {
-        m_position = position;
-    }
-    
-    inline const Shape& shape() const
-    {
-        return m_shape;
+        // TODO it is not lightweight implementation, must be lightweight
+        for (Component* component : m_components) {
+            T castedComponent = dynamic_cast<T>(component);
+            if (castedComponent != 0) {
+                return castedComponent;
+            }
+        }
+        assert(!"No component of mentioned type.");
     }
 
-    inline const Position position() const
-    {
-        return m_position;
-    }
+private:
+    void init();
 };
 
 } // namespace Core
