@@ -12,6 +12,7 @@ LogicObject::LogicObject()
 void LogicObject::update()
 {
     for (Component* component : m_components) {
+        assert(component != 0);
         component->update();
     }
 }
@@ -25,6 +26,7 @@ void LogicObject::addComponent(Component* component)
 void LogicObject::init()
 {
     for (Component* component : m_components) {
+        assert(component != 0);
         component->init();
     }
 }
