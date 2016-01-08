@@ -12,6 +12,7 @@ LogicObject::LogicObject()
 void LogicObject::update()
 {
     for (auto& pair : m_components) {
+        assert(0 != pair.second);
         pair.second->update();
     }
 }
@@ -25,6 +26,7 @@ void LogicObject::addComponent(Component* component)
 void LogicObject::init()
 {
     for (auto& pair : m_components) {
+        assert(0 != pair.second);
         pair.second->init();
     }
 }
