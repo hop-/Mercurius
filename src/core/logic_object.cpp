@@ -11,25 +11,23 @@ LogicObject::LogicObject()
 
 void LogicObject::update()
 {
-    for (Component* component : m_components) {
-        component->update();
+    for (auto& pair : m_components) {
+        pair.second->update();
     }
 }
 
 void LogicObject::addComponent(Component* component)
 {
     assert(component != 0);
-    m_components.push_back(component);
+    m_components.insert(std::pair<int, Component*>(component->getType(), component));
 }
 
 void LogicObject::init()
 {
-    for (Component* component : m_components) {
-        component->init();
+    for (auto& pair : m_components) {
+        pair.second->init();
     }
 }
 
-LogicObject::Component::~Component()
-{}
 
 } // namespace Core

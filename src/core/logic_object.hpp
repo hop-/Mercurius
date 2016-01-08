@@ -2,8 +2,9 @@
 #define _CORE_LOGIC_OBJECT_HPP_
 
 #include "subject.hpp"
+#include "typed_base.hpp"
 
-#include <vector>
+#include <map>
 #include <cassert>
 
 namespace Core
@@ -13,18 +14,39 @@ class LogicObject
     : public Subject
 {
 public:
-    class Component 
+    class Component
+        : public TypedBase
     {
-        friend class LogicObject; // can be restructured
-    public:
-        virtual ~Component() = 0;
+        friend class LogicObject;
+
     private:
         virtual void update() {};
         virtual void init() {};
+
+        bool less(TypedBase* o)
+        {
+            return false; 
+        }
+    };
+
+    template <class T>
+    class ComponentCreator
+        : public Component
+    {
+        static const ID type;
+
+    public:
+        virtual ~ComponentCreator() = 0;
+
+    private:
+        int getType() const
+        {
+            return type;
+        }
     };
 
 private:
-    std::vector<Component*> m_components;
+    std::map<int, Component*> m_components;
 
 public:
     LogicObject();
@@ -33,21 +55,20 @@ public:
     void update();
     void addComponent(Component* component);
     template <class T>
-    T getComponent()
+    inline T getComponent()
     {
-        // TODO it is not lightweight implementation, must be lightweight
-        for (Component* component : m_components) {
-            T castedComponent = dynamic_cast<T>(component);
-            if (castedComponent != 0) {
-                return castedComponent;
-            }
-        }
-        assert(!"No component of mentioned type.");
+        // TODO assert(static) if not exist T::type();
+        assert(0 != m_components.at(T::type()));
+        return static_cast<T>(m_components.at(T::type()));
     }
 
 private:
     void init();
 };
+
+template <class T>
+LogicObject::ComponentCreator<T>::~ComponentCreator()
+{}
 
 } // namespace Core
 
