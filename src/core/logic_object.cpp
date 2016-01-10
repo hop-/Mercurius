@@ -4,11 +4,6 @@ namespace Core
 {
 
 
-LogicObject::LogicObject()
-{
-    init();
-}
-
 void LogicObject::update()
 {
     for (auto& pair : m_components) {
@@ -20,6 +15,7 @@ void LogicObject::update()
 void LogicObject::addComponent(Component* component)
 {
     assert(component != 0);
+    component->setParent(this); // automatically set parent
     m_components.insert(std::pair<int, Component*>(component->getType(), component));
 }
 

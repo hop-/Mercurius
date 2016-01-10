@@ -30,7 +30,7 @@ public:
     virtual ~TypedBase() = default;
     virtual int getType() const = 0;
 
-private:
+protected:
     virtual bool less(TypedBase* object) = 0;
 };
 

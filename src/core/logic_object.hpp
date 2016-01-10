@@ -18,17 +18,30 @@ public:
         : public TypedBase
     {
         friend class LogicObject;
+        LogicObject* m_parent;
 
-    private:
+    public:
+        inline LogicObject* getParent()
+        {
+            return m_parent;
+        }
+
+        inline void setParent(LogicObject* parent)
+        {
+            m_parent = parent;
+        }
+
+    protected:
         virtual void update() {};
         virtual void init() {};
-
-        bool less(TypedBase* o)
+    
+        bool less(TypedBase* o) final
         {
             return false; 
         }
     };
 
+public:
     template <class T>
     class ComponentCreator
         : public Component
@@ -38,8 +51,8 @@ public:
     public:
         virtual ~ComponentCreator() = 0;
 
-    private:
-        int getType() const
+    public:
+        int getType() const final
         {
             return type;
         }
@@ -49,10 +62,8 @@ private:
     std::map<int, Component*> m_components;
 
 public:
-    LogicObject();
-
-public:
     void update();
+    void init(); // may be this funtionality will assign to addComponent
     void addComponent(Component* component);
     template <class T>
     inline T getComponent()
@@ -61,10 +72,10 @@ public:
         assert(0 != m_components.at(T::type()));
         return static_cast<T>(m_components.at(T::type()));
     }
-
-private:
-    void init();
 };
+
+template <class T>
+const LogicObject::Component::ID LogicObject::ComponentCreator<T>::type;
 
 template <class T>
 LogicObject::ComponentCreator<T>::~ComponentCreator()

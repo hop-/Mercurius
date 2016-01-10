@@ -14,6 +14,7 @@ class Shape
 public:
     Shape(EngineUnit width, EngineUnit height);
     Shape();
+    virtual ~Shape() = default;
 
 public:
     inline const EngineUnit& width() const
