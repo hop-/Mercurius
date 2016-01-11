@@ -46,9 +46,8 @@ public:
     class ComponentCreator
         : public Component
     {
-        static const ID type;
-
     public:
+        static const ID type;
         virtual ~ComponentCreator() = 0;
 
     public:
@@ -66,11 +65,11 @@ public:
     void init(); // may be this funtionality will assign to addComponent
     void addComponent(Component* component);
     template <class T>
-    inline T getComponent()
+    inline T* getComponent()
     {
-        // TODO assert(static) if not exist T::type();
-        assert(0 != m_components.at(T::type()));
-        return static_cast<T>(m_components.at(T::type()));
+        // TODO assert(static) if not exist T::type;
+        assert(0 != m_components.at(T::type));
+        return static_cast<T*>(m_components.at(T::type));
     }
 };
 

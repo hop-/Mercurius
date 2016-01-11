@@ -13,19 +13,28 @@ class Physics
     : public LogicObject::ComponentCreator<Physics> 
 {
     Shape m_rect;
-    Position m_position;
     int m_mass;
     Vector m_velocity;
     
 public:
-    inline void setRect(Shape rect)
+    inline Shape rect() const
+    {
+        return m_rect;
+    }
+
+    inline void setRect(const Shape& rect)
     {
         m_rect = rect;
     }
     
-    inline void setPosition(Position position)
+    inline Position position() const
     {
-        m_position = position;
+        return m_rect.position();
+    }
+
+    inline void setPosition(const Position& position)
+    {
+        m_rect.setPosition(position);
     }
     
     inline void setMass(int mass)
@@ -33,12 +42,12 @@ public:
         m_mass = mass;
     }
 
-    inline void setVelocity(Vector velocity)
+    inline void setVelocity(const Vector& velocity)
     {
         m_velocity = velocity;
     }
 
-    inline void addVelocity(Vector velocity)
+    inline void addVelocity(const Vector& velocity)
     {
         m_velocity += velocity;
     }
