@@ -2,7 +2,7 @@
 #define _CORE_COMPONENTS_HPP_
 
 #include "logic_object.hpp"
-#include "shape.hpp"
+#include "rectangle.hpp"
 #include "position.hpp"
 #include "vector.hpp"
 
@@ -12,17 +12,17 @@ namespace Core
 class Physics
     : public LogicObject::ComponentCreator<Physics> 
 {
-    Shape m_rect;
+    Rectangle m_rect;
     int m_mass;
     Vector m_velocity;
     
 public:
-    inline Shape rect() const
+    inline Rectangle rect() const
     {
         return m_rect;
     }
 
-    inline void setRect(const Shape& rect)
+    inline void setRect(const Rectangle& rect)
     {
         m_rect = rect;
     }

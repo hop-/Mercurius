@@ -1,5 +1,5 @@
-#ifndef _CORE_SHAPE_HPP_
-#define _CORE_SHAPE_HPP_
+#ifndef _CORE_RECTANGLE_HPP_
+#define _CORE_RECTANGLE_HPP_
 
 #include "units.hpp"
 #include "position.hpp"
@@ -7,16 +7,16 @@
 namespace Core
 {
 
-class Shape
+class Rectangle
 {
     EngineUnit m_width;
     EngineUnit m_height;
     Position m_position;
 
 public:
-    Shape(EngineUnit width, EngineUnit height,const Position& position);
-    Shape();
-    virtual ~Shape() = default;
+    Rectangle(EngineUnit width, EngineUnit height,const Position& position);
+    Rectangle();
+    virtual ~Rectangle() = default;
 
 public:
     inline const EngineUnit& width() const
@@ -48,8 +48,13 @@ public:
     {
         m_position = position;
     }
+
+    EngineUnit xMax();
+    EngineUnit xMin();
+    EngineUnit yMax();
+    EngineUnit yMin();
 };
 
 } // namespace Core
 
-#endif //_CORE_SHAPE_HPP_
+#endif //_CORE_RECTANGLE_HPP_
