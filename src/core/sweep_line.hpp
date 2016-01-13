@@ -25,6 +25,7 @@ public:
 
 private:
     void sort();
+    void quickSort(int left, int right);
     void sortLastInserted();
 };
 

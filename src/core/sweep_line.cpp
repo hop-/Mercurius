@@ -30,9 +30,37 @@ void SweepLine::insert(LogicObject* object)
 
 void SweepLine::sort()
 {
-    EngineUnit pivotValue = m_objects[m_objects.size() / 2].second.xMin();
-    
+    quickSort(0, m_objects.size());
     m_sorted = true;
+}
+
+void SweepLine::quickSort(int left, int right)
+{
+    int i = left;
+    int j = right;
+    std::pair<LogicObject*, Rectangle> tmp;
+    EngineUnit pivotValue = m_objects[(left + right) / 2].second.xMin();
+    while (i <= j) {
+        while (m_objects[i].second.xMin() < pivotValue) {
+            ++i;
+        }
+        while (m_objects[j].second.xMin() > pivotValue) {
+            --j;
+        }
+        if (i <= j) {
+            tmp = m_objects[i];
+            m_objects[i] = m_objects[j];
+            m_objects[j] = tmp;
+            ++i;
+            --j;
+        }
+    }
+    if (left < j) {
+        quickSort(left, j);
+    }
+    if (i < right) {
+        quickSort(i, right);
+    }
 }
 
 void SweepLine::sortLastInserted()
