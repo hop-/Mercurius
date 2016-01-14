@@ -1,38 +1,16 @@
 #ifndef _CORE_EVENT_HPP_
 #define _CORE_EVENT_HPP_
 
+#include "typed_base.hpp"
+
 #include <cassert>
 
 namespace Core
 {
 
 class Event
-{
-public:
-    class ID
-    {
-        static int m_count;
-        const int m_id;
-
-     public:
-        ID();
-        operator int() const;
-    };
-
-    struct Less
-    {
-        bool operator() (Event* lEvent, Event* rEvent) const;
-        typedef Event* first_argument_type;
-        typedef Event* second_argument_type;
-        typedef bool result_type;
-    };
-
-    virtual ~Event() = default;
-    virtual int getType() const = 0;
-
-private:
-    virtual bool less(Event* event) = 0;
-};
+    : public TypedBase
+{};
 
 template <class T>
 class EventCreator
@@ -47,7 +25,7 @@ public:
     }
 };
 
-template<class T>
+template <class T>
 const Event::ID EventCreator<T>::type;
 
 } // namespace Core

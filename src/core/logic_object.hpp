@@ -2,8 +2,9 @@
 #define _CORE_LOGIC_OBJECT_HPP_
 
 #include "subject.hpp"
+#include "typed_base.hpp"
 
-#include <vector>
+#include <map>
 #include <cassert>
 
 namespace Core
@@ -13,41 +14,71 @@ class LogicObject
     : public Subject
 {
 public:
-    class Component 
+    class Component
+        : public TypedBase
     {
-        friend class LogicObject; // can be restructured
+        friend class LogicObject;
+        LogicObject* m_parent;
+
     public:
-        virtual ~Component() = 0;
-    private:
+        inline LogicObject* getParent()
+        {
+            return m_parent;
+        }
+
+        inline void setParent(LogicObject* parent)
+        {
+            m_parent = parent;
+        }
+
+    protected:
         virtual void update() {};
         virtual void init() {};
+    
+        bool less(TypedBase* o) final
+        {
+            return false; 
+        }
+    };
+
+public:
+    template <class T>
+    class ComponentCreator
+        : public Component
+    {
+    public:
+        static const ID type;
+        virtual ~ComponentCreator() = 0;
+
+    public:
+        int getType() const final
+        {
+            return type;
+        }
     };
 
 private:
-    std::vector<Component*> m_components;
-
-public:
-    LogicObject();
+    std::map<int, Component*> m_components;
 
 public:
     void update();
+    void init(); // may be this funtionality will assign to addComponent
     void addComponent(Component* component);
     template <class T>
-    T getComponent()
+    inline T* getComponent()
     {
-        // TODO it is not lightweight implementation, must be lightweight
-        for (Component* component : m_components) {
-            T castedComponent = dynamic_cast<T>(component);
-            if (castedComponent != 0) {
-                return castedComponent;
-            }
-        }
-        assert(!"No component of mentioned type.");
+        // TODO assert(static) if not exist T::type;
+        assert(0 != m_components.at(T::type));
+        return static_cast<T*>(m_components.at(T::type));
     }
-
-private:
-    void init();
 };
+
+template <class T>
+const LogicObject::Component::ID LogicObject::ComponentCreator<T>::type;
+
+template <class T>
+LogicObject::ComponentCreator<T>::~ComponentCreator()
+{}
 
 } // namespace Core
 
