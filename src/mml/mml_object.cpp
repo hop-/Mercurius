@@ -1,5 +1,7 @@
 #include "mml_object.hpp"
 #include "mml_attribute.hpp"
+#include "mml_manager.hpp"
+#include "mml_registery.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -14,6 +16,10 @@ MMLObject(const std::string& n, MMLObject* p)
 {
     assert(!n.empty());
     setParent(p);
+    MMLManager* m = MMLManager::getInstance();
+    assert(0 != m);
+    MMLRegistery* r = m->getRegistery();
+    r->addObject(this);
 }
 
 MMLObject::
@@ -22,6 +28,10 @@ MMLObject::
     std::for_each(m_children.begin(), m_children.end(),
                   [](MMLObject* o) { assert(o != 0); delete o;});
     m_children.clear();
+    MMLManager* m = MMLManager::getInstance();
+    assert(0 != m);
+    MMLRegistery* r = m->getRegistery();
+    r->removeObject(this);
 }
 
 const std::string& MMLObject::
