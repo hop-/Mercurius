@@ -10,6 +10,8 @@ namespace MML
 
 class MMLAttribute : public MMLObject
 {
+    MMLAttributePrivate* m_private;
+
 public:
     MMLAttribute(const std::string& n, const std::string& v);
     MMLAttribute(const std::string& n, int v);
@@ -30,9 +32,6 @@ public:
         assert(m_private != 0);
         m_private->setValue(v);
     }
-
-private:
-    MMLAttributePrivate* m_private;
 };
 
 } // MML
