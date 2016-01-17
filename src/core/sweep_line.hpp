@@ -59,7 +59,7 @@ private:
     struct Interval
     {
         const int index;
-        const LogicObject* object;
+        LogicObject* const object;
         const EngineUnit min;
         const EngineUnit max;
 
