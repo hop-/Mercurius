@@ -81,19 +81,25 @@ std::vector<std::pair<LogicObject*, LogicObject*> > SweepLine::getPairs()
     }
     std::vector<std::pair<LogicObject*, LogicObject*> > returnPairs;
     std::set<Interval> intervals;
-    //IntervalTree intervals;
     for (const auto& edge : m_objects) {
-        // TODO
-        Interval interval(edge.index()
+        Interval objectInterval(edge.index()
                 , edge.object()
                 , edge.object()->getComponent<Physics>()->rect().yMin()
                 , edge.object()->getComponent<Physics>()->rect().yMax());
-        // TODO unable to get intersects
+        // TODO implement an interval tree as an augmented tree
+        // Now it uses brute force
+        for (const auto& interval : intervals) {
+            if (objectInterval.intersect(interval)) {
+                returnPairs.push_back(std::pair
+                        <LogicObject*, LogicObject*>
+                        (objectInterval.object, interval.object));
+            }
+        }
         if (edge.isBegin()) {
-            intervals.insert(interval);
+            intervals.insert(objectInterval);
         } else {
-            assert(intervals.find(interval) != intervals.end());
-            intervals.erase(intervals.find(interval));
+            assert(intervals.find(objectInterval) != intervals.end());
+            intervals.erase(intervals.find(objectInterval));
         }
     }
     return returnPairs;
