@@ -13,7 +13,8 @@ execable ?= mercurius
 # autodetect projects in SRC_DIR
 PROJECT_DIRS := $(sort $(dir $(abspath $(wildcard $(SRC_DIR)/*/*.hpp))))
 # includes
-INCLUDES := $(addprefix -I,$(PROJECT_DIRS))
+#INCLUDES := $(addprefix -I,$(PROJECT_DIRS))
+INCLUDES := $(addprefix -I,$(abspath $(SRC_DIR)))
 # autodetect *.cpp files
 CPPS := $(wildcard $(SRC_DIR)/*/*.cpp) $(wildcard $(SRC_DIR)/main.cpp)
 ifdef SKIP
@@ -68,6 +69,7 @@ resolve:
 	@find $(OBJ_DIR) -name *.d | xargs rm -rf
 $(OBJ_DIR)/%.d: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
+#@echo -e "$(YELLOW)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) -MM $< -o $@$(RCOLOR)"
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -MM $< -o $@
 	@sed -i 's|$(notdir $*).o:|$(@:.d=.o):|g' $@
 

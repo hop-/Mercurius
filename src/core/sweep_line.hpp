@@ -13,6 +13,10 @@ class LogicObject;
 
 class SweepLine
 {
+public:
+    using LogicObjectPair = std::pair<LogicObject*, LogicObject*>;
+    using LogicObjectPairVector = std::vector<LogicObjectPair>;
+
 private:
     class RectangleEdge
     {
@@ -88,7 +92,7 @@ public:
 
 public:
     void insert(LogicObject* object);
-    std::vector<std::pair<LogicObject*, LogicObject*> > getPairs();
+    LogicObjectPairVector getPairs();
 
 private:
     void insert(const RectangleEdge& object);

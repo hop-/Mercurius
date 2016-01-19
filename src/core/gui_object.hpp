@@ -2,7 +2,7 @@
 #define _CORE_GUI_OBJECT_HPP_
 
 #include "observer.hpp"
-#include "mml.hpp"
+#include "mml/mml.hpp"
 
 #include <string>
 

@@ -74,12 +74,12 @@ void SweepLine::insert(const RectangleEdge& object)
     }
 }
 
-std::vector<std::pair<LogicObject*, LogicObject*> > SweepLine::getPairs()
+SweepLine::LogicObjectPairVector SweepLine::getPairs()
 {
     if (!m_sorted) {
         sort();
     }
-    std::vector<std::pair<LogicObject*, LogicObject*> > returnPairs;
+    LogicObjectPairVector returnPairs;
     std::set<Interval> intervals;
     for (const auto& edge : m_objects) {
         Interval objectInterval(edge.index()
@@ -90,8 +90,7 @@ std::vector<std::pair<LogicObject*, LogicObject*> > SweepLine::getPairs()
         // Now it uses brute force
         for (const auto& interval : intervals) {
             if (objectInterval.intersect(interval)) {
-                returnPairs.push_back(std::pair
-                        <LogicObject*, LogicObject*>
+                returnPairs.push_back(LogicObjectPair
                         (objectInterval.object, interval.object));
             }
         }
