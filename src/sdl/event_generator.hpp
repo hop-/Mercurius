@@ -1,7 +1,7 @@
 #ifndef _SDL_EVENT_GENERATOR_HPP_
 #define _SDL_EVENT_GENERATOR_HPP_
 
-#include "core/event_generator.hpp"
+#include <core/event_generator.hpp>
 
 namespace Sdl
 {

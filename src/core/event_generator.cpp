@@ -26,6 +26,9 @@ Command* EventGenerator::getCommand(Layer* layer)
 void EventGenerator::setCatchedEvent(Event* e)
 {
     assert(0 != e);
+    if (m_catchedEvent != 0) {
+        delete m_catchedEvent;
+    }
     m_catchedEvent = e;
 }
 
