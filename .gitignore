@@ -1,0 +1,4 @@
+# ignore executable
+mercurius
+# ignore all object and dependensy files
+*.[od]

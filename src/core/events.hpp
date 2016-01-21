@@ -10,7 +10,7 @@ class KeyEvent
     : public EventCreator<KeyEvent>
 {
 public:
-    enum Mode {Up, Down}; 
+    enum class Mode {Up, Down}; 
 
 private:
     int m_keyCode;
@@ -22,8 +22,6 @@ public:
     , m_mode(mode)
     {}
 
-    bool less(TypedBase* obj);
-
     inline int key() const
     {
         return m_keyCode;
@@ -33,11 +31,60 @@ public:
     {
         return m_mode;
     }
+
+private: 
+    bool less(TypedBase* obj);
+};
+
+class MouseClickEvent
+    : public EventCreator<MouseClickEvent>
+{
+public:
+    enum class Mode {Up, Down};
+    enum class Button {Right, Left, Middle};
+
+private:
+    int m_x;
+    int m_y;
+    Button m_button;
+    Mode m_mode;
+
+public:
+    MouseClickEvent(int x, int y, Button button, Mode mode)
+        : m_x(x)
+        , m_y(y)
+        , m_button(button)
+        , m_mode(mode)
+    {}
+
+    inline int x() const
+    {
+        return m_x;
+    }
+
+    inline int y() const
+    {
+        return m_y;
+    }
+
+    inline Button button() const
+    {
+        return m_button;
+    }
+
+    inline Mode mode() const
+    {
+        return m_mode;
+    }
+
+private: 
+    bool less(TypedBase* obj);
 };
 
 class QuitEvent
     : public EventCreator<QuitEvent>
 {
+private: 
     bool less(TypedBase* obj);
 };
 

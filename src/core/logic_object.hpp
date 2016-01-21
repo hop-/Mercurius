@@ -1,7 +1,6 @@
 #ifndef _CORE_LOGIC_OBJECT_HPP_
 #define _CORE_LOGIC_OBJECT_HPP_
 
-#include "subject.hpp"
 #include "typed_base.hpp"
 
 #include <map>
@@ -11,7 +10,6 @@ namespace Core
 {
 
 class LogicObject
-    : public Subject
 {
 public:
     class Component

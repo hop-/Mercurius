@@ -2,6 +2,7 @@
 #define _CORE_COMPONENTS_HPP_
 
 #include "logic_object.hpp"
+#include "subject.hpp"
 #include "rectangle.hpp"
 #include "position.hpp"
 #include "vector.hpp"
@@ -55,6 +56,13 @@ public:
 protected:
     void update();
 
+};
+
+class Visual
+    : public LogicObject::ComponentCreator<Visual>
+    , public Subject
+{
+    // TODO need to clarify positions;
 };
 
 } // namespace Core
