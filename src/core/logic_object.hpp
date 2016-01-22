@@ -3,6 +3,8 @@
 
 #include "typed_base.hpp"
 
+#include "position.hpp"
+
 #include <map>
 #include <cassert>
 
@@ -19,7 +21,7 @@ public:
         LogicObject* m_parent;
 
     public:
-        inline LogicObject* getParent()
+        inline LogicObject* parent() const
         {
             return m_parent;
         }
@@ -57,11 +59,35 @@ public:
 
 private:
     std::map<int, Component*> m_components;
+    Position m_position;
+    float m_scale;
 
 public:
     void update();
     void init(); // may be this funtionality will assign to addComponent
     void addComponent(Component* component);
+
+
+    inline Position position() const
+    {
+        return m_position;
+    }
+
+    inline void setPosition(Position p)
+    {
+        m_position = p;
+    }
+
+    inline float scale() const
+    {
+        return m_scale;
+    }
+
+    inline void setScale(float scale)
+    {
+        m_scale = scale;
+    }
+
     template <class T>
     inline T* getComponent()
     {

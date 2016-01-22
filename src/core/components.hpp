@@ -10,34 +10,41 @@
 namespace Core
 {
 
+class Dimensions    // for now it have no any use in codes
+                    // may be it will removed in future
+    : public LogicObject::ComponentCreator<Dimensions>
+{
+    Position m_position;
+    float m_scale;
+public:
+    inline Position position() const
+    {
+        return m_position;
+    }
+
+    inline void setPosition(Position position)
+    {
+        m_position = position;
+    }
+
+    inline float scale() const
+    {
+        return m_scale;
+    }
+
+    inline void setScale(float scale)
+    {
+        m_scale = scale;
+    }
+};
+
 class Physics
     : public LogicObject::ComponentCreator<Physics> 
 {
-    Rectangle m_rect;
     int m_mass;
     Vector m_velocity;
     
 public:
-    inline Rectangle rect() const
-    {
-        return m_rect;
-    }
-
-    inline void setRect(const Rectangle& rect)
-    {
-        m_rect = rect;
-    }
-    
-    inline Position position() const
-    {
-        return m_rect.position();
-    }
-
-    inline void setPosition(const Position& position)
-    {
-        m_rect.setPosition(position);
-    }
-    
     inline void setMass(int mass)
     {
         m_mass = mass;
@@ -53,16 +60,56 @@ public:
         m_velocity += velocity;
     }
 
-protected:
+private:
     void update();
 
 };
 
-class Visual
-    : public LogicObject::ComponentCreator<Visual>
-    , public Subject
+class Collider
+    : public LogicObject::ComponentCreator<Collider>
 {
-    // TODO need to clarify positions;
+    EngineUnit m_width;
+    EngineUnit m_height;
+
+public:
+    inline Rectangle rect() const
+    {
+        return Rectangle(m_width, m_height, parent()->position());
+    }
+
+    inline void setSizes(EngineUnit width, EngineUnit height)
+    {
+        m_width = width;
+        m_height = height;
+    }
+    
+};
+
+class TextureRenderer
+    : public LogicObject::ComponentCreator<TextureRenderer>
+    , protected Subject
+{
+    bool m_stateChanged;
+    // think it should have some info about texture
+
+private:
+    void init();
+    void update();
+    
+    inline bool stateHasBeenChaned() const
+    {
+        return m_stateChanged;
+    }
+
+    inline void changeState()
+    {
+        m_stateChanged = true;
+    }
+
+    inline void resetState()
+    {
+        m_stateChanged = false;
+    }
 };
 
 } // namespace Core
