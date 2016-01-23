@@ -3,8 +3,11 @@
 namespace Core
 {
 
-GuiObject::GuiObject(const std::string& config)
+GuiObject::GuiObject(Gui* parent, const std::string& config)
     : m_mml(config)
-{}
+    , m_parent(parent)
+{
+    assert(0 != parent);
+}
 
 } // namespace Core

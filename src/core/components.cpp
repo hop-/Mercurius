@@ -5,23 +5,15 @@ namespace Core
 
 void Physics::update()
 {
-    // TODO some physical calculations
+    Position position = parent()->position();
+    position.move(m_velocity);
 }
 
 void TextureRenderer::init()
 {
     // TODO init
     // TODO add observer GuiObject
-    changeState();
+    notify();
 }
-
-void TextureRenderer::update()
-{
-    if (stateHasBeenChaned()) {
-        notify();
-    }
-    resetState();
-}
-
 
 } // namespace Core

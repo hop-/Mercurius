@@ -16,6 +16,7 @@ class Dimensions    // for now it have no any use in codes
 {
     Position m_position;
     float m_scale;
+
 public:
     inline Position position() const
     {
@@ -89,27 +90,10 @@ class TextureRenderer
     : public LogicObject::ComponentCreator<TextureRenderer>
     , protected Subject
 {
-    bool m_stateChanged;
     // think it should have some info about texture
 
 private:
     void init();
-    void update();
-    
-    inline bool stateHasBeenChaned() const
-    {
-        return m_stateChanged;
-    }
-
-    inline void changeState()
-    {
-        m_stateChanged = true;
-    }
-
-    inline void resetState()
-    {
-        m_stateChanged = false;
-    }
 };
 
 } // namespace Core
