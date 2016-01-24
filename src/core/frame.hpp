@@ -15,6 +15,12 @@ protected:
     {
         m_msPerUpdate = ms;
     }
+
+public:
+    class Renderer
+    {
+        //TODO
+    };
     
 public:
     virtual ~Frame() = default;

@@ -1,6 +1,7 @@
 #ifndef _CORE_GUI_HPP_
 #define _CORE_GUI_HPP_
 
+#include <vector>
 #include <cassert>
 
 namespace Core
@@ -8,10 +9,16 @@ namespace Core
 
 class Frame;
 class Layer;
+class GuiObject;
 
 class Gui
 {
+public:
+    typedef std::vector<GuiObject*> GuiObjects;
+    
+private:
     Layer* m_parent;
+    GuiObjects m_objects;
 
 public:
     Gui(Layer* parent)
@@ -20,6 +27,12 @@ public:
         assert(0 != parent);
     }
     virtual ~Gui() = default;
+
+public:
+    void addGuiObject(GuiObject* o);
+
+public:
+    void removeGuiObject(GuiObject* o);
 
 public:
     virtual void draw(Frame*) = 0;

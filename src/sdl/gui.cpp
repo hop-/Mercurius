@@ -1,4 +1,10 @@
 #include "gui.hpp"
 
 namespace Sdl
-{} // namespace Sdl
+{
+
+void Gui::
+draw(Core::Frame*)
+{}
+
+} // namespace Sdl

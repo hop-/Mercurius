@@ -25,16 +25,12 @@ public:
     virtual ~GuiObject() = default;
 
 protected:
-    inline Gui* parent() const
+    inline const Gui* parent() const
     {
         return m_parent;
     }
 
-    inline void setParent(Gui* parent)
-    {
-        assert(0 != parent);
-        m_parent = parent;
-    }
+    void setParent(Gui* parent);
 };
 
 } // namespace Core
