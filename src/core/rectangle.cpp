@@ -14,6 +14,21 @@ Rectangle::Rectangle()
     : Rectangle(0, 0, Position())
 {}
 
+Rectangle Rectangle::represent(Rectangle rectangle)
+{
+    rectangle.setPosition(rectangle.position() - m_position);
+    return rectangle;
+}
+
+Rectangle Rectangle::scaled(float scale)
+{
+    Rectangle rectangle;
+    rectangle.setWidth(m_width * scale);
+    rectangle.setHeight(m_height * scale);
+    rectangle.setPosition(m_position * scale);
+    return rectangle;
+}
+
 EngineUnit Rectangle::xMax()
 {
     if (m_width > 0) {

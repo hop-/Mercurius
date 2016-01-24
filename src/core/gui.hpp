@@ -10,6 +10,7 @@ namespace Core
 class Frame;
 class Layer;
 class GuiObject;
+class Rectangle;
 
 class Gui
 {
@@ -19,6 +20,8 @@ public:
 private:
     Layer* m_parent;
     GuiObjects m_objects;
+    Rectangle* m_viewPort;
+    //Frame* m_frame;
 
 public:
     Gui(Layer* parent)
@@ -30,17 +33,32 @@ public:
 
 public:
     void addGuiObject(GuiObject* o);
-
-public:
     void removeGuiObject(GuiObject* o);
+/*
+    inline void setFrame(Frame* frame)
+    {
+        assert(0 != frame);
+        m_frame = frame;
+    }
+*/
+    inline void setViewPort(Rectangle* viewPort)
+    {
+        assert(0 != viewPort);
+        m_viewPort = viewPort;
+    }
 
 public:
-    virtual void draw(Frame*) = 0;
+    virtual void draw(Frame* frame) = 0;
 
 protected:
     inline Layer* parent() const
     {
         return m_parent;
+    }
+
+    inline const GuiObjects& objects()
+    {
+        return m_objects;
     }
 
     inline void setParent(Layer* parent)

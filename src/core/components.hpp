@@ -10,6 +10,20 @@
 namespace Core
 {
 
+class ViewPort
+    : LogicObject::ComponentCreator<ViewPort>
+    , Rectangle
+{
+    LogicObject* m_targetObject;
+
+public:
+    void target(LogicObject* object);
+    
+private:
+    void aim();
+    void update();
+};
+
 class Dimensions    // for now it have no any use in codes
                     // may be it will removed in future
     : public LogicObject::ComponentCreator<Dimensions>

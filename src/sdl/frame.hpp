@@ -19,6 +19,13 @@ public:
     ~Frame();
     void init();
     void drawTexture(Core::Texture* texture) {}
+
+
+
+    void* renderer() const
+    {
+        return m_renderer;
+    }
 };
 
 } // namespace Sdl

@@ -37,6 +37,9 @@ public:
         m_y = y;
     }
 
+    Position operator-(const Position& p) const;
+    Position operator+(const Position& p) const;
+    Position operator*(float f) const;
     void move(Vector vector);
 };
 

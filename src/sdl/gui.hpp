@@ -3,6 +3,9 @@
 
 #include <core/gui.hpp>
 
+#include <list>
+#include <SDL2/SDL.h>
+
 namespace Sdl
 {
 

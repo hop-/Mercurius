@@ -49,6 +49,9 @@ public:
         m_position = position;
     }
 
+    Rectangle represent(Rectangle rectangle);
+    Rectangle scaled(float scale);
+
     EngineUnit xMax();
     EngineUnit xMin();
     EngineUnit yMax();

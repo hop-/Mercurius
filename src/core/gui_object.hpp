@@ -11,12 +11,15 @@ namespace Core
 {
 
 class Gui;
+class Texture;
 
 class GuiObject
     : public Observer
 {
     MML m_mml;
     Gui* m_parent;
+    std::string m_textureLocation;
+    Texture* m_texture;
 
 protected:
     GuiObject(Gui* parnet, const std::string& config);
@@ -24,7 +27,28 @@ protected:
 public:
     virtual ~GuiObject() = default;
 
+public:
+    inline Texture* texture() const
+    {
+        return m_texture;
+    }
+
 protected:
+    inline void setTexture(Texture* texture)
+    {
+        m_texture = texture;
+    }
+
+    inline const std::string textureLocation() const
+    {
+        return m_textureLocation;
+    }
+
+    inline void setTectureLocation(std::string textureLocation)
+    {
+        m_textureLocation = textureLocation;
+    }
+
     inline const Gui* parent() const
     {
         return m_parent;

@@ -3,6 +3,8 @@
 
 #include <core/gui_object.hpp>
 
+#include <SDL2/SDL.h>
+
 namespace Sdl
 {
 
@@ -10,6 +12,7 @@ class GuiObject
     : public Core::GuiObject
 {
 public:
+    void init(SDL_Renderer* renderer);
     void onNotify();
 };
 
