@@ -40,9 +40,8 @@ void Layer::update()
 
 void Layer::draw(Frame* frame)
 {
-    // TODO gui draw on frame
     if (!m_hidden) {
-        m_gui->draw();
+        m_gui->draw(frame);
     }
 }
 

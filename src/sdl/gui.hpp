@@ -10,11 +10,11 @@ class Gui
     : public Core::Gui
 {
 public:
-    Gui(Core::Frame* parent)
+    Gui(Core::Layer* parent)
         : Core::Gui(parent)
     {}
 
-    void draw();
+    void draw(Core::Frame*);
 };
 
 } // namespace Sdl

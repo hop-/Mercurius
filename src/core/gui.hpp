@@ -7,13 +7,14 @@ namespace Core
 {
 
 class Frame;
+class Layer;
 
 class Gui
 {
-    Frame* m_parent;
+    Layer* m_parent;
 
 public:
-    Gui(Frame* parent)
+    Gui(Layer* parent)
         : m_parent(parent)
     {
         assert(0 != parent);
@@ -21,15 +22,15 @@ public:
     virtual ~Gui() = default;
 
 public:
-    virtual void draw() = 0;
+    virtual void draw(Frame*) = 0;
 
 protected:
-    inline Frame* parent() const
+    inline Layer* parent() const
     {
         return m_parent;
     }
 
-    inline void setParent(Frame* parent)
+    inline void setParent(Layer* parent)
     {
         assert(0 != parent);
         m_parent = parent;
