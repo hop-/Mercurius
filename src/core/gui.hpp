@@ -66,7 +66,7 @@ protected:
         return m_parent;
     }
 
-    inline const GuiObjects& objects()
+    inline const GuiObjects& objects() const
     {
         return m_objects;
     }
@@ -76,6 +76,8 @@ protected:
         assert(0 != parent);
         m_parent = parent;
     }
+
+    virtual void loadGuiObject(GuiObject*) = 0;
 };
 
 } // namespace Core

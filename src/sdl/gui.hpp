@@ -20,6 +20,9 @@ public:
     void draw();
 
 private:
+    virtual void loadGuiObject(GuiObject*);
+
+private:
     Core::Texture* guiObject2Texture(Core::GuiObject* o);
 };
 

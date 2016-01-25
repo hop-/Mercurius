@@ -11,6 +11,7 @@ void Gui::addGuiObject(GuiObject* o)
     assert(m_objects.end() ==
            std::find(m_objects.begin(), m_objects.end(), o));
     m_objects.push_back(o);
+    loadGuiObject(o);
     /*
     assert(0 != guiObject2Texture(o));
     assert(m_textures.end() == sdt::find(
