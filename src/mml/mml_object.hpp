@@ -17,7 +17,6 @@ public:
 
 private:
     MMLAttributes m_attributes;
-    const std::string m_name;
     std::string m_type;
     MMLObject* m_parent;
     typedef std::vector<MMLObject*> Children;
@@ -35,9 +34,10 @@ protected:
 
 protected:
     MMLAttribute* getAttribute(const std::string&);
+    const MMLAttribute* getAttribute(const std::string&) const;
 
 public:
-    const std::string& getName() const;
+    std::string getName() const;
 
 public:
     void setParent(MMLObject*);

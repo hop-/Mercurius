@@ -27,6 +27,14 @@ MMLAttribute(const std::string& n, double v)
 }
 
 MMLAttribute::
+MMLAttribute(const std::string& n, bool v)
+    : MMLObject(n)
+{
+    setType("attribute");
+    m_private = new MMLAttributePrivate(v, this);
+}
+
+MMLAttribute::
 ~MMLAttribute()
 {
     assert(m_private != 0);

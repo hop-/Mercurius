@@ -16,6 +16,7 @@ public:
     MMLAttribute(const std::string& n, const std::string& v);
     MMLAttribute(const std::string& n, int v);
     MMLAttribute(const std::string& n, double v);
+    MMLAttribute(const std::string& n, bool v);
     virtual ~MMLAttribute();
 
 public:

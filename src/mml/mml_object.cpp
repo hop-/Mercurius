@@ -11,10 +11,10 @@ namespace MML
 
 MMLObject::
 MMLObject(const std::string& n, MMLObject* p)
-    : m_name(n)
-    , m_parent(0)
+    : m_parent(0)
 {
-    assert(!n.empty());
+    MMLAttribute* name = new MMLAttribute("name", n);
+    addAttribute(name);
     setParent(p);
     MMLManager* m = MMLManager::getInstance();
     assert(0 != m);
@@ -34,10 +34,12 @@ MMLObject::
     r->removeObject(this);
 }
 
-const std::string& MMLObject::
+std::string MMLObject::
 getName() const
 {
-    return m_name;
+    const MMLAttribute* name = getAttribute("name");
+    assert(0 != name);
+    return name->getValue<std::string>();
 }
 
 MMLObject::CMMLAttributes& MMLObject::
@@ -51,6 +53,20 @@ getAttribute(const std::string& n)
 {
     assert(!n.empty());
     MMLAttributes::iterator i =
+                std::find_if(m_attributes.begin(), m_attributes.end(),
+                [&](MMLAttribute* a)
+                {
+                    assert(0 != a);
+                    return a->getName() == n;
+                });
+    return (i != m_attributes.end()) ? (*i): 0;
+}
+
+const MMLAttribute* MMLObject::
+getAttribute(const std::string& n) const
+{
+    assert(!n.empty());
+    MMLAttributes::const_iterator i =
                 std::find_if(m_attributes.begin(), m_attributes.end(),
                 [&](MMLAttribute* a)
                 {

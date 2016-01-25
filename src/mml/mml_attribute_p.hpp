@@ -15,13 +15,14 @@ public:
     class AttrHolder
     {
     public:
-        enum Type {string_t, int_t, double_t};
+        enum Type {string_t, int_t, double_t, bool_t};
 
     public:
         AttrHolder(const std::string& v)
             : m_string(v)
             , m_int(0)
             , m_double(0)
+            , m_bool(false)
             , m_type(string_t)
         {
         }
@@ -31,6 +32,7 @@ public:
             : m_string("")
             , m_int(v)
             , m_double(0)
+            , m_bool(false)
             , m_type(int_t)
         {
         }
@@ -40,10 +42,21 @@ public:
             : m_string("")
             , m_int(0)
             , m_double(v)
+            , m_bool(false)
             , m_type(double_t)
         {
         }
     
+    public:
+        AttrHolder(bool v)
+            : m_string("")
+            , m_int(0)
+            , m_double(0)
+            , m_bool(v)
+            , m_type(bool_t)
+        {
+        }
+
     public:
         AttrHolder(const AttrHolder& a)
         {
@@ -62,23 +75,29 @@ public:
             m_string = a.m_string;
             m_int = a.m_int;
             m_double = a.m_double;
+            m_bool = a.m_bool;
             m_type = a.m_type;
             return *this;
         }
     public:
-        operator int ()
+        operator int () const
         {
             return m_int;
         }
 
-        operator double ()
+        operator double () const
         {
             return m_double;
         }
         
-        operator std::string ()
+        operator std::string () const
         {
             return m_string;
+        }
+    
+        operator bool () const
+        {
+            return m_bool;
         }
 
     public:
@@ -91,6 +110,7 @@ public:
         std::string m_string;
         int m_int;
         double m_double;
+        bool m_bool;
         Type m_type;
     };
 
