@@ -12,7 +12,7 @@ class GuiObject
     : public Core::GuiObject
 {
 public:
-    void init(SDL_Renderer* renderer);
+    void init();
     void onNotify();
 };
 

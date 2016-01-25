@@ -57,7 +57,7 @@ public:
     Command* getCommand(Event* event);
     bool processEvent(Event*);
     void update();
-    void draw(Frame* frame);
+    void draw();
 };
 
 } // namespace Core

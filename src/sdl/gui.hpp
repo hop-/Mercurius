@@ -17,7 +17,10 @@ public:
         : Core::Gui(parent)
     {}
 
-    void draw(Core::Frame*);
+    void draw();
+
+private:
+    Core::Texture* guiObject2Texture(Core::GuiObject* o);
 };
 
 } // namespace Sdl

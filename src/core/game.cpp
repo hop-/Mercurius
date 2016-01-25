@@ -56,7 +56,7 @@ void Game::mainLoop()
                 layer->update();
                 lag -= msToUpdate;
             }
-            layer->draw(m_frame);
+            layer->draw();
         }
         realLag = lag;
     }

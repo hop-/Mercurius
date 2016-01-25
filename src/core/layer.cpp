@@ -38,10 +38,10 @@ void Layer::update()
     m_logic->update();
 }
 
-void Layer::draw(Frame* frame)
+void Layer::draw()
 {
     if (!m_hidden) {
-        m_gui->draw(frame);
+        m_gui->draw();
     }
 }
 

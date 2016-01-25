@@ -11,17 +11,20 @@ class Frame;
 class Layer;
 class GuiObject;
 class Rectangle;
+class Texture;
 
 class Gui
 {
 public:
     typedef std::vector<GuiObject*> GuiObjects;
+    typedef std::vector<Texture*> Textures;
     
 private:
     Layer* m_parent;
     GuiObjects m_objects;
+    Textures m_textures;
     Rectangle* m_viewPort;
-    //Frame* m_frame;
+    Frame* m_frame;
 
 public:
     Gui(Layer* parent)
@@ -34,13 +37,18 @@ public:
 public:
     void addGuiObject(GuiObject* o);
     void removeGuiObject(GuiObject* o);
-/*
+
+    inline Frame* frame() const
+    {
+        return m_frame;
+    }
+
     inline void setFrame(Frame* frame)
     {
         assert(0 != frame);
         m_frame = frame;
     }
-*/
+
     inline void setViewPort(Rectangle* viewPort)
     {
         assert(0 != viewPort);
@@ -48,9 +56,11 @@ public:
     }
 
 public:
-    virtual void draw(Frame* frame) = 0;
+    virtual void draw() = 0;
 
 protected:
+    //virtual Texture* guiObject2Texture(GuiObjects* o) = 0;
+
     inline Layer* parent() const
     {
         return m_parent;

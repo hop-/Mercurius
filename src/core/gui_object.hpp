@@ -16,18 +16,19 @@ class Texture;
 class GuiObject
     : public Observer
 {
-    MML m_mml;
     Gui* m_parent;
     std::string m_textureLocation;
     Texture* m_texture;
 
 protected:
-    GuiObject(Gui* parnet, const std::string& config);
+    GuiObject(Gui* parnet);
 
 public:
     virtual ~GuiObject() = default;
 
 public:
+    virtual void init() = 0;
+
     inline Texture* texture() const
     {
         return m_texture;

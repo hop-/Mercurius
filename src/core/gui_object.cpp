@@ -5,9 +5,8 @@ namespace Core
 {
 
 GuiObject::
-GuiObject(Gui* parent, const std::string& config)
-    : m_mml(config)
-    , m_parent(parent)
+GuiObject(Gui* parent)
+    : m_parent(parent)
 {
     assert(0 != parent);
     parent->addGuiObject(this);
