@@ -15,7 +15,7 @@ void Gui::draw()
     }
 }
 
-void Gui::loadGuiObject(GuiObject* o)
+void Gui::loadGuiObject(Core::GuiObject* o)
 {
     assert(0 != o);
     // TODO load data from GuiObject using SDL

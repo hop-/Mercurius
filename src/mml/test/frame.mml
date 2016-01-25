@@ -1,0 +1,13 @@
+layer {
+
+name: layer1;
+visible: true;
+
+box {
+name: box1;
+width: 50;
+height: 50;
+weight: 20;
+}
+
+}

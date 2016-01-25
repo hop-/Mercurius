@@ -2,7 +2,6 @@
 #define _CORE_GUI_OBJECT_HPP_
 
 #include "observer.hpp"
-#include "mml/mml.hpp"
 
 #include <string>
 #include <cassert>
