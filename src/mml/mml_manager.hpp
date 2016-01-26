@@ -1,6 +1,9 @@
 #ifndef _MML_MMLMANAGER_HPP
 #define _MML_MMLMANAGER_HPP
 
+#include "mml_object.hpp"
+
+#include <map>
 #include <string>
 
 namespace MML
@@ -13,7 +16,10 @@ class MMLManager
     static MMLManager* m_instance;
 
 private:
-    MMLRegistery* m_registery;    
+    MMLRegistery* m_registery;
+    typedef MMLObject::AbstractFactory Factory;
+    typedef std::map<std::string, Factory*> Types;
+    Types m_types;
 
 public:
     static MMLManager* getInstance();
@@ -27,6 +33,10 @@ public:
 
 public:
     MMLRegistery* getRegistery();
+
+private:
+    void registerTypes();
+    void emptyTypeRegistery();
 
 private:
     MMLManager(const MMLManager&) = delete;

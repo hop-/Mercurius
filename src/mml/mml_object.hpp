@@ -43,6 +43,16 @@ public:
     void setParent(MMLObject*);
     const MMLObject* getParent() const;
 
+public:
+    class AbstractFactory
+    {
+    public:
+        virtual ~AbstractFactory()
+        {}
+    public:
+        virtual MMLObject* create(const std::string&) = 0;
+    };
+
 protected:
     void addAttribute(MMLAttribute*);
     void setType(const std::string&);

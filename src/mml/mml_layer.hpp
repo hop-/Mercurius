@@ -10,6 +10,13 @@ class MMLLayer
     : public MMLObject
 {
 public:
+    class LayerFactory : public MMLObject::AbstractFactory
+    {
+    public:
+        virtual MMLObject* create(const std::string& n);
+    };
+
+public:
     MMLLayer(const std::string& n);
 
 };
