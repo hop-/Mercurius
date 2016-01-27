@@ -35,8 +35,11 @@ public:
     MMLRegistery* getRegistery();
 
 private:
+    Factory* getTypeFactory(const std::string&);
+
+private:
     void registerTypes();
-    void emptyTypeRegistery();
+    void cleanTypeRegistery();
 
 private:
     MMLManager(const MMLManager&) = delete;

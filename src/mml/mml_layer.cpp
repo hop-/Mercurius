@@ -16,6 +16,7 @@ MMLLayer(const std::string& n)
 {
     setType("layer");
     addAttribute(new MMLAttribute("visible", false));
+    addAttribute(new MMLAttribute("level", 0));
 }
 
 } // MML

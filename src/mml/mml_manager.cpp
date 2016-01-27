@@ -1,6 +1,8 @@
 #include "mml_manager.hpp"
+#include "mml_parser.hpp"
 #include "mml_registery.hpp"
 
+#include "mml_box.hpp"
 #include "mml_layer.hpp"
 
 #include <algorithm>
@@ -30,7 +32,22 @@ MMLManager()
 MMLManager::
 ~MMLManager()
 {
-    emptyTypeRegistery();
+    cleanTypeRegistery();
+}
+
+bool MMLManager::
+parseMMLFile(const std::string& f)
+{
+    MMLParser* p = MMLParser::getInstance();
+    assert(0 != p);
+    return p->parseFile(f);
+}
+
+MMLManager::Factory* MMLManager::
+getTypeFactory(const std::string& n)
+{
+    Types::iterator i = m_types.find(n);
+    return i != m_types.end() ? i->second : 0;
 }
 
 void MMLManager::
@@ -38,13 +55,14 @@ registerTypes()
 {
     // All types should be registerd in this function
     m_types["layer"] = new MMLLayer::LayerFactory();
+    m_types["box"] = new MMLBox::BoxFactory();
 }
 
 void MMLManager::
-emptyTypeRegistery()
+cleanTypeRegistery()
 {
     std::for_each(m_types.begin(), m_types.end(), 
-                  [](Types::value_type v) { delete v.second;});
+                  [](Types::value_type& v) { delete v.second;});
     m_types.clear();
 }
 
