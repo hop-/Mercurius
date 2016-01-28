@@ -29,7 +29,7 @@ public:
     ~MMLManager();
 
 public:
-    bool parseMMLFile(const std::string&);
+    bool loadData(const std::string&);
 
 public:
     MMLRegistery* getRegistery();

@@ -36,7 +36,7 @@ MMLManager::
 }
 
 bool MMLManager::
-parseMMLFile(const std::string& f)
+loadData(const std::string& f)
 {
     MMLParser* p = MMLParser::getInstance();
     assert(0 != p);
