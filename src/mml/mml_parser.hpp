@@ -22,6 +22,9 @@ public:
     bool parseFile(const std::string&);
 
 private:
+    void removeSpaceses(std::string&);
+
+private:
     MMLParser(const MMLParser&) = delete;
     MMLParser& operator=(const MMLParser&) = delete;
 };
