@@ -44,6 +44,8 @@ private:
 private:
     MMLManager(const MMLManager&) = delete;
     MMLManager& operator=(const MMLManager&) = delete;
+
+    friend class MMLParser;
 };
 
 } // namespace MML

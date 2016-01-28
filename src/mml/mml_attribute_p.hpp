@@ -15,7 +15,7 @@ public:
     class AttrHolder
     {
     public:
-        enum Type {string_t, int_t, double_t, bool_t};
+        enum Type {string_t = 0, int_t, double_t, bool_t};
 
     public:
         AttrHolder(const std::string& v)
@@ -133,6 +133,12 @@ public:
     void setValue(const ValueType& v)
     {
         m_value = v;
+    }
+
+public:
+    AttrHolder::Type getType() const
+    {
+        return m_value.getType();
     }
 
 protected:

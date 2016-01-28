@@ -6,6 +6,9 @@
 namespace MML
 {
 
+class MMLObject;
+class MMLAttribute;
+
 class MMLParser
 {
 private:
@@ -23,6 +26,12 @@ public:
 
 private:
     void removeSpaceses(std::string&);
+    bool checkSyntax(const std::string&);
+    void matchMMLObject(const std::string&);
+    void parseMMLObject(const std::string&);
+    void parseMMLAtribute(const std::string&, MMLObject*);
+    void parseMMLValue(const std::string&, MMLAttribute*);
+    bool isMetaSymbol(char);
 
 private:
     MMLParser(const MMLParser&) = delete;

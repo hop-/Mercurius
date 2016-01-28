@@ -20,6 +20,9 @@ public:
     virtual ~MMLAttribute();
 
 public:
+    unsigned getType() const;
+
+public:
     template <typename T>
     T getValue() const
     {

@@ -37,9 +37,16 @@ MMLAttribute(const std::string& n, bool v)
 MMLAttribute::
 ~MMLAttribute()
 {
-    assert(m_private != 0);
+    assert(0 != m_private);
     delete m_private;
     m_private = 0;
+}
+
+unsigned MMLAttribute::
+getType() const
+{
+    assert(0 != m_private);
+    return m_private->getType();
 }
 
 } // MML

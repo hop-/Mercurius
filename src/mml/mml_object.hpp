@@ -32,7 +32,7 @@ public:
 protected:
     CMMLAttributes& getAttributes() const;
 
-protected:
+public:
     MMLAttribute* getAttribute(const std::string&);
     const MMLAttribute* getAttribute(const std::string&) const;
 
