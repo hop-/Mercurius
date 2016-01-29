@@ -6,6 +6,7 @@
 #include <cctype>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 #include <streambuf>
 #include <stack>
 
@@ -150,6 +151,7 @@ void MMLParser::
 parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
 {
     assert(0 != attr);
+    std::stringstream converter;
     switch (attr->getType()) {
     case 0:
         // STRING
@@ -157,11 +159,17 @@ parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
         break;
     case 1:
         // INT
-        attr->setValue(std::stoi(attr_value));
+        converter<<attr_value;
+        int vi;
+        converter>>vi;
+        attr->setValue(vi);
         break;
     case 2:
         // DOUBLE
-        attr->setValue(std::stod(attr_value));
+        converter<<attr_value;
+        double vd;
+        converter>>vd;
+        attr->setValue(vd);
         break;
     case 3:
         // BOOL
