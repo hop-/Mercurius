@@ -24,7 +24,7 @@ private:
 
 public:
     MMLObject(const std::string&, MMLObject* = 0);
-    virtual ~MMLObject() = 0;
+    virtual ~MMLObject();
 
 public:
     const std::string& getType();

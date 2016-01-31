@@ -125,6 +125,13 @@ public:
     }
 
 public:
+    MMLAttributePrivate(const MMLAttributePrivate& a, MMLAttribute* parent)
+        : m_parent(parent)
+        , m_value(a.m_value)
+    {
+    }
+
+public:
     const ValueType& getValue() const
     {
         return m_value;

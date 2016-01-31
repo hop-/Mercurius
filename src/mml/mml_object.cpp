@@ -15,6 +15,11 @@ MMLObject(const std::string& n, MMLObject* p)
 {
     MMLAttribute* name = new MMLAttribute("name", n);
     addAttribute(name);
+/* recuesion and name problems
+    MMLAttribute* gui = new MMLAttribute("gui", n + "gui");
+    addAttribute(gui);
+    MMLAttribute* logic = new MMLAttribute("logic", n + "logic"); 
+    addAttribute(logic);*/
     setParent(p);
     MMLManager* m = MMLManager::getInstance();
     assert(0 != m);
@@ -32,6 +37,9 @@ MMLObject::
     assert(0 != m);
     MMLRegistery* r = m->getRegistery();
     r->removeObject(this);
+    std::for_each(m_attributes.begin(), m_attributes.end(),
+                  [](MMLAttribute* o) { assert(o != 0); delete o;});
+    m_attributes.clear();
 }
 
 std::string MMLObject::
@@ -80,7 +88,6 @@ void MMLObject::
 addAttribute(MMLAttribute* a)
 {
     assert(0 != a);
-    a->setParent(this);
     m_attributes.push_back(a);
 }
 
@@ -104,7 +111,9 @@ setParent(MMLObject* p)
         m_parent->removeChild(this);
     }
     m_parent = p;
-    p->addChild(this);
+    if (p != 0) {
+        p->addChild(this);
+    }
 }
 
 const MMLObject* MMLObject::
@@ -118,8 +127,8 @@ addChild(MMLObject* o)
 {
     assert(0 != o);
     assert(o != this);
-    Children::iterator i = std::find(m_children.begin(), m_children.end(), o);
-    assert(i == m_children.end());
+/*    Children::const_iterator i = std::find(m_children.begin(), m_children.end(), o);
+    assert(i == m_children.end());*/
     m_children.push_back(o);
 }
 

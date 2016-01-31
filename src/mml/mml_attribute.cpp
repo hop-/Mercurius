@@ -4,33 +4,29 @@ namespace MML
 {
 MMLAttribute::
 MMLAttribute(const std::string& n, const std::string& v)
-    : MMLObject(n)
+    : m_name(n)
 {
-    setType("attribute");
     m_private = new MMLAttributePrivate(v, this);
 }
 
 MMLAttribute::
 MMLAttribute(const std::string& n, int v)
-    : MMLObject(n)
+    : m_name(n)
 {
-    setType("attribute");
     m_private = new MMLAttributePrivate(v, this);
 }
 
 MMLAttribute::
 MMLAttribute(const std::string& n, double v)
-    : MMLObject(n)
+    : m_name(n)
 {
-    setType("attribute");
     m_private = new MMLAttributePrivate(v, this);
 }
 
 MMLAttribute::
 MMLAttribute(const std::string& n, bool v)
-    : MMLObject(n)
+    : m_name(n)
 {
-    setType("attribute");
     m_private = new MMLAttributePrivate(v, this);
 }
 
@@ -40,6 +36,18 @@ MMLAttribute::
     assert(0 != m_private);
     delete m_private;
     m_private = 0;
+}
+
+MMLAttribute::
+MMLAttribute(const MMLAttribute& a)
+{
+    m_private = new MMLAttributePrivate(a.m_private, this);
+}
+
+const std::string& MMLAttribute::
+getName() const
+{
+    return m_name;
 }
 
 unsigned MMLAttribute::
