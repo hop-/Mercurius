@@ -17,12 +17,10 @@ class Gui
 {
 public:
     typedef std::vector<GuiObject*> GuiObjects;
-    typedef std::vector<Texture*> Textures;
     
 private:
     Layer* m_parent;
     GuiObjects m_objects;
-    Textures m_textures;
     Rectangle* m_viewPort;
     Frame* m_frame;
 
