@@ -7,23 +7,12 @@ level: 1;
 box {
 
 name: box1;
-
-logic {
-
 width: 50;
 height: 50;
 weight: 20;
 position_x: 25;
 position_y: 50;
-
-}
-
-gui {
-
 texture: path_to_image;
-states: static;
-
-}
 
 }
 

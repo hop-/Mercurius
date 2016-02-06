@@ -31,8 +31,6 @@ private:
     MMLObject* parseMMLObject(const std::string&, const std::string&);
     void parseMMLAtribute(const std::string&, MMLObject*);
     void parseMMLValue(const std::string&, MMLAttribute*);
-    void parseLogic(const std::string&, MMLObject*);
-    void parseGui(const std::string&, MMLObject*);
     bool isMetaSymbol(char);
     void parseLayers(const std::string&);
 

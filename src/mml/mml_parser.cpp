@@ -53,7 +53,6 @@ parseFile(const std::string& f)
         // TODO throw exception
         throw "Syntax error";
     }
-    std::cout<<data<<std::endl;
     parseLayers(data);
     return true;
 }
@@ -129,12 +128,10 @@ parseLayers(const std::string& data)
     char* buffer = new char[10];
     size_t s = tmp.copy(buffer, b);
     buffer[s] = '\0';
-    std::cout<<buffer<<std::endl;
     std::string type(buffer);
     delete[] buffer;
     buffer = 0;
     tmp.erase(0, tmp.find_first_of(open_bracket));
-    std::cout<<tmp<<std::endl;
     size_t i = 0;
     do {
         if (tmp[i] == open_bracket) {
@@ -145,7 +142,6 @@ parseLayers(const std::string& data)
         }
         ++i;
     } while(brackets != 0);
-    std::cout<<i<<"\t"<<brackets<<std::endl;
     buffer = new char[i + 1];
     s = tmp.copy(buffer, i - 2 , 1);
     buffer[s] = '\0';
@@ -153,9 +149,6 @@ parseLayers(const std::string& data)
     delete[] buffer;
     buffer = 0;
     tmp.erase(0, i);
-    std::cout<<body<<std::endl;
-    std::cout<<tmp<<std::endl;
-
     size_t fo = body.find_first_of(open_bracket);
     buffer = new  char[fo + 1];
     body.copy(buffer, fo);
@@ -167,13 +160,20 @@ parseLayers(const std::string& data)
     s = tmp1.copy(buffer, attr_end + 1);
     buffer[s] = '\0';
     std::string attr(buffer);
-    std::cout<<"ATTR: "<<attr<<std::endl;
     body.erase(0, attr_end + 1);
-    std::cout<<body<<std::endl;
     MMLObject* level = parseMMLObject(type, attr);
     assert(0 != level);
-//    parseObjects()
-
+    while(!body.empty()) {
+        size_t obj_begin = body.find_first_of(open_bracket);
+        std::string obj_type = body.substr(0, obj_begin);
+        body.erase(0, obj_begin + 1);
+        size_t obj_end = body.find_first_of(close_bracket);
+        std::string obj_body = body.substr(0, obj_end);
+        body.erase(0, obj_end + 1);
+        MMLObject* child = parseMMLObject(obj_type, obj_body);
+        assert(0 != child);
+        child->setParent(level);
+    }
     if (!tmp.empty()) {
         parseLayers(tmp);
     }
@@ -186,45 +186,11 @@ parseMMLObject(const std::string& type, const std::string& attr)
     MMLObject* attr_getter = createMMLObject(type, "attr_getter");
     parseMMLAtribute(attr, attr_getter);
     const std::string name = attr_getter->getName();
-    std::cout<<name<<std::endl;
     attr_getter->getAttribute("name")->setValue<std::string>("attr_getter");
-    std::cout<<attr_getter->getName()<<std::endl;
     delete attr_getter;
     MMLObject* level = createMMLObject(type, name);
     parseMMLAtribute(attr, level);
     return level;
-}
-
-void MMLParser::
-parseGui(const std::string& gui, MMLObject* obj)
-{
-    if (gui.empty()) {
-        return;
-    }
-    assert(0 != obj);
-/*    MMLAttribute* g = obj->getAttribute("gui");
-    assert(0 != g);*/
-    std::string tmp = gui;
-    size_t pos = tmp.find_first_of(open_bracket);
-    tmp.erase(0, pos);
-    tmp.erase(tmp.size() - 2 , 1);
-//    parseMMLAtribute(tmp, g);
-}
-
-void MMLParser::
-parseLogic(const std::string& logic, MMLObject* obj)
-{
-    if (logic.empty()) {
-        return;
-    }
-    assert(0 != obj);
-/*    MMLAttribute* l = obj->getAttribute("logic");
-    assert(0 != l);*/
-    std::string tmp = logic;
-    size_t pos = tmp.find_first_of(open_bracket);
-    tmp.erase(0, pos);
-    tmp.erase(tmp.size() - 2 , 1);
-//    parseMMLAtribute(tmp, l);
 }
 
 void MMLParser::

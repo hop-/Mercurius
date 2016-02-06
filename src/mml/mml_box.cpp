@@ -18,7 +18,9 @@ MMLBox(const std::string& n)
     addAttribute(new MMLAttribute("width", 0));
     addAttribute(new MMLAttribute("height", 0));
     addAttribute(new MMLAttribute("weight", 0));
-    addAttribute(new MMLAttribute("position", 0));
+    addAttribute(new MMLAttribute("position_x", 0.0));
+    addAttribute(new MMLAttribute("position_y", 0.0));
+    addAttribute(new MMLAttribute("texture", ""));
 }
 
 } // MML
