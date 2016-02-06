@@ -2,10 +2,11 @@
 #define _CORE_COMPONENTS_HPP_
 
 #include "logic_object.hpp"
-#include "subject.hpp"
 #include "rectangle.hpp"
 #include "position.hpp"
 #include "vector.hpp"
+
+#include <base/subject.hpp>
 
 namespace Core
 {
@@ -102,7 +103,7 @@ public:
 
 class TextureRenderer
     : public LogicObject::ComponentCreator<TextureRenderer>
-    , protected Subject
+    , protected Base::Subject
 {
     // think it should have some info about texture
 

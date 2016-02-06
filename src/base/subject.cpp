@@ -4,7 +4,7 @@
 
 #include <cassert>
 
-namespace Core
+namespace Base
 {
 
 void Subject::notify()
@@ -27,4 +27,4 @@ void Subject::removeObserver(Observer* observer)
     m_observersToNotify.remove(observer);
 }
 
-} // namespace Core
+} // namespace Base

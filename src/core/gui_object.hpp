@@ -1,7 +1,7 @@
 #ifndef _CORE_GUI_OBJECT_HPP_
 #define _CORE_GUI_OBJECT_HPP_
 
-#include "observer.hpp"
+#include <base/observer.hpp>
 
 #include <string>
 #include <cassert>
@@ -13,7 +13,7 @@ class Gui;
 class Texture;
 
 class GuiObject
-    : public Observer
+    : public Base::Observer
 {
     Gui* m_parent;
     std::string m_textureLocation;

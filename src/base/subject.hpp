@@ -1,9 +1,9 @@
-#ifndef _CORE_SUBJECT_HPP_
-#define _CORE_SUBJECT_HPP_
+#ifndef _BASE_SUBJECT_HPP_
+#define _BASE_SUBJECT_HPP_
 
 #include <list>
 
-namespace Core
+namespace Base
 {
 
 class Observer;
@@ -21,6 +21,6 @@ public:
     void removeObserver(Observer* observer);
 };
 
-} // namespace Core
+} // namespace Base
 
-#endif //_CORE_SUBJECT_HPP_
+#endif //_BASE_SUBJECT_HPP_
