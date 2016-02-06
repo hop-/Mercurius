@@ -1,4 +1,8 @@
 # ignore executable
 mercurius
-# ignore all object and dependensy files
-*.[od]
+mercurius.exe
+# ignore objects directory
+objs/
+# ignore all tmp backup files
+*~
+.*.swp

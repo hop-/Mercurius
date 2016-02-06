@@ -24,6 +24,8 @@ void GuiObject::init()
 }
 
 void GuiObject::onNotify()
-{}
+{
+    // TODO
+}
 
 } // namespace Sdl

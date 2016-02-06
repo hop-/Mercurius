@@ -18,12 +18,6 @@ public:
     {}
 
     void draw();
-
-private:
-    virtual void loadGuiObject(Core::GuiObject*);
-
-private:
-    Core::Texture* guiObject2Texture(Core::GuiObject* o);
 };
 
 } // namespace Sdl

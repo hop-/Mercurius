@@ -15,10 +15,4 @@ void Gui::draw()
     }
 }
 
-void Gui::loadGuiObject(Core::GuiObject* o)
-{
-    assert(0 != o);
-    // TODO load data from GuiObject using SDL
-}
-
 } // namespace Sdl

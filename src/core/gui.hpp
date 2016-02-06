@@ -59,8 +59,6 @@ public:
     virtual void draw() = 0;
 
 protected:
-    //virtual Texture* guiObject2Texture(GuiObjects* o) = 0;
-
     inline Layer* parent() const
     {
         return m_parent;
@@ -76,8 +74,6 @@ protected:
         assert(0 != parent);
         m_parent = parent;
     }
-
-    virtual void loadGuiObject(GuiObject*) = 0;
 };
 
 } // namespace Core
