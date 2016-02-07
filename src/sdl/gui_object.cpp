@@ -13,6 +13,8 @@ namespace Sdl
 void GuiObject::init()
 {
     Core::Texture* texture = new Core::Texture;
+    assert(0 != parent());
+    assert(0 != parent()->frame());
     SDL_Renderer* renderer = static_cast<SDL_Renderer*>(
             parent()->frame()->renderer());
     assert(0 != renderer);

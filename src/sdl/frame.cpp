@@ -1,6 +1,8 @@
 #include "frame.hpp"
 #include "texture.hpp"
 
+#include <cassert>
+
 namespace Sdl
 {
     
@@ -31,6 +33,8 @@ void Frame::init()
 
 void Frame::drawTexture(Core::Texture* texture)
 {
+    assert(0 != texture);
+    assert(0 != m_renderer);
     SDL_RenderCopy(m_renderer, texture->texture
             , texture->sourceRect
             , texture->destinationRect);
