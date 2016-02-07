@@ -1,4 +1,5 @@
 #include "frame.hpp"
+#include "texture.hpp"
 
 namespace Sdl
 {
@@ -14,18 +15,25 @@ Frame::~Frame()
 
 void Frame::init()
 {
-    // TODO check for possibility of init
-    m_window = SDL_CreateWindow("test title"
+    // TODO check SDL_Init(SDL_INIT_VIDEO) == 0 for success
+    m_window = SDL_CreateWindow("test title" // TODO title
             , SDL_WINDOWPOS_UNDEFINED
             , SDL_WINDOWPOS_UNDEFINED
-            , 800
-            , 600
-            , SDL_WINDOW_SHOWN);
+            , 800 // TODO should be used Frame::width()
+            , 600 // TODO should be used Frame::height()
+            , SDL_WINDOW_SHOWN); // TODO window and fullscrean modes
     // TODO check for m_window != 0
     m_renderer = SDL_CreateRenderer(m_window
             , -1
             , SDL_RENDERER_ACCELERATED);
     // TODO check for m_renterer != 0
+}
+
+void Frame::drawTexture(Core::Texture* texture)
+{
+    SDL_RenderCopy(m_renderer, texture->texture
+            , texture->sourceRect
+            , texture->destinationRect);
 }
 
 

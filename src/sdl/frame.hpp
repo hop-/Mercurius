@@ -18,9 +18,7 @@ class Frame
 public:
     ~Frame();
     void init();
-    void drawTexture(Core::Texture* texture) {}
-
-
+    void drawTexture(Core::Texture* texture);
 
     void* renderer() const
     {

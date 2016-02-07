@@ -8,8 +8,6 @@ namespace Sdl
 void Gui::draw()
 {
     assert(0 != frame());
-    //SDL_Renderer* frameRenderer =
-    //    static_cast<SDL_Renderer*>(frame->renderer());
     for (Core::GuiObject* object : objects()) {
         frame()->drawTexture(object->texture());
     }

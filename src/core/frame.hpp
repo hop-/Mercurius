@@ -24,6 +24,16 @@ public:
     virtual void drawTexture(Texture* texture) = 0;
     virtual void setResolution(int width, int height);
 
+    inline const int width() const
+    {
+        return m_width;
+    }
+
+    inline const int height() const
+    {
+        return m_height;
+    }
+
     inline const unsigned& msPerUpdate() const
     {
         return m_msPerUpdate;
