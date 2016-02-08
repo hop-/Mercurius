@@ -3,7 +3,7 @@
 
 #include <cassert>
 
-namespace Core
+namespace Base
 {
 
 class TypedBase
@@ -35,6 +35,6 @@ protected:
 };
 
 
-} // namespace Core
+} // namespace Base
 
 #endif //_CORE_TYPED_BASE_HPP_

@@ -4,14 +4,14 @@ namespace Core
 {
 
 
-bool KeyEvent::less(TypedBase* obj)
+bool KeyEvent::less(Base::TypedBase* obj)
 {
     KeyEvent* keyEvent = static_cast<KeyEvent*>(obj);
     return (m_keyCode < keyEvent->key() 
             || (m_keyCode == keyEvent->key() && m_mode < keyEvent->mode()));
 }
 
-bool MouseClickEvent::less(TypedBase* obj)
+bool MouseClickEvent::less(Base::TypedBase* obj)
 {
     MouseClickEvent* mouseEvent = static_cast<MouseClickEvent*>(obj);
     return (m_button < mouseEvent->button()
@@ -20,7 +20,7 @@ bool MouseClickEvent::less(TypedBase* obj)
                 || (m_y == mouseEvent->y() && m_x < mouseEvent->x())));
 }
 
-bool QuitEvent::less(TypedBase* obj)
+bool QuitEvent::less(Base::TypedBase* obj)
 {
     return false;
 }

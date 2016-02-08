@@ -1,6 +1,6 @@
 #include "typed_base.hpp"
 
-namespace Core
+namespace Base
 {
 
 int TypedBase::ID::m_count = 0;
@@ -24,4 +24,4 @@ bool TypedBase::Less::operator()(TypedBase* left, TypedBase* right) const
     return left->getType() < right->getType();
 }
 
-} // namespace Core
+} // namespace Base

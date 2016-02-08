@@ -1,7 +1,7 @@
 #ifndef _CORE_EVENT_HPP_
 #define _CORE_EVENT_HPP_
 
-#include "typed_base.hpp"
+#include <base/typed_base.hpp>
 
 #include <cassert>
 
@@ -9,7 +9,7 @@ namespace Core
 {
 
 class Event
-    : public TypedBase
+    : public Base::TypedBase
 {};
 
 template <class T>

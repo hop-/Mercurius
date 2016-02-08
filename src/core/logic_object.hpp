@@ -1,7 +1,7 @@
 #ifndef _CORE_LOGIC_OBJECT_HPP_
 #define _CORE_LOGIC_OBJECT_HPP_
 
-#include "typed_base.hpp"
+#include <base/typed_base.hpp>
 
 #include "position.hpp"
 
@@ -15,7 +15,7 @@ class LogicObject
 {
 public:
     class Component
-        : public TypedBase
+        : public Base::TypedBase
     {
         friend class LogicObject;
         LogicObject* m_parent;
@@ -35,7 +35,7 @@ public:
         virtual void update() {};
         virtual void init() {};
     
-        bool less(TypedBase* o) final
+        bool less(Base::TypedBase* o) final
         {
             return false; 
         }

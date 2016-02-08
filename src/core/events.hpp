@@ -33,7 +33,7 @@ public:
     }
 
 private: 
-    bool less(TypedBase* obj);
+    bool less(Base::TypedBase* obj);
 };
 
 class MouseClickEvent
@@ -78,14 +78,14 @@ public:
     }
 
 private: 
-    bool less(TypedBase* obj);
+    bool less(Base::TypedBase* obj);
 };
 
 class QuitEvent
     : public EventCreator<QuitEvent>
 {
 private: 
-    bool less(TypedBase* obj);
+    bool less(Base::TypedBase* obj);
 };
 
 } // namespace Core
