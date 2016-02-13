@@ -36,8 +36,8 @@ void Frame::drawTexture(Core::Texture* texture)
     assert(0 != texture);
     assert(0 != m_renderer);
     SDL_RenderCopy(m_renderer, texture->texture
-            , texture->sourceRect
-            , texture->destinationRect);
+            , &(texture->sourceRect)
+            , &(texture->destinationRect));
 }
 
 
