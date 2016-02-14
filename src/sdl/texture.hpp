@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-namespace Core
+namespace Sdl
 {
 
 struct Texture

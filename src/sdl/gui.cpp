@@ -4,13 +4,4 @@
 
 namespace Sdl
 {
-
-void Gui::draw()
-{
-    assert(0 != frame());
-    for (Core::GuiObject* object : objects()) {
-        frame()->drawTexture(object->texture());
-    }
-}
-
 } // namespace Sdl

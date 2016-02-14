@@ -11,7 +11,6 @@ class Frame;
 class Layer;
 class GuiObject;
 class Rectangle;
-class Texture;
 
 class Gui
 {
@@ -54,7 +53,7 @@ public:
     }
 
 public:
-    virtual void draw() = 0;
+    void draw();
 
 protected:
     inline Layer* parent() const

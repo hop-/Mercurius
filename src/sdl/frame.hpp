@@ -14,11 +14,10 @@ class Frame
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
 
-
 public:
     ~Frame();
     void init();
-    void drawTexture(Core::Texture* texture);
+    void draw(Core::GuiObject* object);
 
     void* renderer() const
     {

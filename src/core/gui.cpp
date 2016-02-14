@@ -1,9 +1,18 @@
 #include "gui.hpp"
+#include "frame.hpp"
 
 #include <algorithm>
 
 namespace Core
 {
+
+void Gui::draw()
+{
+    assert(0 != m_frame);
+    for (auto* object : m_objects) {
+        frame()->draw(object);
+    }
+}
 
 void Gui::addGuiObject(GuiObject* o)
 {

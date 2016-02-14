@@ -11,7 +11,6 @@ namespace Core
 {
 
 class Gui;
-class Texture;
 class LogicObject;
 
 class GuiObject
@@ -20,7 +19,6 @@ class GuiObject
     Gui* m_parent;
     LogicObject* m_logicObject;
     std::string m_textureLocation;
-    Texture* m_texture;
     Rectangle m_srcRect;    // not the best way
     Rectangle m_destRect;   // not the best way
 
@@ -63,17 +61,7 @@ public:
         m_logicObject = logicObject;
     }
 
-    inline Texture* texture() const
-    {
-        return m_texture;
-    }
-
 protected:
-    inline void setTexture(Texture* texture)
-    {
-        m_texture = texture;
-    }
-
     inline const std::string textureLocation() const
     {
         return m_textureLocation;

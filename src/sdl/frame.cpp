@@ -1,5 +1,6 @@
 #include "frame.hpp"
 #include "texture.hpp"
+#include "gui_object.hpp"
 
 #include <cassert>
 
@@ -31,13 +32,16 @@ void Frame::init()
     // TODO check for m_renterer != 0
 }
 
-void Frame::drawTexture(Core::Texture* texture)
+void Frame::draw(Core::GuiObject* object)
 {
-    assert(0 != texture);
+    assert(0 != object);
+    GuiObject* sdlObject = static_cast<GuiObject*>(object);
+    assert(0 != dynamic_cast<GuiObject*>(object));
     assert(0 != m_renderer);
-    SDL_RenderCopy(m_renderer, texture->texture
-            , &(texture->sourceRect)
-            , &(texture->destinationRect));
+    Texture texture = sdlObject->texture();
+    SDL_RenderCopy(m_renderer, texture.texture
+            , &(texture.sourceRect)
+            , &(texture.destinationRect));
 }
 
 

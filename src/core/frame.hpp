@@ -4,7 +4,7 @@
 namespace Core
 {
 
-class Texture;
+class GuiObject;
 
 class Frame
 {
@@ -21,7 +21,7 @@ protected:
 public:
     virtual ~Frame() = default;
     virtual void init() = 0;
-    virtual void drawTexture(Texture* texture) = 0;
+    virtual void draw(GuiObject* object) = 0;
     virtual void setResolution(int width, int height);
 
     inline const int width() const
