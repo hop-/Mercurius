@@ -1,4 +1,5 @@
 #include "logic_object.hpp"
+#include "logic.hpp"
 
 namespace Core
 {
@@ -24,6 +25,13 @@ void LogicObject::init()
         assert(0 != pair.second);
         pair.second->init();
     }
+}
+
+LogicObject::LogicObject(Logic* parent)
+    : m_parent(parent)
+{
+    assert(parent != 0);
+    parent->addLogicObject(this);
 }
 
 } // namespace Core

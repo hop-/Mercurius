@@ -29,7 +29,7 @@ public:
     {
         assert(0 != parent);
     }
-    virtual ~Gui() = default;
+    virtual ~Gui() = default; // TODO implement and delete all children
 
 public:
     void addGuiObject(GuiObject* o);

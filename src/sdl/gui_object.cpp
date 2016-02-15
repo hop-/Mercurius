@@ -6,6 +6,11 @@
 
 #include <SDL2/SDL_image.h>
 
+namespace Sdl
+{
+
+namespace  {
+
 SDL_Rect toSDL_Rect(const Core::Rectangle& rect)
 {
     return SDL_Rect{int(rect.position().x())
@@ -14,10 +19,7 @@ SDL_Rect toSDL_Rect(const Core::Rectangle& rect)
         , int(rect.height())};
 }
 
-namespace Sdl
-{
-
-
+}
 void GuiObject::init()
 {
     assert(0 != parent());
