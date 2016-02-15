@@ -1,5 +1,6 @@
 # ignore executable
 mercurius
+mercurius-d
 mercurius.exe
 # ignore objects directories
 objs/
