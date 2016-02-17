@@ -18,6 +18,7 @@ public:
 
 public:
     MMLLayer(const std::string& n);
+    virtual ~MMLLayer();
 };
 
 } // namespace MML

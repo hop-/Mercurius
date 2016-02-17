@@ -14,16 +14,16 @@ class MMLRegistery
     struct less
     {
         bool operator()(MMLObject* a, MMLObject* b)
-        { 
+        {
             assert(0 != a);
             assert(0 != b);
             return a->getName() < b->getName();
         }
-    };   
+    };
 
     typedef std::set<MMLObject*, less> Objects;
-    
-    Objects m_objects;    
+
+    Objects m_objects;
 
 public:
     bool addObject(MMLObject* o)

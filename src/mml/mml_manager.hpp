@@ -17,6 +17,7 @@ class MMLManager
 
 private:
     MMLRegistery* m_registery;
+    MMLRegistery* m_layer_registery;
     typedef MMLObject::AbstractFactory Factory;
     typedef std::map<std::string, Factory*> Types;
     Types m_types;
@@ -33,6 +34,9 @@ public:
 
 public:
     MMLRegistery* getRegistery();
+
+public:
+    MMLRegistery* getLayerRegistery();
 
 private:
     Factory* getTypeFactory(const std::string&);

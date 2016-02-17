@@ -25,6 +25,7 @@ getInstance()
 MMLManager::
 MMLManager()
      : m_registery(new MMLRegistery())
+     , m_layer_registery(new MMLRegistery())
 {
     registerTypes();
 }
@@ -33,6 +34,7 @@ MMLManager::
 ~MMLManager()
 {
     cleanTypeRegistery();
+    // TODO delete registeries and mml objects
 }
 
 bool MMLManager::
@@ -61,7 +63,7 @@ registerTypes()
 void MMLManager::
 cleanTypeRegistery()
 {
-    std::for_each(m_types.begin(), m_types.end(), 
+    std::for_each(m_types.begin(), m_types.end(),
                   [](Types::value_type& v) { delete v.second;});
     m_types.clear();
 }
@@ -70,6 +72,12 @@ MMLRegistery* MMLManager::
 getRegistery()
 {
     return m_registery;
+}
+
+MMLRegistery* MMLManager::
+getLayerRegistery()
+{
+    return m_layer_registery;
 }
 
 }
