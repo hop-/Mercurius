@@ -22,8 +22,10 @@ class MMLRegistery
     };
 
     typedef std::set<MMLObject*, less> Objects;
-
     Objects m_objects;
+
+public:
+    typedef Objects::iterator iterator;
 
 public:
     bool addObject(MMLObject* o)
@@ -37,6 +39,18 @@ public:
     {
         assert(0 != o);
         return m_objects.erase(o);
+    }
+
+public:
+    iterator begin()
+    {
+        return m_objects.begin();
+    }
+
+public:
+    iterator end()
+    {
+        return m_objects.end();
     }
 };
 
