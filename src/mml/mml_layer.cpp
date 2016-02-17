@@ -1,6 +1,7 @@
 #include "mml_layer.hpp"
 #include "mml_attribute.hpp"
 #include "mml_manager.hpp"
+#include "mml_registery.hpp"
 
 namespace MML
 {
