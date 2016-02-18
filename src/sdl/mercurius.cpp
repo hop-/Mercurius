@@ -13,14 +13,14 @@ namespace Sdl
 
 void Mercurius::start()
 {
-    loadLayers();
     Core::Frame* frame = new Sdl::Frame;
     Core::EventGenerator* eventGenerator = new Sdl::EventGenerator;
     Core::Game game(frame, eventGenerator);
+    loadLayers(game);
     game.start();
 }
 
-void Mercurius::loadLayers()
+void Mercurius::loadLayers(Core::Game& game)
 {
     typedef MML::MMLManager manager;
     manager* m = manager::getInstance();
@@ -34,9 +34,9 @@ void Mercurius::loadLayers()
                                     i != layer_registery->end(); ++i) {
         MML::MMLObject* layer = *i;
         assert(0 != layer);
-        Core::ObjectsFactory* f = tm->getFactory(layer->getType());
+        const Core::ObjectsFactory* f = tm->getFactory(layer->getType());
         assert(0 != f);
-        f->create(layer); // TODO some how get layers from here
+        game.pushLayer(f->create(layer)); // TODO some how get layers from here
     }
 }
 

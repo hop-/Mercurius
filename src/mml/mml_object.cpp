@@ -15,11 +15,6 @@ MMLObject(const std::string& n, MMLObject* p)
 {
     MMLAttribute* name = new MMLAttribute("name", n);
     addAttribute(name);
-/* recuesion and name problems
-    MMLAttribute* gui = new MMLAttribute("gui", n + "gui");
-    addAttribute(gui);
-    MMLAttribute* logic = new MMLAttribute("logic", n + "logic"); 
-    addAttribute(logic);*/
     setParent(p);
     MMLManager* m = MMLManager::getInstance();
     assert(0 != m);
@@ -92,7 +87,7 @@ addAttribute(MMLAttribute* a)
 }
 
 const std::string& MMLObject::
-getType()
+getType() const
 {
     return m_type;
 }
@@ -127,7 +122,7 @@ addChild(MMLObject* o)
 {
     assert(0 != o);
     assert(o != this);
-/*    Children::const_iterator i = std::find(m_children.begin(), m_children.end(), o);
+/*    MMLChildren::const_iterator i = std::find(m_children.begin(), m_children.end(), o);
     assert(i == m_children.end());*/
     m_children.push_back(o);
 }
@@ -137,9 +132,15 @@ removeChild(MMLObject* o)
 {
     assert(0 != o);
     assert(o != this);
-    Children::iterator i = std::find(m_children.begin(), m_children.end(), o);
+    MMLChildren::iterator i = std::find(m_children.begin(), m_children.end(), o);
     assert(i != m_children.end());
     m_children.erase(i);
+}
+
+const MMLObject::MMLChildren& MMLObject::
+getChildren() const
+{
+    return m_children;
 }
 
 } // namespace MML

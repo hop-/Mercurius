@@ -14,20 +14,20 @@ class MMLObject
 public:
     typedef std::vector<MMLAttribute*> MMLAttributes;
     typedef const MMLAttributes CMMLAttributes;
+    typedef std::vector<MMLObject*> MMLChildren;
 
 private:
     MMLAttributes m_attributes;
     std::string m_type;
     MMLObject* m_parent;
-    typedef std::vector<MMLObject*> Children;
-    Children m_children;
+    MMLChildren m_children;
 
 public:
     MMLObject(const std::string&, MMLObject* = 0);
     virtual ~MMLObject();
 
 public:
-    const std::string& getType();
+    const std::string& getType() const;
 
 protected:
     CMMLAttributes& getAttributes() const;
@@ -35,6 +35,9 @@ protected:
 public:
     MMLAttribute* getAttribute(const std::string&);
     const MMLAttribute* getAttribute(const std::string&) const;
+
+public:
+    const MMLChildren& getChildren() const;
 
 public:
     std::string getName() const;

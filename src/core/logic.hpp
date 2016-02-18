@@ -41,6 +41,7 @@ public:
     }
 
 public:
+    Logic();
     virtual ~Logic();
     virtual void update();
 };

@@ -1,9 +1,9 @@
 #ifndef _CORE_LOGIC_OBJECT_HPP_
 #define _CORE_LOGIC_OBJECT_HPP_
 
-#include <base/typed_base.hpp>
-
 #include "position.hpp"
+
+#include <base/typed_base.hpp>
 
 #include <map>
 #include <cassert>

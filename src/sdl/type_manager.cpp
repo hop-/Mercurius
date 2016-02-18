@@ -1,6 +1,6 @@
 #include "type_manager.hpp"
 
-#include <core/objects_factory.hpp>
+#include "factories.hpp"
 
 namespace Sdl
 {
@@ -23,12 +23,13 @@ TypeManager::TypeManager()
 void TypeManager::registerTypes()
 {
     // TODO register all types here
+    m_factories["layer"] = new LayerFactory();
 }
 
-Core::ObjectsFactory* TypeManager::getFactory(const std::string& type)
+const Core::ObjectsFactory* TypeManager::getFactory(const std::string& type) const
 {
-    // TODO
-    return 0;
+    Factories::const_iterator i = m_factories.find(type);
+    return i != m_factories.end() ? i->second : 0;
 }
 
 }

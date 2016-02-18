@@ -15,7 +15,8 @@ namespace Sdl
 class TypeManager
 {
 private:
-    std::map<std::string, Core::ObjectsFactory*> m_factories;
+    typedef std::map<std::string, Core::ObjectsFactory*> Factories;
+    Factories m_factories;
 
 private:
     static TypeManager* m_instance;
@@ -24,7 +25,7 @@ public:
     static TypeManager* getInstance();
 
 public:
-    Core::ObjectsFactory* getFactory(const std::string& type);
+    const Core::ObjectsFactory* getFactory(const std::string& type) const;
 
 private:
     TypeManager();

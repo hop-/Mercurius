@@ -31,6 +31,11 @@ void Logic::removeLogicObject(LogicObject* o)
     m_objects.erase(i);
 }
 
+Logic::Logic()
+    : m_parent(0)
+{
+}
+
 Logic::~Logic()
 {
 }

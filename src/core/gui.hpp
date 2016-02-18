@@ -24,10 +24,9 @@ private:
     Frame* m_frame;
 
 public:
-    Gui(Layer* parent)
-        : m_parent(parent)
+    Gui()
+        : m_parent(0)
     {
-        assert(0 != parent);
     }
     virtual ~Gui() = default; // TODO implement and delete all children
 
@@ -55,7 +54,7 @@ public:
 public:
     void draw();
 
-protected:
+public:
     inline Layer* parent() const
     {
         return m_parent;

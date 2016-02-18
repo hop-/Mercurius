@@ -2,8 +2,8 @@
 #define _CORE_COMPONENTS_HPP_
 
 #include "logic_object.hpp"
-#include "rectangle.hpp"
 #include "position.hpp"
+#include "rectangle.hpp"
 #include "vector.hpp"
 
 #include <base/subject.hpp>
@@ -106,7 +106,6 @@ class TextureRenderer
     , protected Base::Subject
 {
     // think it should have some info about texture
-
 private:
     void init();
 };

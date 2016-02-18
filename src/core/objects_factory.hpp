@@ -9,10 +9,14 @@ class MMLObject;
 namespace Core
 {
 
+class Gui;
+class Layer;
+class Logic;
+
 class ObjectsFactory
 {
 public:
-    virtual void create(const MML::MMLObject*) = 0; // TODO need to change the interface
+    virtual Layer* create(const MML::MMLObject*, Gui* = 0, Logic* = 0) const = 0; // TODO need to change the interface
 };
 
 } // namespace core
