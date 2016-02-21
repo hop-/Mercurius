@@ -3,8 +3,12 @@
 
 #include <core/gui.hpp>
 #include <core/frame.hpp>
+#include <core/components.hpp>
+#include <core/rectangle.hpp>
 
 #include <SDL2/SDL_image.h>
+
+#include <cassert>
 
 namespace Sdl
 {
@@ -19,7 +23,8 @@ SDL_Rect toSDL_Rect(const Core::Rectangle& rect)
         , int(rect.height())};
 }
 
-}
+} // unnamed namespace
+
 void GuiObject::init()
 {
     assert(0 != parent());
@@ -33,11 +38,22 @@ void GuiObject::init()
     m_texture.sourceRect = toSDL_Rect(srcRect());
     // TODO set dst rect
     m_texture.destinationRect = toSDL_Rect(destRect());
+    m_textureRederer = logicObject()->component<Core::TextureRenderer>();
+    assert(0 != m_textureRederer);
 }
 
 void GuiObject::onNotify()
 {
     // TODO
+    changeSourceRect(m_textureRederer->state());
+}
+
+void GuiObject::changeSourceRect(int state)
+{
+    int srcWidth = srcRect().width();
+    Core::Rectangle rect = srcRect();
+    rect.setX(srcWidth * state);
+    m_texture.sourceRect = toSDL_Rect(rect);
 }
 
 } // namespace Sdl

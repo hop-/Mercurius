@@ -49,6 +49,16 @@ public:
         m_position = position;
     }
 
+    inline void setX(const EngineUnit& x)
+    {
+        m_position.setX(x);
+    }
+
+    inline void setY(const EngineUnit& y)
+    {
+        m_position.setY(y);
+    }
+
     Rectangle represent(Rectangle rectangle);
     Rectangle scaled(float scale);
 

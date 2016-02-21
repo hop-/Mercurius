@@ -103,9 +103,20 @@ public:
 
 class TextureRenderer
     : public LogicObject::ComponentCreator<TextureRenderer>
-    , protected Base::Subject
+    , public Base::Subject
 {
     // think it should have some info about texture
+    int m_state;
+
+public:
+    // TODO add some useful functions
+    void setState(int state);
+
+    inline int state() const
+    {
+        return m_state;
+    }
+
 private:
     void init();
 };

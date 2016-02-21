@@ -39,9 +39,9 @@ void Frame::draw(Core::GuiObject* object)
     assert(0 != dynamic_cast<GuiObject*>(object));
     assert(0 != m_renderer);
     Texture texture = sdlObject->texture();
-    SDL_RenderCopy(m_renderer, texture.texture
-            , &(texture.sourceRect)
-            , &(texture.destinationRect));
+    SDL_RenderCopy(m_renderer, texture.texture  // maybe need to be used
+            , &(texture.sourceRect)             // SDL_RenderCopyEx(..) to
+            , &(texture.destinationRect));      // mirror image left/right
 }
 
 

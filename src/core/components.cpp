@@ -33,4 +33,10 @@ void TextureRenderer::init()
     notify();
 }
 
+void TextureRenderer::setState(int state)
+{
+    m_state = state;
+    notify();
+}
+
 } // namespace Core

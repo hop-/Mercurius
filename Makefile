@@ -58,7 +58,7 @@ export DEF_FLAGS
 _default: _makeODir $(execable)
 	@echo -e "$(GREEN)Compiled.$(RCOLOR)"
 
-.PHONY: install debug noassert mingw clean resolve $(execable)
+.PHONY: install debug noassert mingw clean resolve
 
 install:
 	@$(MAKE) --no-print-directory $(MAKEFILE)
