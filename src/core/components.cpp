@@ -35,7 +35,9 @@ void TextureRenderer::init()
 
 void TextureRenderer::setState(int state)
 {
-    m_state = state;
+    assert(0 < state);
+    assert(m_numberOfStates > state);
+    m_state = static_cast<unsigned>(state);
     notify();
 }
 

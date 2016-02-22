@@ -106,15 +106,21 @@ class TextureRenderer
     , public Base::Subject
 {
     // think it should have some info about texture
-    int m_state;
+    unsigned m_state;
+    int m_numberOfStates;
 
 public:
     // TODO add some useful functions
     void setState(int state);
 
+    inline void setStateNumber(int numberOfStates)
+    {
+        m_numberOfStates = 0;
+    }
+
     inline int state() const
     {
-        return m_state;
+        return static_cast<int>(m_state);
     }
 
 private:
