@@ -17,6 +17,10 @@ public:
     };
 
 public:
+    int getWidth() const;
+    int getHeight() const;    
+
+public:
     MMLBox(const std::string& n);
 };
 
