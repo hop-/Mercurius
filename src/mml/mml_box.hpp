@@ -1,6 +1,7 @@
 #ifndef _MML_MMLBOX_HPP
 #define _MML_MMLBOX_HPP
 
+#include "macros.hpp"
 #include "mml_object.hpp"
 
 namespace MML
@@ -17,8 +18,8 @@ public:
     };
 
 public:
-    int getWidth() const;
-    int getHeight() const;    
+    ATTRIBUTE_INTERFACE(int, "width", width);
+    ATTRIBUTE_INTERFACE(int, "height", height);
 
 public:
     MMLBox(const std::string& n);

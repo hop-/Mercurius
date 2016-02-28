@@ -1,6 +1,7 @@
 #ifndef _MML_MMLLAYER_HPP
 #define _MML_MMLLAYER_HPP
 
+#include "macros.hpp"
 #include "mml_object.hpp"
 
 namespace MML
@@ -19,6 +20,9 @@ public:
 public:
     MMLLayer(const std::string& n);
     virtual ~MMLLayer();
+
+    ATTRIBUTE_INTERFACE(bool, "visible", isVisible);
+    ATTRIBUTE_INTERFACE(int, "level", level);
 };
 
 } // namespace MML

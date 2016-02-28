@@ -18,7 +18,7 @@ create(const MML::MMLObject* mml, Core::Gui*, Core::Logic*) const
     assert(0 != mml_layer);
     Core::Gui* gui = new Core::Gui();
     Core::Logic* logic = new Core::Logic();
-    Core::Layer* layer = new Core::Layer(gui, logic, Core::Controls());
+    Core::Layer* layer = new Core::Layer(gui, logic, Core::Controls(), false, !mml_layer->isVisible());
     // TODO get attributes from mml_layer and set on layer
     TypeManager* tm = TypeManager::getInstance();
     assert(0 != tm);
@@ -43,7 +43,7 @@ create(const MML::MMLObject* mml, Core::Gui* gui, Core::Logic* logic) const
     assert(0 != box);
     Core::LogicObject* logic_object = new Core::LogicObject(logic);
     Core::Collider* collider = new Core::Collider();
-    collider->setSizes(box->getWidth(), box->getHeight());
+    collider->setSizes(box->width(), box->height());
     logic_object->addComponent(collider);
     return 0;
 }

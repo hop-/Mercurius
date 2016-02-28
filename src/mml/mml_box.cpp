@@ -23,20 +23,4 @@ MMLBox(const std::string& n)
     addAttribute(new MMLAttribute("texture", ""));
 }
 
-int MMLBox::
-getWidth() const
-{
-    const MMLAttribute* width = getAttribute("width");
-    assert(0 != width);
-    return width->getValue<int>();
-}
-
-int MMLBox::
-getHeight() const
-{
-    const MMLAttribute* height = getAttribute("height");
-    assert(0 != height);
-    return height->getValue<int>();
-}
-
 } // MML
