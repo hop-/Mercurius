@@ -2,7 +2,7 @@
 
 #include "layer.hpp"
 #include "frame.hpp"
-#include "event_generator.hpp"
+#include "event_manager.hpp"
 #include "command.hpp"
 
 #include <cassert>
@@ -10,9 +10,9 @@
 namespace Core
 {
 
-Game::Game(Frame* frame, EventGenerator* eventGenerator)
+Game::Game(Frame* frame, EventManager* eventManager)
     : m_frame(frame)
-    , m_eventGenerator(eventGenerator)
+    , m_eventManager(eventManager)
 {}
 
 Game::Game()
@@ -22,22 +22,22 @@ Game::Game()
 Game::~Game()
 {
     assert(0 != m_frame);
-    assert(0 != m_eventGenerator);
+    assert(0 != m_eventManager);
     delete m_frame;
     m_frame = 0;
-    delete m_eventGenerator;
-    m_eventGenerator = 0;
+    delete m_eventManager;
+    m_eventManager = 0;
 }
 
 void Game::mainLoop()
 {
-    unsigned previousTicks = m_eventGenerator->getTicks();
+    unsigned previousTicks = m_eventManager->getTicks();
     unsigned realLag = 0;
     const unsigned msToUpdate = m_frame->msPerUpdate();
     // game loop
     while (m_layers.size()) {
-        assert(0 != m_eventGenerator);
-        unsigned currentTicks = m_eventGenerator->getTicks();
+        assert(0 != m_eventManager);
+        unsigned currentTicks = m_eventManager->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
         previousTicks = currentTicks;
         realLag += deltaTicks;
@@ -48,9 +48,11 @@ void Game::mainLoop()
             if (layer->isStopped()) {
                 continue;
             }
-            Command* cmd = m_eventGenerator->getCommand(layer);
-            assert(0 != cmd);
-            cmd->execute();
+            Command* cmd = m_eventManager->getCommand(layer);
+            // assert(0 != cmd);
+            if (0 != cmd) {
+                cmd->execute();
+            }
             lag = realLag;
             while (lag >= msToUpdate) {
                 layer->update();
@@ -59,6 +61,7 @@ void Game::mainLoop()
             layer->draw();
         }
         realLag = lag;
+        m_eventManager->pop();
     }
 }
 

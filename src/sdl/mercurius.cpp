@@ -1,5 +1,5 @@
 #include "mercurius.hpp"
-#include "event_generator.hpp"
+#include "event_manager.hpp"
 #include "type_manager.hpp"
 
 #include <core/game.hpp>
@@ -14,8 +14,8 @@ namespace Sdl
 void Mercurius::start()
 {
     Core::Frame* frame = new Sdl::Frame;
-    Core::EventGenerator* eventGenerator = new Sdl::EventGenerator;
-    Core::Game game(frame, eventGenerator);
+    Core::EventManager* eventManager = new Sdl::EventManager;
+    Core::Game game(frame, eventManager);
     loadLayers(game);
     game.start();
 }
