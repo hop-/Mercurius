@@ -32,6 +32,11 @@ void Frame::init()
     // TODO check for m_renterer != 0
 }
 
+void Frame::clear()
+{
+    SDL_RenderClear(m_renderer);
+}
+
 void Frame::draw(Core::GuiObject* object)
 {
     assert(0 != object);
@@ -44,5 +49,9 @@ void Frame::draw(Core::GuiObject* object)
             , &(texture.destinationRect));      // mirror image left/right
 }
 
+void Frame::show()
+{
+    SDL_RenderPresent(m_renderer);
+}
 
 } // namespace Sdl

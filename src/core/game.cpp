@@ -45,6 +45,8 @@ void Game::mainLoop()
         realLag += deltaTicks;
         unsigned lag = realLag;
         m_eventManager->catchEvent();
+        // clear frame
+        m_frame->clear();
         // run update for each layer
         for (Layer* layer : m_layers) {
             assert(0 != layer);
@@ -71,6 +73,7 @@ void Game::mainLoop()
             break;
         }
         // END OF TMP
+        m_frame->show();
         m_eventManager->pop();
     }
 }

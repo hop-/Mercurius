@@ -17,7 +17,9 @@ class Frame
 public:
     ~Frame();
     void init();
+    void clear();
     void draw(Core::GuiObject* object);
+    void show();
 
     void* renderer() const
     {

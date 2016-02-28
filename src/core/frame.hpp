@@ -18,7 +18,9 @@ public:
 
 public:
     virtual void init() = 0;
+    virtual void clear() = 0;
     virtual void draw(GuiObject* object) = 0;
+    virtual void show() = 0;
     virtual void setResolution(int width, int height);
 
     inline const int width() const
