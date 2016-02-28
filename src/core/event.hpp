@@ -19,6 +19,12 @@ class EventCreator
     static const ID type;
 
 public:
+    static bool castable(Event* e)
+    {
+        assert(0 != e);
+        return e->getType() == type;
+    }
+
     int getType() const
     {
         return type;

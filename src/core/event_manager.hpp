@@ -33,7 +33,9 @@ public:
 
     inline void pop()
     {
-        m_eventQueue.pop();
+        if (m_eventQueue.size() > 0) {
+            m_eventQueue.pop();
+        }
     }
 	
 };

@@ -4,7 +4,9 @@
 #include "frame.hpp"
 #include "event_manager.hpp"
 #include "command.hpp"
+#include "events.hpp"
 
+#include <iostream>
 #include <cassert>
 
 namespace Core
@@ -42,6 +44,7 @@ void Game::mainLoop()
         previousTicks = currentTicks;
         realLag += deltaTicks;
         unsigned lag = realLag;
+        m_eventManager->catchEvent();
         // run update for each layer
         for (Layer* layer : m_layers) {
             assert(0 != layer);
@@ -50,6 +53,7 @@ void Game::mainLoop()
             }
             Command* cmd = m_eventManager->getCommand(layer);
             // assert(0 != cmd);
+            // TODO command list not a single command
             if (0 != cmd) {
                 cmd->execute();
             }
@@ -61,6 +65,12 @@ void Game::mainLoop()
             layer->draw();
         }
         realLag = lag;
+        // TMP
+        Event* e = m_eventManager->getEvent();
+        if (e != 0 && Core::QuitEvent::castable(e)) {
+            break;
+        }
+        // END OF TMP
         m_eventManager->pop();
     }
 }

@@ -12,14 +12,11 @@ class Frame
     int m_width;
     int m_height;
 
-protected:
-    inline void setmsPerUpdate(const unsigned& ms)
-    {
-        m_msPerUpdate = ms;
-    }
+public:
+    Frame();
+    virtual ~Frame() = default;
 
 public:
-    virtual ~Frame() = default;
     virtual void init() = 0;
     virtual void draw(GuiObject* object) = 0;
     virtual void setResolution(int width, int height);
@@ -40,6 +37,12 @@ public:
     }
 
     virtual void* renderer() const = 0;
+
+protected:
+    inline void setMsPerUpdate(const unsigned& ms)
+    {
+        m_msPerUpdate = ms;
+    }
 };
 
 } // namespace Core
