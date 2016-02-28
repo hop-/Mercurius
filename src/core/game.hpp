@@ -7,17 +7,17 @@ namespace Core
 {
 
 class Frame;
-class EventGenerator;
+class EventManager;
 class Layer;
 
 class Game
 {
     Frame* m_frame;
-    EventGenerator* m_eventGenerator;
+    EventManager* m_eventManager;
     std::vector<Layer*> m_layers;
 
 public:
-    Game(Frame* frame, EventGenerator* eventGenerator);
+    Game(Frame* frame, EventManager* eventManager);
     Game();
     ~Game();
 

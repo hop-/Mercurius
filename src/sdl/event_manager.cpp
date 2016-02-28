@@ -1,4 +1,4 @@
-#include "event_generator.hpp"
+#include "event_manager.hpp"
 
 #include <core/events.hpp>
 
@@ -7,7 +7,7 @@
 namespace Sdl
 {
 
-void EventGenerator::catchEvent()
+void EventManager::catchEvent()
 {
     SDL_Event event;
     if (SDL_PollEvent(&event)) {
@@ -30,12 +30,12 @@ void EventGenerator::catchEvent()
             cevent = 0;
         }
         if (0 != cevent) {
-            setCatchedEvent(cevent);
+            push(cevent);
         }
     }
 }
 
-unsigned EventGenerator::getTicks()
+unsigned EventManager::getTicks()
 {
     return SDL_GetTicks();
 }
