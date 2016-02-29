@@ -1,3 +1,4 @@
+#include "exceptions.hpp"
 #include "mml_parser.hpp"
 #include "mml_attribute.hpp"
 #include "mml_manager.hpp"
@@ -44,14 +45,12 @@ MMLParser::
 bool MMLParser::
 parseFile(const std::string& f)
 {
-    // TODO
     std::ifstream fin(f);
     std::string data((std::istreambuf_iterator<char>(fin)),
                  (std::istreambuf_iterator<char>()));
     removeSpaceses(data);
     if (!checkSyntax(data)) {
-        // TODO throw exception
-        throw "Syntax error";
+        throw MMLSyntaxError();
     }
     parseLayers(data);
     return true;
@@ -214,8 +213,7 @@ parseMMLAtribute(const std::string& attributes, MMLObject* obj)
         }
         MMLAttribute* attr = obj->getAttribute(attr_name);
         if (attr == 0) {
-            std::cout<<"noooooooooooooo attr: "<<attr_name<<std::endl;
-            return; //  throw;
+            throw MMLNoAttribute(obj->getType(), attr_name);
         }
         std::string attr_value = tmp.substr(0, pos);
         tmp.erase(0, pos + 1);
