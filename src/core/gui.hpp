@@ -26,6 +26,7 @@ private:
 public:
     Gui()
         : m_parent(0)
+        , m_frame(0)
     {
     }
     virtual ~Gui() = default; // TODO implement and delete all children

@@ -12,7 +12,7 @@ public:
     static void start();
 
 private:
-    static void loadLayers(Core::Game&);
+    static void loadLayers(Core::Game&, Core::Frame*);
 };
 
 } // namespace Sdl

@@ -3,7 +3,9 @@
 #include "type_manager.hpp"
 
 #include <core/game.hpp>
+#include <core/gui.hpp>
 #include <core/objects_factory.hpp>
+#include <core/layer.hpp>
 #include <mml/mml_manager.hpp>
 #include <mml/mml_registery.hpp>
 #include <sdl/frame.hpp>
@@ -16,15 +18,16 @@ void Mercurius::start()
     Core::Frame* frame = new Sdl::Frame;
     Core::EventManager* eventManager = new Sdl::EventManager;
     Core::Game game(frame, eventManager);
-    loadLayers(game);
+    loadLayers(game, frame);
     game.start();
 }
 
-void Mercurius::loadLayers(Core::Game& game)
+void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
 {
     typedef MML::MMLManager manager;
     manager* m = manager::getInstance();
     assert(0 != m);
+    assert(0 != frame);
     m->loadData("src/mml/test/frame.mml");
     MML::MMLRegistery* layer_registery = m->getLayerRegistery();
     assert(0 != layer_registery);
@@ -36,7 +39,11 @@ void Mercurius::loadLayers(Core::Game& game)
         assert(0 != layer);
         const Core::ObjectsFactory* f = tm->getFactory(layer->getType());
         assert(0 != f);
-        game.pushLayer(f->create(layer)); // TODO some how get layers from here
+        Core::Layer* l = f->create(layer);
+        assert(0 != l);
+        assert(0 != l->gui());
+        l->gui()->setFrame(frame);
+        game.pushLayer(l); // TODO some how get layers from here
     }
 }
 

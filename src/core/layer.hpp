@@ -52,6 +52,12 @@ public:
     {
         return m_stopped;
     }
+    
+    inline Gui* gui()
+    {
+        return m_gui;
+    }
+
 
     void changeControls(Controls controls);
     Command* getCommand(Event* event);
