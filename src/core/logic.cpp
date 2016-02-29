@@ -38,6 +38,12 @@ Logic::Logic()
 
 Logic::~Logic()
 {
+    std::for_each(m_objects.begin(), m_objects.end(), [](LogicObject* lo) {
+        assert(0 != lo);
+        delete lo;
+    });
+    m_objects.clear();
+    assert(m_objects.empty());
 }
 
 } // namespace Core 

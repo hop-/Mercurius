@@ -29,7 +29,7 @@ public:
         , m_frame(0)
     {
     }
-    virtual ~Gui() = default; // TODO implement and delete all children
+    virtual ~Gui();
 
 public:
     void addGuiObject(GuiObject* o);

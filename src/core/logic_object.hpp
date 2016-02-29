@@ -61,10 +61,11 @@ public:
 
 public:
     LogicObject(Logic* p);
-    virtual ~LogicObject() = default; // TODO implement and delete all children
+    virtual ~LogicObject();
 
 private:
-    std::map<int, Component*> m_components;
+    typedef std::map<int, Component*> Components;
+    Components m_components;
     Position m_position;
     float m_scale;
     Logic* m_parent;

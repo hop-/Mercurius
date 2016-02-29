@@ -1,6 +1,8 @@
 #include "logic_object.hpp"
 #include "logic.hpp"
 
+#include <algorithm>
+
 namespace Core
 {
 
@@ -32,6 +34,16 @@ LogicObject::LogicObject(Logic* parent)
 {
     assert(parent != 0);
     parent->addLogicObject(this);
+}
+
+LogicObject::~LogicObject()
+{
+    std::for_each(m_components.begin(), m_components.end(), [](Components::value_type v) {
+        assert(0 != v.second);
+        delete v.second;
+    });
+    m_components.clear();
+    assert(m_components.empty());
 }
 
 } // namespace Core
