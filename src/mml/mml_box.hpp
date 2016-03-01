@@ -4,6 +4,8 @@
 #include "macros.hpp"
 #include "mml_object.hpp"
 
+#include <string>
+
 namespace MML
 {
 
@@ -20,6 +22,7 @@ public:
 public:
     ATTRIBUTE_INTERFACE(int, "width", width);
     ATTRIBUTE_INTERFACE(int, "height", height);
+    ATTRIBUTE_INTERFACE(std::string, "texture", texture);
 
 public:
     MMLBox(const std::string& n);

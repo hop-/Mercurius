@@ -12,7 +12,7 @@ height: 50;
 weight: 20;
 position_x: 25;
 position_y: 50;
-texture: path_to_image;
+texture: resource/box.png;
 
 }
 

@@ -39,12 +39,18 @@ create(const MML::MMLObject* mml, Core::Gui* gui, Core::Logic* logic) const
     assert(0 != mml);
     assert(0 != gui);
     assert(0 != logic);
+    // TODO instead of dynamic_cast a static_cast should
+    // be used with assert(0 != dynamic_cast)
     const MML::MMLBox* box = dynamic_cast<const MML::MMLBox*>(mml);
     assert(0 != box);
     Core::LogicObject* logic_object = new Core::LogicObject(logic);
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(box->width(), box->height());
     logic_object->addComponent(collider);
+
+    Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
+    textureRenderer->setTexture(box->texture());
+    logic_object->addComponent(textureRenderer);
     return 0;
 }
 

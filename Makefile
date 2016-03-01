@@ -16,7 +16,7 @@ execable_d := $(addsuffix -d,$(abspath $(execable)))
 PROJECT_DIRS := $(sort $(dir $(abspath $(wildcard $(SRC_DIR)/*/*.hpp))))
 # includes
 #INCLUDES := $(addprefix -I,$(PROJECT_DIRS))
-INCLUDES := $(addprefix -I,$(abspath $(SRC_DIR)))
+INCLUDES ?= $(addprefix -I,$(abspath $(SRC_DIR)))
 # autodetect *.cpp files
 CPPS := $(wildcard $(SRC_DIR)/*/*.cpp) $(wildcard $(SRC_DIR)/main.cpp)
 ifdef SKIP
@@ -53,6 +53,7 @@ export execable
 export CXXFLAGS
 export LIBS
 export DEF_FLAGS
+export INCLUDES
 #########################################
 
 _default: _makeODir $(execable)
@@ -81,7 +82,7 @@ resolve:
 	@find $(OBJ_DIR) -name *.d | xargs rm -rf
 $(OBJ_DIR)/%.d: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
-#@echo -e "$(YELLOW)$(CXX) $(CXXFLAGS) $(DEF_FLAGS) -MM $< -o $@$(RCOLOR)"
+	@echo -en "$(YELLOW)Calculating dependencies...$(RCOLOR)\r"
 	@$(CXX) $(INCLUDES) $(CXXFLAGS) $(DEF_FLAGS) -MM $< -o $@
 	@sed -i 's|$(notdir $*).o:|$(@:.d=.o):|g' $@
 
@@ -123,6 +124,8 @@ help info:
 	@echo -e "\tby default: '$(MAGENTA)$(SDL_LIBS)$(RCOLOR)'"
 	@echo -e "$(YELLOW)LIBS$(RCOLOR)\n\tto set other libs."
 	@echo -e "\tby default: '$(MAGENTA)$(LIBS)$(RCOLOR)'"
+	@echo -e "$(YELLOW)INCLUDES$(RCOLOR)\n\tto set additional include dirs."
+	@echo -e "\tby default: '$(MAGENTA)$(INCLUDES)$(RCOLOR)'"
 	@echo -e "$(YELLOW)execable$(RCOLOR)\n\tto rename the executable (program)."
 	@echo -e "\tby default: '$(GREEN)$(execable)$(RCOLOR)'"
 	@echo -e "--------------------------------------------------\n"
