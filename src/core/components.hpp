@@ -105,18 +105,12 @@ class TextureRenderer
     : public LogicObject::ComponentCreator<TextureRenderer>
     , public Base::Subject
 {
-    std::string m_texturePath;
     unsigned m_state = 0;
     int m_numberOfStates = 1;
 
 public:
     // TODO add some useful functions
     void setState(int state);
-
-    inline void setTexture(const std::string& texturePath)
-    {
-        m_texturePath = texturePath;
-    }
 
     inline void setStateNumber(int numberOfStates)
     {

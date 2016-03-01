@@ -49,7 +49,6 @@ create(const MML::MMLObject* mml, Core::Gui* gui, Core::Logic* logic) const
     logic_object->addComponent(collider);
     Core::GuiObject* gui_object = new Sdl::GuiObject(gui, box->texture());
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
-    textureRenderer->setTexture(box->texture());
     textureRenderer->addObserver(gui_object);
     logic_object->addComponent(textureRenderer);
     return 0;

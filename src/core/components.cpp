@@ -1,4 +1,5 @@
 #include "components.hpp"
+#include "gui_object.hpp"
 
 namespace Core
 {
