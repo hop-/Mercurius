@@ -61,10 +61,7 @@ GuiObject::GuiObject(Core::Gui* p, const std::string& texture)
     : Core::GuiObject(p)
 {
     setTextureLocation(texture);
-    Sdl::Frame* f = dynamic_cast<Sdl::Frame*>(p->frame());
-    assert(0 != f);
-    m_texture.texture = IMG_LoadTexture(static_cast<SDL_Renderer*>(f->renderer()),
-                                        texture.c_str());
+    init();
 }
 
 } // namespace Sdl
