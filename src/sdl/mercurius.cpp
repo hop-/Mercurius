@@ -42,7 +42,7 @@ void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
         Core::Layer* l = f->create(layer);
         assert(0 != l);
         assert(0 != l->gui());
-        l->gui()->setFrame(frame);
+        l->gui()->setFrame(frame); // TODO pase frame before creating child widgets
         game.pushLayer(l); // TODO some how get layers from here
     }
 }

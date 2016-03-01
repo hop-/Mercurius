@@ -67,7 +67,7 @@ protected:
         return m_textureLocation;
     }
 
-    inline void setTectureLocation(std::string textureLocation)
+    inline void setTextureLocation(const std::string& textureLocation)
     {
         m_textureLocation = textureLocation;
     }

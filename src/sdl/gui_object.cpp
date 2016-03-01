@@ -1,3 +1,4 @@
+#include "frame.hpp"
 #include "gui_object.hpp"
 #include "texture.hpp"
 
@@ -54,6 +55,16 @@ void GuiObject::changeSourceRect(int state)
     Core::Rectangle rect = srcRect();
     rect.setX(srcWidth * state);
     m_texture.sourceRect = toSDL_Rect(rect);
+}
+
+GuiObject::GuiObject(Core::Gui* p, const std::string& texture)
+    : Core::GuiObject(p)
+{
+    setTextureLocation(texture);
+    Sdl::Frame* f = dynamic_cast<Sdl::Frame*>(p->frame());
+    assert(0 != f);
+    m_texture.texture = IMG_LoadTexture(static_cast<SDL_Renderer*>(f->renderer()),
+                                        texture.c_str());
 }
 
 } // namespace Sdl
