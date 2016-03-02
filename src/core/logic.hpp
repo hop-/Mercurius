@@ -1,6 +1,10 @@
 #ifndef _CORE_LOGIC_HPP_
 #define _CORE_LOGIC_HPP_
 
+#include "logic_object.hpp"
+
+#include <base/container_object.hpp>
+
 #include <cassert>
 #include <vector>
 
@@ -8,42 +12,16 @@ namespace Core
 {
 
 class Layer;
-class LogicObject;
 
 class Logic
+    : public Base::ContainerObject<LogicObject>
 {
-public:
-    typedef std::vector<LogicObject*> LogicObjects;
-
-private:
-    LogicObjects m_objects;
-    Layer* m_parent;
-
-public:
-    void addLogicObject(LogicObject* o);
-    void removeLogicObject(LogicObject* o);
-
-public:
-    inline Layer* parent() const
-    {
-        return m_parent;
-    }
-
-    inline const LogicObjects& objects() const
-    {
-        return m_objects;
-    }
-
-    inline void setParent(Layer* parent)
-    {
-        assert(0 != parent);
-        m_parent = parent;
-    }
-
 public:
     Logic();
     virtual ~Logic();
     virtual void update();
+    virtual void initObject()
+    {}
 };
 
 } // namespace Core

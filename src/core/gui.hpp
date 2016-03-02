@@ -1,40 +1,38 @@
 #ifndef _CORE_GUI_HPP_
 #define _CORE_GUI_HPP_
 
+#include "gui_object.hpp"
+
+#include <base/container_object.hpp>
+
 #include <vector>
-#include <cassert>
 
 namespace Core
 {
 
 class Frame;
 class Layer;
-class GuiObject;
 class Rectangle;
 
 class Gui
+    : public Base::ContainerObject<GuiObject>
 {
-public:
-    typedef std::vector<GuiObject*> GuiObjects;
-    
 private:
-    Layer* m_parent;
-    GuiObjects m_objects;
     Rectangle* m_viewPort;
     Frame* m_frame;
 
+private:
+    virtual void initObject()
+    {}
+
 public:
     Gui()
-        : m_parent(0)
-        , m_frame(0)
+        : m_frame(0)
     {
     }
     virtual ~Gui();
 
 public:
-    void addGuiObject(GuiObject* o);
-    void removeGuiObject(GuiObject* o);
-
     inline Frame* frame() const
     {
         return m_frame;
@@ -54,23 +52,6 @@ public:
 
 public:
     void draw();
-
-public:
-    inline Layer* parent() const
-    {
-        return m_parent;
-    }
-
-    inline const GuiObjects& objects() const
-    {
-        return m_objects;
-    }
-
-    inline void setParent(Layer* parent)
-    {
-        assert(0 != parent);
-        m_parent = parent;
-    }
 };
 
 } // namespace Core

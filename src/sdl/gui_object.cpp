@@ -29,9 +29,9 @@ SDL_Rect toSDL_Rect(const Core::Rectangle& rect)
 void GuiObject::init()
 {
     assert(0 != parent());
-    assert(0 != parent()->frame());
+    assert(0 != parent<Core::Gui>()->frame());
     SDL_Renderer* renderer = static_cast<SDL_Renderer*>(
-            parent()->frame()->renderer());
+            parent<Core::Gui>()->frame()->renderer());
     assert(0 != renderer);
     m_texture.texture = IMG_LoadTexture(renderer,
             textureLocation().c_str());
@@ -58,8 +58,9 @@ void GuiObject::changeSourceRect(int state)
 }
 
 GuiObject::GuiObject(Core::Gui* p, const std::string& texture)
-    : Core::GuiObject(p)
+    : Core::GuiObject()
 {
+    p->addObject(this);
     setTextureLocation(texture);
     init();
 }

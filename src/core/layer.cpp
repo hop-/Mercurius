@@ -47,4 +47,12 @@ void Layer::draw()
     }
 }
 
+void Layer::init()
+{
+    assert(0 != m_gui);
+    m_gui->init();
+    assert(0 != m_logic);
+    m_logic->init();
+}
+
 } // namespace Core

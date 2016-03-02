@@ -3,6 +3,7 @@
 
 #include "position.hpp"
 
+#include <base/object.hpp>
 #include <base/typed_base.hpp>
 
 #include <map>
@@ -14,6 +15,7 @@ namespace Core
 class Logic;
 
 class LogicObject
+    : public Base::Object
 {
 public:
     class Component
@@ -68,11 +70,10 @@ private:
     Components m_components;
     Position m_position;
     float m_scale;
-    Logic* m_parent;
 
 public:
     void update();
-    void init(); // may be this funtionality will assign to addComponent
+    virtual void init();
     void addComponent(Component* component);
 
 
