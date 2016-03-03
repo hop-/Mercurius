@@ -17,18 +17,18 @@ class LayerFactory
     : public Core::ObjectsFactory
 {
 public:
-    virtual Core::Layer* create(const MML::MMLObject* mml,
-                                Core::Gui* = 0,
-                                Core::Logic* = 0) const;
+    /// Reimplemented interface
+    virtual Base::Object* create(const MML::MMLObject* mml,
+                                Base::Object* = 0) const;
 };
 
 class BoxFactory
     : public Core::ObjectsFactory
 {
 public:
-    virtual Core::Layer* create(const MML::MMLObject* mml,
-                                Core::Gui* gui,
-                                Core::Logic* logic) const;
+    /// Reimplemented interface
+    virtual Base::Object* create(const MML::MMLObject* mml,
+                                Base::Object* p) const;
 };
 
 } // namespace Sdl

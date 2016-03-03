@@ -39,7 +39,9 @@ void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
         assert(0 != layer);
         const Core::ObjectsFactory* f = tm->getFactory(layer->getType());
         assert(0 != f);
-        Core::Layer* l = f->create(layer);
+        Base::Object* o = f->create(layer);
+        assert(0 != o);
+        Core::Layer* l = dynamic_cast<Core::Layer*>(o);
         assert(0 != l);
         assert(0 != l->gui());
         l->gui()->setFrame(frame); // TODO pase frame before creating child widgets

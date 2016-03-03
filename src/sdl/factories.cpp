@@ -10,8 +10,8 @@
 namespace Sdl
 {
 
-Core::Layer* LayerFactory::
-create(const MML::MMLObject* mml, Core::Gui*, Core::Logic*) const
+Base::Object* LayerFactory::
+create(const MML::MMLObject* mml, Base::Object*) const
 {
     assert(0 != mml);
     const MML::MMLLayer* mml_layer = dynamic_cast<const MML::MMLLayer*>(mml);
@@ -28,29 +28,30 @@ create(const MML::MMLObject* mml, Core::Gui*, Core::Logic*) const
             assert(0 != obj);
             const Core::ObjectsFactory* f = tm->getFactory(obj->getType());
             assert(0 != f);
-            f->create(obj, gui, logic);
+            f->create(obj, layer);
     }
     return layer;
 }
 
-Core::Layer* BoxFactory::
-create(const MML::MMLObject* mml, Core::Gui* gui, Core::Logic* logic) const
+Base::Object* BoxFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
-    assert(0 != gui);
-    assert(0 != logic);
-    // TODO instead of dynamic_cast a static_cast should
-    // be used with assert(0 != dynamic_cast)
+    assert(0 != p);
     const MML::MMLBox* box = dynamic_cast<const MML::MMLBox*>(mml);
     assert(0 != box);
-    Core::LogicObject* logic_object = new Core::LogicObject(logic);
+    Core::Layer* l = dynamic_cast<Core::Layer*>(p);
+    assert(0 != l);
+    Core::LogicObject* logic_object = new Core::LogicObject();
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(box->width(), box->height());
     logic_object->addComponent(collider);
-    Core::GuiObject* gui_object = new Sdl::GuiObject(gui, box->texture());
+    Core::GuiObject* gui_object = new Sdl::GuiObject(box->texture());
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
     textureRenderer->addObserver(gui_object);
     logic_object->addComponent(textureRenderer);
+    l->addGuiObject(gui_object);
+    l->addLogicObject(logic_object);
     return 0;
 }
 

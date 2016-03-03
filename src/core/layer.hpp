@@ -9,7 +9,9 @@ namespace Core
 {
 
 class Gui;
+class GuiObject;
 class Logic;
+class LogicObject;
 class Event;
 class Frame;
 class Command;
@@ -27,39 +29,42 @@ class Layer
 public:
     Layer();
     Layer(Gui* gui, Logic* logic, Controls controls,
-            bool stopped = false, 
-            bool hidden = false, 
+            bool stopped = false,
+            bool hidden = false,
             bool ignoreEvents = false);
 
     inline const Controls& controls() const
     {
         return m_controls;
     }
-    
+
     inline void stop(bool stop)
     {
         m_stopped = stop;
     }
-    
+
     inline void hide(bool hide)
     {
         m_hidden = hide;
     }
-    
+
     inline void ignoreEvents(bool ignoreEvents)
     {
         m_ignoreEvent = ignoreEvents;
     }
-    
+
     inline bool isStopped() const
     {
         return m_stopped;
     }
-    
+
     inline Gui* gui()
     {
         return m_gui;
     }
+
+    bool addGuiObject(Core::GuiObject*);
+    bool addLogicObject(Core::LogicObject*);
 
     virtual void init();
 

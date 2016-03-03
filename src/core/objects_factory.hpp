@@ -6,17 +6,26 @@ namespace MML
 class MMLObject;
 }
 
+namespace Base
+{
+class Object;
+}
+
 namespace Core
 {
-
-class Gui;
-class Layer;
-class Logic;
 
 class ObjectsFactory
 {
 public:
-    virtual Layer* create(const MML::MMLObject*, Gui* = 0, Logic* = 0) const = 0; // TODO need to change the interface
+    /**
+     * @brief Interface for createing base objects from MML
+     * @param m MML object pointer
+     * @param p parent for created object
+     * @return created object
+     * @note m should be valid pointer
+     * @note p should be valid pointer
+     */
+    virtual Base::Object* create(const MML::MMLObject* m, Base::Object* p = 0) const = 0;
 };
 
 } // namespace core

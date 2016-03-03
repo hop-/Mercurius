@@ -9,6 +9,7 @@ static const std::string base_name = "baseObject";
 static unsigned id = 0;
 
 Object::Object()
+    : m_parent(0)
 {
     std::stringstream converter;
     converter<<id;

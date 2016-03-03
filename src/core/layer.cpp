@@ -55,4 +55,20 @@ void Layer::init()
     m_logic->init();
 }
 
+bool Layer::addGuiObject(GuiObject* g)
+{
+    assert(0 != g);
+    assert(0 != m_gui);
+    g->setParent(m_gui);
+    return m_gui->addObject(g);
+}
+
+bool Layer::addLogicObject(LogicObject* l)
+{
+    assert(0 != l);
+    assert(0 != m_logic);
+    l->setParent(m_logic);
+    return m_logic->addObject(l);
+}
+
 } // namespace Core

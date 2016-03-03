@@ -22,7 +22,7 @@ class GuiObject
     const Core::TextureRenderer* m_textureRederer;
 
 public:
-    GuiObject(Core::Gui*, const std::string&);
+    GuiObject(const std::string&);
 
 public:
     void init();

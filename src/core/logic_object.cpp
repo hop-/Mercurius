@@ -29,10 +29,8 @@ void LogicObject::init()
     }
 }
 
-LogicObject::LogicObject(Logic* parent)
+LogicObject::LogicObject()
 {
-    assert(parent != 0);
-    parent->addObject(this);
 }
 
 LogicObject::~LogicObject()

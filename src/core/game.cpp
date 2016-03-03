@@ -6,7 +6,7 @@
 #include "command.hpp"
 #include "events.hpp"
 
-#include <iostream>
+#include <algorithm>
 #include <cassert>
 
 namespace Core
@@ -82,6 +82,10 @@ void Game::start()
 {
     assert(0 != m_frame);
     m_frame->init();
+    std::for_each(m_layers.begin(), m_layers.end(), [](Layer* l) {
+        assert(0 != l);
+        l->init();
+    });
     mainLoop();
 }
 

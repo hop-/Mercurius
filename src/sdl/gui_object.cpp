@@ -57,12 +57,10 @@ void GuiObject::changeSourceRect(int state)
     m_texture.sourceRect = toSDL_Rect(rect);
 }
 
-GuiObject::GuiObject(Core::Gui* p, const std::string& texture)
+GuiObject::GuiObject(const std::string& texture)
     : Core::GuiObject()
 {
-    p->addObject(this);
     setTextureLocation(texture);
-    init();
 }
 
 } // namespace Sdl

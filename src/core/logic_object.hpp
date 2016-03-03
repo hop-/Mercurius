@@ -38,10 +38,10 @@ public:
     protected:
         virtual void update() {};
         virtual void init() {};
-    
+
         bool less(Base::TypedBase* o) final
         {
-            return false; 
+            return false;
         }
     };
 
@@ -62,7 +62,7 @@ public:
     };
 
 public:
-    LogicObject(Logic* p);
+    LogicObject();
     virtual ~LogicObject();
 
 private:

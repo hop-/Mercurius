@@ -1,6 +1,7 @@
 #ifndef _BASE_OBJECT_HPP_
 #define _BASE_OBJECT_HPP_
 
+#include <cassert>
 #include <string>
 
 namespace Base
@@ -10,7 +11,7 @@ class Object
 {
 public:
     Object();
-    virtual ~Object();    
+    virtual ~Object();
 
 public:
     virtual void init() = 0;
@@ -22,6 +23,7 @@ public:
     template <typename R>
     R* parent()
     {
+        assert(0 != m_parent);
         return dynamic_cast<R*>(m_parent);
     }
 

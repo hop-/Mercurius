@@ -29,7 +29,7 @@ void Frame::init()
     m_renderer = SDL_CreateRenderer(m_window
             , -1
             , SDL_RENDERER_ACCELERATED);
-    // TODO check for m_renterer != 0
+    assert(0 != m_renderer);
 }
 
 void Frame::clear()
