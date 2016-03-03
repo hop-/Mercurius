@@ -39,7 +39,8 @@ void GuiObject::init()
     m_texture.sourceRect = toSDL_Rect(srcRect());
     // TODO set dst rect
     m_texture.destinationRect = toSDL_Rect(destRect());
-    m_textureRederer = logicObject()->component<Core::TextureRenderer>();
+    assert(0 != subject());
+    m_textureRederer = static_cast<Core::TextureRenderer*>(subject());
     assert(0 != m_textureRederer);
 }
 

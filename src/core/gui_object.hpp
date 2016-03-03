@@ -19,7 +19,6 @@ class GuiObject
     : public Base::Object
     , public Base::Observer
 {
-    LogicObject* m_logicObject;
     std::string m_textureLocation;
     Rectangle m_srcRect;    // not the best way
     Rectangle m_destRect;   // not the best way
@@ -49,16 +48,6 @@ public:
     inline void setDestRect(Rectangle rect)
     {
         m_destRect = rect;
-    }
-
-    inline LogicObject* logicObject() const
-    {
-        return m_logicObject;
-    }
-
-    inline void setLogicObject(LogicObject* logicObject)
-    {
-        m_logicObject = logicObject;
     }
 
 protected:

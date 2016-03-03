@@ -4,11 +4,24 @@
 namespace Base
 {
 
+class Subject;
+
 class Observer
 {
+    Subject* m_subject;
 public:
     virtual ~Observer() = default;
     virtual void onNotify() = 0;
+
+    inline Subject* subject() const
+    {
+        return m_subject;
+    }
+
+    inline void setSubject(Subject* subject)
+    {
+        m_subject = subject;
+    }
 };
 
 } // namespace Base

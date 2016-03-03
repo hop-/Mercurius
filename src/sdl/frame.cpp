@@ -24,7 +24,7 @@ void Frame::init()
             , SDL_WINDOWPOS_UNDEFINED
             , 800 // TODO should be used Frame::width()
             , 600 // TODO should be used Frame::height()
-            , SDL_WINDOW_FULLSCREEN); // TODO window and fullscreen modes
+            , SDL_WINDOW_SHOWN); // TODO window and fullscreen modes
     // TODO check for m_window != 0
     m_renderer = SDL_CreateRenderer(m_window
             , -1

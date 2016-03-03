@@ -19,6 +19,7 @@ void Subject::addObserver(Observer* observer)
 {
     assert(0 != observer);
     m_observersToNotify.push_back(observer);
+    observer->setSubject(this);
 }
 
 void Subject::removeObserver(Observer* observer)
