@@ -25,7 +25,11 @@ void Subject::addObserver(Observer* observer)
 void Subject::removeObserver(Observer* observer)
 {
     assert(0 != observer);
+    if (observer->subject() != this) {
+        return;
+    }
     m_observersToNotify.remove(observer);
+    observer->setSubject(0);
 }
 
 } // namespace Base
