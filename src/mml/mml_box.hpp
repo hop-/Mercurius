@@ -20,6 +20,8 @@ public:
     };
 
 public:
+    ATTRIBUTE_INTERFACE(int, "position_x", x);
+    ATTRIBUTE_INTERFACE(int, "position_y", y);
     ATTRIBUTE_INTERFACE(int, "width", width);
     ATTRIBUTE_INTERFACE(int, "height", height);
     ATTRIBUTE_INTERFACE(std::string, "texture", texture);

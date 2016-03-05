@@ -38,10 +38,8 @@ void GuiObject::init()
     assert(m_texture.texture);
     // TODO set src rect
     m_texture.sourceRect = toSDL_Rect(srcRect());
-    m_texture.sourceRect = SDL_Rect{0, 0, 100, 100};      // hard code
     // TODO set dst rect
     m_texture.destinationRect = toSDL_Rect(destRect());
-    m_texture.destinationRect = SDL_Rect{80, 90, 100, 100}; // hard code
     assert(0 != subject());
     m_textureRederer = static_cast<Core::TextureRenderer*>(subject());
     assert(0 != m_textureRederer);
@@ -58,7 +56,7 @@ void GuiObject::changeSourceRect(int state)
     int srcWidth = srcRect().width();
     Core::Rectangle rect = srcRect();
     rect.setX(srcWidth * state);
-    //m_texture.sourceRect = toSDL_Rect(rect); //  TMP commented
+    m_texture.sourceRect = toSDL_Rect(rect);
 }
 
 GuiObject::GuiObject(const std::string& texture)

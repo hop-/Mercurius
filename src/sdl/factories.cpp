@@ -4,6 +4,8 @@
 
 #include <core/components.hpp>
 #include <core/logic_object.hpp>
+#include <core/rectangle.hpp>
+#include <core/position.hpp>
 #include <mml/mml_box.hpp>
 #include <mml/mml_layer.hpp>
 
@@ -46,11 +48,15 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(box->width(), box->height());
     logic_object->addComponent(collider);
-    Core::GuiObject* gui_object = new Sdl::GuiObject(box->texture());
+    Core::GuiObject* guiObject = new Sdl::GuiObject(box->texture());
+    Core::Rectangle rect(box->width() , box->height(), Core::Position());
+    guiObject->setSrcRect(rect);
+    rect.setPosition(Core::Position(box->x(), box->y()));
+    guiObject->setDestRect(rect);
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
-    textureRenderer->addObserver(gui_object);
+    textureRenderer->addObserver(guiObject);
     logic_object->addComponent(textureRenderer);
-    l->addGuiObject(gui_object);
+    l->addGuiObject(guiObject);
     l->addLogicObject(logic_object);
     return 0;
 }
