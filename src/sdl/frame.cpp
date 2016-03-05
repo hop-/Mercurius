@@ -19,7 +19,7 @@ Frame::~Frame()
 void Frame::init()
 {
     // TODO check SDL_Init(SDL_INIT_VIDEO) == 0 for success
-    m_window = SDL_CreateWindow("test title" // TODO title
+    m_window = SDL_CreateWindow("Mercurius :P" // TODO title
             , SDL_WINDOWPOS_UNDEFINED
             , SDL_WINDOWPOS_UNDEFINED
             , 800 // TODO should be used Frame::width()
