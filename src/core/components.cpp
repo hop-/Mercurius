@@ -25,12 +25,17 @@ void Physics::update()
 {
     Position position = parent()->position();
     position.move(m_velocity);
+    parent()->setPosition(position);
 }
 
 void TextureRenderer::init()
 {
-    // TODO init
-    // TODO add observer GuiObject
+    notify();
+}
+
+void TextureRenderer::onNotify()
+{
+    m_position = parent()->position();
     notify();
 }
 

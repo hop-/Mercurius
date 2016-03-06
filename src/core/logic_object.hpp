@@ -4,6 +4,8 @@
 #include "position.hpp"
 
 #include <base/object.hpp>
+#include <base/subject.hpp>
+#include <base/observer.hpp>
 #include <base/typed_base.hpp>
 
 #include <map>
@@ -16,10 +18,12 @@ class Logic;
 
 class LogicObject
     : public Base::Object
+    , public Base::Subject
 {
 public:
     class Component
         : public Base::TypedBase
+        , public Base::Observer
     {
         friend class LogicObject;
         LogicObject* m_parent;
@@ -34,6 +38,8 @@ public:
         {
             m_parent = parent;
         }
+
+        void onNotify(){}
 
     protected:
         virtual void update() {};
@@ -75,7 +81,6 @@ public:
     virtual void init();
     void addComponent(Component* component);
 
-
     inline Position position() const
     {
         return m_position;
@@ -84,6 +89,7 @@ public:
     inline void setPosition(Position p)
     {
         m_position = p;
+        notify();
     }
 
     template <class T>

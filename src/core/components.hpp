@@ -108,10 +108,12 @@ class TextureRenderer
     unsigned m_state = 0;
     int m_numberOfStates = 1;
     float m_scaleFactor = 1;
+    Position m_position;
 
 public:
     // TODO add some useful functions
     void setState(int state);
+    void onNotify();
 
     inline void setStateNumber(int numberOfStates)
     {

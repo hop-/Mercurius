@@ -18,7 +18,9 @@ void LogicObject::addComponent(Component* component)
 {
     assert(component != 0);
     component->setParent(this); // automatically set parent
-    m_components.insert(std::pair<int, Component*>(component->getType(), component));
+    addObserver(component);
+    m_components.insert(std::pair<int, Component*>(component->getType()
+                , component));
 }
 
 void LogicObject::init()

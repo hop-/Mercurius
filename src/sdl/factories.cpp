@@ -53,8 +53,9 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
     textureRenderer->addObserver(guiObject);
     logicObject->addComponent(textureRenderer);
-    Core::Rectangle rect(box->width() , box->height(), Core::Position());
-    guiObject->setDimensions(rect, textureRenderer->scaleFactor());
+    guiObject->setDimensions(box->width()
+            ,box->height()
+            , textureRenderer->scaleFactor());
     l->addGuiObject(guiObject);
     l->addLogicObject(logicObject);
     return 0;

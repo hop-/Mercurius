@@ -15,18 +15,6 @@
 namespace Sdl
 {
 
-namespace  {
-
-SDL_Rect toSDL_Rect(const Core::Rectangle& rect)
-{
-    return SDL_Rect{int(rect.position().x())
-        , int(rect.position().y())
-        , int(rect.width())
-        , int(rect.height())};
-}
-
-} // unnamed namespace
-
 void GuiObject::init()
 {
     assert(0 != parent());
@@ -37,24 +25,18 @@ void GuiObject::init()
     m_texture.texture = IMG_LoadTexture(renderer,
             textureLocation().c_str());
     assert(m_texture.texture);
-    // TODO set src rect
-    m_texture.sourceRect = toSDL_Rect(srcRect());
-    // TODO set dst rect
-    m_texture.destinationRect = toSDL_Rect(destRect());
+    m_texture.sourceRect = SDL_Rect{0, 0, width(), height()};
+    m_texture.destinationRect = SDL_Rect{0, 0
+        , int(width() * scaleFactor())
+        , int(height() * scaleFactor())};
     assert(0 != subject());
     m_textureRederer = static_cast<Core::TextureRenderer*>(subject());
     assert(0 != m_textureRederer);
 }
 
-Texture GuiObject::texture()
-{
-    updateDestRect();
-    return m_texture;
-}
-
 void GuiObject::onNotify()
 {
-    // TODO
+    updateDestRect();
     changeSourceRect(m_textureRederer->state());
 }
 
@@ -67,10 +49,7 @@ void GuiObject::updateDestRect()
 
 void GuiObject::changeSourceRect(int state)
 {
-    int srcWidth = srcRect().width();
-    Core::Rectangle rect = srcRect();
-    rect.setX(srcWidth * state);
-    m_texture.sourceRect = toSDL_Rect(rect);
+    m_texture.sourceRect.x = width() * state;
 }
 
 GuiObject::GuiObject(const std::string& texture)

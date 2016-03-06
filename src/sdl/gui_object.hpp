@@ -28,7 +28,10 @@ public:
     void init();
     void onNotify();
 
-    Texture texture();
+    Texture texture() const
+    {
+        return m_texture;
+    }
 
 private:
     void updateDestRect();

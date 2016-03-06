@@ -2,6 +2,8 @@
 #define _CORE_GUI_OBJECT_HPP_
 
 #include "rectangle.hpp"
+#include "units.hpp"
+#include "position.hpp"
 
 #include <base/object.hpp>
 #include <base/observer.hpp>
@@ -20,8 +22,12 @@ class GuiObject
     , public Base::Observer
 {
     std::string m_textureLocation;
-    Rectangle m_srcRect;    // not the best way
-    Rectangle m_destRect;   // not the best way
+    int m_width = 0;
+    int m_height = 0;
+    float m_scaleFactor = 1;
+    Position m_position;
+//    Rectangle m_srcRect;    // not the best way
+//    Rectangle m_destRect;   // not the best way
 
 protected:
     GuiObject();
@@ -30,29 +36,24 @@ public:
     virtual ~GuiObject() = default;
 
 public:
-    void setDimensions(Rectangle rect, float scale);
+    void setDimensions(int w, int h, float scale);
 
-    inline Rectangle srcRect() const
+    inline int width() const
     {
-        return m_srcRect;
+        return m_width;
     }
 
-    inline Rectangle destRect() const
+    inline int height() const
     {
-        return m_destRect;
+        return m_height;
+    }
+
+    inline float scaleFactor() const
+    {
+        return m_scaleFactor;
     }
 
 protected:
-    inline void setSrcRect(Rectangle rect)
-    {
-        m_srcRect = rect;
-    }
-
-    inline void setDestRect(Rectangle rect)
-    {
-        m_destRect = rect;
-    }
-
     inline const std::string textureLocation() const
     {
         return m_textureLocation;
