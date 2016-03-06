@@ -54,6 +54,7 @@ export CXXFLAGS
 export LIBS
 export DEF_FLAGS
 export INCLUDES
+export SKIP
 #########################################
 
 _default: _makeODir $(execable)
@@ -126,6 +127,8 @@ help info:
 	@echo -e "\tby default: '$(MAGENTA)$(LIBS)$(RCOLOR)'"
 	@echo -e "$(YELLOW)INCLUDES$(RCOLOR)\n\tto set additional include dirs."
 	@echo -e "\tby default: '$(MAGENTA)$(INCLUDES)$(RCOLOR)'"
+	@echo -e "$(YELLOW)SKIP$(RCOLOR)\n\tto skip cpp files."
+	@echo -e "\tby default: '$(MAGENTA)$(SKIP)$(RCOLOR)'"
 	@echo -e "$(YELLOW)execable$(RCOLOR)\n\tto rename the executable (program)."
 	@echo -e "\tby default: '$(GREEN)$(execable)$(RCOLOR)'"
 	@echo -e "--------------------------------------------------\n"
