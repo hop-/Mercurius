@@ -28,9 +28,31 @@ texture: resources/box.png;
 
 }
 
+}
+layer {
+name: layer2;
+
 box {
 
 name: box1;
+width: 100;
+height: 100;
+weight: 20;
+position_x: 250;
+position_y: 50;
+texture: resources/box.png;
+
+}
+
+}
+
+layer {
+name: layer3;
+visible: true;
+
+box {
+
+name: box4;
 width: 100;
 height: 100;
 weight: 20;
@@ -39,8 +61,4 @@ position_y: 50;
 texture: resources/box.png;
 
 }
-
-}
-layer {
-name: layer2;
 }

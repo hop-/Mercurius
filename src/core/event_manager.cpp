@@ -11,7 +11,9 @@ EventManager::EventManager()
 
 Event* EventManager::getEvent()
 {
-    return m_eventQueue.front();
+    return (m_eventQueue.empty())
+        ? 0
+        : m_eventQueue.front();
 }
 
 Command* EventManager::getCommand(Layer* layer)
