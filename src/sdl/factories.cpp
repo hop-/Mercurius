@@ -44,20 +44,19 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     assert(0 != box);
     Core::Layer* l = dynamic_cast<Core::Layer*>(p);
     assert(0 != l);
-    Core::LogicObject* logic_object = new Core::LogicObject();
+    Core::LogicObject* logicObject = new Core::LogicObject();
+    logicObject->setPosition(Core::Position(box->x(), box->y()));
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(box->width(), box->height());
-    logic_object->addComponent(collider);
+    logicObject->addComponent(collider);
     Core::GuiObject* guiObject = new Sdl::GuiObject(box->texture());
-    Core::Rectangle rect(box->width() , box->height(), Core::Position());
-    guiObject->setSrcRect(rect);
-    rect.setPosition(Core::Position(box->x(), box->y()));
-    guiObject->setDestRect(rect);
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
     textureRenderer->addObserver(guiObject);
-    logic_object->addComponent(textureRenderer);
+    logicObject->addComponent(textureRenderer);
+    Core::Rectangle rect(box->width() , box->height(), Core::Position());
+    guiObject->setDimensions(rect, textureRenderer->scaleFactor());
     l->addGuiObject(guiObject);
-    l->addLogicObject(logic_object);
+    l->addLogicObject(logicObject);
     return 0;
 }
 

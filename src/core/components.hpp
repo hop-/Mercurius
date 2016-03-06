@@ -19,7 +19,7 @@ class ViewPort
 
 public:
     void target(LogicObject* object);
-    
+
 private:
     void aim();
     void update();
@@ -55,11 +55,11 @@ public:
 };
 
 class Physics
-    : public LogicObject::ComponentCreator<Physics> 
+    : public LogicObject::ComponentCreator<Physics>
 {
     int m_mass;
     Vector m_velocity;
-    
+
 public:
     inline void setMass(int mass)
     {
@@ -98,7 +98,7 @@ public:
         m_width = width;
         m_height = height;
     }
-    
+
 };
 
 class TextureRenderer
@@ -107,6 +107,7 @@ class TextureRenderer
 {
     unsigned m_state = 0;
     int m_numberOfStates = 1;
+    float m_scaleFactor = 1;
 
 public:
     // TODO add some useful functions
@@ -117,9 +118,24 @@ public:
         m_numberOfStates = 0;
     }
 
+    inline void setScaleFactor(float scaleFactor)
+    {
+        m_scaleFactor = scaleFactor;
+    }
+
+    inline float scaleFactor() const
+    {
+        return m_scaleFactor;
+    }
+
     inline int state() const
     {
         return static_cast<int>(m_state);
+    }
+
+    inline Position objectPosition() const
+    {
+        return parent()->position();
     }
 
 private:

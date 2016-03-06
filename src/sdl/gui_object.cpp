@@ -6,6 +6,7 @@
 #include <core/frame.hpp>
 #include <core/components.hpp>
 #include <core/rectangle.hpp>
+#include <core/position.hpp>
 
 #include <SDL2/SDL_image.h>
 
@@ -45,10 +46,23 @@ void GuiObject::init()
     assert(0 != m_textureRederer);
 }
 
+Texture GuiObject::texture()
+{
+    updateDestRect();
+    return m_texture;
+}
+
 void GuiObject::onNotify()
 {
     // TODO
     changeSourceRect(m_textureRederer->state());
+}
+
+void GuiObject::updateDestRect()
+{
+    Core::Position objectPosition = m_textureRederer->objectPosition();
+    m_texture.destinationRect.x = objectPosition.x();
+    m_texture.destinationRect.y = objectPosition.y();
 }
 
 void GuiObject::changeSourceRect(int state)

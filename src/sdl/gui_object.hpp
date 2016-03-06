@@ -28,12 +28,10 @@ public:
     void init();
     void onNotify();
 
-    inline Texture texture() const
-    {
-        return m_texture;
-    }
+    Texture texture();
 
 private:
+    void updateDestRect();
     void changeSourceRect(int state);
 };
 
