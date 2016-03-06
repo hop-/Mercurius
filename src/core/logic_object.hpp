@@ -69,7 +69,6 @@ private:
     typedef std::map<int, Component*> Components;
     Components m_components;
     Position m_position;
-    float m_scale;
 
 public:
     void update();
@@ -85,16 +84,6 @@ public:
     inline void setPosition(Position p)
     {
         m_position = p;
-    }
-
-    inline float scale() const
-    {
-        return m_scale;
-    }
-
-    inline void setScale(float scale)
-    {
-        m_scale = scale;
     }
 
     template <class T>

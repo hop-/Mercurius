@@ -30,6 +30,8 @@ public:
     virtual ~GuiObject() = default;
 
 public:
+    void setDimensions(Rectangle rect, float scale);
+
     inline Rectangle srcRect() const
     {
         return m_srcRect;
@@ -40,6 +42,7 @@ public:
         return m_destRect;
     }
 
+protected:
     inline void setSrcRect(Rectangle rect)
     {
         m_srcRect = rect;
@@ -50,7 +53,6 @@ public:
         m_destRect = rect;
     }
 
-protected:
     inline const std::string textureLocation() const
     {
         return m_textureLocation;
