@@ -6,6 +6,30 @@ level: 1;
 
 box {
 
+name: box2;
+width: 100;
+height: 100;
+weight: 20;
+position_x: 150;
+position_y: 150;
+texture: resources/box.png;
+
+}
+
+box {
+
+name: box3;
+width: 100;
+height: 100;
+weight: 20;
+position_x: 500;
+position_y: 500;
+texture: resources/box.png;
+
+}
+
+box {
+
 name: box1;
 width: 100;
 height: 100;
