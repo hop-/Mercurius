@@ -11,8 +11,6 @@
 #include <streambuf>
 #include <stack>
 
-#include <iostream>
-
 namespace MML
 {
 
@@ -95,9 +93,8 @@ checkSyntax(const std::string& data)
     if (!symbols.empty()) {
         return false;
     }
-    return true;   
+    return true;
 }
-
 
 MMLObject* MMLParser::
 createMMLObject(const std::string& type, const std::string& name)
@@ -109,7 +106,6 @@ createMMLObject(const std::string& type, const std::string& name)
     // TODO
     return f->create(name);
 }
-
 
 bool MMLParser::
 isMetaSymbol(char c)
@@ -124,12 +120,7 @@ parseLayers(const std::string& data)
     std::string tmp = data;
     unsigned brackets = 0;
     size_t b = tmp.find_first_of(open_bracket);
-    char* buffer = new char[10];
-    size_t s = tmp.copy(buffer, b);
-    buffer[s] = '\0';
-    std::string type(buffer);
-    delete[] buffer;
-    buffer = 0;
+    std::string type = tmp.substr(0, b);
     tmp.erase(0, tmp.find_first_of(open_bracket));
     size_t i = 0;
     do {
@@ -140,25 +131,13 @@ parseLayers(const std::string& data)
             --brackets;
         }
         ++i;
-    } while(brackets != 0);
-    buffer = new char[i + 1];
-    s = tmp.copy(buffer, i - 2 , 1);
-    buffer[s] = '\0';
-    std::string body(buffer);
-    delete[] buffer;
-    buffer = 0;
+    } while (brackets != 0);
+    std::string body = tmp.substr(1, i - 2);
     tmp.erase(0, i);
     size_t fo = body.find_first_of(open_bracket);
-    buffer = new  char[fo + 1];
-    body.copy(buffer, fo);
-    std::string tmp1(buffer);
-    delete[] buffer;
-    buffer = 0;
+    std::string tmp1 = body.substr(0, fo);
     size_t attr_end = tmp1.find_last_of(close_value);
-    buffer = new char[attr_end + 1];
-    s = tmp1.copy(buffer, attr_end + 1);
-    buffer[s] = '\0';
-    std::string attr(buffer);
+    std::string attr = tmp1.substr(0, attr_end + 1);
     body.erase(0, attr_end + 1);
     MMLObject* level = parseMMLObject(type, attr);
     assert(0 != level);

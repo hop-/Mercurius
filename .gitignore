@@ -2,6 +2,7 @@
 mercurius
 mercurius-d
 mercurius.exe
+mercurius.exe-d
 # ignore objects directories
 objs/
 objs-d/
