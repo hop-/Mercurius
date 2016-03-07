@@ -12,14 +12,9 @@ create(const std::string& n)
 
 MMLBox::
 MMLBox(const std::string& n)
-    : MMLObject(n)
+    : DrawableObject(n)
 {
     setType("box");
-    addAttribute(new MMLAttribute("width", 0));
-    addAttribute(new MMLAttribute("height", 0));
-    addAttribute(new MMLAttribute("weight", 0));
-    addAttribute(new MMLAttribute("position", MMLAttribute::IntPair(0, 0)));
-    addAttribute(new MMLAttribute("texture", std::string(""))); // issue
 }
 
 } // MML

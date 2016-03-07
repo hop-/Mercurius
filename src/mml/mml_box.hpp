@@ -1,17 +1,13 @@
 #ifndef _MML_MMLBOX_HPP
 #define _MML_MMLBOX_HPP
 
-#include "macros.hpp"
-#include "mml_attribute.hpp"
-#include "mml_object.hpp"
-
-#include <string>
+#include "drawable_object.hpp"
 
 namespace MML
 {
 
 class MMLBox
-    : public MMLObject
+    : public DrawableObject
 {
 public:
     class BoxFactory : public MMLObject::AbstractFactory
@@ -19,12 +15,6 @@ public:
     public:
         virtual MMLObject* create(const std::string& n);
     };
-
-public:
-    ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "position", position);
-    ATTRIBUTE_INTERFACE(int, "width", width);
-    ATTRIBUTE_INTERFACE(int, "height", height);
-    ATTRIBUTE_INTERFACE(std::string, "texture", texture);
 
 public:
     MMLBox(const std::string& n);
