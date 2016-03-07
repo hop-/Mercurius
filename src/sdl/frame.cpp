@@ -43,7 +43,7 @@ void Frame::init()
             , SDL_WINDOWPOS_UNDEFINED
             , width()
             , height()
-            , toSDLScreenMode(screenMode())); // TODO window and fullscreen modes
+            , toSDLScreenMode(screenMode()));
     // TODO check for m_window != 0
     m_renderer = SDL_CreateRenderer(m_window
             , -1
