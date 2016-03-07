@@ -15,17 +15,6 @@ texture: resources/textures/box.png;
 
 }
 
-dude {
-
-name: player;
-width: 60;
-height: 100;
-weight: 12;
-position: 420, 120;
-texture: resources/textures/dude.png;
-
-}
-
 }
 layer {
 name: layer2;
@@ -57,4 +46,16 @@ position: 25, 50;
 texture: resources/textures/box.png;
 
 }
+
+dude {
+
+name: player;
+width: 60;
+height: 100;
+weight: 12;
+position: 25, 50;
+texture: resources/textures/dude.png;
+
+}
+
 }
