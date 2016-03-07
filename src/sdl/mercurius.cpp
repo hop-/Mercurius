@@ -16,6 +16,8 @@ namespace Sdl
 void Mercurius::start()
 {
     Core::Frame* frame = new Sdl::Frame;
+    frame->setScreenMode(Core::Frame::window);
+    frame->setResolution(800, 600);
     Core::EventManager* eventManager = new Sdl::EventManager;
     Core::Game game(frame, eventManager);
     loadLayers(game, frame);

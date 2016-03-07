@@ -8,9 +8,14 @@ class GuiObject;
 
 class Frame
 {
+public:
+    enum ScreenMode {fullScreen, window, fullScreenFit};
+
+private:
     unsigned m_msPerUpdate;
     int m_width;
     int m_height;
+    ScreenMode m_screenMode;
 
 public:
     Frame();
@@ -39,6 +44,10 @@ public:
     }
 
     virtual void* renderer() const = 0;
+
+    void setScreenMode(ScreenMode m);
+
+    ScreenMode screenMode() const;
 
 protected:
     inline void setMsPerUpdate(const unsigned& ms)

@@ -7,6 +7,25 @@
 namespace Sdl
 {
     
+namespace {
+
+SDL_WindowFlags toSDLScreenMode(Core::Frame::ScreenMode m)
+{
+    switch (m) {
+    case Core::Frame::fullScreen:
+        return SDL_WINDOW_FULLSCREEN;
+    case Core::Frame::window:
+        return SDL_WINDOW_SHOWN;
+    case Core::Frame::fullScreenFit:
+        return SDL_WINDOW_FULLSCREEN_DESKTOP;
+    default:
+        break;
+    }
+    assert(!"All core modes should have there corresponding SDL modes");
+    return SDL_WINDOW_SHOWN;
+}
+
+} // unnamed namespace
 
 Frame::~Frame()
 {
@@ -22,9 +41,9 @@ void Frame::init()
     m_window = SDL_CreateWindow("Mercurius :P" // TODO title
             , SDL_WINDOWPOS_UNDEFINED
             , SDL_WINDOWPOS_UNDEFINED
-            , 800 // TODO should be used Frame::width()
-            , 600 // TODO should be used Frame::height()
-            , SDL_WINDOW_SHOWN); // TODO window and fullscreen modes
+            , width()
+            , height()
+            , toSDLScreenMode(screenMode())); // TODO window and fullscreen modes
     // TODO check for m_window != 0
     m_renderer = SDL_CreateRenderer(m_window
             , -1
