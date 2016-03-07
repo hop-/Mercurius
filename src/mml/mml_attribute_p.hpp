@@ -15,7 +15,16 @@ public:
     class AttrHolder
     {
     public:
-        enum Type {string_t = 0, int_t, double_t, bool_t};
+        enum Type {
+            string_t = 0,
+            int_t,
+            double_t,
+            bool_t,
+            int_pair_t
+        };
+
+    public:
+        typedef std::pair<int, int> IntPair;
 
     public:
         AttrHolder(const std::string& v)
@@ -23,6 +32,7 @@ public:
             , m_int(0)
             , m_double(0)
             , m_bool(false)
+            , m_intPair(0, 0)
             , m_type(string_t)
         {
         }
@@ -33,6 +43,7 @@ public:
             , m_int(v)
             , m_double(0)
             , m_bool(false)
+            , m_intPair(0, 0)
             , m_type(int_t)
         {
         }
@@ -43,17 +54,30 @@ public:
             , m_int(0)
             , m_double(v)
             , m_bool(false)
+            , m_intPair(0, 0)
             , m_type(double_t)
         {
         }
-    
+
     public:
         AttrHolder(bool v)
             : m_string("")
             , m_int(0)
             , m_double(0)
             , m_bool(v)
+            , m_intPair(0, 0)
             , m_type(bool_t)
+        {
+        }
+
+    public:
+        AttrHolder(IntPair v)
+            : m_string("")
+            , m_int(0)
+            , m_double(0)
+            , m_bool(false)
+            , m_intPair(v)
+            , m_type(int_pair_t)
         {
         }
 
@@ -63,9 +87,11 @@ public:
             m_string = a.m_string;
             m_int = a.m_int;
             m_double = a.m_double;
+            m_bool = a.m_bool;
+            m_intPair = a.m_intPair;
             m_type = a.m_type;
         }
-    
+
     public:
         AttrHolder& operator=(const AttrHolder& a)
         {
@@ -76,6 +102,7 @@ public:
             m_int = a.m_int;
             m_double = a.m_double;
             m_bool = a.m_bool;
+            m_intPair = a.m_intPair;
             m_type = a.m_type;
             return *this;
         }
@@ -89,28 +116,34 @@ public:
         {
             return m_double;
         }
-        
+
         operator std::string () const
         {
             return m_string;
         }
-    
+
         operator bool () const
         {
             return m_bool;
+        }
+
+        operator IntPair() const
+        {
+            return m_intPair;
         }
 
     public:
         Type getType() const
         {
             return m_type;
-        }        
- 
+        }
+
     private:
         std::string m_string;
         int m_int;
         double m_double;
         bool m_bool;
+        IntPair m_intPair;
         Type m_type;
     };
 

@@ -10,8 +10,7 @@ name: box2;
 width: 100;
 height: 100;
 weight: 20;
-position_x: 150;
-position_y: 150;
+position: 150, 150;
 texture: resources/textures/box.png;
 
 }
@@ -22,8 +21,7 @@ name: player;
 width: 60;
 height: 100;
 weight: 12;
-position_x: 420;
-position_y: 120;
+position: 420, 120;
 texture: resources/textures/dude.png;
 
 }
@@ -38,8 +36,7 @@ name: box1;
 width: 100;
 height: 100;
 weight: 20;
-position_x: 250;
-position_y: 50;
+position: 250, 50;
 texture: resources/textures/box.png;
 
 }
@@ -56,8 +53,7 @@ name: box4;
 width: 100;
 height: 100;
 weight: 20;
-position_x: 25;
-position_y: 50;
+position: 25, 50;
 texture: resources/textures/box.png;
 
 }

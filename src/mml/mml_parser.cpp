@@ -18,6 +18,7 @@ static const char open_bracket = '{';
 static const char close_bracket = '}';
 static const char open_value = ':';
 static const char close_value = ';';
+static const char comma_value = ',';
 
 MMLParser* MMLParser::m_instance = 0;
 
@@ -200,11 +201,33 @@ parseMMLAtribute(const std::string& attributes, MMLObject* obj)
     }
 }
 
+namespace {
+
+template <typename T>
+T convertto(const std::string& v)
+{
+    std::stringstream converter;
+    converter<<v;
+    T vi;
+    converter>>vi;
+    return vi;
+}
+
+MMLAttribute::IntPair toIntPair(const std::string& v)
+{
+    int cp = v.find_first_of(comma_value);
+    std::string first = v.substr(0, cp);
+    std::string second = v.substr(cp + 1, v.size());
+    return MMLAttribute::IntPair(convertto<int>(first),
+                                 convertto<int>(second));
+}
+
+}
+
 void MMLParser::
 parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
 {
     assert(0 != attr);
-    std::stringstream converter;
     switch (attr->getType()) {
     case 0:
         // STRING
@@ -212,21 +235,19 @@ parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
         break;
     case 1:
         // INT
-        converter<<attr_value;
-        int vi;
-        converter>>vi;
-        attr->setValue(vi);
+        attr->setValue(convertto<int>(attr_value));
         break;
     case 2:
         // DOUBLE
-        converter<<attr_value;
-        double vd;
-        converter>>vd;
-        attr->setValue(vd);
+        attr->setValue(convertto<double>(attr_value));
         break;
     case 3:
         // BOOL
         attr->setValue(attr_value == "true" ? true : false);
+        break;
+    case 4:
+        // IntPair
+        attr->setValue(toIntPair(attr_value));
         break;
     default:
         break;

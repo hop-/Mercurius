@@ -5,7 +5,8 @@
 
 namespace MML {
 
-class MMLSyntaxError : public Base::Exception
+class MMLSyntaxError
+   : public Base::Exception
 {
 public:
     virtual const std::string what() const
@@ -15,6 +16,7 @@ public:
 };
 
 class MMLNoAttribute
+    : public Base::Exception
 {
 public:
     MMLNoAttribute(const std::string& type_name, const std::string& attr_name)
@@ -25,7 +27,7 @@ public:
 public:
     virtual const std::string what() const
     {
-        return "Attribute with name " + m_attr_name + " doesn't exists for MML type " 
+        return "Attribute with name " + m_attr_name + " doesn't exists for MML type "
                + m_type_name;
     }
 

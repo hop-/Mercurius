@@ -46,7 +46,7 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     Core::Layer* l = dynamic_cast<Core::Layer*>(p);
     assert(0 != l);
     Core::LogicObject* logicObject = new Core::LogicObject();
-    logicObject->setPosition(Core::Position(box->x(), box->y()));
+    logicObject->setPosition(Core::Position(box->position().first, box->position().second));
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(box->width(), box->height());
     logicObject->addComponent(collider);
@@ -72,7 +72,7 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
     Core::LogicObject* logicObject = new Core::LogicObject();
-    logicObject->setPosition(Core::Position(dude->x(), dude->y()));
+    logicObject->setPosition(Core::Position(dude->position().first, dude->position().second));
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(dude->width(), dude->height());
     logicObject->addComponent(collider);

@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main(int argc, char** argv)
-{   
+{
     try {
         Sdl::Mercurius::start();
     } catch (const Base::Exception& e) {

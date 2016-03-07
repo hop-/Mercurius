@@ -2,6 +2,7 @@
 #define _MML_MMLBOX_HPP
 
 #include "macros.hpp"
+#include "mml_attribute.hpp"
 #include "mml_object.hpp"
 
 #include <string>
@@ -20,8 +21,7 @@ public:
     };
 
 public:
-    ATTRIBUTE_INTERFACE(int, "position_x", x);
-    ATTRIBUTE_INTERFACE(int, "position_y", y);
+    ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "position", position);
     ATTRIBUTE_INTERFACE(int, "width", width);
     ATTRIBUTE_INTERFACE(int, "height", height);
     ATTRIBUTE_INTERFACE(std::string, "texture", texture);

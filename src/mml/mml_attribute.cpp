@@ -31,6 +31,13 @@ MMLAttribute(const std::string& n, bool v)
 }
 
 MMLAttribute::
+MMLAttribute(const std::string& n, MMLAttribute::IntPair v)
+    : m_name(n)
+{
+    m_private = new MMLAttributePrivate(v, this);
+}
+
+MMLAttribute::
 ~MMLAttribute()
 {
     assert(0 != m_private);

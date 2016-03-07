@@ -14,11 +14,15 @@ class MMLAttribute
     MMLAttributePrivate* m_private;
 
 public:
+    typedef std::pair<int, int> IntPair;
+
+public:
     MMLAttribute(const MMLAttribute&);
     MMLAttribute(const std::string& n, const std::string& v);
     MMLAttribute(const std::string& n, int v);
     MMLAttribute(const std::string& n, double v);
     MMLAttribute(const std::string& n, bool v);
+    MMLAttribute(const std::string& n, IntPair);
     virtual ~MMLAttribute();
 
 public:
