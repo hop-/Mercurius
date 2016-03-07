@@ -30,7 +30,7 @@ void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
     manager* m = manager::getInstance();
     assert(0 != m);
     assert(0 != frame);
-    m->loadData("src/mml/test/frame.mml");
+    m->loadData("resources/mmls/main.mml");
     MML::MMLRegistery* layer_registery = m->getLayerRegistery();
     assert(0 != layer_registery);
     TypeManager* tm = TypeManager::getInstance();

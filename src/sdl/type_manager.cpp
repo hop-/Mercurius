@@ -25,6 +25,7 @@ void TypeManager::registerTypes()
     // TODO register all types here
     m_factories["layer"] = new LayerFactory();
     m_factories["box"] = new BoxFactory();
+    m_factories["dude"] = new DudeFactory();
 }
 
 const Core::ObjectsFactory* TypeManager::getFactory(const std::string& type) const

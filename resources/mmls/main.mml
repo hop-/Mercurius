@@ -12,19 +12,19 @@ height: 100;
 weight: 20;
 position_x: 150;
 position_y: 150;
-texture: resources/box.png;
+texture: resources/textures/box.png;
 
 }
 
-box {
+dude {
 
-name: box3;
-width: 100;
+name: player;
+width: 60;
 height: 100;
-weight: 20;
-position_x: 500;
-position_y: 500;
-texture: resources/box.png;
+weight: 12;
+position_x: 420;
+position_y: 120;
+texture: resources/textures/dude.png;
 
 }
 
@@ -40,7 +40,7 @@ height: 100;
 weight: 20;
 position_x: 250;
 position_y: 50;
-texture: resources/box.png;
+texture: resources/textures/box.png;
 
 }
 
@@ -58,7 +58,7 @@ height: 100;
 weight: 20;
 position_x: 25;
 position_y: 50;
-texture: resources/box.png;
+texture: resources/textures/box.png;
 
 }
 }

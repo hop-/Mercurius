@@ -31,6 +31,15 @@ public:
                                 Base::Object* p) const;
 };
 
+class DudeFactory
+    : public Core::ObjectsFactory
+{
+public:
+    /// Reimplemented interface
+    virtual Base::Object* create(const MML::MMLObject* mml,
+                                Base::Object* p) const;
+};
+
 } // namespace Sdl
 
 #endif // _SDL_FACTORIES_HPP_

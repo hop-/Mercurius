@@ -3,6 +3,7 @@
 #include "mml_registery.hpp"
 
 #include "mml_box.hpp"
+#include "dude.hpp"
 #include "mml_layer.hpp"
 
 #include <algorithm>
@@ -58,6 +59,7 @@ registerTypes()
     // All types should be registerd in this function
     m_types["layer"] = new MMLLayer::LayerFactory();
     m_types["box"] = new MMLBox::BoxFactory();
+    m_types["dude"] = new Dude::Factory();
 }
 
 void MMLManager::
