@@ -14,7 +14,6 @@ public:
     Box(const MML::MMLBox* b, Core::Layer* l)
         : Object(b, l)
     {
-        init(); // TODO remove after adding as child to Layer
     }
 
 private:

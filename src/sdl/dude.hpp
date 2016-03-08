@@ -14,7 +14,6 @@ public:
     Dude(const MML::Dude* d, Core::Layer* l)
         : Object(d, l)
     {
-        init(); // TODO remove after adding as child to Layer
     }
 
 private:

@@ -47,7 +47,7 @@ void Layer::draw()
     }
 }
 
-void Layer::init()
+void Layer::initObjectPost()
 {
     assert(0 != m_gui);
     m_gui->init();

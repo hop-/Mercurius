@@ -17,6 +17,7 @@ Object::Object(const MML::DrawableObject* dr, Core::Layer* layer)
 {
     assert(0 != dr);
     assert(0 != layer);
+    layer->addObject(this);
 }
 
 void Object::addGuiObject()

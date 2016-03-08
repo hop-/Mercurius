@@ -53,7 +53,10 @@ protected:
     /**
      * @brief This function sould be implemented in child objects
      */
-    virtual void initObject() = 0;
+    virtual void initObject()
+    {}
+    virtual void initObjectPost()
+    {}
 
 public:
     virtual void init() final
@@ -63,20 +66,23 @@ public:
             assert(0 != c);
             c->init();
         });
+        initObjectPost();
     }
 
 public:
-    ~ContainerObject()
-    {
-        std::for_each(m_children.begin(), m_children.end(), [](C* c) {
+    virtual ~ContainerObject() = 0;
+};
+
+template<typename C>
+ContainerObject<C>::~ContainerObject()
+{
+    std::for_each(m_children.begin(), m_children.end(), [](C* c) {
             assert(0 != c);
             delete c;
-        });
-        m_children.clear();
-        assert(m_children.empty());
-    }
-
-};
+            });
+    m_children.clear();
+    assert(m_children.empty());
+}
 
 } // namespace Base
 

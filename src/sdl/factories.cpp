@@ -29,7 +29,7 @@ create(const MML::MMLObject* mml, Base::Object*) const
             assert(0 != obj);
             const Core::ObjectsFactory* f = tm->getFactory(obj->getType());
             assert(0 != f);
-            f->create(obj, layer); // TODO collect all children and add them as child of layer
+            f->create(obj, layer);
     }
     return layer;
 }
@@ -43,7 +43,7 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     assert(0 != box);
     Core::Layer* l = dynamic_cast<Core::Layer*>(p);
     assert(0 != l);
-    return new Box(box, l); // TODO MLK
+    return new Box(box, l);
 }
 
 Base::Object* DudeFactory::create(const MML::MMLObject* mml
@@ -55,7 +55,7 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     assert(0 != dude);
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
-    return new Dude(dude, layer); // TODO MLK
+    return new Dude(dude, layer);
 }
 
 } // namespace Sdl

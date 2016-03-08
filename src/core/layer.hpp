@@ -3,7 +3,7 @@
 
 #include "controls.hpp"
 
-#include <base/object.hpp>
+#include <base/container_object.hpp>
 
 namespace Core
 {
@@ -17,7 +17,7 @@ class Frame;
 class Command;
 
 class Layer
-    : public Base::Object
+    : public Base::ContainerObject<Base::Object>
 {
 	Gui* m_gui;
     Logic* m_logic;
@@ -66,7 +66,7 @@ public:
     bool addGuiObject(Core::GuiObject*);
     bool addLogicObject(Core::LogicObject*);
 
-    virtual void init();
+    virtual void initObjectPost();
 
     void changeControls(Controls controls);
     Command* getCommand(Event* event);
