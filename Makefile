@@ -70,6 +70,7 @@ rc:
 	$(eval execable := resource_converter)
 	$(eval SRC_DIR := src_rc)
 	$(eval OBJ_DIR := objs_rc)
+	$(eval LIBS += -lz)
 	@echo -e "$(MAGENTA)$(BOLD)<resource_converter>$(RCOLOR)"
 debug:
 	$(eval CXXFLAGS += -g)

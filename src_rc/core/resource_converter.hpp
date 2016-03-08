@@ -15,6 +15,7 @@ class ResourceConverter
     std::map<std::string, int> m_resourceTypesAndCounts;
     std::map<std::string, int> m_resourceNamesAndSizes;
     std::string m_data;
+    std::string m_fullContent;
 
 public:
     ResourceConverter(std::string resourceRoot);

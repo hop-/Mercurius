@@ -1,9 +1,12 @@
 #include "resource_converter.hpp"
 
 #include <vector>
-#include <dirent.h>
 #include <fstream>
 #include <sstream>
+
+#include <dirent.h>
+#include <zlib.h>
+#include <cstring>
 
 namespace Core
 {
@@ -58,7 +61,7 @@ void ResourceConverter::convert()
     for (auto file : listResources(m_resourceRoot
                 , mmlDir
                 , mmlExtension)) {
-        load(textureDir, file, mmlExtension);
+        load(mmlDir, file, mmlExtension);
     }
     collect();
     compress();
@@ -91,12 +94,58 @@ void ResourceConverter::load(std::string dir
 
 void ResourceConverter::collect()
 {
-    // TODO collect data into one buffer
+    // TODO is this methode cross system?
+    m_fullContent = "";
+    int i = m_resourceTypesAndCounts.size();
+    if (0 == i) {
+        return;
+    }
+    m_fullContent += (char*)&i;
+    for (auto pair : m_resourceTypesAndCounts) {
+        i = pair.first.size();
+        m_fullContent += (char*)&i;
+        m_fullContent += (char*)&pair.first;
+        m_fullContent += (char*)&pair.second;
+    }
+    for (auto pair : m_resourceNamesAndSizes) {
+        i = pair.first.size();
+        m_fullContent += (char*)&i;
+        m_fullContent += (char*)&pair.first;
+        m_fullContent += (char*)&pair.second;
+    }
+    m_fullContent += m_data;
 }
 
 void ResourceConverter::compress()
 {
-    // TODO compress buffer
+    // copied from https://panthema.net/2007/0328-ZLibString.html
+    int compressionlevel = Z_BEST_COMPRESSION;
+    z_stream zs;
+    memset(&zs, 0, sizeof(zs));
+    if (deflateInit(&zs, compressionlevel) != Z_OK) {
+        return;  // TODO throw exception
+    }
+    zs.next_in = (Bytef*)m_fullContent.data();
+    zs.avail_in = m_fullContent.size();
+    int ret;
+    char outbuffer[32768]; // may cotain issue
+    std::string outstring;
+    do {
+        zs.next_out = reinterpret_cast<Bytef*>(outbuffer);
+        zs.avail_out = sizeof(outbuffer);
+
+        ret = deflate(&zs, Z_FINISH);
+
+        if (outstring.size() < zs.total_out) {
+            outstring.append(outbuffer,
+                    zs.total_out - outstring.size());
+        }
+    } while (ret == Z_OK);
+    deflateEnd(&zs);
+    if (ret != Z_STREAM_END) {
+        return;
+    }
+    m_fullContent = outstring;
 }
 
 void ResourceConverter::encrypt()
@@ -106,7 +155,12 @@ void ResourceConverter::encrypt()
 
 void ResourceConverter::write()
 {
-    // TODO write buffer into file
+    std::ofstream outFile(m_outputName);
+    if (!outFile.is_open()) {
+        return; // TODO throw an exception
+    }
+    outFile << m_fullContent;
+    outFile.close();
 }
 
 } // namespace Core
