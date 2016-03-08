@@ -19,5 +19,6 @@ int main(int argc, char* argv[])
     std::string resourceRoot = argv[1];
     // TMP end
     Core::ResourceConverter res(resourceRoot);
+    res.convert();
     return 0;
 }

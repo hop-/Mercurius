@@ -2,6 +2,8 @@
 #define _CORE_RESOURCE_CONVERTER_HPP_
 
 #include <string>
+#include <map>
+#include <vector>
 
 namespace Core
 {
@@ -10,16 +12,22 @@ class ResourceConverter
 {
     std::string m_resourceRoot;
     std::string m_outputName = "resources.rs";
-
-    const std::string m_textureDir = "textures";
-    const std::string m_mmlDir = "mmls";
-
-    const std::string m_mmlExtension = "mml";
-    const std::string m_textureExtension = "png";
+    std::map<std::string, int> m_resourceTypesAndCounts;
+    std::map<std::string, int> m_resourceNamesAndSizes;
+    std::string m_data;
 
 public:
     ResourceConverter(std::string resourceRoot);
     void convert();
+
+private:
+    void load(std::string dir
+            , std::string fileName
+            , std::string ext);
+    void collect();
+    void compress();
+    void encrypt();
+    void write();
 };
 
 } // namespace Core
