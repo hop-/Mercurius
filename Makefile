@@ -48,6 +48,7 @@ ifdef INTERACTIVE
 endif
 
 # exporting variables
+export SRC_DIR
 export OBJ_DIR
 export execable
 export CXXFLAGS
@@ -60,10 +61,16 @@ export SKIP
 _default: _makeODir $(execable)
 	@echo -e "$(GREEN)Compiled.$(RCOLOR)"
 
-.PHONY: install debug noassert mingw clean resolve
+.PHONY: install debug noassert mingw clean resolve resource_converter
 
 install:
 	@$(MAKE) --no-print-directory $(MAKEFILE)
+
+rc:
+	$(eval execable := resource_converter)
+	$(eval SRC_DIR := src_rc)
+	$(eval OBJ_DIR := objs_rc)
+	@echo -e "$(MAGENTA)$(BOLD)<resource_converter>$(RCOLOR)"
 debug:
 	$(eval CXXFLAGS += -g)
 	$(eval OBJ_DIR := $(addsuffix -d, $(OBJ_DIR)))
