@@ -62,4 +62,12 @@ void Object::addPhysics()
     m_logicObject->addComponent(physics);
 }
 
+void Object::addMoveable()
+{
+    assert(0 != m_logicObject);
+    assert(m_logicObject->component<Core::Physics>() != 0);
+    Core::Moveable* moveable = new Core::Moveable();
+    m_logicObject->addComponent(moveable);
+}
+
 } // namespace Sdl

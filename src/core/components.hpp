@@ -81,6 +81,13 @@ private:
 
 };
 
+class Moveable
+    : public LogicObject::ComponentCreator<Moveable>
+{
+private:
+    virtual void update();
+};
+
 class Collider
     : public LogicObject::ComponentCreator<Collider>
 {

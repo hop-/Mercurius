@@ -23,6 +23,7 @@ private:
         addCollider();
         addGuiObject();
         addPhysics();
+        addMoveable();
     }
 };
 

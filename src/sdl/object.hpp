@@ -33,6 +33,7 @@ protected:
     void addLogicObject();
     void addCollider();
     void addPhysics();
+    void addMoveable();
 };
 
 } // namespace Sdl

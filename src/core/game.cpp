@@ -12,14 +12,23 @@
 namespace Core
 {
 
+Game* Game::m_instance = 0;
+
+Game* Game::getInstance(Frame* frame, EventManager* eventManager)
+{
+    if (frame != 0 && eventManager != 0 && m_instance == 0) {
+            m_instance = new Game(frame, eventManager);
+    }
+    return m_instance;
+}
+
 Game::Game(Frame* frame, EventManager* eventManager)
     : m_frame(frame)
     , m_eventManager(eventManager)
-{}
-
-Game::Game()
-    : Game(0, 0)
-{}
+{
+    assert(0 != m_frame);
+    assert(0 != eventManager);
+}
 
 Game::~Game()
 {
@@ -97,6 +106,12 @@ void Game::pushLayer(Layer* layer)
 void Game::popLayer()
 {
     return m_layers.pop_back();
+}
+
+Event* Game::getEvent()
+{
+    assert(0 != m_eventManager);
+    return m_eventManager->getEvent();
 }
 
 } // namespace core

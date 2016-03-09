@@ -1,4 +1,6 @@
 #include "components.hpp"
+#include "events.hpp"
+#include "game.hpp"
 #include "gui_object.hpp"
 
 namespace Core
@@ -45,6 +47,33 @@ void TextureRenderer::setState(int state)
     assert(m_numberOfStates > state);
     m_state = static_cast<unsigned>(state);
     notify();
+}
+
+void Moveable::update()
+{
+    Game* game = Game::getInstance();
+    assert(0 != game);
+    Event* event = game->getEvent();
+    if (0 == event) {
+        return;
+    }
+    KeyEvent* ke = dynamic_cast<KeyEvent*>(event);
+    if (ke != 0) {
+        LogicObject* lo = parent();
+        assert(0 != lo);
+        Physics* ph = lo->component<Physics>();
+        assert(0 != ph);
+        if (ke->mode() == KeyEvent::Mode::Down) {
+            if (ke->key() == 1073741903) { // TODO create Keys codes handler
+                ph->setVelocity(Vector(1, 0));
+            } else if (ke->key() == 1073741904) { // TODO create Key codes handler
+                ph->setVelocity(Vector(1, 180));
+            }
+        } else {
+            assert(ke->mode() == KeyEvent::Mode::Up);
+            ph->setVelocity(Vector(0, 0));
+        }
+    }
 }
 
 } // namespace Core

@@ -19,9 +19,9 @@ void Mercurius::start()
     frame->setScreenMode(Core::Frame::window);
     frame->setResolution(800, 600);
     Core::EventManager* eventManager = new Sdl::EventManager;
-    Core::Game game(frame, eventManager);
-    loadLayers(game, frame);
-    game.start();
+    Core::Game* game = Core::Game::getInstance(frame, eventManager);
+    loadLayers(*game, frame);
+    game->start();
 }
 
 void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
