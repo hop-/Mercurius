@@ -18,6 +18,9 @@ void EventManager::catchEvent()
         break;
         case SDL_KEYDOWN:
         case SDL_KEYUP:
+            if (event.key.repeat != 0) {
+                break;
+            }
             if (event.type == SDL_KEYDOWN) {
                 cevent = new Core::KeyEvent(event.key.keysym.sym
                         , Core::KeyEvent::Mode::Down);

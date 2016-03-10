@@ -2,6 +2,7 @@
 #include "events.hpp"
 #include "game.hpp"
 #include "gui_object.hpp"
+#include <iostream>
 
 namespace Core
 {
@@ -64,12 +65,14 @@ void Moveable::update()
         Physics* ph = lo->component<Physics>();
         assert(0 != ph);
         if (ke->mode() == KeyEvent::Mode::Down) {
+            std::cout<<"DOWN"<<std::endl;
             if (ke->key() == 1073741903) { // TODO create Keys codes handler
                 ph->setVelocity(Vector(1, 0));
             } else if (ke->key() == 1073741904) { // TODO create Key codes handler
                 ph->setVelocity(Vector(1, 180));
             }
         } else {
+            std::cout<<"UP"<<std::endl;
             assert(ke->mode() == KeyEvent::Mode::Up);
             ph->setVelocity(Vector(0, 0));
         }
