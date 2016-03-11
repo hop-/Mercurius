@@ -25,6 +25,11 @@ public:
         return e->getType() == type;
     }
 
+    static T* cast(Event* e)
+    {
+        return (castable(e)) ? static_cast<T*>(e) : 0;
+    }
+
     int getType() const
     {
         return type;

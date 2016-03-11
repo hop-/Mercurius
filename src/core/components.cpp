@@ -58,21 +58,21 @@ void Moveable::update()
     if (0 == event) {
         return;
     }
-    KeyEvent* ke = dynamic_cast<KeyEvent*>(event);
+    KeyEvent* ke = KeyEvent::cast(event);
     if (ke != 0) {
         LogicObject* lo = parent();
         assert(0 != lo);
         Physics* ph = lo->component<Physics>();
         assert(0 != ph);
         if (ke->mode() == KeyEvent::Mode::Down) {
-            std::cout<<"DOWN"<<std::endl;
+            std::cout << "DOWN - " << ke->key() << std::endl;
             if (ke->key() == 1073741903) { // TODO create Keys codes handler
                 ph->setVelocity(Vector(1, 0));
             } else if (ke->key() == 1073741904) { // TODO create Key codes handler
                 ph->setVelocity(Vector(1, 180));
             }
         } else {
-            std::cout<<"UP"<<std::endl;
+            std::cout << "UP - " << ke->key() << std::endl;
             assert(ke->mode() == KeyEvent::Mode::Up);
             ph->setVelocity(Vector(0, 0));
         }

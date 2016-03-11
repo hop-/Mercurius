@@ -47,6 +47,7 @@ void Game::mainLoop()
     const unsigned msToUpdate = m_frame->msPerUpdate();
     // game loop
     while (m_layers.size()) {
+        bool isUpdated = false;
         assert(0 != m_eventManager);
         unsigned currentTicks = m_eventManager->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
@@ -70,6 +71,7 @@ void Game::mainLoop()
             }
             lag = realLag;
             while (lag >= msToUpdate) {
+                isUpdated = true;
                 layer->update();
                 lag -= msToUpdate;
             }
@@ -83,7 +85,9 @@ void Game::mainLoop()
         }
         // END OF TMP
         m_frame->show();
-        m_eventManager->pop();
+        if (isUpdated) {
+            m_eventManager->pop();
+        }
     }
 }
 
