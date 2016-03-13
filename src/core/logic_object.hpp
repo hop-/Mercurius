@@ -2,8 +2,9 @@
 #define _CORE_LOGIC_OBJECT_HPP_
 
 #include "position.hpp"
+#include "state.hpp"
 
-#include <base/object.hpp>
+#include <base/container_object.hpp>
 #include <base/subject.hpp>
 #include <base/observer.hpp>
 #include <base/typed_base.hpp>
@@ -17,7 +18,7 @@ namespace Core
 class Logic;
 
 class LogicObject
-    : public Base::Object
+    : public Base::ContainerObject<State>
     , public Base::Subject
 {
 public:
@@ -78,7 +79,7 @@ private:
 
 public:
     void update();
-    virtual void init();
+    virtual void initObject();
     void addComponent(Component* component);
 
     inline Position position() const

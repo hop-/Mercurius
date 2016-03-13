@@ -1,0 +1,21 @@
+#ifndef _CORE_STATE_HPP_
+#define _CORE_STATE_HPP_
+
+#include <base/object.hpp>
+
+namespace Core
+{
+
+class Event;
+
+class State
+    : Base::Object
+{
+public:
+    void init() {};
+    virtual void process(Event* e) = 0;
+};
+
+} // namespace Core
+
+#endif //_CORE_STATE_HPP_

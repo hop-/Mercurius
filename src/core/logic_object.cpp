@@ -23,7 +23,7 @@ void LogicObject::addComponent(Component* component)
                 , component));
 }
 
-void LogicObject::init()
+void LogicObject::initObject()
 {
     for (auto& pair : m_components) {
         assert(0 != pair.second);
