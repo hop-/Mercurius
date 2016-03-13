@@ -1,5 +1,5 @@
-#ifndef _SDL_TYPE_MANAGER_HPP_
-#define _SDL_TYPE_MANAGER_HPP_
+#ifndef _ASSETS_TYPE_MANAGER_HPP_
+#define _ASSETS_TYPE_MANAGER_HPP_
 
 #include <map>
 #include <string>
@@ -9,7 +9,7 @@ namespace Core
 class ObjectsFactory;
 }
 
-namespace Sdl
+namespace Assets
 {
 
 class TypeManager
@@ -38,6 +38,6 @@ private:
     void registerTypes();
 };
 
-} // namespace Sdl
+} // namespace Assets
 
-#endif // _SDL_TYPE_MANAGER_HPP_
+#endif // _ASSETS_TYPE_MANAGER_HPP_

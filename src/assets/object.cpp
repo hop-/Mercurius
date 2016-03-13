@@ -1,5 +1,4 @@
 #include "object.hpp"
-#include "gui_object.hpp"
 
 #include <core/components.hpp>
 #include <core/layer.hpp>
@@ -7,8 +6,9 @@
 #include <core/rectangle.hpp>
 #include <core/position.hpp>
 #include <mml/drawable_object.hpp>
+#include <sdl/gui_object.hpp>
 
-namespace Sdl
+namespace Assets
 {
 
 Object::Object(const MML::DrawableObject* dr, Core::Layer* layer)
@@ -70,4 +70,4 @@ void Object::addMoveable()
     m_logicObject->addComponent(moveable);
 }
 
-} // namespace Sdl
+} // namespace Assets

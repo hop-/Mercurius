@@ -2,7 +2,7 @@
 
 #include "factories.hpp"
 
-namespace Sdl
+namespace Assets
 {
 
 TypeManager* TypeManager::m_instance = 0;

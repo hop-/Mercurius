@@ -1,9 +1,9 @@
-#ifndef _SDL_MERCURIUS_HPP_
-#define _SDL_MERCURIUS_HPP_
+#ifndef _ASSETS_MERCURIUS_HPP_
+#define _ASSETS_MERCURIUS_HPP_
 
 #include <core/game.hpp>
 
-namespace Sdl
+namespace Assets
 {
 
 class Mercurius
@@ -15,6 +15,6 @@ private:
     static void loadLayers(Core::Game&, Core::Frame*);
 };
 
-} // namespace Sdl
+} // namespace Assets
 
-#endif // _SDL_MERCURIUS_HPP_
+#endif // _ASSETS_MERCURIUS_HPP_

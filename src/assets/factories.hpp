@@ -1,5 +1,5 @@
-#ifndef _SDL_FACTORIES_HPP_
-#define _SDL_FACTORIES_HPP_
+#ifndef _ASSETS_FACTORIES_HPP_
+#define _ASSETS_FACTORIES_HPP_
 
 #include <core/controls.hpp>
 #include <core/gui.hpp>
@@ -10,7 +10,7 @@
 
 #include <cassert>
 
-namespace Sdl
+namespace Assets
 {
 
 class LayerFactory
@@ -40,6 +40,6 @@ public:
                                 Base::Object* p) const;
 };
 
-} // namespace Sdl
+} // namespace Assets
 
-#endif // _SDL_FACTORIES_HPP_
+#endif // _ASSETS_FACTORIES_HPP_

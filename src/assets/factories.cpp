@@ -1,14 +1,13 @@
 #include "factories.hpp"
 #include "box.hpp"
 #include "dude.hpp"
-#include "gui_object.hpp"
 #include "type_manager.hpp"
 
 #include <mml/mml_box.hpp>
 #include <mml/mml_layer.hpp>
 #include <mml/dude.hpp>
 
-namespace Sdl
+namespace Assets
 {
 
 Base::Object* LayerFactory::
@@ -58,4 +57,4 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     return new Dude(dude, layer);
 }
 
-} // namespace Sdl
+} // namespace Assets

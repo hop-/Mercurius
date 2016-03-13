@@ -1,5 +1,4 @@
 #include "mercurius.hpp"
-#include "event_manager.hpp"
 #include "type_manager.hpp"
 
 #include <core/game.hpp>
@@ -8,9 +7,10 @@
 #include <core/layer.hpp>
 #include <mml/mml_manager.hpp>
 #include <mml/mml_registery.hpp>
+#include <sdl/event_manager.hpp>
 #include <sdl/frame.hpp>
 
-namespace Sdl
+namespace Assets
 {
 
 void Mercurius::start()
@@ -51,4 +51,4 @@ void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
     }
 }
 
-} // namespace Sdl
+} // namespace Assets

@@ -1,5 +1,5 @@
-#ifndef _SDL_OBJECT_HPP_
-#define _SDL_OBJECT_HPP_
+#ifndef _ASSETS_OBJECT_HPP_
+#define _ASSETS_OBJECT_HPP_
 
 #include <base/object.hpp>
 
@@ -15,7 +15,7 @@ namespace MML
 class DrawableObject;
 }
 
-namespace Sdl
+namespace Assets
 {
 
 class Object : public Base::Object
@@ -36,6 +36,6 @@ protected:
     void addMoveable();
 };
 
-} // namespace Sdl
+} // namespace Assets
 
-#endif // _SDL_OBJECT_HPP_
+#endif // _ASSETS_OBJECT_HPP_

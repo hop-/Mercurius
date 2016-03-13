@@ -1,11 +1,11 @@
-#ifndef _SDL_BOX_HPP_
-#define _SDL_BOX_HPP_
+#ifndef _ASSETS_BOX_HPP_
+#define _ASSETS_BOX_HPP_
 
 #include "object.hpp"
 
 #include <mml/mml_box.hpp>
 
-namespace Sdl
+namespace Assets
 {
 
 class Box : public Object
@@ -26,6 +26,6 @@ private:
 
 };
 
-} // namespace Sdl
+} // namespace Asset
 
-#endif // _SDL_BOX_HPP_
+#endif // _ASSETS_BOX_HPP_

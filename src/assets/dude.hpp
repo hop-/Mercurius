@@ -1,11 +1,11 @@
-#ifndef _SDL_DUDE_HPP_
-#define _SDL_DUDE_HPP_
+#ifndef _ASSETS_DUDE_HPP_
+#define _ASSETS_DUDE_HPP_
 
 #include "object.hpp"
 
 #include <mml/dude.hpp>
 
-namespace Sdl
+namespace Assets
 {
 
 class Dude : public Object
@@ -27,6 +27,6 @@ private:
     }
 };
 
-} // namepsace Sdl
+} // namepsace Assets
 
-#endif // _SDL_DUDE_HPP_
+#endif // _ASSETS_DUDE_HPP_
