@@ -1,7 +1,6 @@
 #include "logic_object.hpp"
 #include "logic.hpp"
-
-#include <algorithm>
+#include <iostream>
 
 namespace Core
 {
@@ -21,6 +20,22 @@ void LogicObject::addComponent(Component* component)
     addObserver(component);
     m_components.insert(std::pair<int, Component*>(component->getType()
                 , component));
+}
+
+void LogicObject::changeState(State* newState)
+{
+    removeObject(m_currentState);
+    addObject(newState);
+}
+
+void LogicObject::process(Event* event)
+{
+    std::vector<State*> states = children();
+    for (auto currentState : states) {
+        assert(0 != currentState);
+        m_currentState = currentState;
+        m_currentState->process(event);
+    }
 }
 
 void LogicObject::initObject()

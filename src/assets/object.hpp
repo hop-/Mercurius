@@ -2,6 +2,7 @@
 #define _ASSETS_OBJECT_HPP_
 
 #include <base/object.hpp>
+#include <core/state.hpp>
 
 namespace Core
 {
@@ -33,6 +34,7 @@ protected:
     void addLogicObject();
     void addCollider();
     void addPhysics();
+    void addState(Core::State* state);
     void addMoveable();
 };
 

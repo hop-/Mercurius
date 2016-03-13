@@ -76,11 +76,14 @@ private:
     typedef std::map<int, Component*> Components;
     Components m_components;
     Position m_position;
+    State* m_currentState = 0;
 
 public:
     void update();
     virtual void initObject();
     void addComponent(Component* component);
+    void changeState(State* newState);
+    void process(Event* event);
 
     inline Position position() const
     {

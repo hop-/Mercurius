@@ -36,7 +36,7 @@ public:
         assert(0 != o);
         typename Children::iterator i =
                 std::find(m_children.begin(), m_children.end(), o);
-        if (m_children.end() != i) {
+        if (m_children.end() == i) {
                 return false;
         }
         m_children.erase(i);

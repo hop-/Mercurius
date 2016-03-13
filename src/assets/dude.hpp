@@ -2,6 +2,7 @@
 #define _ASSETS_DUDE_HPP_
 
 #include "object.hpp"
+#include "states.hpp"
 
 #include <mml/dude.hpp>
 
@@ -23,7 +24,7 @@ private:
         addCollider();
         addGuiObject();
         addPhysics();
-        addMoveable();
+        addState(new Standing);
     }
 };
 

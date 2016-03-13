@@ -9,7 +9,7 @@ namespace Core
 class Event;
 
 class State
-    : Base::Object
+    : public Base::Object
 {
 public:
     void init() {};

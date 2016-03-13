@@ -33,7 +33,7 @@ const std::string& Object::name() const
     return m_name;
 }
 
-Object* Object::parent()
+Object* Object::parent() const
 {
     return m_parent;
 }

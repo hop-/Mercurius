@@ -62,6 +62,13 @@ void Object::addPhysics()
     m_logicObject->addComponent(physics);
 }
 
+void Object::addState(Core::State* state)
+{
+    assert(0 != state);
+    assert(0 != m_logicObject);
+    m_logicObject->addObject(state);
+}
+
 void Object::addMoveable()
 {
     assert(0 != m_logicObject);
