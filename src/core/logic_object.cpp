@@ -24,8 +24,24 @@ void LogicObject::addComponent(Component* component)
 
 void LogicObject::changeState(State* newState)
 {
-    removeObject(m_currentState);
-    addObject(newState);
+    removeState(m_currentState);
+    addState(newState);
+    m_currentState = newState;
+}
+
+void LogicObject::addState(State* newState)
+{
+    bool status = addObject(newState);
+    assert(status);
+    newState->init();
+}
+
+void LogicObject::removeState(State* state)
+{
+    bool status = removeObject(state);
+    assert(status);
+    assert(state != 0);
+    delete state;
 }
 
 void LogicObject::process(Event* event)

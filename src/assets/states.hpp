@@ -15,6 +15,7 @@ class Standing
     : public Core::State
 {
 public:
+    virtual void init();
     void process(Core::Event* e);
 };
 
@@ -22,6 +23,7 @@ class RunningLeft
     : public Core::State
 {
 public:
+    virtual void init();
     void process(Core::Event* e);
 };
 
@@ -29,6 +31,7 @@ class RunningRight
     : public Core::State
 {
 public:
+    virtual void init();
     void process(Core::Event* e);
 };
 

@@ -82,7 +82,9 @@ public:
     void update();
     virtual void initObject();
     void addComponent(Component* component);
+    void addState(State* newState);
     void changeState(State* newState);
+    void removeState(State* state);
     void process(Event* event);
 
     inline Position position() const

@@ -12,7 +12,7 @@ class State
     : public Base::Object
 {
 public:
-    void init() {};
+    virtual void init() = 0;
     virtual void process(Event* e) = 0;
 };
 
