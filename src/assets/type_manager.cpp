@@ -26,6 +26,7 @@ void TypeManager::registerTypes()
     m_factories["layer"] = new LayerFactory();
     m_factories["box"] = new BoxFactory();
     m_factories["dude"] = new DudeFactory();
+    m_factories["background"] = new BackgroundFactory();
 }
 
 const Core::ObjectsFactory* TypeManager::getFactory(const std::string& type) const

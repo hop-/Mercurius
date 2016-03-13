@@ -2,6 +2,7 @@
 #include "mml_parser.hpp"
 #include "mml_registery.hpp"
 
+#include "background.hpp"
 #include "mml_box.hpp"
 #include "dude.hpp"
 #include "mml_layer.hpp"
@@ -60,6 +61,7 @@ registerTypes()
     m_types["layer"] = new MMLLayer::LayerFactory();
     m_types["box"] = new MMLBox::BoxFactory();
     m_types["dude"] = new Dude::Factory();
+    m_types["background"] = new Background::BackgroundFactory();
 }
 
 void MMLManager::

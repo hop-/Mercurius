@@ -1,10 +1,12 @@
 #include "factories.hpp"
+#include "background.hpp"
 #include "box.hpp"
 #include "dude.hpp"
 #include "type_manager.hpp"
 
 #include <mml/mml_box.hpp>
 #include <mml/mml_layer.hpp>
+#include <mml/background.hpp>
 #include <mml/dude.hpp>
 
 namespace Assets
@@ -55,6 +57,18 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
     return new Dude(dude, layer);
+}
+
+Base::Object* BackgroundFactory::create(const MML::MMLObject* mml,
+        Base::Object* p) const
+{
+    assert(0 != mml);
+    assert(0 != p);
+    const MML::Background* bg = dynamic_cast<const MML::Background*>(mml);
+    assert(0 != bg);
+    Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
+    assert(0 != layer);
+    return new Background(bg, layer);
 }
 
 } // namespace Assets

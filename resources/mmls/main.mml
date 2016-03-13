@@ -15,6 +15,13 @@ texture: resources/textures/box.png;
 
 }
 
+background {
+width: 800;
+height: 500; 
+position: 0, 0;
+texture: resources/textures/bg.jpg;
+}
+
 }
 layer {
 name: layer2;

@@ -40,6 +40,16 @@ public:
                                 Base::Object* p) const;
 };
 
+class BackgroundFactory
+    : public Core::ObjectsFactory
+{
+public:
+    /// Reimplemented interface
+    virtual Base::Object* create(const MML::MMLObject* mml,
+                                Base::Object* p) const;
+
+};
+
 } // namespace Assets
 
 #endif // _ASSETS_FACTORIES_HPP_
