@@ -51,7 +51,7 @@ void TextureRenderer::setState(int state)
 }
 
 void Moveable::update()
-{
+{/*
     Game* game = Game::getInstance();
     assert(0 != game);
     Event* event = game->getEvent();
@@ -76,7 +76,7 @@ void Moveable::update()
             assert(ke->mode() == KeyEvent::Mode::Up);
             ph->setVelocity(Vector(0, 0));
         }
-    }
+    }*/
 }
 
 } // namespace Core

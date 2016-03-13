@@ -1,6 +1,8 @@
 #ifndef _CORE_GAME_HPP_
 #define _CORE_GAME_HPP_
 
+#include "input_manager.hpp"
+
 #include <vector>
 
 namespace Core
@@ -15,6 +17,7 @@ class Game
 {
     Frame* m_frame;
     EventManager* m_eventManager;
+    InputManager m_inputManager;
     std::vector<Layer*> m_layers;
     static Game* m_instance;
 
@@ -31,6 +34,11 @@ public:
 
 public:
     Event* getEvent();
+
+    const InputManager& getInputManager() const
+    {
+        return m_inputManager;
+    }
 
 public:
     void start();

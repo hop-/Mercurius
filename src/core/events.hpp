@@ -2,6 +2,7 @@
 #define _CORE_EVENTS_HPP_
 
 #include "event.hpp"
+#include <core/input_manager.hpp>
 
 namespace Core
 {
@@ -10,19 +11,19 @@ class KeyEvent
     : public EventCreator<KeyEvent>
 {
 public:
-    enum class Mode {Up, Down}; 
+    enum class Mode {Up, Down};
 
 private:
-    int m_keyCode;
+    InputManager::Key m_keyCode;
     Mode m_mode;
 
 public:
-    KeyEvent(int keyCode, Mode mode)
+    KeyEvent(InputManager::Key keyCode, Mode mode)
     : m_keyCode(keyCode)
     , m_mode(mode)
     {}
 
-    inline int key() const
+    inline InputManager::Key key() const
     {
         return m_keyCode;
     }
@@ -32,7 +33,7 @@ public:
         return m_mode;
     }
 
-private: 
+private:
     bool less(Base::TypedBase* obj);
 };
 

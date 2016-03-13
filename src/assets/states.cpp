@@ -4,6 +4,7 @@
 #include <core/logic_object.hpp>
 #include <core/components.hpp>
 #include <core/vector.hpp>
+#include <core/input_manager.hpp>
 
 namespace Assets
 {
@@ -16,10 +17,10 @@ void Standing::process(Core::Event* e)
     }
     Core::LogicObject* p = parent<Core::LogicObject>();
     switch (key->key()) {
-    case 1073741903:
+        case Core::InputManager::Key::Right:
         p->changeState(new RunningRight);
         break;
-    case 1073741904:
+    case Core::InputManager::Key::Left:
         p->changeState(new RunningLeft);
     default:
         break;
@@ -41,11 +42,11 @@ void RunningLeft::process(Core::Event* e)
     }
     Core::LogicObject* p = parent<Core::LogicObject>();
     if (key->mode() == Core::KeyEvent::Mode::Down) {
-        if (key->key() == 1073741903) {
+        if (key->key() == Core::InputManager::Key::Right) {
             p->changeState(new RunningRight);
         }
     } else {
-        if (key->key() == 1073741904) {
+        if (key->key() == Core::InputManager::Key::Left) {
             p->changeState(new Standing);
         }
     }
@@ -66,11 +67,11 @@ void RunningRight::process(Core::Event* e)
     }
     Core::LogicObject* p = parent<Core::LogicObject>();
     if (key->mode() == Core::KeyEvent::Mode::Down) {
-        if (key->key() == 1073741904) {
+        if (key->key() == Core::InputManager::Key::Left) {
             p->changeState(new RunningLeft);
         }
     } else {
-        if (key->key() == 1073741903) {
+        if (key->key() == Core::InputManager::Key::Right) {
             p->changeState(new Standing);
         }
     }
