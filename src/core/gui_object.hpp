@@ -25,6 +25,7 @@ class GuiObject
     int m_width = 0;
     int m_height = 0;
     float m_scaleFactor = 1;
+    int m_priority = 0;
     Position m_position;
 //    Rectangle m_srcRect;    // not the best way
 //    Rectangle m_destRect;   // not the best way
@@ -48,9 +49,19 @@ public:
         return m_height;
     }
 
+    inline int priority() const
+    {
+        return m_priority;
+    }
+
     inline float scaleFactor() const
     {
         return m_scaleFactor;
+    }
+
+    inline void setPriority(int priority)
+    {
+        m_priority = priority;
     }
 
 protected:

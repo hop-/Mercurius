@@ -18,13 +18,15 @@ public:
     ~Frame();
     void init();
     void clear();
-    void draw(Core::GuiObject* object);
-    void show();
 
     void* renderer() const
     {
         return m_renderer;
     }
+
+private:
+    void draw(const Core::GuiObject* object);
+    void show();
 };
 
 } // namespace Sdl

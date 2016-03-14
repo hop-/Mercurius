@@ -84,7 +84,7 @@ void Game::mainLoop()
             break;
         }
         // END OF TMP
-        m_frame->show();
+        m_frame->draw();
         if (isUpdated) {
             m_eventManager->pop();
         }

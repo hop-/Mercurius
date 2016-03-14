@@ -11,7 +11,7 @@ void Gui::draw()
 {
     assert(0 != m_frame);
     for (auto* object : children()) {
-        frame()->draw(object);
+        frame()->prepareToDraw(object);
     }
 }
 

@@ -27,6 +27,7 @@ void Object::addGuiObject()
     assert(0 != m_drawableObject);
     assert(0 != m_logicObject);
     m_guiObject = new Sdl::GuiObject(m_drawableObject->texture());
+    m_guiObject->setPriority(m_drawableObject->priority());
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
     textureRenderer->addObserver(m_guiObject);
     textureRenderer->setScaleFactor(m_drawableObject->scale());

@@ -6,7 +6,7 @@
 
 namespace Sdl
 {
-    
+
 namespace {
 
 SDL_WindowFlags toSDLScreenMode(Core::Frame::ScreenMode m)
@@ -56,11 +56,11 @@ void Frame::clear()
     SDL_RenderClear(m_renderer);
 }
 
-void Frame::draw(Core::GuiObject* object)
+void Frame::draw(const Core::GuiObject* object)
 {
     assert(0 != object);
-    GuiObject* sdlObject = static_cast<GuiObject*>(object);
-    assert(0 != dynamic_cast<GuiObject*>(object));
+    const GuiObject* sdlObject = static_cast<const GuiObject*>(object);
+    assert(0 != dynamic_cast<const GuiObject*>(object));
     assert(0 != m_renderer);
     Texture texture = sdlObject->texture();
     assert(0 != texture.texture);

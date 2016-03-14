@@ -19,6 +19,7 @@ public:
     ATTRIBUTE_INTERFACE(int, "width", width);
     ATTRIBUTE_INTERFACE(int, "height", height);
     ATTRIBUTE_INTERFACE(double, "scale", scale);
+    ATTRIBUTE_INTERFACE(int, "priority", priority);
     ATTRIBUTE_INTERFACE(std::string, "texture", texture);
 };
 

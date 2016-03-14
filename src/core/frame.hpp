@@ -1,6 +1,9 @@
 #ifndef _CORE_FRAME_HPP_
 #define _CORE_FRAME_HPP_
 
+#include <map>
+#include <list>
+
 namespace Core
 {
 
@@ -16,6 +19,7 @@ private:
     int m_width;
     int m_height;
     ScreenMode m_screenMode;
+    std::map<const int, std::list<const GuiObject*> > m_sortedObjects; // need to descuse
 
 public:
     Frame();
@@ -24,9 +28,12 @@ public:
 public:
     virtual void init() = 0;
     virtual void clear() = 0;
-    virtual void draw(GuiObject* object) = 0;
-    virtual void show() = 0;
+    void draw();
+    void prepareToDraw(const GuiObject* object);
     virtual void setResolution(int width, int height);
+    virtual void* renderer() const = 0;
+    void setScreenMode(ScreenMode m);
+    ScreenMode screenMode() const;
 
     inline const int width() const
     {
@@ -43,13 +50,9 @@ public:
         return m_msPerUpdate;
     }
 
-    virtual void* renderer() const = 0;
-
-    void setScreenMode(ScreenMode m);
-
-    ScreenMode screenMode() const;
-
 protected:
+    virtual void show() = 0;
+    virtual void draw(const GuiObject* object) = 0;
     inline void setMsPerUpdate(const unsigned& ms)
     {
         m_msPerUpdate = ms;
