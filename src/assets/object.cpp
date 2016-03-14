@@ -7,6 +7,7 @@
 #include <core/position.hpp>
 #include <mml/drawable_object.hpp>
 #include <sdl/gui_object.hpp>
+#include <iostream>
 
 namespace Assets
 {
@@ -28,6 +29,7 @@ void Object::addGuiObject()
     m_guiObject = new Sdl::GuiObject(m_drawableObject->texture());
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
     textureRenderer->addObserver(m_guiObject);
+    textureRenderer->setScaleFactor(m_drawableObject->scale());
     m_guiObject->setDimensions(m_drawableObject->width()
             , m_drawableObject->height()
             , textureRenderer->scaleFactor());
