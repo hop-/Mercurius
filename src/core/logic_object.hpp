@@ -98,6 +98,11 @@ public:
         notify();
     }
 
+    inline void setPosition(UserUnit x, UserUnit y)
+    {
+        setPosition(Position(x, y));
+    }
+
     template <class T>
     inline T* component()
     {

@@ -100,7 +100,7 @@ public:
         return Rectangle(m_width, m_height, parent()->position());
     }
 
-    inline void setSizes(EngineUnit width, EngineUnit height)
+    inline void setSizes(UserUnit width, UserUnit height)
     {
         m_width = width;
         m_height = height;

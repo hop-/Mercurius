@@ -56,7 +56,7 @@ void RunningLeft::init()
 {
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
-    p->component<Core::Physics>()->setVelocity(Core::Vector(1, 180));
+    p->component<Core::Physics>()->setVelocity(Core::Vector(500, 180));
 }
 
 void RunningRight::process(Core::Event* e)
@@ -81,7 +81,7 @@ void RunningRight::init()
 {
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
-    p->component<Core::Physics>()->setVelocity(Core::Vector(1, 0));
+    p->component<Core::Physics>()->setVelocity(Core::Vector(500, 0));
 }
 
 } // namespace Assets

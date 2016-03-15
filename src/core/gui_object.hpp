@@ -26,7 +26,9 @@ class GuiObject
     int m_height = 0;
     float m_scaleFactor = 1;
     int m_priority = 0;
-    Position m_position;
+    int m_x = 0;
+    int m_y = 0;
+    int m_state = 0;
 //    Rectangle m_srcRect;    // not the best way
 //    Rectangle m_destRect;   // not the best way
 
@@ -37,7 +39,9 @@ public:
     virtual ~GuiObject() = default;
 
 public:
-    void setDimensions(int w, int h, float scale);
+    void onNotify();
+
+    void setDimensions(UserUnit w, UserUnit h, float scale);
 
     inline int width() const
     {
@@ -65,6 +69,21 @@ public:
     }
 
 protected:
+    inline int x() const
+    {
+        return m_x;
+    }
+
+    inline int y() const
+    {
+        return m_y;
+    }
+
+    inline int state() const
+    {
+        return m_state;
+    }
+
     inline const std::string textureLocation() const
     {
         return m_textureLocation;

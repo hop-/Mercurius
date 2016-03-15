@@ -15,9 +15,9 @@ public:
 
 public:
     ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "position", position);
-    ATTRIBUTE_INTERFACE(int, "weight", weight);
-    ATTRIBUTE_INTERFACE(int, "width", width);
-    ATTRIBUTE_INTERFACE(int, "height", height);
+    ATTRIBUTE_INTERFACE(double, "weight", weight);
+    ATTRIBUTE_INTERFACE(double, "width", width);
+    ATTRIBUTE_INTERFACE(double, "height", height);
     ATTRIBUTE_INTERFACE(double, "scale", scale);
     ATTRIBUTE_INTERFACE(int, "priority", priority);
     ATTRIBUTE_INTERFACE(std::string, "texture", texture);

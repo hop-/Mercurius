@@ -7,11 +7,6 @@
 
 #include <SDL2/SDL.h>
 
-namespace Core
-{
-class TextureRenderer;
-}
-
 namespace Sdl
 {
 
@@ -19,7 +14,6 @@ class GuiObject
     : public Core::GuiObject
 {
     Texture m_texture;
-    const Core::TextureRenderer* m_textureRederer;
 
 public:
     GuiObject(const std::string&);
@@ -35,7 +29,7 @@ public:
 
 private:
     void updateDestRect();
-    void changeSourceRect(int state);
+    void changeSourceRect();
 };
 
 } // namespace Sdl

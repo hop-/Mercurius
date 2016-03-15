@@ -1,11 +1,9 @@
-#include "frame.hpp"
 #include "gui_object.hpp"
+#include "frame.hpp"
 #include "texture.hpp"
 
 #include <core/gui.hpp>
 #include <core/frame.hpp>
-#include <core/components.hpp>
-#include <core/rectangle.hpp>
 #include <core/position.hpp>
 
 #include <SDL2/SDL_image.h>
@@ -30,26 +28,25 @@ void GuiObject::init()
         , int(width() * scaleFactor())
         , int(height() * scaleFactor())};
     assert(0 != subject());
-    m_textureRederer = static_cast<Core::TextureRenderer*>(subject());
-    assert(0 != m_textureRederer);
 }
 
 void GuiObject::onNotify()
 {
+    Core::GuiObject::onNotify();
     updateDestRect();
-    changeSourceRect(m_textureRederer->state());
+    changeSourceRect();
 }
 
 void GuiObject::updateDestRect()
 {
-    Core::Position objectPosition = m_textureRederer->objectPosition();
-    m_texture.destinationRect.x = objectPosition.x();
-    m_texture.destinationRect.y = objectPosition.y();
+    //Core::Position objectPosition = m_textureRederer->objectPosition();
+    m_texture.destinationRect.x = x();
+    m_texture.destinationRect.y = y();
 }
 
-void GuiObject::changeSourceRect(int state)
+void GuiObject::changeSourceRect()
 {
-    m_texture.sourceRect.x = width() * state;
+    m_texture.sourceRect.x = width() * state();
 }
 
 GuiObject::GuiObject(const std::string& texture)

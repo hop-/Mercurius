@@ -33,7 +33,7 @@ float Vector::angle()
 
 float Vector::angleInRadians()
 {
-    return std::atan2(m_y, m_x);
+    return std::atan2(engineUnit(m_y), engineUnit(m_x));
 }
 
 Vector& Vector::operator+=(const Vector& vector)

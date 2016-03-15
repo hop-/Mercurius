@@ -7,7 +7,6 @@
 #include <core/position.hpp>
 #include <mml/drawable_object.hpp>
 #include <sdl/gui_object.hpp>
-#include <iostream>
 
 namespace Assets
 {
@@ -44,7 +43,8 @@ void Object::addLogicObject()
     assert(0 == m_logicObject);
     assert(0 != m_drawableObject);
     m_logicObject = new Core::LogicObject();
-    m_logicObject->setPosition(Core::Position(m_drawableObject->position().first, m_drawableObject->position().second));
+    //m_logicObject->setPosition(Core::Position(m_drawableObject->position().first, m_drawableObject->position().second));
+    m_logicObject->setPosition(m_drawableObject->position().first, m_drawableObject->position().second);
     assert(0 != m_layer);
     m_layer->addLogicObject(m_logicObject);
 }
