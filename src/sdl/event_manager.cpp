@@ -1,12 +1,9 @@
 #include "event_manager.hpp"
 
 #include <core/events.hpp>
-#include <core/game.hpp>
 #include <core/input_manager.hpp>
 
 #include <SDL2/SDL.h>
-
-#include <iostream>
 
 namespace Sdl
 {
@@ -14,8 +11,6 @@ namespace Sdl
 void EventManager::catchEvent()
 {
     SDL_Event event;
-    Core::InputManager im =
-        Core::Game::getInstance()->getInputManager();
     Core::InputManager::Key k;
     if (SDL_PollEvent(&event)) {
         Core::Event* cevent = 0;
@@ -27,7 +22,7 @@ void EventManager::catchEvent()
             if (event.key.repeat != 0) {
                 break;
             }
-            k = im[event.key.keysym.scancode];
+            k = Core::InputManager::key(event.key.keysym.scancode);
             if (k == Core::InputManager::Key::None) {
                 break;
             }
@@ -38,7 +33,7 @@ void EventManager::catchEvent()
             if (event.key.repeat != 0) {
                 break;
             }
-            k = im[event.key.keysym.scancode];
+            k = Core::InputManager::key(event.key.keysym.scancode);
             if (k == Core::InputManager::Key::None) {
                 break;
             }

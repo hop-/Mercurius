@@ -21,26 +21,13 @@ public:
     };
 
 private:
-    std::map<int, Key> m_keyMap;
+    static Key m_keyMap[256];
 
 public:
-
-    InputManager();
-
-    Key operator [](int id) const
-    {
-        try {
-            return m_keyMap.at(id);
-        } catch (const std::out_of_range& e) {
-            return Key::None;
-        }
-    }
-
-    void set(Key key, int muppingValue)
-    {
-        assert(Key::None != key);
-        m_keyMap[muppingValue] = key;
-    }
+    Key operator [](int id) const;
+    static Key key(int id);
+    static void setMapping(Key key, int muppingValue);
+    static void reset();
 };
 
 } // namespace Core
