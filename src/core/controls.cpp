@@ -19,7 +19,11 @@ void Controls::remove(Event* event)
 Command* Controls::getCommand(Event* event)
 {
     assert(0 != event);
-    return m_controlMap[event];
+    try {
+        return m_controlMap.at(event);
+    } catch (const std::out_of_range& e) {
+        return 0;
+    }
 }
 
 } // namespace Core

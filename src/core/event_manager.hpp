@@ -24,20 +24,13 @@ public:
     virtual unsigned getTicks() = 0;
     Event* getEvent();
     Command* getCommand(Layer*);
+    void pop();
 
     inline void push(Event* e)
     {
         assert(0 != e);
         m_eventQueue.push(e);
     }
-
-    inline void pop()
-    {
-        if (m_eventQueue.size() > 0) {
-            m_eventQueue.pop();
-        }
-    }
-	
 };
 
 } // namespace Core

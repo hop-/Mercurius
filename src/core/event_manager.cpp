@@ -24,4 +24,13 @@ Command* EventManager::getCommand(Layer* layer)
         : layer->getCommand(m_eventQueue.front());
 }
 
+void EventManager::pop()
+{
+    if (m_eventQueue.size() > 0) {
+        Event* e = m_eventQueue.back();
+        m_eventQueue.pop();
+        delete e;
+    }
+}
+
 } // namespace core
