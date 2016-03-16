@@ -59,13 +59,14 @@ public:
         m_position.setY(y);
     }
 
-    Rectangle represent(Rectangle rectangle);
+    Rectangle represent(const Rectangle& rectangle) const;
     Rectangle scaled(float scale);
+    bool isInside(const Rectangle& rect) const;
 
-    EngineUnit xMax();
-    EngineUnit xMin();
-    EngineUnit yMax();
-    EngineUnit yMin();
+    EngineUnit xMax() const;
+    EngineUnit xMin() const;
+    EngineUnit yMax() const;
+    EngineUnit yMin() const;
 };
 
 } // namespace Core

@@ -22,6 +22,7 @@ Layer::Layer(Gui* gui, Logic* logic, Controls controls,
     assert(0 != logic);
     m_gui->setParent(this);
     m_logic->setParent(this);
+    m_gui->setViewPort(m_logic->viewPortComponent());
 }
 
 Layer::~Layer()
@@ -79,6 +80,13 @@ bool Layer::addLogicObject(LogicObject* l)
     assert(0 != m_logic);
     l->setParent(m_logic);
     return m_logic->addObject(l);
+}
+
+void Layer::aimTo(LogicObject* l)
+{
+    assert(0 != l);
+    assert(0 != m_logic);
+    m_logic->aimTo(l);
 }
 
 } // namespace Core

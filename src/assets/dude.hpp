@@ -14,8 +14,7 @@ class Dude : public Object
 public:
     Dude(const MML::Dude* d, Core::Layer* l)
         : Object(d, l)
-    {
-    }
+    {}
 
 private:
     virtual void init()

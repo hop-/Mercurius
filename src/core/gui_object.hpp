@@ -9,28 +9,24 @@
 #include <base/observer.hpp>
 
 #include <string>
-#include <cassert>
 
 namespace Core
 {
 
 class Gui;
 class LogicObject;
+class TextureRenderer;
 
 class GuiObject
     : public Base::Object
     , public Base::Observer
 {
     std::string m_textureLocation;
-    int m_width = 0;
-    int m_height = 0;
     float m_scaleFactor = 1;
     int m_priority = 0;
-    int m_x = 0;
-    int m_y = 0;
     int m_state = 0;
-//    Rectangle m_srcRect;    // not the best way
-//    Rectangle m_destRect;   // not the best way
+    Rectangle m_rect;
+    Rectangle m_realRect;
 
 protected:
     GuiObject();
@@ -43,14 +39,14 @@ public:
 
     void setDimensions(UserUnit w, UserUnit h, float scale);
 
-    inline int width() const
+    inline UserUnit width() const
     {
-        return m_width;
+        return m_realRect.width();
     }
 
-    inline int height() const
+    inline UserUnit height() const
     {
-        return m_height;
+        return m_realRect.height();
     }
 
     inline int priority() const
@@ -67,16 +63,20 @@ public:
     {
         m_priority = priority;
     }
+    void updatePosInViewPort();
 
 protected:
-    inline int x() const
+    inline const TextureRenderer* textureRenderer() const;
+    inline const Gui* guiManager() const;
+
+    inline UserUnit x() const
     {
-        return m_x;
+        return m_rect.position().x();
     }
 
-    inline int y() const
+    inline UserUnit y() const
     {
-        return m_y;
+        return m_rect.position().y();
     }
 
     inline int state() const

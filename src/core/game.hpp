@@ -35,6 +35,7 @@ public:
 
 public:
     Event* getEvent();
+    const Frame* frame() const;
 
     const InputManager& getInputManager() const
     {

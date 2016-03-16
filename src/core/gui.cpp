@@ -11,6 +11,7 @@ void Gui::draw()
 {
     assert(0 != m_frame);
     for (auto* object : children()) {
+        object->updatePosInViewPort(); // TODO must be called in other place
         frame()->prepareToDraw(object);
     }
 }

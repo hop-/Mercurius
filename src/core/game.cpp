@@ -137,6 +137,12 @@ void Game::popLayer()
     return m_layers.pop_back();
 }
 
+const Frame* Game::frame() const
+{
+    assert(0 != m_frame);
+    return m_frame;
+}
+
 Event* Game::getEvent()
 {
     assert(0 != m_eventManager);

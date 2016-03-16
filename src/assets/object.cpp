@@ -47,6 +47,9 @@ void Object::addLogicObject()
     m_logicObject->setPosition(m_drawableObject->position().first, m_drawableObject->position().second);
     assert(0 != m_layer);
     m_layer->addLogicObject(m_logicObject);
+    if (m_drawableObject->aimed()) {
+        m_layer->aimTo(m_logicObject);
+    }
 }
 
 void Object::addCollider()

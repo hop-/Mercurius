@@ -18,7 +18,7 @@ class Gui
     : public Base::ContainerObject<GuiObject>
 {
 private:
-    Rectangle* m_viewPort;
+    const Rectangle* m_viewPort;
     Frame* m_frame;
 
 private:
@@ -44,10 +44,15 @@ public:
         m_frame = frame;
     }
 
-    inline void setViewPort(Rectangle* viewPort)
+    inline void setViewPort(const Rectangle* viewPort)
     {
         assert(0 != viewPort);
         m_viewPort = viewPort;
+    }
+
+    inline const Rectangle* viewPort() const
+    {
+        return m_viewPort;
     }
 
 public:

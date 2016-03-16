@@ -64,8 +64,9 @@ public:
         return m_gui;
     }
 
-    bool addGuiObject(Core::GuiObject*);
-    bool addLogicObject(Core::LogicObject*);
+    bool addGuiObject(GuiObject*);
+    bool addLogicObject(LogicObject*);
+    void aimTo(LogicObject*);
 
     virtual void initObjectPost();
 

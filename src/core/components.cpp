@@ -1,25 +1,38 @@
 #include "components.hpp"
 #include "events.hpp"
 #include "game.hpp"
+#include "frame.hpp"
 #include "gui_object.hpp"
-#include <iostream>
 
 namespace Core
 {
 
+ViewPort::ViewPort()
+    : m_movingArea(UserUnit(15000)
+            , UserUnit(15000)
+            , Position(UserUnit(-2000), UserUnit(-3000)))    // TODO TMP for testing
+{
+    setWidth(UserUnit(Game::getInstance()->frame()->width()));
+    setHeight(UserUnit(Game::getInstance()->frame()->height()));
+}
+
 void ViewPort::target(LogicObject* object)
 {
-    m_targetObject = object;
+    assert(0 != object);
+    object->addObserver(this);
 }
 
 void ViewPort::aim()
 {
-    if (0 != m_targetObject) {
-        // TODO aim viewPort position to m_targetObject position
+    assert(0 != target());
+    Position p(target()->position().x() - middleX()
+            , target()->position().y() - middleY());
+    if (m_movingArea.isInside(Rectangle(width(), height(), p))) {
+        setPosition(p);
     }
 }
 
-void ViewPort::update()
+void ViewPort::onNotify()
 {
     aim();
 }

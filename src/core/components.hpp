@@ -5,6 +5,7 @@
 #include "position.hpp"
 #include "rectangle.hpp"
 #include "vector.hpp"
+#include "units.hpp"
 
 #include <base/subject.hpp>
 
@@ -12,17 +13,41 @@ namespace Core
 {
 
 class ViewPort
-    : LogicObject::ComponentCreator<ViewPort>
-    , Rectangle
+    : public LogicObject::ComponentCreator<ViewPort>
+    , public Rectangle
 {
-    LogicObject* m_targetObject;
+    Rectangle m_movingArea;
+
+public:
+    ViewPort();
 
 public:
     void target(LogicObject* object);
 
+    inline void setMovingArea(Rectangle area)
+    {
+        m_movingArea = area;
+    }
+
+    void onNotify();
+
 private:
     void aim();
-    void update();
+
+    inline EngineUnit middleX()
+    {
+        return (xMax() - xMin()) / 2;
+    }
+
+    inline EngineUnit middleY()
+    {
+        return (yMax() - yMin()) / 2;
+    }
+
+    inline const LogicObject* target() const
+    {
+         return static_cast<const LogicObject*>(subject());
+    }
 };
 
 class Dimensions    // for now it have no any use in codes
