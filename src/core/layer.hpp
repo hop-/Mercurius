@@ -32,6 +32,7 @@ public:
             bool stopped = false,
             bool hidden = false,
             bool ignoreEvents = false);
+    virtual ~Layer();
 
     inline const Controls& controls() const
     {

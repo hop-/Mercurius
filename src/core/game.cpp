@@ -31,6 +31,16 @@ Game* Game::getInstance(Frame* frame, EventManager* eventManager)
     return m_instance;
 }
 
+bool Game::deleteInstance()
+{
+    if (m_instance == 0) {
+        return false;
+    }
+    delete m_instance;
+    m_instance = 0;
+    return true;
+}
+
 Game::Game(Frame* frame, EventManager* eventManager)
     : m_frame(frame)
     , m_eventManager(eventManager)
@@ -47,6 +57,12 @@ Game::~Game()
     m_frame = 0;
     delete m_eventManager;
     m_eventManager = 0;
+    for (auto l : m_layers) {
+        assert(0 != l);
+        delete l;
+    }
+    m_layers.clear();
+    assert(m_layers.empty());
 }
 
 void Game::mainLoop()

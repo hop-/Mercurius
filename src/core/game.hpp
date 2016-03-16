@@ -31,6 +31,7 @@ private:
 
 public:
     static Game* getInstance(Frame* frame = 0, EventManager* eventManager = 0);
+    static bool deleteInstance();
 
 public:
     Event* getEvent();

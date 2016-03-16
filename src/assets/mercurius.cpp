@@ -22,6 +22,8 @@ void Mercurius::start()
     Core::Game* game = Core::Game::getInstance(frame, eventManager);
     loadLayers(*game, frame);
     game->start();
+    bool r = Core::Game::deleteInstance();
+    assert(r);
 }
 
 void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)

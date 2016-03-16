@@ -24,6 +24,16 @@ Layer::Layer(Gui* gui, Logic* logic, Controls controls,
     m_logic->setParent(this);
 }
 
+Layer::~Layer()
+{
+    assert(0 != m_gui);
+    assert(0 != m_logic);
+    delete m_gui;
+    m_gui = 0;
+    delete m_logic;
+    m_logic = 0;
+}
+
 void Layer::changeControls(Controls controls)
 {
     m_controls = controls;
