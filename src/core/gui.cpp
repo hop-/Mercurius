@@ -2,16 +2,23 @@
 #include "gui_object.hpp"
 #include "frame.hpp"
 
-#include <algorithm>
-
 namespace Core
 {
+
+float Gui::scale() const
+{
+    float widthScale = float(frame()->width())
+        / float(viewPort()->width());
+    float heightScale = float(frame()->height())
+        / float(viewPort()->height());
+    return (widthScale > heightScale) ? heightScale : widthScale;
+}
+
 
 void Gui::draw()
 {
     assert(0 != m_frame);
     for (auto* object : children()) {
-        object->updatePosInViewPort(); // TODO must be called in other place
         frame()->prepareToDraw(object);
     }
 }

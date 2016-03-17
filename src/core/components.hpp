@@ -15,6 +15,7 @@ namespace Core
 class ViewPort
     : public LogicObject::ComponentCreator<ViewPort>
     , public Rectangle
+    , public Base::Subject
 {
     Rectangle m_movingArea;
 

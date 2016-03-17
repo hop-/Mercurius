@@ -56,6 +56,7 @@ public:
     }
 
 public:
+    float scale() const;
     void draw();
 };
 

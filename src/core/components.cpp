@@ -2,7 +2,7 @@
 #include "events.hpp"
 #include "game.hpp"
 #include "frame.hpp"
-#include "gui_object.hpp"
+#include "logic.hpp"
 
 namespace Core
 {
@@ -20,6 +20,7 @@ void ViewPort::target(LogicObject* object)
 {
     assert(0 != object);
     object->addObserver(this);
+    onNotify();
 }
 
 void ViewPort::aim()
@@ -35,17 +36,23 @@ void ViewPort::aim()
 void ViewPort::onNotify()
 {
     aim();
+    notify();
 }
 
 void Physics::update()
 {
     Position position = parent()->position();
-    position.move(m_velocity);
-    parent()->setPosition(position);
+    if (m_velocity.magnitude() != 0) {
+        position.move(m_velocity);
+        parent()->setPosition(position);
+    }
 }
 
 void TextureRenderer::init()
 {
+    if (0 != parent()->parent()) {
+        dynamic_cast<Logic*>(parent()->parent())->addToViewPort(parent());
+    }
     notify();
 }
 

@@ -5,6 +5,7 @@
 #include <core/gui.hpp>
 #include <core/frame.hpp>
 #include <core/position.hpp>
+#include <core/units.hpp>
 
 #include <SDL2/SDL_image.h>
 
@@ -12,6 +13,19 @@
 
 namespace Sdl
 {
+
+namespace
+{
+
+SDL_Rect toSDL(Core::Rectangle rectangle, float scale, float scaleRect)
+{
+    return SDL_Rect{int(float(rectangle.position().x()) * scale)
+        , int(float(rectangle.position().y()) * scale)
+        , int(float(rectangle.width()) * scale * scaleRect)
+        , int(float(rectangle.height()) * scale * scaleRect)};
+}
+
+}
 
 void GuiObject::init()
 {
@@ -24,9 +38,6 @@ void GuiObject::init()
             textureLocation().c_str());
     assert(m_texture.texture);
     m_texture.sourceRect = SDL_Rect{0, 0, width(), height()};
-    m_texture.destinationRect = SDL_Rect{0, 0
-        , int(width() * scaleFactor())
-        , int(height() * scaleFactor())};
     assert(0 != subject());
 }
 
@@ -39,9 +50,7 @@ void GuiObject::onNotify()
 
 void GuiObject::updateDestRect()
 {
-    //Core::Position objectPosition = m_textureRederer->objectPosition();
-    m_texture.destinationRect.x = x();
-    m_texture.destinationRect.y = y();
+    m_texture.destinationRect = toSDL(rect(), scale(), scaleFactor());
 }
 
 void GuiObject::changeSourceRect()

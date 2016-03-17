@@ -26,6 +26,7 @@ public:
     void aimTo(LogicObject* l);
     const LogicObject* viewPort() const;
     const ViewPort* viewPortComponent() const;
+    void addToViewPort(LogicObject* object);
 
 private:
     void createViewPortObject();

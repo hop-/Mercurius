@@ -26,7 +26,6 @@ class GuiObject
     int m_priority = 0;
     int m_state = 0;
     Rectangle m_rect;
-    Rectangle m_realRect;
 
 protected:
     GuiObject();
@@ -36,17 +35,24 @@ public:
 
 public:
     void onNotify();
-
     void setDimensions(UserUnit w, UserUnit h, float scale);
+    Rectangle rect() const;
+    float scale() const;
+
+    inline const Rectangle& realRect() const
+    {
+        return m_rect;
+    }
 
     inline UserUnit width() const
     {
-        return m_realRect.width();
+        return m_rect.width();
     }
+
 
     inline UserUnit height() const
     {
-        return m_realRect.height();
+        return m_rect.height();
     }
 
     inline int priority() const
@@ -63,7 +69,6 @@ public:
     {
         m_priority = priority;
     }
-    void updatePosInViewPort();
 
 protected:
     inline const TextureRenderer* textureRenderer() const;

@@ -1,7 +1,7 @@
 #include "logic.hpp"
 #include "event.hpp"
-#include "game.hpp"
 #include "components.hpp"
+#include "game.hpp"
 
 #include <cassert>
 
@@ -39,6 +39,15 @@ const LogicObject* Logic::viewPort() const
 {
     assert(0 != m_viewPort);
     return m_viewPort;
+}
+
+void Logic::addToViewPort(LogicObject* object)
+{
+    assert(0 != object);
+    TextureRenderer* objectTR = object->component<TextureRenderer>();
+    if (0 != objectTR) {
+        m_viewPort->component<ViewPort>()->addObserver(objectTR);
+    }
 }
 
 const ViewPort* Logic::viewPortComponent() const

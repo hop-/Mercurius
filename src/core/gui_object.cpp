@@ -11,21 +11,25 @@ GuiObject::GuiObject(){}
 
 void GuiObject::setDimensions(UserUnit w, UserUnit h, float scale)
 {
-    m_realRect.setWidth(w);
-    m_realRect.setHeight(h);
+    m_rect.setWidth(w);
+    m_rect.setHeight(h);
     m_scaleFactor = scale;
 }
 
 void GuiObject::onNotify()
 {
-    m_realRect.setPosition(textureRenderer()->objectPosition());
+    m_rect.setPosition(textureRenderer()->objectPosition());
     m_state = textureRenderer()->state();
 }
 
-void GuiObject::updatePosInViewPort()
+float GuiObject::scale() const
 {
-    m_rect = guiManager()->viewPort()->represent(m_realRect);
-    onNotify(); // TODO wrong place just for test
+    return guiManager()->scale();
+}
+
+Rectangle GuiObject::rect() const
+{
+    return guiManager()->viewPort()->represent(m_rect);
 }
 
 const TextureRenderer* GuiObject::textureRenderer() const
