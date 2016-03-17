@@ -31,6 +31,17 @@ getInstance()
     return m_instance;
 }
 
+bool MMLParser::
+deleteInstance()
+{
+    if (m_instance == 0) {
+        return false;
+    }
+    delete m_instance;
+    m_instance = 0;
+    return true;
+}
+
 MMLParser::
 MMLParser()
 {

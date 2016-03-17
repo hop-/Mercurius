@@ -15,7 +15,8 @@ class Frame
     SDL_Renderer* m_renderer;
 
 public:
-    ~Frame();
+    Frame();
+    virtual ~Frame();
     void init();
     void clear();
 

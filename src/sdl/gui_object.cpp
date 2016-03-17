@@ -37,7 +37,7 @@ void GuiObject::init()
     m_texture.texture = IMG_LoadTexture(renderer,
             textureLocation().c_str());
     assert(m_texture.texture);
-    m_texture.sourceRect = SDL_Rect{0, 0, width(), height()};
+    m_texture.sourceRect = SDL_Rect{0, 0, (int)width(), (int)height()};
     assert(0 != subject());
 }
 

@@ -27,16 +27,28 @@ SDL_WindowFlags toSDLScreenMode(Core::Frame::ScreenMode m)
 
 } // unnamed namespace
 
+Frame::Frame()
+    : Core::Frame()
+    , m_window(0)
+    , m_renderer(0)
+{
+}
+
 Frame::~Frame()
 {
+    assert(0 != m_window);
     SDL_DestroyWindow(m_window);
     m_window = 0;
+    assert(0 != m_renderer);
     SDL_DestroyRenderer(m_renderer);
     m_renderer = 0;
+    SDL_Quit(); // This call may be risky need further investigation
 }
 
 void Frame::init()
 {
+    assert(0 == m_window);
+    assert(0 == m_renderer);
     // TODO check SDL_Init(SDL_INIT_VIDEO) == 0 for success
     m_window = SDL_CreateWindow("Mercurius :P" // TODO title
             , SDL_WINDOWPOS_UNDEFINED
@@ -44,7 +56,7 @@ void Frame::init()
             , width()
             , height()
             , toSDLScreenMode(screenMode()));
-    // TODO check for m_window != 0
+    assert(0 != m_window);
     m_renderer = SDL_CreateRenderer(m_window
             , -1
             , SDL_RENDERER_ACCELERATED);

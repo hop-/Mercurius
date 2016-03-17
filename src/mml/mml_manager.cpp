@@ -24,6 +24,17 @@ getInstance()
     return m_instance;
 }
 
+bool MMLManager::
+deleteInstance()
+{
+    if (m_instance == 0) {
+        return false;
+    }
+    delete m_instance;
+    m_instance = 0;
+    return true;
+}
+
 MMLManager::
 MMLManager()
      : m_registery(new MMLRegistery())
@@ -36,7 +47,26 @@ MMLManager::
 ~MMLManager()
 {
     cleanTypeRegistery();
-    // TODO delete registeries and mml objects
+    assert(0 != m_layer_registery);
+    assert(0 != m_registery);
+    std::vector<MMLObject*> layers;
+    std::for_each(m_layer_registery->begin(),
+                  m_layer_registery->end(),
+                  [&](MMLObject* o) {
+                        assert(0 != o);
+                        layers.push_back(o);
+                  });
+    std::for_each(layers.begin(),
+                  layers.end(),
+                  [](MMLObject* o) {
+                        assert(0 != o);
+                        delete o;
+                  });
+    delete m_layer_registery;
+    m_layer_registery = 0;
+    delete m_registery;
+    m_registery = 0;
+    MMLParser::deleteInstance();
 }
 
 bool MMLManager::

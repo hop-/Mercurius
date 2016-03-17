@@ -16,6 +16,7 @@ private:
 
 public:
     static MMLParser* getInstance();
+    static bool deleteInstance();
 
 public:
     MMLParser();

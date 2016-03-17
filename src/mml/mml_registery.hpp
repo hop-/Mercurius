@@ -3,6 +3,7 @@
 
 #include "mml_object.hpp"
 
+#include <algorithm>
 #include <set>
 #include <cassert>
 
@@ -51,6 +52,13 @@ public:
     iterator end()
     {
         return m_objects.end();
+    }
+
+public:
+    ~MMLRegistery()
+    {
+        m_objects.clear();
+        assert(m_objects.empty());
     }
 };
 
