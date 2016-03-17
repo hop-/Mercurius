@@ -1,6 +1,5 @@
 #include "components.hpp"
 #include "events.hpp"
-#include "game.hpp"
 #include "frame.hpp"
 #include "logic.hpp"
 
@@ -12,8 +11,8 @@ ViewPort::ViewPort()
             , UserUnit(15000)
             , Position(UserUnit(-2000), UserUnit(-3000)))    // TODO TMP for testing
 {
-    setWidth(UserUnit(Game::getInstance()->frame()->width()));
-    setHeight(UserUnit(Game::getInstance()->frame()->height()));
+    setWidth(UserUnit(1200));
+    setHeight(UserUnit(900));
 }
 
 void ViewPort::target(LogicObject* object)
