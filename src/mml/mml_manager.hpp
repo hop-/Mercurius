@@ -24,6 +24,7 @@ private:
 
 public:
     static MMLManager* getInstance();
+    static bool deleteInstance();
 
 public:
     MMLManager();
