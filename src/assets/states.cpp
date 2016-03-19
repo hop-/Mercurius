@@ -1,4 +1,5 @@
 #include "states.hpp"
+#include "commands.hpp"
 
 #include <core/events.hpp>
 #include <core/logic_object.hpp>
@@ -29,9 +30,20 @@ void Standing::process(Core::Event* e)
 
 void Standing::init()
 {
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    assert(0 != p);
-    p->component<Core::Physics>()->setVelocity(Core::Vector(0, 0));
+    // TODO change texture state
+}
+
+Core::Command* Standing::command() const
+{
+    assert(0 != parent<Core::LogicObject>());
+    Core::Physics* ph =
+        parent<Core::LogicObject>()->component<Core::Physics>();
+    Core::Vector v;
+    if (0 != ph) {
+        v = ph->velocity();
+        v.setAngle(v.angle() + 180);
+    }
+    return new Accelerate(parent<Core::LogicObject>(), v);
 }
 
 void RunningLeft::process(Core::Event* e)
@@ -54,9 +66,13 @@ void RunningLeft::process(Core::Event* e)
 
 void RunningLeft::init()
 {
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    assert(0 != p);
-    p->component<Core::Physics>()->setVelocity(Core::Vector(500, 180));
+    // TODO change texture state
+}
+
+Core::Command* RunningLeft::command() const
+{
+    return new Accelerate(parent<Core::LogicObject>()
+            , Core::Vector(1, 180));
 }
 
 void RunningRight::process(Core::Event* e)
@@ -79,9 +95,13 @@ void RunningRight::process(Core::Event* e)
 
 void RunningRight::init()
 {
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    assert(0 != p);
-    p->component<Core::Physics>()->setVelocity(Core::Vector(500, 0));
+    // TODO change texture state
+}
+
+Core::Command* RunningRight::command() const
+{
+    return new Accelerate(parent<Core::LogicObject>()
+            , Core::Vector(1, 0));
 }
 
 } // namespace Assets

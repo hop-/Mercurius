@@ -26,9 +26,11 @@ public:
         return m_y;
     }
 
-    EngineUnit magnitude();
-    float angle();
-    float angleInRadians();
+    EngineUnit magnitude() const;
+    float angle() const;
+    float angleInRadians() const;
+    void setAngle(float angle);
+
     Vector& operator+=(const Vector& vector);
     Vector& operator*=(const float& multiplier);
 };

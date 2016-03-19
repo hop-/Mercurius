@@ -7,6 +7,7 @@ namespace Core
 {
 
 class Event;
+class Command;
 
 class State
     : public Base::Object
@@ -14,6 +15,7 @@ class State
 public:
     virtual void init() = 0;
     virtual void process(Event* e) = 0;
+    virtual Command* command() const = 0;
 };
 
 } // namespace Core

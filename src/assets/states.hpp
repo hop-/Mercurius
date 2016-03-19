@@ -17,6 +17,7 @@ class Standing
 public:
     virtual void init();
     void process(Core::Event* e);
+    Core::Command* command() const;
 };
 
 class RunningLeft
@@ -25,6 +26,7 @@ class RunningLeft
 public:
     virtual void init();
     void process(Core::Event* e);
+    Core::Command* command() const;
 };
 
 class RunningRight
@@ -33,6 +35,7 @@ class RunningRight
 public:
     virtual void init();
     void process(Core::Event* e);
+    Core::Command* command() const;
 };
 
 } // namespace Assets

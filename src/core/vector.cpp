@@ -17,23 +17,30 @@ Vector::Vector()
 {}
 
 Vector::Vector(EngineUnit magnitude, float angle)
-    : m_x(magnitude* std::cos(angle *_PI / 180))
-    , m_y(magnitude* std::sin(angle *_PI / 180))
+    : m_x(magnitude * std::cos(angle *_PI / 180))
+    , m_y(magnitude * std::sin(angle *_PI / 180))
 {}
 
-EngineUnit Vector::magnitude()
+EngineUnit Vector::magnitude() const
 {
     return std::sqrt(m_x*m_x + m_y*m_y);
 }
 
-float Vector::angle()
+float Vector::angle() const
 {
     return angleInRadians() * 180 / _PI;
 }
 
-float Vector::angleInRadians()
+float Vector::angleInRadians() const
 {
     return std::atan2(engineUnit(m_y), engineUnit(m_x));
+}
+
+void Vector::setAngle(float angle)
+{
+    EngineUnit m = magnitude();
+    m_x = m * std::cos(angle *_PI / 180);
+    m_y = m * std::sin(angle *_PI / 180);
 }
 
 Vector& Vector::operator+=(const Vector& vector)

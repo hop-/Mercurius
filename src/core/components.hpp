@@ -87,6 +87,16 @@ class Physics
     Vector m_velocity;
 
 public:
+    inline int mass() const
+    {
+        return m_mass;
+    }
+
+    inline Vector velocity()
+    {
+        return m_velocity;
+    }
+
     inline void setMass(int mass)
     {
         m_mass = mass;
