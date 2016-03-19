@@ -104,7 +104,7 @@ public:
     }
 
     template <class T>
-    inline T* component()
+    inline T* component() const
     {
         // TODO assert(static) if not exist T::type;
         try {

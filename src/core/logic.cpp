@@ -23,6 +23,7 @@ void Logic::update()
         assert(0 != object);
         object->update();
     }
+    // m_sweepLine.getPairs()
 }
 
 
@@ -55,6 +56,13 @@ const ViewPort* Logic::viewPortComponent() const
     assert(0 != m_viewPort);
     assert(0 != m_viewPort->component<ViewPort>());
     return m_viewPort->component<ViewPort>();
+}
+
+void Logic::onObjectAdding(const LogicObject* object)
+{
+    if (object->component<Collider>() != 0) {
+        m_sweepLine.insert(object);
+    }
 }
 
 void Logic::createViewPortObject()

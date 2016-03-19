@@ -18,6 +18,8 @@ private:
     Children m_children;
 
 public:
+    virtual void onObjectAdding(const C* o) {}
+
     bool addObject(C* o)
     {
         assert(0 != o);
@@ -27,8 +29,11 @@ public:
         }
         o->setParent(this);
         m_children.push_back(o);
+        onObjectAdding(o);
         return true;
     }
+
+    virtual void onObjectRemoving(const C* o) {}
 
     bool removeObject(const C* o)
     {
@@ -39,6 +44,7 @@ public:
         if (m_children.end() == i) {
                 return false;
         }
+        onObjectRemoving(o);
         m_children.erase(i);
         return true;
     }

@@ -16,7 +16,7 @@ namespace Core
 int SweepLine::RectangleEdge::m_currentIndex = 0;
 
 SweepLine::RectangleEdge::RectangleEdge(int index
-        , LogicObject* object, EngineUnit position, bool isBegin)
+        , const LogicObject* object, EngineUnit position, bool isBegin)
     : m_index(index)
     , m_object(object)
     , m_position(position)
@@ -24,7 +24,7 @@ SweepLine::RectangleEdge::RectangleEdge(int index
 {}
 
 void SweepLine::RectangleEdge::generate(SweepLine& parent
-        , LogicObject* object)
+        , const LogicObject* object)
 {
     assert(0 != object);
     parent.insert(RectangleEdge(m_currentIndex, object
@@ -36,7 +36,7 @@ void SweepLine::RectangleEdge::generate(SweepLine& parent
 
 // SweepLine::Interval
 
-SweepLine::Interval::Interval(int nIndex, LogicObject* nObject
+SweepLine::Interval::Interval(int nIndex, const LogicObject* nObject
         , EngineUnit nMin, EngineUnit nMax)
     : index(nIndex)
     , object(nObject)
@@ -60,7 +60,7 @@ SweepLine::SweepLine()
 SweepLine::~SweepLine()
 {}
 
-void SweepLine::insert(LogicObject* object)
+void SweepLine::insert(const LogicObject* object)
 {
     assert(0 != object);
     RectangleEdge::generate(*this, object);
@@ -76,10 +76,13 @@ void SweepLine::insert(const RectangleEdge& object)
 
 SweepLine::LogicObjectPairVector SweepLine::getPairs()
 {
+    LogicObjectPairVector returnPairs;
+    if (m_objects.size() == 0) {
+        return returnPairs;
+    }
     if (!m_sorted) {
         sort();
     }
-    LogicObjectPairVector returnPairs;
     std::set<Interval> intervals;
     for (const auto& edge : m_objects) {
         Interval objectInterval(edge.index()
@@ -114,6 +117,8 @@ void SweepLine::quickSort(int left, int right)
 {
     int i = left;
     int j = right;
+    assert(int(m_objects.size()) < (left + right) / 2);
+    assert(0 >= (left + right) / 2);
     EngineUnit pivotValue = m_objects[(left + right) / 2].position();
     while (i <= j) {
         while (m_objects[i].position() < pivotValue) {

@@ -3,6 +3,7 @@
 
 #include "logic_object.hpp"
 #include "components.hpp"
+#include "sweep_line.hpp"
 
 #include <base/container_object.hpp>
 
@@ -18,6 +19,8 @@ class Logic
     : public Base::ContainerObject<LogicObject>
 {
     LogicObject* m_viewPort;
+    SweepLine m_sweepLine;
+
 public:
     Logic();
     virtual ~Logic();
@@ -27,6 +30,7 @@ public:
     const LogicObject* viewPort() const;
     const ViewPort* viewPortComponent() const;
     void addToViewPort(LogicObject* object);
+    void onObjectAdding(const LogicObject* object);
 
 private:
     void createViewPortObject();

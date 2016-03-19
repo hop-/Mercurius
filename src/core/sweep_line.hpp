@@ -14,7 +14,8 @@ class LogicObject;
 class SweepLine
 {
 public:
-    using LogicObjectPair = std::pair<LogicObject*, LogicObject*>;
+    using LogicObjectPair = std::pair<const LogicObject*
+        , const LogicObject*>;
     using LogicObjectPairVector = std::vector<LogicObjectPair>;
 
 private:
@@ -22,19 +23,19 @@ private:
     {
         static int m_currentIndex;
         int m_index;
-        LogicObject* m_object;
+        const LogicObject* m_object;
         EngineUnit m_position;
         bool m_begin;
 
     public:
-        static void generate(SweepLine& parent, LogicObject* object);
+        static void generate(SweepLine& parent, const LogicObject* object);
 
         inline int index() const
         {
             return m_index;
         }
 
-        inline LogicObject* object() const
+        inline const LogicObject* object() const
         {
             return m_object;
         }
@@ -55,7 +56,7 @@ private:
         }
 
     private:
-        RectangleEdge(int index, LogicObject* object
+        RectangleEdge(int index, const LogicObject* object
                 , EngineUnit position, bool isBegin);
     };
 
@@ -63,11 +64,11 @@ private:
     struct Interval
     {
         const int index;
-        LogicObject* const object;
+        const LogicObject* const object;
         const EngineUnit min;
         const EngineUnit max;
 
-        Interval(int nIndex, LogicObject* nObject
+        Interval(int nIndex, const LogicObject* nObject
                 , EngineUnit nMin, EngineUnit nMax);
         bool intersect(const Interval& interval) const;
 
@@ -83,7 +84,7 @@ private:
     };
 
 private:
-    std::vector<RectangleEdge> m_objects; 
+    std::vector<RectangleEdge> m_objects;
     bool m_sorted;
 
 public:
@@ -91,7 +92,7 @@ public:
     ~SweepLine();
 
 public:
-    void insert(LogicObject* object);
+    void insert(const LogicObject* object);
     LogicObjectPairVector getPairs();
 
 private:
