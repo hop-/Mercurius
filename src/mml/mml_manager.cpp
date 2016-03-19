@@ -13,31 +13,13 @@
 namespace MML
 {
 
-MMLManager* MMLManager::m_instance = 0;
-
-MMLManager* MMLManager::
-getInstance()
-{
-    if (m_instance == 0) {
-        m_instance = new MMLManager();
-    }
-    return m_instance;
-}
-
-bool MMLManager::
-deleteInstance()
-{
-    if (m_instance == 0) {
-        return false;
-    }
-    delete m_instance;
-    m_instance = 0;
-    return true;
-}
+template<>
+MMLManager* Base::Singleton<MMLManager>::m_s_instance = 0;
 
 MMLManager::
 MMLManager()
-     : m_registery(new MMLRegistery())
+     : Base::Singleton<MMLManager>()
+     , m_registery(new MMLRegistery())
      , m_layer_registery(new MMLRegistery())
 {
     registerTypes();

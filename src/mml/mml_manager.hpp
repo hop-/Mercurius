@@ -3,6 +3,8 @@
 
 #include "mml_object.hpp"
 
+#include <base/singleton.hpp>
+
 #include <map>
 #include <string>
 
@@ -11,10 +13,8 @@ namespace MML
 
 class MMLRegistery;
 
-class MMLManager
+class MMLManager : public Base::Singleton<MMLManager>
 {
-    static MMLManager* m_instance;
-
 private:
     MMLRegistery* m_registery;
     MMLRegistery* m_layer_registery;
@@ -22,13 +22,9 @@ private:
     typedef std::map<std::string, Factory*> Types;
     Types m_types;
 
-public:
-    static MMLManager* getInstance();
-    static bool deleteInstance();
-
-public:
+private:
     MMLManager();
-    ~MMLManager();
+    virtual ~MMLManager();
 
 public:
     bool loadData(const std::string&);
@@ -51,6 +47,7 @@ private:
     MMLManager& operator=(const MMLManager&) = delete;
 
     friend class MMLParser;
+    friend class Base::Singleton<MMLManager>;
 };
 
 } // namespace MML

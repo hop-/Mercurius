@@ -20,30 +20,12 @@ static const char open_value = ':';
 static const char close_value = ';';
 static const char comma_value = ',';
 
-MMLParser* MMLParser::m_instance = 0;
-
-MMLParser* MMLParser::
-getInstance()
-{
-    if (m_instance == 0) {
-        m_instance = new MMLParser();
-    }
-    return m_instance;
-}
-
-bool MMLParser::
-deleteInstance()
-{
-    if (m_instance == 0) {
-        return false;
-    }
-    delete m_instance;
-    m_instance = 0;
-    return true;
-}
+template<>
+MMLParser* Base::Singleton<MMLParser>::m_s_instance = 0;
 
 MMLParser::
 MMLParser()
+    : Base::Singleton<MMLParser>()
 {
 }
 

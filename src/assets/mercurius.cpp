@@ -26,6 +26,8 @@ void Mercurius::start()
     assert(r);
     r = MML::MMLManager::deleteInstance();
     assert(r);
+    r = TypeManager::deleteInstance();
+    assert(r);
 }
 
 void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)

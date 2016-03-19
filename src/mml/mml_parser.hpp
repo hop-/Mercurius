@@ -1,6 +1,8 @@
 #ifndef _MML_MMLPARSER_HPP
 #define _MML_MMLPARSER_HPP
 
+#include <base/singleton.hpp>
+
 #include <string>
 
 namespace MML
@@ -9,16 +11,9 @@ namespace MML
 class MMLObject;
 class MMLAttribute;
 
-class MMLParser
+class MMLParser : public Base::Singleton<MMLParser>
 {
 private:
-    static MMLParser* m_instance;
-
-public:
-    static MMLParser* getInstance();
-    static bool deleteInstance();
-
-public:
     MMLParser();
     ~MMLParser();
 
@@ -38,6 +33,8 @@ private:
 private:
     MMLParser(const MMLParser&) = delete;
     MMLParser& operator=(const MMLParser&) = delete;
+
+    friend class Base::Singleton<MMLParser>;
 };
 
 } // namespace MML

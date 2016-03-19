@@ -5,17 +5,11 @@
 namespace Assets
 {
 
-TypeManager* TypeManager::m_instance = 0;
-
-TypeManager* TypeManager::getInstance()
-{
-    if (m_instance == 0) {
-        m_instance = new TypeManager();
-    }
-    return m_instance;
-}
+template <>
+TypeManager* Base::Singleton<TypeManager>::m_s_instance = 0;
 
 TypeManager::TypeManager()
+    : Base::Singleton<TypeManager>()
 {
     registerTypes();
 }
