@@ -17,9 +17,10 @@ private:
     typedef std::vector<C*> Children;
     Children m_children;
 
-public:
+protected:
     virtual void onObjectAdding(const C* o) {}
 
+public:
     bool addObject(C* o)
     {
         assert(0 != o);

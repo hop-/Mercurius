@@ -26,7 +26,7 @@ void LogicObject::addComponent(Component* component)
     assert(component != 0);
     component->setParent(this); // automatically set parent
     addObserver(component);
-    m_components.insert(std::pair<int, Component*>(component->getType()
+    m_components.insert(Components::value_type(component->getType()
                 , component));
 }
 
@@ -41,6 +41,7 @@ void LogicObject::addState(State* newState)
 {
     bool status = addObject(newState);
     assert(status);
+    assert(0 != newState);
     newState->init();
 }
 

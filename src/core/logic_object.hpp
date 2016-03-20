@@ -107,11 +107,11 @@ public:
     inline T* component() const
     {
         // TODO assert(static) if not exist T::type;
-        try {
-            return static_cast<T*>(m_components.at(T::type));
-        } catch (const std::out_of_range& e) {
+        Components::const_iterator i = m_components.find(T::type);
+        if (i == m_components.end()) {
             return 0;
         }
+        return static_cast<T*>(i->second);
     }
 };
 
