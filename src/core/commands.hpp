@@ -1,18 +1,13 @@
 #ifndef _ASSETS_COMMANDS_HPP_
 #define _ASSETS_COMMANDS_HPP_
 
-#include <core/command.hpp>
-#include <core/vector.hpp>
+#include "command.hpp"
+#include "vector.hpp"
 
 namespace Core
 {
 
 class LogicObject;
-
-} // namespace Core
-
-namespace Assets
-{
 
 class Accelerate
     : public Core::Command
@@ -25,6 +20,6 @@ public:
     void execute();
 };
 
-} // namespace Assets
+} // namespace Core
 
-#endif //_ASSETS_COMMANDS_HPP_
+#endif //_CORE_COMMANDS_HPP_

@@ -30,11 +30,11 @@ public:
     const LogicObject* viewPort() const;
     const ViewPort* viewPortComponent() const;
     void addToViewPort(LogicObject* object);
-    void onObjectAdding(const LogicObject* object);
     void updateSweepLine(const LogicObject* object);
 
 private:
     void createViewPortObject();
+    void onObjectAdding(const LogicObject* object);
 };
 
 } // namespace Core

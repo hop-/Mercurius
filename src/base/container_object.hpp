@@ -19,6 +19,7 @@ private:
 
 protected:
     virtual void onObjectAdding(const C* o) {}
+    virtual void onObjectRemoving(const C* o) {}
 
 public:
     bool addObject(C* o)
@@ -33,8 +34,6 @@ public:
         onObjectAdding(o);
         return true;
     }
-
-    virtual void onObjectRemoving(const C* o) {}
 
     bool removeObject(const C* o)
     {

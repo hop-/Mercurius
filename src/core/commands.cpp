@@ -1,11 +1,10 @@
 #include "commands.hpp"
-
-#include <core/logic_object.hpp>
-#include <core/components.hpp>
+#include "logic_object.hpp"
+#include "components.hpp"
 
 #include <cassert>
 
-namespace Assets
+namespace Core
 {
 
 Accelerate::Accelerate(Core::LogicObject* object, Core::Vector acceleration)
@@ -22,4 +21,4 @@ void Accelerate::execute()
     }
 }
 
-} // namespace Assets
+} // namespace Core

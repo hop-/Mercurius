@@ -26,7 +26,6 @@ void Logic::update()
     m_sweepLine.run();
 }
 
-
 Logic::Logic()
 {
     createViewPortObject();

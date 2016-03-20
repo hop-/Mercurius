@@ -2,8 +2,8 @@
 #define _ASSETS_DUDE_HPP_
 
 #include "object.hpp"
-#include "states.hpp"
 
+#include <core/states.hpp>
 #include <mml/dude.hpp>
 
 namespace Assets
@@ -21,7 +21,7 @@ private:
     {
         addCollider();
         addPhysics();
-        addState(new Standing);
+        addState(new Core::Standing);
     }
 };
 

@@ -1,13 +1,12 @@
 #include "states.hpp"
 #include "commands.hpp"
+#include "events.hpp"
+#include "logic_object.hpp"
+#include "components.hpp"
+#include "vector.hpp"
+#include "input_manager.hpp"
 
-#include <core/events.hpp>
-#include <core/logic_object.hpp>
-#include <core/components.hpp>
-#include <core/vector.hpp>
-#include <core/input_manager.hpp>
-
-namespace Assets
+namespace Core
 {
 
 void Standing::process(Core::Event* e)
@@ -104,4 +103,4 @@ Core::Command* RunningRight::command() const
             , Core::Vector(1, 0));
 }
 
-} // namespace Assets
+} // namespace Core

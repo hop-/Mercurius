@@ -1,15 +1,12 @@
-#ifndef _ASSETS_STATES_HPP_
-#define _ASSETS_STATES_HPP_
+#ifndef _CORE_STATES_HPP_
+#define _CORE_STATES_HPP_
 
-#include <core/state.hpp>
+#include "state.hpp"
 
 namespace Core
 {
-class Event;
-}
 
-namespace Assets
-{
+class Event;
 
 class Standing
     : public Core::State
@@ -38,6 +35,6 @@ public:
     Core::Command* command() const;
 };
 
-} // namespace Assets
+} // namespace Core
 
-#endif //_ASSETS_STATES_HPP_
+#endif //_CORE_STATES_HPP_
