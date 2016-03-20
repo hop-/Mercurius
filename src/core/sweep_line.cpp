@@ -9,6 +9,7 @@
 #include <set>
 #include <cmath>
 #include <cassert>
+#include <algorithm>
 
 namespace Core
 {
@@ -175,14 +176,21 @@ SweepLine::LogicObjectPairs SweepLine::getPairs()
 
 void SweepLine::sort()
 {
-    quickSort(0, m_objects.size());
+    //quickSort(0, m_objects.size());
+    std::sort(m_objects.begin(), m_objects.end()
+            , [](const RectangleEdge& a, const RectangleEdge& b) -> bool
+            {
+                return a.position() < b.position();
+            });
     m_sorted = true;
 }
 
+// the dunction have no any use.
 void SweepLine::quickSort(int left, int right)
 {
     int i = left;
     int j = right;
+    assert(i != j);
     assert(int(m_objects.size()) > (left + right) / 2);
     assert(0 <= (left + right) / 2);
     EngineUnit pivotValue = m_objects[(left + right) / 2].position();
