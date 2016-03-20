@@ -29,6 +29,7 @@ float GuiObject::scale() const
 
 Rectangle GuiObject::rect() const
 {
+    assert(0 != guiManager()->viewPort());
     return guiManager()->viewPort()->represent(m_rect);
 }
 

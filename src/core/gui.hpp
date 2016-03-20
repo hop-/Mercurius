@@ -27,7 +27,8 @@ private:
 
 public:
     Gui()
-        : m_frame(0)
+        : m_viewPort(0)
+        , m_frame(0)
     {
     }
     virtual ~Gui();

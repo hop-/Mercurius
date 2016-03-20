@@ -40,6 +40,7 @@ void ViewPort::onNotify()
 
 void Physics::update()
 {
+    assert(0 != parent());
     Position position = parent()->position();
     if (m_velocity.magnitude() != 0) {
         position.move(m_velocity);
@@ -49,11 +50,14 @@ void Physics::update()
 
 void Collider::onNotify()
 {
+    assert(0 != parent());
+    assert(0 != parent()->parent());
     dynamic_cast<Logic*>(parent()->parent())->updateSweepLine(parent());
 }
 
 void TextureRenderer::init()
 {
+    assert(0 != parent());
     if (0 != parent()->parent()) {
         dynamic_cast<Logic*>(parent()->parent())->addToViewPort(parent());
     }
@@ -62,6 +66,7 @@ void TextureRenderer::init()
 
 void TextureRenderer::onNotify()
 {
+    assert(0 != parent());
     m_position = parent()->position();
     notify();
 }
