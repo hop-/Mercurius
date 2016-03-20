@@ -31,6 +31,7 @@ public:
     const ViewPort* viewPortComponent() const;
     void addToViewPort(LogicObject* object);
     void onObjectAdding(const LogicObject* object);
+    void updateSweepLine(const LogicObject* object);
 
 private:
     void createViewPortObject();

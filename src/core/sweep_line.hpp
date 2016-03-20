@@ -5,6 +5,7 @@
 #include "rectangle.hpp"
 
 #include <vector>
+#include <list>
 
 namespace Core
 {
@@ -16,7 +17,7 @@ class SweepLine
 public:
     using LogicObjectPair = std::pair<const LogicObject*
         , const LogicObject*>;
-    using LogicObjectPairVector = std::vector<LogicObjectPair>;
+    using LogicObjectPairs = std::list<LogicObjectPair>;
 
 private:
     class RectangleEdge
@@ -79,12 +80,14 @@ private:
 
         inline bool operator<(const Interval& cmp) const
         {
-            return min < cmp.min;
+            return index < cmp.index;
         }
     };
 
 private:
-    std::vector<RectangleEdge> m_objects;
+    using RectEdges = std::vector<RectangleEdge>;
+    RectEdges m_objects;
+    LogicObjectPairs m_pairs;
     bool m_sorted;
 
 public:
@@ -93,7 +96,10 @@ public:
 
 public:
     void insert(const LogicObject* object);
-    LogicObjectPairVector getPairs();
+    void update(const LogicObject* object);
+    bool remove(const LogicObject* object);
+    LogicObjectPairs getPairs();
+    void run();
 
 private:
     void insert(const RectangleEdge& object);

@@ -30,6 +30,12 @@ public:
     Object(const MML::DrawableObject*, Core::Layer*);
 
 protected:
+    void init()
+    {
+        addLogicObject();
+        addGuiObject();
+    }
+    virtual void setupLogicObject() = 0;
     void addGuiObject();
     void addLogicObject();
     void addCollider();

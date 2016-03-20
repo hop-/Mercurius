@@ -131,6 +131,8 @@ class Collider
     EngineUnit m_height;
 
 public:
+    void onNotify();
+
     inline Rectangle rect() const
     {
         return Rectangle(m_width, m_height, parent()->position());

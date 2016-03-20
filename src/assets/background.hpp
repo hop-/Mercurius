@@ -17,11 +17,8 @@ public:
     }
 
 private:
-    virtual void init()
-    {
-        addLogicObject();
-        addGuiObject();
-    }
+    void setupLogicObject()
+    {}
 
 };
 

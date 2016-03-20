@@ -7,6 +7,8 @@
 namespace Core
 {
 
+class LogicObject;
+
 class KeyEvent
     : public EventCreator<KeyEvent>
 {
@@ -78,14 +80,50 @@ public:
         return m_mode;
     }
 
-private: 
+private:
+    bool less(Base::TypedBase* obj);
+};
+
+class ObjectCollision
+    : public EventCreator<ObjectCollision>
+{
+public:
+    using ObjectPair = std::pair<const LogicObject*, const LogicObject*>;
+    enum class Status {Collided, NotCollided};
+
+private:
+    ObjectPair m_objects;
+    Status m_status;
+
+public:
+    ObjectCollision(ObjectPair pair, Status status)
+        : m_objects(pair)
+        , m_status(status)
+    {}
+
+    inline const LogicObject* first() const
+    {
+        return m_objects.first;
+    }
+
+    inline const LogicObject* second() const
+    {
+        return m_objects.second;
+    }
+
+    inline Status status() const
+    {
+        return m_status;
+    }
+
+private:
     bool less(Base::TypedBase* obj);
 };
 
 class QuitEvent
     : public EventCreator<QuitEvent>
 {
-private: 
+private:
     bool less(Base::TypedBase* obj);
 };
 

@@ -47,6 +47,11 @@ void Physics::update()
     }
 }
 
+void Collider::onNotify()
+{
+    dynamic_cast<Logic*>(parent()->parent())->updateSweepLine(parent());
+}
+
 void TextureRenderer::init()
 {
     if (0 != parent()->parent()) {

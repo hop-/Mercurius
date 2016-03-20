@@ -23,7 +23,7 @@ void Logic::update()
         assert(0 != object);
         object->update();
     }
-    // m_sweepLine.getPairs()
+    m_sweepLine.run();
 }
 
 
@@ -63,6 +63,11 @@ void Logic::onObjectAdding(const LogicObject* object)
     if (object->component<Collider>() != 0) {
         m_sweepLine.insert(object);
     }
+}
+
+void Logic::updateSweepLine(const LogicObject* object)
+{
+    m_sweepLine.update(object);
 }
 
 void Logic::createViewPortObject()

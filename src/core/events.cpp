@@ -7,7 +7,7 @@ namespace Core
 bool KeyEvent::less(Base::TypedBase* obj)
 {
     KeyEvent* keyEvent = static_cast<KeyEvent*>(obj);
-    return (m_keyCode < keyEvent->key() 
+    return (m_keyCode < keyEvent->key()
             || (m_keyCode == keyEvent->key() && m_mode < keyEvent->mode()));
 }
 
@@ -18,6 +18,11 @@ bool MouseClickEvent::less(Base::TypedBase* obj)
             && m_mode < mouseEvent->mode()
             && (m_y < mouseEvent->y()
                 || (m_y == mouseEvent->y() && m_x < mouseEvent->x())));
+}
+
+bool ObjectCollision::less(Base::TypedBase* obj)
+{
+    return m_objects < static_cast<ObjectCollision*>(obj)->m_objects;
 }
 
 bool QuitEvent::less(Base::TypedBase* obj)

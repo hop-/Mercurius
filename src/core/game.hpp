@@ -37,6 +37,11 @@ public:
     Event* getEvent();
     const Frame* frame() const;
 
+    EventManager* eventManager()
+    {
+        return m_eventManager;
+    }
+
     const InputManager& getInputManager() const
     {
         return m_inputManager;

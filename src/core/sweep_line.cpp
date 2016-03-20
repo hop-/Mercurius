@@ -2,6 +2,9 @@
 
 #include "logic_object.hpp"
 #include "components.hpp"
+#include "game.hpp"
+#include "event_manager.hpp"
+#include "events.hpp"
 
 #include <set>
 #include <cmath>
@@ -27,6 +30,7 @@ void SweepLine::RectangleEdge::generate(SweepLine& parent
         , const LogicObject* object)
 {
     assert(0 != object);
+    assert(0 != object->component<Collider>());
     parent.insert(RectangleEdge(m_currentIndex, object
                 , object->component<Collider>()->rect().xMin(), true));
     parent.insert(RectangleEdge(m_currentIndex, object
@@ -63,6 +67,7 @@ SweepLine::~SweepLine()
 void SweepLine::insert(const LogicObject* object)
 {
     assert(0 != object);
+    assert(0 != object->component<Collider>());
     RectangleEdge::generate(*this, object);
 }
 
@@ -74,9 +79,68 @@ void SweepLine::insert(const RectangleEdge& object)
     }
 }
 
-SweepLine::LogicObjectPairVector SweepLine::getPairs()
+void SweepLine::update(const LogicObject* object)
 {
-    LogicObjectPairVector returnPairs;
+    // TODO performance improvement
+    if (remove(object)) {
+        insert(object);
+    }
+}
+
+bool SweepLine::remove(const LogicObject* object)
+{
+    // TODO performance improvement
+    int count = 0;
+    for (RectEdges::iterator it = m_objects.begin()
+            ; it != m_objects.end(); ++it) {
+        if (it->object() == object) {
+            ++count;
+            m_objects.erase(it);
+            --it;
+            if (2 == count) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void SweepLine::run()
+{
+    LogicObjectPairs pairs = getPairs();
+    // TODO performance implement
+    for (const auto& pair : pairs) {
+        bool found = false;
+        for (LogicObjectPairs::iterator existPair = m_pairs.begin()
+               ; existPair != m_pairs.end(); ++existPair) {
+            if ((pair.first == existPair->first
+                        && pair.second == existPair->second)
+                    || (pair.first == existPair->second
+                        && pair.second == existPair->first))
+            {
+                m_pairs.erase(existPair);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            Game::getInstance()->eventManager()
+                ->push(new ObjectCollision(
+                            pair
+                            , ObjectCollision::Status::Collided));
+        }
+    }
+    for (const auto& existPair : m_pairs) {
+        Game::getInstance()->eventManager()->push(new ObjectCollision(
+                    existPair
+                    , ObjectCollision::Status::NotCollided));
+    }
+    m_pairs = pairs;
+}
+
+SweepLine::LogicObjectPairs SweepLine::getPairs()
+{
+    LogicObjectPairs returnPairs;
     if (m_objects.size() == 0) {
         return returnPairs;
     }
@@ -85,23 +149,25 @@ SweepLine::LogicObjectPairVector SweepLine::getPairs()
     }
     std::set<Interval> intervals;
     for (const auto& edge : m_objects) {
+        assert(0 != edge.object());
+        assert(0 != edge.object()->component<Collider>());
         Interval objectInterval(edge.index()
                 , edge.object()
                 , edge.object()->component<Collider>()->rect().yMin()
                 , edge.object()->component<Collider>()->rect().yMax());
         // TODO implement an interval tree as an augmented tree
         // Now it uses brute force
-        for (const auto& interval : intervals) {
-            if (objectInterval.intersect(interval)) {
-                returnPairs.push_back(LogicObjectPair
-                        (objectInterval.object, interval.object));
-            }
-        }
         if (edge.isBegin()) {
+            for (const auto& interval : intervals) {
+                if (objectInterval.intersect(interval)) {
+                    returnPairs.push_back(LogicObjectPair
+                            (objectInterval.object, interval.object));
+                }
+            }
             intervals.insert(objectInterval);
         } else {
             assert(intervals.find(objectInterval) != intervals.end());
-            intervals.erase(intervals.find(objectInterval));
+            intervals.erase(objectInterval);
         }
     }
     return returnPairs;
@@ -117,8 +183,8 @@ void SweepLine::quickSort(int left, int right)
 {
     int i = left;
     int j = right;
-    assert(int(m_objects.size()) < (left + right) / 2);
-    assert(0 >= (left + right) / 2);
+    assert(int(m_objects.size()) > (left + right) / 2);
+    assert(0 <= (left + right) / 2);
     EngineUnit pivotValue = m_objects[(left + right) / 2].position();
     while (i <= j) {
         while (m_objects[i].position() < pivotValue) {
@@ -146,7 +212,7 @@ void SweepLine::quickSort(int left, int right)
 void SweepLine::sortLastInserted()
 {
     RectangleEdge key = m_objects.back();
-    int i = static_cast<int>(m_objects.size());
+    int i = static_cast<int>(m_objects.size()) - 1;
     while (i != 0 && m_objects[i - 1].position() > key.position()) {
         m_objects[i] = m_objects[i - 1];
         --i;

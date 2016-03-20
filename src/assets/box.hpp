@@ -17,11 +17,9 @@ public:
     }
 
 private:
-    virtual void init()
+    void setupLogicObject()
     {
-        addLogicObject();
         addCollider();
-        addGuiObject();
     }
 
 };

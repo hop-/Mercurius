@@ -1,7 +1,6 @@
 layer {
 
 name: layer1;
-visible: true;
 level: 1;
 
 box {
