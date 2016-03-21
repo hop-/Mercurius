@@ -7,12 +7,13 @@ namespace Core
 {
 
 ViewPort::ViewPort()
-    : m_movingArea(UserUnit(15000)
-            , UserUnit(15000)
-            , Position(UserUnit(-2000), UserUnit(-3000)))    // TODO TMP for testing
+    : m_movingArea(UserUnit(1500)
+            , UserUnit(1500)
+            , Position(UserUnit(-200), UserUnit(-300)))    // TODO TMP for testing
 {
     setWidth(UserUnit(1200));
     setHeight(UserUnit(900));
+    setPosition(m_movingArea.position());
 }
 
 void ViewPort::target(LogicObject* object)
@@ -27,8 +28,14 @@ void ViewPort::aim()
     assert(0 != target());
     Position p(target()->position().x() - middleX()
             , target()->position().y() - middleY());
-    if (m_movingArea.isInside(Rectangle(width(), height(), p))) {
-        setPosition(p);
+    Rectangle tmpRect(width(), height(), p);
+    if (m_movingArea.xMax() >= tmpRect.xMax()
+            && m_movingArea.xMin() <= tmpRect.xMin()) {
+        setX(p.x());
+    }
+    if (m_movingArea.yMax() >= tmpRect.yMax()
+            && m_movingArea.yMin() <= tmpRect.yMin()) {
+        setY(p.y());
     }
 }
 

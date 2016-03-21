@@ -2,6 +2,7 @@ layer {
 
 name: layer1;
 level: 1;
+visible: true;
 
 box {
 
@@ -74,8 +75,8 @@ texture: resources/textures/dude.png;
 background {
 width: 2560;
 height: 1440;
-position: -10, 0;
-scale: 0.42;
+position: -400, -300;
+scale: 0.8;
 priority: -1;
 texture: resources/textures/bg.png;
 }

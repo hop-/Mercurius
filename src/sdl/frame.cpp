@@ -76,6 +76,9 @@ void Frame::draw(const Core::GuiObject* object)
     assert(0 != m_renderer);
     Texture texture = sdlObject->texture();
     assert(0 != texture.texture);
+    texture.destinationRect.y = height()
+        - texture.destinationRect.y
+        - texture.destinationRect.h;
     SDL_RenderCopy(m_renderer, texture.texture  // maybe need to be used
             , &(texture.sourceRect)             // SDL_RenderCopyEx(..) to
             , &(texture.destinationRect));      // mirror image left/right
