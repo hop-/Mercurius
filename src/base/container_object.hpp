@@ -65,7 +65,7 @@ protected:
     {}
 
 public:
-    virtual void init() final
+    virtual void init()
     {
         initObject();
         std::for_each(m_children.begin(), m_children.end(), [](C* c) {

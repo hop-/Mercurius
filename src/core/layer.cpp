@@ -79,7 +79,7 @@ bool Layer::addLogicObject(LogicObject* l)
     assert(0 != l);
     assert(0 != m_logic);
     l->setParent(m_logic);
-    return m_logic->addObject(l);
+    return m_logic->addLogicObject(l);
 }
 
 void Layer::aimTo(LogicObject* l)

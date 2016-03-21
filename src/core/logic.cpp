@@ -2,6 +2,7 @@
 #include "event.hpp"
 #include "components.hpp"
 #include "game.hpp"
+#include "powers.hpp"
 
 #include <cassert>
 
@@ -14,12 +15,12 @@ void Logic::update()
     assert(0 != game);
     Event* e = game->getEvent();
     if (0 != e) {
-        for (auto* object : children()) {
+        for (auto* object : LogicObjects::children()) {
             assert(0 != object);
             object->process(e);
         }
     }
-    for (auto* object : children()) {
+    for (auto* object : LogicObjects::children()) {
         assert(0 != object);
         object->update();
     }
@@ -28,11 +29,23 @@ void Logic::update()
 
 Logic::Logic()
 {
+    Powers::addObject(new Gravity()); // TODO create using MML
     createViewPortObject();
 }
 
 Logic::~Logic()
 {
+}
+
+void Logic::init()
+{
+    Base::ContainerObject<LogicObject>::init();
+}
+
+bool Logic::addLogicObject(LogicObject* object)
+{
+    assert(0 != object);
+    return Base::ContainerObject<LogicObject>::addObject(object);
 }
 
 const LogicObject* Logic::viewPort() const
@@ -61,6 +74,13 @@ void Logic::onObjectAdding(const LogicObject* object)
 {
     if (object->component<Collider>() != 0) {
         m_sweepLine.insert(object);
+    }
+    for (auto* p: Powers::children()) {
+        assert(0 != p);
+        for (auto* lo: LogicObjects::children()) {
+            assert(0 != lo);
+            p->addComponentToObject(lo);
+        }
     }
 }
 
