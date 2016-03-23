@@ -44,6 +44,7 @@ void Object::addLogicObject()
     assert(0 != m_drawableObject);
     m_logicObject = new Core::LogicObject();
     m_logicObject->setPosition(m_drawableObject->position().first, m_drawableObject->position().second);
+    m_logicObject->setWeight(m_drawableObject->weight());
     setupLogicObject();
     assert(0 != m_layer);
     m_layer->addLogicObject(m_logicObject);

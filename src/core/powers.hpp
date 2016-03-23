@@ -12,12 +12,20 @@ namespace Core
 class Gravity : public NaturalPower
 {
 public:
-    class GravityComponent : public LogicObject::ComponentCreator<Physics>
+    class GravityComponent : public LogicObject::ComponentCreator<GravityComponent>
     {
+    EngineUnit m_v = 0;
+
     public:
         virtual void update()
         {
-            // TODO update postion
+            m_v = m_v + 9.8; // TODO v = v0 + g*t^2 / 2
+            assert(0 != parent());
+            if (0 != parent()->weight()) {
+                Position position = parent()->position();
+                position.move(Vector(m_v, 270));
+                parent()->setPosition(position);
+            }
         }
     };
 

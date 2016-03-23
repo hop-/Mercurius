@@ -77,6 +77,7 @@ private:
     Components m_components;
     Position m_position;
     State* m_currentState = 0;
+    float m_weight = 0;
 
 public:
     void update();
@@ -95,6 +96,17 @@ public:
     inline void setPosition(Position p)
     {
         m_position = p;
+        notify();
+    }
+
+    inline float weight() const
+    {
+        return m_weight;
+    }
+
+    inline void setWeight(float w)
+    {
+        m_weight = w;
         notify();
     }
 

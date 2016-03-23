@@ -40,11 +40,16 @@ Logic::~Logic()
 void Logic::init()
 {
     Base::ContainerObject<LogicObject>::init();
+    Base::ContainerObject<NaturalPower>::init();
 }
 
 bool Logic::addLogicObject(LogicObject* object)
 {
     assert(0 != object);
+    for (auto* p: Powers::children()) {
+        assert(0 != p);
+        p->addComponentToObject(object);
+    }
     return Base::ContainerObject<LogicObject>::addObject(object);
 }
 
@@ -70,17 +75,11 @@ const ViewPort* Logic::viewPortComponent() const
     return m_viewPort->component<ViewPort>();
 }
 
-void Logic::onObjectAdding(const LogicObject* object)
+void Logic::onObjectAdding(LogicObject* object)
 {
+    assert(0 != object);
     if (object->component<Collider>() != 0) {
         m_sweepLine.insert(object);
-    }
-    for (auto* p: Powers::children()) {
-        assert(0 != p);
-        for (auto* lo: LogicObjects::children()) {
-            assert(0 != lo);
-            p->addComponentToObject(lo);
-        }
     }
 }
 
