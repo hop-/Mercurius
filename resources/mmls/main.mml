@@ -72,6 +72,17 @@ texture: resources/textures/dude.png;
 
 }
 
+ground {
+
+name: ground1;
+width: 1024;
+height: 189;
+scale: 0.4;
+position: 0, 0;
+texture: resources/textures/ground.png;
+
+}
+
 background {
 width: 2560;
 height: 1440;

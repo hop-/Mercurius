@@ -2,12 +2,14 @@
 #include "background.hpp"
 #include "box.hpp"
 #include "dude.hpp"
+#include "ground.hpp"
 #include "type_manager.hpp"
 
 #include <mml/mml_box.hpp>
 #include <mml/mml_layer.hpp>
 #include <mml/background.hpp>
 #include <mml/dude.hpp>
+#include <mml/ground.hpp>
 
 namespace Assets
 {
@@ -57,6 +59,18 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
     return new Dude(dude, layer);
+}
+
+Base::Object* GroundFactory::create(const MML::MMLObject* mml
+        , Base::Object* p) const
+{
+    assert(0 != mml);
+    assert(0 != p);
+    const MML::Ground* ground = dynamic_cast<const MML::Ground*>(mml);
+    assert(0 != ground);
+    Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
+    assert(0 != layer);
+    return new Ground(ground, layer);
 }
 
 Base::Object* BackgroundFactory::create(const MML::MMLObject* mml,

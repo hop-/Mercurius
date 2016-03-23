@@ -5,6 +5,7 @@
 #include "background.hpp"
 #include "mml_box.hpp"
 #include "dude.hpp"
+#include "ground.hpp"
 #include "mml_layer.hpp"
 
 #include <algorithm>
@@ -73,6 +74,7 @@ registerTypes()
     m_types["layer"] = new MMLLayer::LayerFactory();
     m_types["box"] = new MMLBox::BoxFactory();
     m_types["dude"] = new Dude::Factory();
+    m_types["ground"] = new Ground::Factory();
     m_types["background"] = new Background::BackgroundFactory();
 }
 
