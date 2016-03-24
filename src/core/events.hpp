@@ -2,7 +2,7 @@
 #define _CORE_EVENTS_HPP_
 
 #include "event.hpp"
-#include <core/input_manager.hpp>
+#include "input_manager.hpp"
 
 namespace Core
 {
@@ -94,12 +94,10 @@ public:
 private:
     ObjectPair m_objects;
     Status m_status;
+    bool m_isTrigger;
 
 public:
-    ObjectCollision(ObjectPair pair, Status status)
-        : m_objects(pair)
-        , m_status(status)
-    {}
+    ObjectCollision(ObjectPair pair, Status status);
 
     inline const LogicObject* first() const
     {
@@ -109,6 +107,11 @@ public:
     inline const LogicObject* second() const
     {
         return m_objects.second;
+    }
+
+    inline bool isTrigger() const
+    {
+        return m_isTrigger;
     }
 
     inline Status status() const

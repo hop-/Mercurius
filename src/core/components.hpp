@@ -129,6 +129,7 @@ class Collider
 {
     EngineUnit m_width;
     EngineUnit m_height;
+    bool m_isTrigger = false;
 
 public:
     void onNotify();
@@ -144,6 +145,15 @@ public:
         m_height = height;
     }
 
+    inline bool isTrigger() const
+    {
+        return m_isTrigger;
+    }
+
+    inline void trigger(bool isTrigger)
+    {
+        m_isTrigger = isTrigger;
+    }
 };
 
 class TextureRenderer
