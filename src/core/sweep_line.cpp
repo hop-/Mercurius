@@ -96,8 +96,9 @@ bool SweepLine::remove(const LogicObject* object)
             ; it != m_objects.end(); ++it) {
         if (it->object() == object) {
             ++count;
-            m_objects.erase(it);
+            RectEdges::iterator tmpIt = it;
             --it;
+            m_objects.erase(tmpIt);
             if (2 == count) {
                 return true;
             }
@@ -109,7 +110,7 @@ bool SweepLine::remove(const LogicObject* object)
 void SweepLine::run()
 {
     LogicObjectPairs pairs = getPairs();
-    // TODO performance implement
+    // TODO performance improvement
     for (const auto& pair : pairs) {
         bool found = false;
         for (LogicObjectPairs::iterator existPair = m_pairs.begin()
