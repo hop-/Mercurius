@@ -18,7 +18,7 @@ class EventManager
 public:
     EventManager();
     virtual ~EventManager() = default;
-   
+
 public:
     virtual void catchEvent() = 0;
     virtual unsigned getTicks() = 0;

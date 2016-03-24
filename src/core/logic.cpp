@@ -46,9 +46,13 @@ void Logic::init()
 bool Logic::addLogicObject(LogicObject* object)
 {
     assert(0 != object);
+    // TODO either move to onObjectAdding, or remove onObjectAdding
     for (auto* p: Powers::children()) {
         assert(0 != p);
         p->addComponentToObject(object);
+    }
+    if (object->component<Collider>() != 0) {
+        m_sweepLine.insert(object);
     }
     return Base::ContainerObject<LogicObject>::addObject(object);
 }

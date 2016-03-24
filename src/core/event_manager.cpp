@@ -27,7 +27,7 @@ Command* EventManager::getCommand(Layer* layer)
 void EventManager::pop()
 {
     if (m_eventQueue.size() > 0) {
-        Event* e = m_eventQueue.back();
+        Event* e = m_eventQueue.front();
         m_eventQueue.pop();
         delete e;
     }
