@@ -106,7 +106,7 @@ bool SweepLine::remove(const LogicObject* object)
     }
     return false;
 }
-
+/*
 void SweepLine::run()
 {
     LogicObjectPairs pairs = getPairs();
@@ -139,7 +139,7 @@ void SweepLine::run()
     }
     m_pairs = pairs;
 }
-
+*/
 SweepLine::LogicObjectPairs SweepLine::getPairs()
 {
     LogicObjectPairs returnPairs;

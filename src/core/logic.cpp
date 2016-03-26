@@ -14,6 +14,7 @@ void Logic::update()
     applyPowers();
     processEvents();
     updateLogicObjects();
+    m_collider.throwCollisionEvents();
 }
 
 void Logic::applyPowers()

@@ -15,8 +15,12 @@ class LogicObject;
 class ObjectCollider
 {
     using Objects = std::list<LogicObject*>;
+    using Pair = std::pair<const LogicObject*, const LogicObject*>;
+    using Pairs = std::list<Pair>;
 
     QuadTree m_quadTree;
+    Pairs m_collidedPairs;
+    Pairs m_currentCollidedPairs;
 
 public:
     ObjectCollider();
@@ -27,6 +31,7 @@ public:
     void insert(const LogicObject* object);
     void update(LogicObject* object, Position p);
     void remove(const LogicObject* object);
+    void throwCollisionEvents();
 };
 
 } // namespace Core

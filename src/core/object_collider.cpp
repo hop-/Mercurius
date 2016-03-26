@@ -53,6 +53,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
         //      ->push(new ObjectCollision(
         //            ObjectCollision::ObjectPair{object, collieded}
         //            , ObjectCollision::Status::Collided));
+        m_currentCollidedPairs.push_back(Pair{object, collieded});
         if (!c->isTrigger() && !collider->isTrigger()) {
             EngineUnit dX;
             if (p.x() - pOld.x() > 0) {
@@ -84,6 +85,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
                 || !collider->rect().intersects(c->rect())) {
             continue;
         }
+        m_currentCollidedPairs.push_back(Pair{object, collieded});
         if (!c->isTrigger() && !collider->isTrigger()) {
             EngineUnit dy;
             if (p.y() - pOld.y() > 0) {
@@ -114,6 +116,39 @@ void ObjectCollider::remove(const LogicObject* object)
     assert(0 != object);
     assert(0 != object->component<Collider>());
     m_quadTree.remove(object->component<Collider>());
+}
+
+void ObjectCollider::throwCollisionEvents()
+{
+    for (const auto& pair : m_currentCollidedPairs) {
+        bool found = false;
+        for (Pairs::iterator existPair = m_collidedPairs.begin()
+                ; existPair != m_collidedPairs.end()
+                ; ++existPair) {
+            if ((pair.first == existPair->first
+                        && pair.second == existPair->second)
+                    || (pair.first == existPair->second
+                        && pair.second == existPair->first))
+            {
+                m_collidedPairs.erase(existPair);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            Game::getInstance()->eventManager()
+                ->push(new ObjectCollision(
+                            pair
+                            , ObjectCollision::Status::Attached));
+        }
+    }
+    for (const auto& existPair : m_collidedPairs) {
+        Game::getInstance()->eventManager()->push(new ObjectCollision(
+                    existPair
+                    , ObjectCollision::Status::Detached));
+    }
+    m_collidedPairs = m_currentCollidedPairs;
+    m_currentCollidedPairs.clear();
 }
 
 } // namespace Core

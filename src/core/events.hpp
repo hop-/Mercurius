@@ -89,7 +89,7 @@ class ObjectCollision
 {
 public:
     using ObjectPair = std::pair<const LogicObject*, const LogicObject*>;
-    enum class Status {Collided, NotCollided};
+    enum class Status {Attached, Detached};
 
 private:
     ObjectPair m_objects;
