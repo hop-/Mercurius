@@ -4,6 +4,15 @@
 
 #include <cassert>
 
+#ifndef NDEBUG
+#define DRAW_BOARDS(RENDERER, RECT) \
+    SDL_SetRenderDrawColor(RENDERER, 0xFF, 0x00, 0x00, 0x00); \
+    SDL_RenderDrawRect(RENDERER, RECT); \
+    SDL_SetRenderDrawColor(RENDERER, 0x00, 0x00, 0x00, 0x00);
+#else
+#define DRAW_BOARDS(RENDERER, RECT)
+#endif
+
 namespace Sdl
 {
 
@@ -82,6 +91,7 @@ void Frame::draw(const Core::GuiObject* object)
     SDL_RenderCopy(m_renderer, texture.texture  // maybe need to be used
             , &(texture.sourceRect)             // SDL_RenderCopyEx(..) to
             , &(texture.destinationRect));      // mirror image left/right
+    DRAW_BOARDS(m_renderer, &(texture.destinationRect));
 }
 
 void Frame::show()

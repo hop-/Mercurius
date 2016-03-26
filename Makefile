@@ -8,7 +8,7 @@ SRC_DIR ?= src
 OBJ_DIR ?= objs
 OBJ_DIR_D := $(addsuffix -d, $(OBJ_DIR))
 # definitions
-DEF_FLAGS := $(addprefix -D, $(DEFINES))
+DEF_FLAGS += $(addprefix -D, $(DEFINES))
 # name of executable (program)
 execable ?= mercurius
 execable_d := $(addsuffix -d,$(abspath $(execable)))
