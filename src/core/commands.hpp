@@ -20,6 +20,16 @@ public:
     void execute();
 };
 
+class Stand
+    : public Core::Command
+{
+    Core::LogicObject* m_object;
+
+public:
+    Stand(Core::LogicObject* object);
+    void execute();
+};
+
 } // namespace Core
 
 #endif //_CORE_COMMANDS_HPP_

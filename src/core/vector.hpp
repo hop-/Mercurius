@@ -26,6 +26,16 @@ public:
         return m_y;
     }
 
+    inline void setX(EngineUnit x)
+    {
+        m_x = x;
+    }
+
+    inline void setY(EngineUnit y)
+    {
+        m_y = y;
+    }
+
     EngineUnit magnitude() const;
     float angle() const;
     float angleInRadians() const;

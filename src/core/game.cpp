@@ -88,12 +88,6 @@ void Game::mainLoop()
             if (layer->isStopped()) {
                 continue;
             }
-            Command* cmd = m_eventManager->getCommand(layer);
-            // assert(0 != cmd);
-            // TODO command list not a single command
-            if (0 != cmd) {
-                cmd->execute();
-            }
             lag = realLag;
             while (lag >= msToUpdate) {
                 isUpdated = true;

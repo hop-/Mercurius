@@ -35,14 +35,7 @@ void Standing::init()
 Core::Command* Standing::command() const
 {
     assert(0 != parent<Core::LogicObject>());
-    Core::Physics* ph =
-        parent<Core::LogicObject>()->component<Core::Physics>();
-    Core::Vector v;
-    if (0 != ph) {
-        v = ph->velocity();
-        v.setAngle(v.angle() + 180);
-    }
-    return new Accelerate(parent<Core::LogicObject>(), v);
+    return new Stand(parent<Core::LogicObject>());
 }
 
 void RunningLeft::process(Core::Event* e)
