@@ -51,16 +51,12 @@ void Physics::update()
     Position position = parent()->position();
     if (m_velocity.magnitude() != 0) {
         position.move(m_velocity);
-        parent()->setPosition(position);
+        parent()->requestNewPosition(position);
     }
 }
 
 void Collider::onNotify()
-{
-    assert(0 != parent());
-    assert(0 != parent()->parent());
-    dynamic_cast<Logic*>(parent()->parent())->updateSweepLine(parent());
-}
+{}
 
 void TextureRenderer::init()
 {

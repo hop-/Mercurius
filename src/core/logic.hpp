@@ -4,7 +4,7 @@
 #include "logic_object.hpp"
 #include "components.hpp"
 #include "natural_power.hpp"
-#include "sweep_line.hpp"
+#include "object_collider.hpp"
 
 #include <base/container_object.hpp>
 
@@ -21,7 +21,7 @@ class Logic
     , public Base::ContainerObject<NaturalPower>
 {
     LogicObject* m_viewPort;
-    SweepLine m_sweepLine;
+    ObjectCollider m_collider;
 
     typedef Base::ContainerObject<LogicObject> LogicObjects;
     typedef Base::ContainerObject<NaturalPower> Powers;
@@ -36,7 +36,7 @@ public:
     const LogicObject* viewPort() const;
     const ViewPort* viewPortComponent() const;
     void addToViewPort(LogicObject* object);
-    void updateSweepLine(const LogicObject* object);
+    void updateObject(LogicObject* object, Position p);
     bool addLogicObject(LogicObject* object);
 
 private:

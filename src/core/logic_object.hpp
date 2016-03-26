@@ -87,6 +87,7 @@ public:
     void changeState(State* newState);
     void removeState(State* state);
     void process(Event* event);
+    void requestNewPosition(Position p);
 
     inline Position position() const
     {
@@ -98,6 +99,7 @@ public:
         m_position = p;
         notify();
     }
+
 
     inline float weight() const
     {

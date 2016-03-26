@@ -24,13 +24,13 @@ void Logic::update()
         assert(0 != object);
         object->update();
     }
-    m_sweepLine.run();
 }
 
 Logic::Logic()
 {
     Powers::addObject(new Gravity()); // TODO create using MML
     createViewPortObject();
+    m_collider.setBounds(m_viewPort->component<ViewPort>()->movingArea()); // TODO tmp solution
 }
 
 Logic::~Logic()
@@ -49,10 +49,11 @@ bool Logic::addLogicObject(LogicObject* object)
     // TODO either move to onObjectAdding, or remove onObjectAdding
     for (auto* p: Powers::children()) {
         assert(0 != p);
-        p->addComponentToObject(object);
+//        p->addComponentToObject(object);
     }
-    if (object->component<Collider>() != 0) {
-        m_sweepLine.insert(object);
+    Collider* collider = object->component<Collider>();
+    if (collider != 0) {
+        m_collider.insert(object);
     }
     return Base::ContainerObject<LogicObject>::addObject(object);
 }
@@ -83,13 +84,13 @@ void Logic::onObjectAdding(LogicObject* object)
 {
     assert(0 != object);
     if (object->component<Collider>() != 0) {
-        m_sweepLine.insert(object);
+        //m_sweepLine.insert(object);
     }
 }
 
-void Logic::updateSweepLine(const LogicObject* object)
+void Logic::updateObject(LogicObject* object, Position p)
 {
-    m_sweepLine.update(object);
+    m_collider.update(object, p);
 }
 
 void Logic::createViewPortObject()

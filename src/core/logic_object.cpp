@@ -71,6 +71,11 @@ void LogicObject::initObject()
     }
 }
 
+void LogicObject::requestNewPosition(Position p)
+{
+    parent<Logic>()->updateObject(this, p);
+}
+
 LogicObject::LogicObject()
 {
 }

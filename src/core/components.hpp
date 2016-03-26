@@ -30,6 +30,11 @@ public:
         m_movingArea = area;
     }
 
+    Rectangle movingArea()
+    {
+        return m_movingArea;
+    }
+
     void onNotify();
 
 private:

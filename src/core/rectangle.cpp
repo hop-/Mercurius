@@ -38,6 +38,14 @@ Rectangle Rectangle::scaled(float scale)
     return rectangle;
 }
 
+bool Rectangle::intersects(const Rectangle& rect) const
+{
+    return (xMin() < rect.xMax()
+            && xMax() > rect.xMin()
+            && yMin() < rect.yMax()
+            && yMax() > rect.yMin());
+}
+
 EngineUnit Rectangle::xMax() const
 {
     if (m_width > 0) {

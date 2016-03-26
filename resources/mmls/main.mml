@@ -65,7 +65,7 @@ name: player;
 width: 60;
 height: 100;
 weight: 12;
-scale: 1.2;
+scale: 1;
 position: 25, 200;
 aimed: true;
 texture: resources/textures/dude.png;
