@@ -98,7 +98,7 @@ const ViewPort* Logic::viewPortComponent() const
     return m_viewPort->component<ViewPort>();
 }
 
-void Logic::onObjectAdding(LogicObject* object)
+void Logic::onObjectAdding(const LogicObject* object)
 {
     assert(0 != object);
     if (object->component<Collider>() != 0) {

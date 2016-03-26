@@ -44,7 +44,7 @@ private:
     void processEvents();
     void updateLogicObjects();
     void createViewPortObject();
-    virtual void onObjectAdding(LogicObject* object);
+    virtual void onObjectAdding(const LogicObject* object);
 };
 
 } // namespace Core
