@@ -68,11 +68,6 @@ void Logic::init()
 bool Logic::addLogicObject(LogicObject* object)
 {
     assert(0 != object);
-    // TODO either move to onObjectAdding, or remove onObjectAdding
-    Collider* collider = object->component<Collider>();
-    if (collider != 0) {
-        m_collider.insert(object);
-    }
     return Base::ContainerObject<LogicObject>::addObject(object);
 }
 
@@ -101,8 +96,9 @@ const ViewPort* Logic::viewPortComponent() const
 void Logic::onObjectAdding(const LogicObject* object)
 {
     assert(0 != object);
-    if (object->component<Collider>() != 0) {
-        //m_sweepLine.insert(object);
+    Collider* collider = object->component<Collider>();
+    if (collider != 0) {
+        m_collider.insert(object);
     }
 }
 
