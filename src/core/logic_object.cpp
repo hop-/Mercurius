@@ -73,6 +73,7 @@ void LogicObject::initObject()
 
 void LogicObject::requestNewPosition(Position p)
 {
+    assert(0 != parent<Logic>());
     parent<Logic>()->updateObject(this, p);
 }
 

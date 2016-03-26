@@ -21,10 +21,12 @@ public:
         {
             m_v = m_v + 9.8; // TODO v = v0 + g*t^2 / 2
             assert(0 != parent());
-            if (0 != parent()->weight()) {
-                Position position = parent()->position();
+            Physics* ph = parent()->component<Physics>();
+            if (ph != 0 && 0 != parent()->weight()) {
+/*                Position position = parent()->position();
                 position.move(Vector(m_v, 270));
-                parent()->setPosition(position);
+                parent()->setPosition(position);*/
+                ph->addVelocity(Vector(9.8, 270));
             }
         }
     };

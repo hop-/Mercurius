@@ -49,7 +49,7 @@ bool Logic::addLogicObject(LogicObject* object)
     // TODO either move to onObjectAdding, or remove onObjectAdding
     for (auto* p: Powers::children()) {
         assert(0 != p);
-//        p->addComponentToObject(object);
+        p->addComponentToObject(object);
     }
     Collider* collider = object->component<Collider>();
     if (collider != 0) {

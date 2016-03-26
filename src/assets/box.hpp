@@ -19,6 +19,7 @@ public:
 private:
     void setupLogicObject()
     {
+        addPhysics();
         addCollider();
     }
 
