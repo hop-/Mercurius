@@ -1,6 +1,7 @@
 #include "mercurius.hpp"
 #include "type_manager.hpp"
 
+#include <base/utility.hpp>
 #include <core/game.hpp>
 #include <core/gui.hpp>
 #include <core/objects_factory.hpp>
@@ -28,6 +29,7 @@ void Mercurius::start()
     assert(r);
     r = TypeManager::deleteInstance();
     assert(r);
+    Base::Utility::ignoreUnused(r);
 }
 
 void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)

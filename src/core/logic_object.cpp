@@ -1,7 +1,8 @@
 #include "logic_object.hpp"
 #include "logic.hpp"
 #include "command.hpp"
-#include <iostream>
+
+#include <base/utility.hpp>
 
 namespace Core
 {
@@ -43,6 +44,7 @@ void LogicObject::addState(State* newState)
     assert(status);
     assert(0 != newState);
     newState->init();
+    Base::Utility::ignoreUnused(status);
 }
 
 void LogicObject::removeState(State* state)
@@ -51,6 +53,7 @@ void LogicObject::removeState(State* state)
     assert(status);
     assert(state != 0);
     delete state;
+    Base::Utility::ignoreUnused(status);
 }
 
 void LogicObject::process(Event* event)
