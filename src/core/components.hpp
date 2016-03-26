@@ -56,35 +56,6 @@ private:
     }
 };
 
-class Dimensions    // for now it have no any use in codes
-                    // may be it will removed in future
-    : public LogicObject::ComponentCreator<Dimensions>
-{
-    Position m_position;
-    float m_scale;
-
-public:
-    inline Position position() const
-    {
-        return m_position;
-    }
-
-    inline void setPosition(Position position)
-    {
-        m_position = position;
-    }
-
-    inline float scale() const
-    {
-        return m_scale;
-    }
-
-    inline void setScale(float scale)
-    {
-        m_scale = scale;
-    }
-};
-
 class Physics
     : public LogicObject::ComponentCreator<Physics>
 {
@@ -120,13 +91,6 @@ public:
 private:
     void update();
 
-};
-
-class Moveable
-    : public LogicObject::ComponentCreator<Moveable>
-{
-private:
-    virtual void update();
 };
 
 class Collider

@@ -41,7 +41,6 @@ protected:
     void addCollider();
     void addPhysics();
     void addState(Core::State* state);
-    void addMoveable();
 };
 
 } // namespace Assets
