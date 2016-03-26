@@ -36,6 +36,24 @@ private:
     std::string m_attr_name;
 };
 
+class MMLNameExists
+    : public Base::Exception
+{
+public:
+    MMLNameExists(const std::string& name)
+        : m_name(name)
+    {}
+
+public:
+    virtual const std::string what() const
+    {
+        return "Object with name " + m_name + " already exists.";
+    }
+
+private:
+    std::string m_name;
+};
+
 } // namespace MML
 
 #endif // _MML_EXCEPTIONS_HPP_

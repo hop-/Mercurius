@@ -3,6 +3,8 @@
 #include "mml_manager.hpp"
 #include "mml_registery.hpp"
 
+#include "exceptions.hpp"
+
 #include <algorithm>
 #include <cassert>
 
@@ -19,7 +21,10 @@ MMLObject(const std::string& n, MMLObject* p)
     MMLManager* m = MMLManager::getInstance();
     assert(0 != m);
     MMLRegistery* r = m->getRegistery();
-    r->addObject(this);
+    bool re = r->addObject(this);
+    if (!re) {
+        throw MMLNameExists(n);
+    }
 }
 
 MMLObject::
