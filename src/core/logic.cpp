@@ -11,6 +11,13 @@ namespace Core
 
 void Logic::update()
 {
+    applyPowers();
+    processEvents();
+    updateLogicObjects();
+}
+
+void Logic::applyPowers()
+{
     for (auto* p: Powers::children()) {
         assert(0 != p);
         for (auto* object : LogicObjects::children()) {
@@ -18,6 +25,10 @@ void Logic::update()
             p->applyToObject(object);
         }
     }
+}
+
+void Logic::processEvents()
+{
     Game* game = Game::getInstance();
     assert(0 != game);
     Event* e = game->getEvent();
@@ -27,6 +38,10 @@ void Logic::update()
             object->process(e);
         }
     }
+}
+
+void Logic::updateLogicObjects()
+{
     for (auto* object : LogicObjects::children()) {
         assert(0 != object);
         object->update();
@@ -35,7 +50,6 @@ void Logic::update()
 
 Logic::Logic()
 {
-    Powers::addObject(new Gravity()); // TODO create using MML
     createViewPortObject();
     m_collider.setBounds(m_viewPort->component<ViewPort>()->movingArea()); // TODO tmp solution
 }
@@ -46,6 +60,7 @@ Logic::~Logic()
 
 void Logic::init()
 {
+    Powers::addObject(new Gravity()); // TODO create using MML
     Base::ContainerObject<LogicObject>::init();
     Base::ContainerObject<NaturalPower>::init();
 }

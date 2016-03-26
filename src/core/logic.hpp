@@ -40,6 +40,9 @@ public:
     bool addLogicObject(LogicObject* object);
 
 private:
+    void applyPowers();
+    void processEvents();
+    void updateLogicObjects();
     void createViewPortObject();
     virtual void onObjectAdding(LogicObject* object);
 };
