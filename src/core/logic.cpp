@@ -11,6 +11,13 @@ namespace Core
 
 void Logic::update()
 {
+    for (auto* p: Powers::children()) {
+        assert(0 != p);
+        for (auto* object : LogicObjects::children()) {
+            assert(0 != object);
+            p->applyToObject(object);
+        }
+    }
     Game* game = Game::getInstance();
     assert(0 != game);
     Event* e = game->getEvent();
@@ -47,10 +54,6 @@ bool Logic::addLogicObject(LogicObject* object)
 {
     assert(0 != object);
     // TODO either move to onObjectAdding, or remove onObjectAdding
-    for (auto* p: Powers::children()) {
-        assert(0 != p);
-        p->addComponentToObject(object);
-    }
     Collider* collider = object->component<Collider>();
     if (collider != 0) {
         m_collider.insert(object);

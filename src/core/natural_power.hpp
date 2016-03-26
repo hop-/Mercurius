@@ -8,54 +8,21 @@ namespace Core
 
 class NaturalPower : public Base::Object
 {
-public:
-    NaturalPower()
-        : Base::Object()
-        , m_factory(0)
-    {}
 
 public:
     virtual ~NaturalPower()
-    {
-        if (m_factory != 0) {
-            delete m_factory;
-            m_factory = 0;
-        }
-    }
+    {}
+
+    virtual void init()
+    {}
 
 public:
     /**
-     * @brief Interface for adding coresponding component to give logic object
+     * @brief Interface for appling coresponding power to give logic object
      * @param l, pointe to logic object
      * @pre l should be valid pointer
      */
-    void addComponentToObject(LogicObject* l)
-    {
-        assert(0 != l);
-        assert(0 != m_factory);
-        l->addComponent(m_factory->createComponent());
-    }
-
-protected:
-    class ComponentAbstractFactory
-    {
-    public:
-        virtual ~ComponentAbstractFactory()
-        {}
-
-    public:
-        virtual LogicObject::Component* createComponent() = 0;
-    };
-
-    void setComponentCreator(ComponentAbstractFactory* f)
-    {
-        assert(0 != f);
-        assert(0 == m_factory);
-        m_factory = f;
-    }
-
-private:
-    ComponentAbstractFactory* m_factory;
+    virtual void applyToObject(LogicObject* l) = 0;
 };
 
 } // end of namespace Core
