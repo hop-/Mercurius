@@ -70,43 +70,42 @@ void Game::mainLoop()
     unsigned previousTicks = m_eventManager->getTicks();
     unsigned realLag = 0;
     const unsigned msToUpdate = m_frame->msPerUpdate();
+    bool finish = false;
     // game loop
-    while (m_layers.size()) {
-        bool isUpdated = false;
+    while (m_layers.size() && !finish) {
         assert(0 != m_eventManager);
         unsigned currentTicks = m_eventManager->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
         previousTicks = currentTicks;
         realLag += deltaTicks;
-        unsigned lag = realLag;
         m_eventManager->catchEvent();
-        // clear frame
-        m_frame->clear();
+        unsigned lag = realLag;
         // run update for each layer
-        for (Layer* layer : m_layers) {
-            assert(0 != layer);
-            if (layer->isStopped()) {
-                continue;
+        while (lag >= msToUpdate) {
+            lag -= msToUpdate;
+            for (Layer* layer : m_layers) {
+                assert(0 != layer);
+                if (!layer->isStopped()) {
+                    layer->update();
+                }
             }
-            lag = realLag;
-            while (lag >= msToUpdate) {
-                isUpdated = true;
-                layer->update();
-                lag -= msToUpdate;
+            // TMP
+            Event* e = m_eventManager->getEvent();
+            if (e != 0 && Core::QuitEvent::castable(e)) {
+                finish = true;
             }
-            layer->draw();
-        }
-        realLag = lag;
-        // TMP
-        Event* e = m_eventManager->getEvent();
-        if (e != 0 && Core::QuitEvent::castable(e)) {
-            break;
-        }
-        // END OF TMP
-        m_frame->draw();
-        if (isUpdated) {
+            // END OF TMP
             m_eventManager->pop();
         }
+        realLag = lag;
+        // clear frame
+        m_frame->clear();
+        // draw layers on frame
+        for (Layer* layer : m_layers) {
+            layer->draw();
+        }
+        // visualize frame
+        m_frame->draw();
     }
 }
 
