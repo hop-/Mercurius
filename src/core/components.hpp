@@ -88,6 +88,20 @@ public:
         m_velocity += velocity;
     }
 
+    inline void stopX()
+    {
+        Vector v = m_velocity;
+        v.setX(0);
+        setVelocity(v);
+    }
+
+    inline void stopY()
+    {
+        Vector v = m_velocity;
+        v.setY(0);
+        setVelocity(v);
+    }
+
 private:
     void update();
 

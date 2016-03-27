@@ -61,6 +61,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
                 dX = c->rect().xMax()
                     - collider->rect().xMin();
             } else {
+                // moved left
                 dX = collider->rect().xMax()
                     - c->rect().xMin();
             }
@@ -89,10 +90,11 @@ void ObjectCollider::update(LogicObject* object, Position p)
         if (!c->isTrigger() && !collider->isTrigger()) {
             EngineUnit dy;
             if (p.y() - pOld.y() > 0) {
-                // moved right
+                // moved up
                 dy = c->rect().yMax()
                     - collider->rect().yMin();
             } else {
+                // moved down
                 dy = collider->rect().yMax()
                     - c->rect().yMin();
             }
@@ -108,6 +110,17 @@ void ObjectCollider::update(LogicObject* object, Position p)
     }
     m_quadTree.remove(c);
     object->setPosition(p);
+    Physics* ph = object->component<Physics>();
+    // May be need to move in other place
+    // stopping moving in collided direction
+    if (ph != 0) {
+        if (maxDX != 0) {
+            ph->stopX();
+        }
+        if (maxDY != 0) {
+            ph->stopY();
+        }
+    }
     m_quadTree.insert(c);
 }
 

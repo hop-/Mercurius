@@ -17,11 +17,14 @@ void Standing::process(Event* e)
     }
     LogicObject* p = parent<LogicObject>();
     switch (key->key()) {
+    case InputManager::Key::Jump:
+        p->addState(new Jumping);
+        break;
     case InputManager::Key::Right:
-        p->changeState(new RunningRight);
+        p->addState(new RunningRight);
         break;
     case InputManager::Key::Left:
-        p->changeState(new RunningLeft);
+        p->addState(new RunningLeft);
     default:
         break;
     }
@@ -34,8 +37,9 @@ void Standing::init()
 
 Command* Standing::command()
 {
-    assert(0 != parent<LogicObject>());
-    return new Stand(parent<LogicObject>());
+    //assert(0 != parent<LogicObject>());
+    //return new Stand(parent<LogicObject>());
+    return 0;
 }
 
 void Jumping::init()
@@ -61,7 +65,7 @@ Command* Jumping::command()
         return 0;
     }
     --m_count;
-    return new Jump(parent<LogicObject>(), 100);
+    return new Jump(parent<LogicObject>(), 25);
 }
 
 void RunningLeft::process(Event* e)
@@ -77,7 +81,7 @@ void RunningLeft::process(Event* e)
         }
     } else {
         if (key->key() == InputManager::Key::Left) {
-            p->changeState(new Standing);
+            p->removeState(this);
         }
     }
 }
@@ -106,7 +110,7 @@ void RunningRight::process(Event* e)
         }
     } else {
         if (key->key() == InputManager::Key::Right) {
-            p->changeState(new Standing);
+            p->removeState(this);
         }
     }
 }
