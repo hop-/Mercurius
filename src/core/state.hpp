@@ -15,7 +15,7 @@ class State
 public:
     virtual void init() = 0;
     virtual void process(Event* e) = 0;
-    virtual Command* command() const = 0;
+    virtual Command* command() = 0;
 };
 
 } // namespace Core

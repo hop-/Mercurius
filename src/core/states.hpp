@@ -8,31 +8,42 @@ namespace Core
 
 class Event;
 
-class Standing
-    : public Core::State
+class Standing  // TODO now it is state manager
+    : public State
 {
 public:
     virtual void init();
-    void process(Core::Event* e);
-    Core::Command* command() const;
+    void process(Event* e);
+    Command* command();
+};
+
+class Jumping
+    : public State
+{
+    int m_count = 100;
+
+public:
+    void init();
+    void process(Event* e);
+    Command* command();
 };
 
 class RunningLeft
-    : public Core::State
+    : public State
 {
 public:
     virtual void init();
-    void process(Core::Event* e);
-    Core::Command* command() const;
+    void process(Event* e);
+    Command* command();
 };
 
 class RunningRight
-    : public Core::State
+    : public State
 {
 public:
     virtual void init();
-    void process(Core::Event* e);
-    Core::Command* command() const;
+    void process(Event* e);
+    Command* command();
 };
 
 } // namespace Core

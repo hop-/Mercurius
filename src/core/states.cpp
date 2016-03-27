@@ -9,18 +9,18 @@
 namespace Core
 {
 
-void Standing::process(Core::Event* e)
+void Standing::process(Event* e)
 {
-    Core::KeyEvent* key = Core::KeyEvent::cast(e);
-    if (0 == key || key->mode() == Core::KeyEvent::Mode::Up) {
+    KeyEvent* key = KeyEvent::cast(e);
+    if (0 == key || key->mode() == KeyEvent::Mode::Up) {
         return;
     }
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    LogicObject* p = parent<LogicObject>();
     switch (key->key()) {
-        case Core::InputManager::Key::Right:
+    case InputManager::Key::Right:
         p->changeState(new RunningRight);
         break;
-    case Core::InputManager::Key::Left:
+    case InputManager::Key::Left:
         p->changeState(new RunningLeft);
     default:
         break;
@@ -32,25 +32,51 @@ void Standing::init()
     // TODO change texture state
 }
 
-Core::Command* Standing::command() const
+Command* Standing::command()
 {
-    assert(0 != parent<Core::LogicObject>());
-    return new Stand(parent<Core::LogicObject>());
+    assert(0 != parent<LogicObject>());
+    return new Stand(parent<LogicObject>());
 }
 
-void RunningLeft::process(Core::Event* e)
+void Jumping::init()
 {
-    Core::KeyEvent* key = Core::KeyEvent::cast(e);
+    // TODO change texture state
+}
+
+void Jumping::process(Event* e)
+{
+    KeyEvent* key = KeyEvent::cast(e);
     if (0 == key) {
         return;
     }
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    if (key->mode() == Core::KeyEvent::Mode::Down) {
-        if (key->key() == Core::InputManager::Key::Right) {
+    if (key->mode() == KeyEvent::Mode::Up
+            && key->key() == InputManager::Key::Jump) {
+        parent<LogicObject>()->removeState(this);
+    }
+}
+
+Command* Jumping::command()
+{
+    if (0 == m_count) {
+        return 0;
+    }
+    --m_count;
+    return new Jump(parent<LogicObject>(), 100);
+}
+
+void RunningLeft::process(Event* e)
+{
+    KeyEvent* key = KeyEvent::cast(e);
+    if (0 == key) {
+        return;
+    }
+    LogicObject* p = parent<LogicObject>();
+    if (key->mode() == KeyEvent::Mode::Down) {
+        if (key->key() == InputManager::Key::Right) {
             p->changeState(new RunningRight);
         }
     } else {
-        if (key->key() == Core::InputManager::Key::Left) {
+        if (key->key() == InputManager::Key::Left) {
             p->changeState(new Standing);
         }
     }
@@ -61,25 +87,25 @@ void RunningLeft::init()
     // TODO change texture state
 }
 
-Core::Command* RunningLeft::command() const
+Command* RunningLeft::command()
 {
-    return new Accelerate(parent<Core::LogicObject>()
-            , Core::Vector(1, 180));
+    return new Accelerate(parent<LogicObject>()
+            , Vector(1, 180));
 }
 
-void RunningRight::process(Core::Event* e)
+void RunningRight::process(Event* e)
 {
-    Core::KeyEvent* key = Core::KeyEvent::cast(e);
+    KeyEvent* key = KeyEvent::cast(e);
     if (0 == key) {
         return;
     }
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    if (key->mode() == Core::KeyEvent::Mode::Down) {
-        if (key->key() == Core::InputManager::Key::Left) {
+    LogicObject* p = parent<LogicObject>();
+    if (key->mode() == KeyEvent::Mode::Down) {
+        if (key->key() == InputManager::Key::Left) {
             p->changeState(new RunningLeft);
         }
     } else {
-        if (key->key() == Core::InputManager::Key::Right) {
+        if (key->key() == InputManager::Key::Right) {
             p->changeState(new Standing);
         }
     }
@@ -90,10 +116,10 @@ void RunningRight::init()
     // TODO change texture state
 }
 
-Core::Command* RunningRight::command() const
+Command* RunningRight::command()
 {
-    return new Accelerate(parent<Core::LogicObject>()
-            , Core::Vector(1, 0));
+    return new Accelerate(parent<LogicObject>()
+            , Vector(1, 0));
 }
 
 } // namespace Core

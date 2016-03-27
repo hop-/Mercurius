@@ -7,7 +7,7 @@
 namespace Core
 {
 
-Accelerate::Accelerate(Core::LogicObject* object, Core::Vector acceleration)
+Accelerate::Accelerate(LogicObject* object, Vector acceleration)
     : m_object(object)
     , m_acceleration(acceleration)
 {
@@ -17,13 +17,27 @@ Accelerate::Accelerate(Core::LogicObject* object, Core::Vector acceleration)
 void Accelerate::execute()
 {
     assert(0 != m_object);
-    Core::Physics* physics = m_object->component<Core::Physics>();
+    Physics* physics = m_object->component<Physics>();
     if (0 != physics) {
         physics->addVelocity(m_acceleration);
     }
 }
 
-Stand::Stand(Core::LogicObject* object)
+Jump::Jump(LogicObject* object, EngineUnit power)
+    : m_object(object)
+    , m_power(power)
+{}
+
+void Jump::execute()
+{
+    assert(0 != m_object);
+    Physics* physics = m_object->component<Physics>();
+    if (0 != physics) {
+        physics->addVelocity(Vector(m_power, 90));
+    }
+}
+
+Stand::Stand(LogicObject* object)
     : m_object(object)
 {
     assert(0 != m_object);
@@ -32,7 +46,7 @@ Stand::Stand(Core::LogicObject* object)
 void Stand::execute()
 {
     assert(0 != m_object);
-    Core::Physics* physics = m_object->component<Core::Physics>();
+    Physics* physics = m_object->component<Physics>();
     if (0 != physics) {
         Vector vel = physics->velocity();
         vel.setX(0);

@@ -3,6 +3,7 @@
 
 #include "command.hpp"
 #include "vector.hpp"
+#include "units.hpp"
 
 namespace Core
 {
@@ -10,23 +11,34 @@ namespace Core
 class LogicObject;
 
 class Accelerate
-    : public Core::Command
+    : public Command
 {
-    Core::LogicObject* m_object;
-    Core::Vector m_acceleration;
+    LogicObject* m_object;
+    Vector m_acceleration;
 
 public:
-    Accelerate(Core::LogicObject* object, Core::Vector acceleration);
+    Accelerate(LogicObject* object, Vector acceleration);
+    void execute();
+};
+
+class Jump
+    : public Command
+{
+    LogicObject* m_object;
+    EngineUnit m_power;
+
+public:
+    Jump(LogicObject* object, EngineUnit power);
     void execute();
 };
 
 class Stand
-    : public Core::Command
+    : public Command
 {
-    Core::LogicObject* m_object;
+    LogicObject* m_object;
 
 public:
-    Stand(Core::LogicObject* object);
+    Stand(LogicObject* object);
     void execute();
 };
 
