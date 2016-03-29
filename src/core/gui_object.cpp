@@ -7,7 +7,10 @@
 namespace Core
 {
 
-GuiObject::GuiObject(){}
+GuiObject::GuiObject()
+    : m_textureLocation()
+    , m_rect()
+{}
 
 void GuiObject::setDimensions(UserUnit w, UserUnit h, float scale)
 {

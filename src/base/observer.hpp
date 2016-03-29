@@ -8,7 +8,7 @@ class Subject;
 
 class Observer
 {
-    Subject* m_subject;
+    Subject* m_subject = 0;
 public:
     virtual ~Observer() = default;
     virtual void onNotify() = 0;

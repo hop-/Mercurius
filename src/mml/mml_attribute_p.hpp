@@ -83,13 +83,13 @@ public:
 
     public:
         AttrHolder(const AttrHolder& a)
+            : m_string(a.m_string)
+            , m_int(a.m_int)
+            , m_double(a.m_double)
+            , m_bool(a.m_bool)
+            , m_intPair(a.m_intPair)
+            , m_type(a.m_type)
         {
-            m_string = a.m_string;
-            m_int = a.m_int;
-            m_double = a.m_double;
-            m_bool = a.m_bool;
-            m_intPair = a.m_intPair;
-            m_type = a.m_type;
         }
 
     public:
@@ -163,6 +163,10 @@ public:
         , m_value(a.m_value)
     {
     }
+
+private:
+    MMLAttributePrivate(const MMLAttributePrivate&) = delete;
+    MMLAttributePrivate& operator=(const MMLAttributePrivate&) = delete;
 
 public:
     const ValueType& getValue() const

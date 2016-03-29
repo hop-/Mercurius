@@ -18,8 +18,8 @@ private:
     Children m_children;
 
 protected:
-    virtual void onObjectAdding(const C* o) {}
-    virtual void onObjectRemoving(const C* o) {}
+    virtual void onObjectAdding(const C*) {}
+    virtual void onObjectRemoving(const C*) {}
 
 public:
     bool addObject(C* o)
@@ -76,6 +76,11 @@ public:
     }
 
 public:
+    ContainerObject()
+        : Object()
+        , m_children()
+    {
+    }
     virtual ~ContainerObject() = 0;
 };
 

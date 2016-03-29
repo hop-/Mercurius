@@ -51,6 +51,15 @@ MMLAttribute(const MMLAttribute& a)
     m_private = new MMLAttributePrivate(a.m_private, this);
 }
 
+MMLAttribute& MMLAttribute::
+operator=(const MMLAttribute& a)
+{
+    if (this != &a) {
+        m_private = new MMLAttributePrivate(a.m_private, this);
+    }
+    return *this;
+}
+
 const std::string& MMLAttribute::
 getName() const
 {

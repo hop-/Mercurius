@@ -39,7 +39,7 @@ bool ObjectCollision::less(Base::TypedBase* obj)
     return m_objects < static_cast<ObjectCollision*>(obj)->m_objects;
 }
 
-bool QuitEvent::less(Base::TypedBase* obj)
+bool QuitEvent::less(Base::TypedBase*)
 {
     return false;
 }

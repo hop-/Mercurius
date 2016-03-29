@@ -18,6 +18,11 @@ public:
     void add(Event* event, Command* command);
     void remove(Event* event);
     Command* getCommand(Event* event);
+
+public:
+    Controls()
+        : m_controlMap()
+    {}
 };
 
 } // namespace Core

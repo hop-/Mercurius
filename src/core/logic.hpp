@@ -20,7 +20,7 @@ class Logic
     : public Base::ContainerObject<LogicObject>
     , public Base::ContainerObject<NaturalPower>
 {
-    LogicObject* m_viewPort;
+    LogicObject* m_viewPort = 0;
     ObjectCollider m_collider;
 
     typedef Base::ContainerObject<LogicObject> LogicObjects;
@@ -38,6 +38,10 @@ public:
     void addToViewPort(LogicObject* object);
     void updateObject(LogicObject* object, Position p);
     bool addLogicObject(LogicObject* object);
+
+private:
+    Logic(const Logic&) = delete;
+    Logic& operator=(const Logic&) = delete;
 
 private:
     void applyPowers();

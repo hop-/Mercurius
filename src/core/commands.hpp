@@ -19,6 +19,10 @@ class Accelerate
 public:
     Accelerate(LogicObject* object, Vector acceleration);
     void execute();
+
+private:
+    Accelerate(const Core::Accelerate&) = delete;
+    Accelerate& operator=(const Core::Accelerate&) = delete;
 };
 
 class Jump
@@ -30,6 +34,10 @@ class Jump
 public:
     Jump(LogicObject* object, EngineUnit power);
     void execute();
+
+private:
+    Jump(const Core::Jump&) = delete;
+    Jump& operator=(const Core::Jump&) = delete;
 };
 
 class Stand
@@ -40,6 +48,10 @@ class Stand
 public:
     Stand(LogicObject* object);
     void execute();
+
+private:
+    Stand(const Core::Stand&) = delete;
+    Stand& operator=(const Core::Stand&) = delete;
 };
 
 } // namespace Core

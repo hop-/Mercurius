@@ -1,13 +1,15 @@
 #ifndef _CORE_RESOURCE_MANAGER_HPP_
 #define _CORE_RESOURCE_MANAGER_HPP_
 
+#include <base/singleton.hpp>
+
 #include <string>
 #include <map>
 
 namespace Core
 {
 
-class ResourceManager
+class ResourceManager : public Base::Singleton<ResourceManager>
 {
 public:
     class Resource
@@ -35,6 +37,10 @@ public:
             return m_size;
         }
 
+    public:
+        Resource(const Resource&) = default; // TODO pointer?
+        Resource& operator=(const Resource&) = default;
+
     private:
         void loadTheFile();
     };
@@ -55,10 +61,7 @@ private:
     std::map<std::string, Resource> m_sounds;
 
 public:
-    ResourceManager() = default;
-
-public:
-    ResourceManager(std::string resourceRoot);
+    ResourceManager();
 
 public:
     void load();
@@ -81,6 +84,9 @@ public:
     {
         return m_sounds.at(name);
     }
+
+private:
+    friend class Base::Singleton<ResourceManager>;
 };
 
 } // namespace Core

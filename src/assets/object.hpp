@@ -29,6 +29,10 @@ class Object : public Base::Object
 public:
     Object(const MML::DrawableObject*, Core::Layer*);
 
+private:
+    Object(const Object&) = delete;
+    Object& operator=(const Object&) = delete;
+
 protected:
     void init()
     {

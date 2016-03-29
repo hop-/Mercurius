@@ -12,10 +12,14 @@ namespace Core
 
 ObjectCollider::ObjectCollider()
     : m_quadTree(0, Rectangle(0, 0, Position(0, 0)))
+    , m_collidedPairs()
+    , m_currentCollidedPairs()
 {}
 
 ObjectCollider::ObjectCollider(Rectangle bounds)
     : m_quadTree(0, bounds)
+    , m_collidedPairs()
+    , m_currentCollidedPairs()
 {}
 
 void ObjectCollider::setBounds(Rectangle bounds)

@@ -94,7 +94,7 @@ public:
 private:
     ObjectPair m_objects;
     Status m_status;
-    bool m_isTrigger;
+    bool m_isTrigger = true;
 
 public:
     ObjectCollision(ObjectPair pair, Status status);

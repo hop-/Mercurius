@@ -13,7 +13,10 @@ namespace MML
 
 MMLObject::
 MMLObject(const std::string& n, MMLObject* p)
-    : m_parent(0)
+    : m_attributes()
+    , m_type()
+    , m_parent(0)
+    , m_children()
 {
     MMLAttribute* name = new MMLAttribute("name", n);
     addAttribute(name);

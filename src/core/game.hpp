@@ -15,8 +15,8 @@ class Layer;
 
 class Game
 {
-    Frame* m_frame;
-    EventManager* m_eventManager;
+    Frame* m_frame = 0;
+    EventManager* m_eventManager = 0;
     InputManager m_inputManager;
     std::vector<Layer*> m_layers;
     static Game* m_instance;

@@ -57,19 +57,19 @@ Vector& Vector::operator*=(const float& multiplier)
     return *this;
 }
 
-Vector& operator+(const Vector& vector1, const Vector& vector2)
+Vector operator+(const Vector& vector1, const Vector& vector2)
 {
     Vector v = vector1;
     return v += vector2;
 }
 
-Vector& operator*(const float& multiplier, const Vector& vector)
+Vector operator*(const float& multiplier, const Vector& vector)
 {
     Vector v = vector;
     return v *= multiplier;
 }
 
-Vector& operator*(const Vector& vector, const float& multiplier)
+Vector operator*(const Vector& vector, const float& multiplier)
 {
     Vector v = vector;
     return v *= multiplier;

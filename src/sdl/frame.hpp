@@ -26,6 +26,10 @@ public:
     }
 
 private:
+    Frame(const Frame&) = delete;
+    Frame& operator=(const Frame&) = delete;
+
+private:
     void draw(const Core::GuiObject* object);
     void show();
 };

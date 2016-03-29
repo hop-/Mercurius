@@ -7,6 +7,7 @@ namespace Core
 {
 
 EventManager::EventManager()
+    : m_eventQueue()
 {}
 
 Event* EventManager::getEvent()

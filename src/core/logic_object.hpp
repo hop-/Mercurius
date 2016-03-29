@@ -27,7 +27,7 @@ public:
         , public Base::Observer
     {
         friend class LogicObject;
-        LogicObject* m_parent;
+        LogicObject* m_parent = 0;
 
     public:
         inline LogicObject* parent() const
@@ -46,7 +46,7 @@ public:
         virtual void update() {};
         virtual void init() {};
 
-        bool less(Base::TypedBase* o) final
+        bool less(Base::TypedBase*) final
         {
             return false;
         }
@@ -71,6 +71,10 @@ public:
 public:
     LogicObject();
     virtual ~LogicObject();
+
+private:
+    LogicObject(const LogicObject&) = delete;
+    LogicObject& operator=(const LogicObject&) = delete;
 
 private:
     typedef std::map<int, Component*> Components;

@@ -10,7 +10,9 @@ const int QuadTree::m_maxLevel = 5;
 
 QuadTree::QuadTree(int level, Rectangle bound)
     : m_level(level)
+    , m_objects()
     , m_bounds(bound)
+    , m_nodes()
 {}
 
 void QuadTree::clear()

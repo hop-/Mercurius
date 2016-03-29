@@ -60,6 +60,7 @@ void GuiObject::changeSourceRect()
 
 GuiObject::GuiObject(const std::string& texture)
     : Core::GuiObject()
+    , m_texture()
 {
     setTextureLocation(texture);
 }

@@ -59,8 +59,8 @@ private:
 class Physics
     : public LogicObject::ComponentCreator<Physics>
 {
-    int m_mass;
-    Vector m_velocity;
+    int m_mass = 0;
+    Vector m_velocity = Vector();
 
 public:
     inline int mass() const
@@ -110,8 +110,8 @@ private:
 class Collider
     : public LogicObject::ComponentCreator<Collider>
 {
-    EngineUnit m_width;
-    EngineUnit m_height;
+    EngineUnit m_width = 0;
+    EngineUnit m_height = 0;
     bool m_isTrigger = false;
 
 public:
@@ -146,7 +146,7 @@ class TextureRenderer
     unsigned m_state = 0;
     int m_numberOfStates = 1;
     float m_scaleFactor = 1;
-    Position m_position;
+    Position m_position = Position();
 
 public:
     // TODO add some useful functions
@@ -155,7 +155,7 @@ public:
 
     inline void setStateNumber(int numberOfStates)
     {
-        m_numberOfStates = 0;
+        m_numberOfStates = numberOfStates;
     }
 
     inline void setScaleFactor(float scaleFactor)

@@ -50,6 +50,7 @@ void Logic::updateLogicObjects()
 }
 
 Logic::Logic()
+    : m_collider()
 {
     createViewPortObject();
     m_collider.setBounds(m_viewPort->component<ViewPort>()->movingArea()); // TODO tmp solution

@@ -35,12 +35,12 @@ public:
     void setScreenMode(ScreenMode m);
     ScreenMode screenMode() const;
 
-    inline const int width() const
+    inline int width() const
     {
         return m_width;
     }
 
-    inline const int height() const
+    inline int height() const
     {
         return m_height;
     }

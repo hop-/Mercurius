@@ -22,6 +22,7 @@ MMLManager()
      : Base::Singleton<MMLManager>()
      , m_registery(new MMLRegistery())
      , m_layer_registery(new MMLRegistery())
+     , m_types()
 {
     registerTypes();
 }

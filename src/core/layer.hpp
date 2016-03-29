@@ -75,6 +75,10 @@ public:
     bool processEvent(Event*);
     void update();
     void draw();
+
+private:
+    Layer(const Layer&) = delete;
+    Layer& operator=(const Layer&) = delete;
 };
 
 } // namespace Core

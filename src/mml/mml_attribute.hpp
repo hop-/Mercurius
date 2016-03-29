@@ -10,8 +10,8 @@ namespace MML
 
 class MMLAttribute
 {
-    std::string m_name;
-    MMLAttributePrivate* m_private;
+    std::string m_name = "";
+    MMLAttributePrivate* m_private = 0;
 
 public:
     typedef std::pair<int, int> IntPair;
@@ -24,6 +24,8 @@ public:
     MMLAttribute(const std::string& n, bool v);
     MMLAttribute(const std::string& n, IntPair);
     virtual ~MMLAttribute();
+
+    MMLAttribute& operator=(const MMLAttribute&);
 
 public:
     const std::string& getName() const;

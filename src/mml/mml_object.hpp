@@ -26,6 +26,10 @@ public:
     MMLObject(const std::string&, MMLObject* = 0);
     virtual ~MMLObject();
 
+private:
+    MMLObject(const MMLObject&) = delete;
+    MMLObject& operator=(const MMLObject&) = delete;
+
 public:
     const std::string& getType() const;
 

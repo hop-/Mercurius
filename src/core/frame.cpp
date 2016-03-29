@@ -11,6 +11,7 @@ Frame::Frame()
     , m_width(800)
     , m_height(600)
     , m_screenMode(fullScreen)
+    , m_sortedObjects()
 {}
 
 void Frame::draw()

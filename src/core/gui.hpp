@@ -27,11 +27,16 @@ private:
 
 public:
     Gui()
-        : m_viewPort(0)
+        : Base::ContainerObject<GuiObject>()
+        , m_viewPort(0)
         , m_frame(0)
     {
     }
     virtual ~Gui();
+
+private:
+    Gui(const Gui&) = delete;
+    Gui& operator=(const Gui&) = delete;
 
 public:
     inline Frame* frame() const

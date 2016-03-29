@@ -59,7 +59,9 @@ bool SweepLine::Interval::intersect(const Interval& interval) const
 // SweepLine
 
 SweepLine::SweepLine()
-    : m_sorted(false)
+    : m_objects()
+    , m_pairs()
+    , m_sorted(false)
 {}
 
 SweepLine::~SweepLine()

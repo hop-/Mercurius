@@ -3,8 +3,11 @@
 namespace Core
 {
 
-ResourceManager::Resource::Resource(std::string fileLocation)
-    : m_fileLocation(fileLocation)
+template<>
+ResourceManager* Base::Singleton<ResourceManager>::m_s_instance = 0;
+
+ResourceManager::Resource::Resource(std::string fileName)
+    : m_fileLocation(fileName)
 {
     loadTheFile();
 }
@@ -23,8 +26,11 @@ void ResourceManager::Resource::loadTheFile()
 
 /////////////////////////////////////////////////////////////
 
-ResourceManager::ResourceManager(std::string resourceRoot)
-    : m_resourceRoot(resourceRoot)
+ResourceManager::ResourceManager()
+    : m_resourceRoot("") // TODO change to static get/set interface
+    , m_textures()
+    , m_mmls()
+    , m_sounds()
 {}
 
 void ResourceManager::load()

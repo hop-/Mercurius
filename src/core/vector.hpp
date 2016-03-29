@@ -45,9 +45,9 @@ public:
     Vector& operator*=(const float& multiplier);
 };
 
-Vector& operator+(const Vector& vector1, const Vector& vector2);
-Vector& operator*(const Vector& vector, const float& multiplier);
-Vector& operator*(const float& multiplier, const Vector& vector);
+Vector operator+(const Vector& vector1, const Vector& vector2);
+Vector operator*(const Vector& vector, const float& multiplier);
+Vector operator*(const float& multiplier, const Vector& vector);
 } // namespace Core
 
 #endif //_CORE_VECTOR_HPP_

@@ -81,8 +81,9 @@ void LogicObject::requestNewPosition(Position p)
 }
 
 LogicObject::LogicObject()
-{
-}
+    : m_components()
+    , m_position(Position())
+{}
 
 LogicObject::~LogicObject()
 {

@@ -23,7 +23,7 @@ class MMLRegistery
     };
 
     typedef std::set<MMLObject*, less> Objects;
-    Objects m_objects;
+    Objects m_objects = Objects();
 
 public:
     typedef Objects::iterator iterator;

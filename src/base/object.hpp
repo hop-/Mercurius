@@ -13,6 +13,11 @@ public:
     Object();
     virtual ~Object();
 
+private:
+    // TMP
+    Object(const Object&) = delete;
+    Object& operator=(const Object&) = delete;
+
 public:
     virtual void init() = 0;
 
