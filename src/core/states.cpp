@@ -2,9 +2,6 @@
 #include "commands.hpp"
 #include "events.hpp"
 #include "logic_object.hpp"
-#include "components.hpp"
-#include "vector.hpp"
-#include "input_manager.hpp"
 
 namespace Core
 {
@@ -15,16 +12,15 @@ void Standing::process(Event* e)
     if (0 == key || key->mode() == KeyEvent::Mode::Up) {
         return;
     }
-    LogicObject* p = parent<LogicObject>();
     switch (key->key()) {
     case InputManager::Key::Jump:
-        p->addState(new Jumping);
+        parent<LogicObject>()->addState(new Jumping);
         break;
     case InputManager::Key::Right:
-        p->addState(new RunningRight);
+        parent<LogicObject>()->changeState(new Running(Running::Direction::Right));
         break;
     case InputManager::Key::Left:
-        p->addState(new RunningLeft);
+        parent<LogicObject>()->changeState(new Running(Running::Direction::Left));
     default:
         break;
     }
@@ -37,10 +33,13 @@ void Standing::init()
 
 Command* Standing::command()
 {
-    //assert(0 != parent<LogicObject>());
-    //return new Stand(parent<LogicObject>());
-    return 0;
+    assert(0 != parent<LogicObject>());
+    return new Stand(parent<LogicObject>());
 }
+
+Jumping::Jumping(EngineUnit power)
+    : m_power(power)
+{}
 
 void Jumping::init()
 {
@@ -65,10 +64,23 @@ Command* Jumping::command()
         return 0;
     }
     --m_count;
-    return new Jump(parent<LogicObject>(), 25);
+    return new Jump(parent<LogicObject>(), m_power);
 }
 
-void RunningLeft::process(Event* e)
+Running::Running(Running::Direction d)
+    : m_direction(d)
+    , m_antiDirection((d == Direction::Left)
+            ? Direction::Right
+            : Direction::Left)
+    , m_changeDir((d == Direction::Left)
+            ? InputManager::Key::Right
+            : InputManager::Key::Left)
+    , m_stopRunning((d == Direction::Left)
+            ? InputManager::Key::Left
+            : InputManager::Key::Right)
+{}
+
+void Running::process(Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
     if (0 == key) {
@@ -76,54 +88,34 @@ void RunningLeft::process(Event* e)
     }
     LogicObject* p = parent<LogicObject>();
     if (key->mode() == KeyEvent::Mode::Down) {
-        if (key->key() == InputManager::Key::Right) {
-            p->changeState(new RunningRight);
+        if (key->key() == m_changeDir) {
+            p->changeState(new Running(m_antiDirection));
+        }
+        if (key->key() == InputManager::Key::Jump) {
+            p->addState(new Jumping);
         }
     } else {
-        if (key->key() == InputManager::Key::Left) {
-            p->removeState(this);
+        if (key->key() == m_stopRunning) {
+            p->changeState(new Standing);
         }
     }
 }
 
-void RunningLeft::init()
+void Running::init()
 {
     // TODO change texture state
 }
 
-Command* RunningLeft::command()
+Command* Running::command()
 {
-    return new Accelerate(parent<LogicObject>()
-            , Vector(1, 180));
-}
-
-void RunningRight::process(Event* e)
-{
-    KeyEvent* key = KeyEvent::cast(e);
-    if (0 == key) {
-        return;
-    }
-    LogicObject* p = parent<LogicObject>();
-    if (key->mode() == KeyEvent::Mode::Down) {
-        if (key->key() == InputManager::Key::Left) {
-            p->changeState(new RunningLeft);
-        }
+    float angle;
+    if (m_direction == Direction::Left) {
+        angle = 180;
     } else {
-        if (key->key() == InputManager::Key::Right) {
-            p->removeState(this);
-        }
+        angle = 0;
     }
-}
-
-void RunningRight::init()
-{
-    // TODO change texture state
-}
-
-Command* RunningRight::command()
-{
     return new Accelerate(parent<LogicObject>()
-            , Vector(1, 0));
+            , Vector(1, angle));
 }
 
 } // namespace Core

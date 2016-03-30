@@ -2,13 +2,15 @@
 #define _CORE_STATES_HPP_
 
 #include "state.hpp"
+#include "units.hpp"
+#include "input_manager.hpp"
 
 namespace Core
 {
 
 class Event;
 
-class Standing  // TODO now it is state manager
+class Standing
     : public State
 {
 public:
@@ -21,6 +23,11 @@ class Jumping
     : public State
 {
     int m_count = 100;
+    EngineUnit m_power = 25;
+
+public:
+    Jumping() = default;
+    Jumping(EngineUnit power);
 
 public:
     void init();
@@ -28,18 +35,24 @@ public:
     Command* command();
 };
 
-class RunningLeft
+class Running   // better to use template
     : public State
 {
 public:
-    virtual void init();
-    void process(Event* e);
-    Command* command();
-};
+    enum class Direction {
+        Left,
+        Right
+    };
 
-class RunningRight
-    : public State
-{
+private:
+    Direction m_direction;
+    Direction m_antiDirection;
+    InputManager::Key m_changeDir;
+    InputManager::Key m_stopRunning;
+
+public:
+    Running(Direction d);
+
 public:
     virtual void init();
     void process(Event* e);
