@@ -2,6 +2,7 @@
 #include "commands.hpp"
 #include "events.hpp"
 #include "logic_object.hpp"
+#include "components.hpp"
 
 namespace Core
 {
@@ -87,11 +88,11 @@ void Running::process(Event* e)
         return;
     }
     LogicObject* p = parent<LogicObject>();
+    assert(0 != p);
     if (key->mode() == KeyEvent::Mode::Down) {
         if (key->key() == m_changeDir) {
             p->changeState(new Running(m_antiDirection));
-        }
-        if (key->key() == InputManager::Key::Jump) {
+        } else if (key->key() == InputManager::Key::Jump) {
             p->addState(new Jumping);
         }
     } else {
@@ -104,6 +105,11 @@ void Running::process(Event* e)
 void Running::init()
 {
     // TODO change texture state
+    assert(0 != parent<LogicObject>());
+    assert(0 != parent<LogicObject>()->component<TextureRenderer>());
+    parent<LogicObject>()
+        ->component<TextureRenderer>()->setDirection(
+                static_cast<TextureRenderer::Direction>(m_direction));
 }
 
 Command* Running::command()

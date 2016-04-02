@@ -11,6 +11,7 @@ struct Texture
     SDL_Texture* texture;
     SDL_Rect sourceRect;
     SDL_Rect destinationRect;
+    SDL_RendererFlip flip;
 };
 
 } // namespace Core

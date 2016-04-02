@@ -29,6 +29,7 @@ public:
 
 private:
     void updateDestRect();
+    void updateDirection();
     void changeSourceRect();
 };
 

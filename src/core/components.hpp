@@ -143,10 +143,18 @@ class TextureRenderer
     : public LogicObject::ComponentCreator<TextureRenderer>
     , public Base::Subject
 {
+public:
+    enum class Direction {
+        Left = 0
+        , Right
+    };
+
+private:
     unsigned m_state = 0;
     int m_numberOfStates = 1;
     float m_scaleFactor = 1;
     Position m_position = Position();
+    Direction m_direction = Direction::Right;
 
 public:
     // TODO add some useful functions
@@ -166,6 +174,16 @@ public:
     inline float scaleFactor() const
     {
         return m_scaleFactor;
+    }
+
+    inline Direction direction() const
+    {
+        return m_direction;
+    }
+
+    inline void setDirection(Direction d)
+    {
+        m_direction = d;
     }
 
     inline int state() const

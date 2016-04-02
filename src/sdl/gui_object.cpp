@@ -25,7 +25,13 @@ SDL_Rect toSDL(Core::Rectangle rectangle, float scale, float scaleRect)
         , int(float(rectangle.height()) * scale * scaleRect)};
 }
 
+inline SDL_RendererFlip flip(GuiObject::Direction dir) {
+    return (GuiObject::Direction::Left == dir)
+       ? SDL_FLIP_HORIZONTAL
+       : SDL_FLIP_NONE;
 }
+
+}  // unknown
 
 void GuiObject::init()
 {
@@ -38,6 +44,7 @@ void GuiObject::init()
             textureLocation().c_str());
     assert(m_texture.texture);
     m_texture.sourceRect = SDL_Rect{0, 0, (int)width(), (int)height()};
+    m_texture.flip = flip(direction());
     assert(0 != subject());
 }
 
@@ -45,7 +52,13 @@ void GuiObject::onNotify()
 {
     Core::GuiObject::onNotify();
     updateDestRect();
+    updateDirection();
     changeSourceRect();
+}
+
+void GuiObject::updateDirection()
+{
+    m_texture.flip = flip(direction());
 }
 
 void GuiObject::updateDestRect()

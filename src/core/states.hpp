@@ -40,8 +40,8 @@ class Running   // better to use template
 {
 public:
     enum class Direction {
-        Left,
-        Right
+        Left = 0
+        , Right
     };
 
 private:

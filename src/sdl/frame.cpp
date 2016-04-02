@@ -88,9 +88,11 @@ void Frame::draw(const Core::GuiObject* object)
     texture.destinationRect.y = height()
         - texture.destinationRect.y
         - texture.destinationRect.h;
-    SDL_RenderCopy(m_renderer, texture.texture  // maybe need to be used
-            , &(texture.sourceRect)             // SDL_RenderCopyEx(..) to
-            , &(texture.destinationRect));      // mirror image left/right
+    SDL_RenderCopyEx(m_renderer, texture.texture
+            , &(texture.sourceRect)
+            , &(texture.destinationRect)
+            , 0, 0
+            , texture.flip);
     DRAW_BOARDS(m_renderer, &(texture.destinationRect));
 }
 
