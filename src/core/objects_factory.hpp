@@ -25,6 +25,7 @@ public:
      * @note m should be valid pointer
      * @note p should be valid pointer
      */
+    virtual ~ObjectsFactory() = default;
     virtual Base::Object* create(const MML::MMLObject* m, Base::Object* p = 0) const = 0;
 };
 

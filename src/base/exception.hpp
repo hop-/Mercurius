@@ -9,6 +9,7 @@ namespace Base
 class Exception
 {
 public:
+    virtual ~Exception() = default;
     virtual const std::string what() const = 0;
 };
 
