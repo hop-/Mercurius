@@ -25,8 +25,8 @@ SDL_Rect toSDL(Core::Rectangle rectangle, float scale, float scaleRect)
         , int(float(rectangle.height()) * scale * scaleRect)};
 }
 
-inline SDL_RendererFlip flip(GuiObject::Direction dir) {
-    return (GuiObject::Direction::Left == dir)
+inline SDL_RendererFlip flip(Core::HorizontalDirection dir) {
+    return (Core::HorizontalDirection::Left == dir)
        ? SDL_FLIP_HORIZONTAL
        : SDL_FLIP_NONE;
 }

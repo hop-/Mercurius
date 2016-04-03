@@ -23,7 +23,7 @@ void GuiObject::onNotify()
 {
     m_rect.setPosition(textureRenderer()->objectPosition());
     m_state = textureRenderer()->state();
-    m_direction = static_cast<Direction>(textureRenderer()->direction());
+    m_direction = textureRenderer()->direction();
 }
 
 float GuiObject::scale() const

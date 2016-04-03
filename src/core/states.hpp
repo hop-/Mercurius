@@ -38,20 +38,13 @@ public:
 class Running   // better to use template
     : public State
 {
-public:
-    enum class Direction {
-        Left = 0
-        , Right
-    };
-
-private:
-    Direction m_direction;
-    Direction m_antiDirection;
+    HorizontalDirection m_direction;
+    HorizontalDirection m_antiDirection;
     InputManager::Key m_changeDir;
     InputManager::Key m_stopRunning;
 
 public:
-    Running(Direction d);
+    Running(HorizontalDirection d);
 
 public:
     virtual void init();

@@ -18,10 +18,10 @@ void Standing::process(Event* e)
         parent<LogicObject>()->addState(new Jumping);
         break;
     case InputManager::Key::Right:
-        parent<LogicObject>()->changeState(new Running(Running::Direction::Right));
+        parent<LogicObject>()->changeState(new Running(HorizontalDirection::Right));
         break;
     case InputManager::Key::Left:
-        parent<LogicObject>()->changeState(new Running(Running::Direction::Left));
+        parent<LogicObject>()->changeState(new Running(HorizontalDirection::Left));
     default:
         break;
     }
@@ -68,15 +68,15 @@ Command* Jumping::command()
     return new Jump(parent<LogicObject>(), m_power);
 }
 
-Running::Running(Running::Direction d)
+Running::Running(HorizontalDirection d)
     : m_direction(d)
-    , m_antiDirection((d == Direction::Left)
-            ? Direction::Right
-            : Direction::Left)
-    , m_changeDir((d == Direction::Left)
+    , m_antiDirection((d == HorizontalDirection::Left)
+            ? HorizontalDirection::Right
+            : HorizontalDirection::Left)
+    , m_changeDir((d == HorizontalDirection::Left)
             ? InputManager::Key::Right
             : InputManager::Key::Left)
-    , m_stopRunning((d == Direction::Left)
+    , m_stopRunning((d == HorizontalDirection::Left)
             ? InputManager::Key::Left
             : InputManager::Key::Right)
 {}
@@ -108,14 +108,13 @@ void Running::init()
     assert(0 != parent<LogicObject>());
     assert(0 != parent<LogicObject>()->component<TextureRenderer>());
     parent<LogicObject>()
-        ->component<TextureRenderer>()->setDirection(
-                static_cast<TextureRenderer::Direction>(m_direction));
+        ->component<TextureRenderer>()->setDirection(m_direction);
 }
 
 Command* Running::command()
 {
     float angle;
-    if (m_direction == Direction::Left) {
+    if (m_direction == HorizontalDirection::Left) {
         angle = 180;
     } else {
         angle = 0;

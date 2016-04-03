@@ -21,19 +21,12 @@ class GuiObject
     : public Base::Object
     , public Base::Observer
 {
-public:
-    enum class Direction {
-        Left = 0
-        , Right
-    };
-
-private:
     std::string m_textureLocation;
     float m_scaleFactor = 1;
     int m_priority = 0;
     int m_state = 0;
     Rectangle m_rect;
-    Direction m_direction = Direction::Right;
+    HorizontalDirection m_direction = HorizontalDirection::Right;
 
 protected:
     GuiObject();
@@ -82,7 +75,7 @@ protected:
     inline const TextureRenderer* textureRenderer() const;
     inline const Gui* guiManager() const;
 
-    inline Direction direction() const
+    inline HorizontalDirection direction() const
     {
         return m_direction;
     }

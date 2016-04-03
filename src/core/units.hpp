@@ -37,6 +37,18 @@ public:
     UserUnit operator*=(UserUnit u);
 };
 
+enum class Direction {
+    Left = 0
+    , Right
+    , Up
+    , Down
+};
+
+enum class HorizontalDirection {
+    Left = 0
+    , Right
+};
+
 } // namespace Core
 
 #endif //_CORE_UNITS_HPP_
