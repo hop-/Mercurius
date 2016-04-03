@@ -33,9 +33,9 @@ void SweepLine::RectangleEdge::generate(SweepLine& parent
     assert(0 != object);
     assert(0 != object->component<Collider>());
     parent.insert(RectangleEdge(m_currentIndex, object
-                , object->component<Collider>()->rect().xMin(), true));
+                , object->component<Collider>()->rect().left(), true));
     parent.insert(RectangleEdge(m_currentIndex, object
-                , object->component<Collider>()->rect().xMax(), false));
+                , object->component<Collider>()->rect().right(), false));
     ++m_currentIndex;
 }
 
@@ -157,8 +157,8 @@ SweepLine::LogicObjectPairs SweepLine::getPairs()
         assert(0 != edge.object()->component<Collider>());
         Interval objectInterval(edge.index()
                 , edge.object()
-                , edge.object()->component<Collider>()->rect().yMin()
-                , edge.object()->component<Collider>()->rect().yMax());
+                , edge.object()->component<Collider>()->rect().bottom()
+                , edge.object()->component<Collider>()->rect().top());
         // TODO implement an interval tree as an augmented tree
         // Now it uses brute force
         if (edge.isBegin()) {

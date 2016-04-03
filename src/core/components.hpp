@@ -42,12 +42,12 @@ private:
 
     inline EngineUnit middleX()
     {
-        return (xMax() - xMin()) / 2;
+        return (right() - left()) / 2;
     }
 
     inline EngineUnit middleY()
     {
-        return (yMax() - yMin()) / 2;
+        return (top() - bottom()) / 2;
     }
 
     inline const LogicObject* target() const

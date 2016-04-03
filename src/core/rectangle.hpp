@@ -24,10 +24,10 @@ public:
     bool isInside(const Rectangle& rect) const;
     bool intersects(const Rectangle& rect) const;
 
-    EngineUnit xMax() const;
-    EngineUnit xMin() const;
-    EngineUnit yMax() const;
-    EngineUnit yMin() const;
+    EngineUnit right() const;
+    EngineUnit left() const;
+    EngineUnit top() const;
+    EngineUnit bottom() const;
 
     inline const EngineUnit& width() const
     {

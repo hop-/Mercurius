@@ -29,12 +29,12 @@ void ViewPort::aim()
     Position p(target()->position().x() - middleX()
             , target()->position().y() - middleY());
     Rectangle tmpRect(width(), height(), p);
-    if (m_movingArea.xMax() >= tmpRect.xMax()
-            && m_movingArea.xMin() <= tmpRect.xMin()) {
+    if (m_movingArea.right() >= tmpRect.right()
+            && m_movingArea.left() <= tmpRect.left()) {
         setX(p.x());
     }
-    if (m_movingArea.yMax() >= tmpRect.yMax()
-            && m_movingArea.yMin() <= tmpRect.yMin()) {
+    if (m_movingArea.top() >= tmpRect.top()
+            && m_movingArea.bottom() <= tmpRect.bottom()) {
         setY(p.y());
     }
 }

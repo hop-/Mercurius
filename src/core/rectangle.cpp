@@ -23,10 +23,10 @@ Rectangle Rectangle::represent(const Rectangle& rectangle) const
 
 bool Rectangle::isInside(const Rectangle& rect) const
 {
-    return (xMax() >= rect.xMax()
-            && xMin() <= rect.xMin()
-            && yMax() >= rect.yMax()
-            && yMin() <= rect.yMin());
+    return (right() >= rect.right()
+            && left() <= rect.left()
+            && top() >= rect.top()
+            && bottom() <= rect.bottom());
 }
 
 Rectangle Rectangle::scaled(float scale)
@@ -40,13 +40,13 @@ Rectangle Rectangle::scaled(float scale)
 
 bool Rectangle::intersects(const Rectangle& rect) const
 {
-    return (xMin() < rect.xMax()
-            && xMax() > rect.xMin()
-            && yMin() < rect.yMax()
-            && yMax() > rect.yMin());
+    return (left() < rect.right()
+            && right() > rect.left()
+            && bottom() < rect.top()
+            && top() > rect.bottom());
 }
 
-EngineUnit Rectangle::xMax() const
+EngineUnit Rectangle::right() const
 {
     if (m_width > 0) {
         return m_position.x() + m_width;
@@ -55,7 +55,7 @@ EngineUnit Rectangle::xMax() const
     }
 }
 
-EngineUnit Rectangle::xMin() const
+EngineUnit Rectangle::left() const
 {
     if (m_width > 0) {
         return m_position.x();
@@ -64,7 +64,7 @@ EngineUnit Rectangle::xMin() const
     }
 }
 
-EngineUnit Rectangle::yMax() const
+EngineUnit Rectangle::top() const
 {
     if (m_height > 0) {
         return m_position.y() + m_height;
@@ -73,7 +73,7 @@ EngineUnit Rectangle::yMax() const
     }
 }
 
-EngineUnit Rectangle::yMin() const
+EngineUnit Rectangle::bottom() const
 {
     if (m_height > 0) {
         return m_position.y();

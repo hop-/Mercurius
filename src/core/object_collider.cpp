@@ -62,12 +62,12 @@ void ObjectCollider::update(LogicObject* object, Position p)
             EngineUnit dX;
             if (p.x() - pOld.x() > 0) {
                 // moved right
-                dX = c->rect().xMax()
-                    - collider->rect().xMin();
+                dX = c->rect().right()
+                    - collider->rect().left();
             } else {
                 // moved left
-                dX = collider->rect().xMax()
-                    - c->rect().xMin();
+                dX = collider->rect().right()
+                    - c->rect().left();
             }
             if (maxDX < dX) {
                 maxDX = dX;
@@ -95,12 +95,12 @@ void ObjectCollider::update(LogicObject* object, Position p)
             EngineUnit dy;
             if (p.y() - pOld.y() > 0) {
                 // moved up
-                dy = c->rect().yMax()
-                    - collider->rect().yMin();
+                dy = c->rect().top()
+                    - collider->rect().bottom();
             } else {
                 // moved down
-                dy = collider->rect().yMax()
-                    - c->rect().yMin();
+                dy = collider->rect().top()
+                    - c->rect().bottom();
             }
             if (maxDY < dy) {
                 maxDY = dy;
