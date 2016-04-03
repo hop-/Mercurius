@@ -1,7 +1,7 @@
 #ifndef _CORE_EVENT_MANAGER_HPP_
 #define _CORE_EVENT_MANAGER_HPP_
 
-#include <queue>
+#include <list>
 #include <cassert>
 
 namespace Core
@@ -13,7 +13,8 @@ class Command;
 
 class EventManager
 {
-    std::queue<Event*> m_eventQueue;
+    std::list<Event*> m_eventQueue;
+    std::list<Event*> m_waitingEvents;
 
 public:
     EventManager();
@@ -29,7 +30,21 @@ public:
     inline void push(Event* e)
     {
         assert(0 != e);
-        m_eventQueue.push(e);
+        m_waitingEvents.push_back(e);
+    }
+
+protected:
+    inline void pushToQueue(Event* e)
+    {
+        assert(0 != e);
+        m_eventQueue.push_back(e);
+    }
+    inline void moveWaitingsToQueue()
+    {
+        m_eventQueue.insert(m_eventQueue.end()
+                , m_waitingEvents.begin()
+                , m_waitingEvents.end());
+        m_waitingEvents.clear();
     }
 };
 

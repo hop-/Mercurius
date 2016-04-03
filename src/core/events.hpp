@@ -3,6 +3,7 @@
 
 #include "event.hpp"
 #include "input_manager.hpp"
+#include "units.hpp"
 
 namespace Core
 {
@@ -95,6 +96,7 @@ private:
     ObjectPair m_objects;
     Status m_status;
     bool m_isTrigger = true;
+    Direction m_collisionDirection;
 
 public:
     ObjectCollision(ObjectPair pair, Status status);
@@ -117,6 +119,28 @@ public:
     inline Status status() const
     {
         return m_status;
+    }
+
+    inline Direction directionForFirst() const
+    {
+        return m_collisionDirection;
+    }
+
+    inline Direction directionForSecond() const
+    {
+        switch (m_collisionDirection) {
+        case Direction::Left:
+            return Direction::Right;
+        case Direction::Right:
+            return Direction::Left;
+        case Direction::Up:
+            return Direction::Down;
+        case Direction::Down:
+            return Direction::Up;
+        case Direction::None:
+            return Direction::None;
+        }
+        return Direction::None;
     }
 
 private:

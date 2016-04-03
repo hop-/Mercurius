@@ -44,7 +44,7 @@ void EventManager::catchEvent()
             cevent = 0;
         }
         if (0 != cevent) {
-            push(cevent);
+            pushToQueue(cevent);
         }
     }
 }

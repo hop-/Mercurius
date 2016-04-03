@@ -14,9 +14,6 @@ void Standing::process(Event* e)
         return;
     }
     switch (key->key()) {
-    case InputManager::Key::Jump:
-        parent<LogicObject>()->addState(new Jumping);
-        break;
     case InputManager::Key::Right:
         parent<LogicObject>()->changeState(new Running(HorizontalDirection::Right));
         break;
@@ -38,6 +35,22 @@ Command* Standing::command()
     return new Stand(parent<LogicObject>());
 }
 
+void OnGround::init()
+{
+    // TODO change texture state
+}
+
+void OnGround::process(Event* e)
+{
+    KeyEvent* key = KeyEvent::cast(e);
+    if (0 == key || key->mode() == KeyEvent::Mode::Up) {
+        return;
+    }
+    if (key->key() == InputManager::Key::Jump) {
+        parent<LogicObject>()->changeState(new Jumping);
+    }
+}
+
 Jumping::Jumping(EngineUnit power)
     : m_power(power)
 {}
@@ -50,12 +63,34 @@ void Jumping::init()
 void Jumping::process(Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
-    if (0 == key) {
+    if (0 != key) {
+        if (key->mode() == KeyEvent::Mode::Up
+                && key->key() == InputManager::Key::Jump) {
+            m_count = 0;
+        }
         return;
     }
-    if (key->mode() == KeyEvent::Mode::Up
-            && key->key() == InputManager::Key::Jump) {
-        parent<LogicObject>()->removeState(this);
+    ObjectCollision* c = ObjectCollision::cast(e);
+    if (0 == c
+            || c->isTrigger()
+            || c->status() == ObjectCollision::Status::Detached) {
+        return;
+    }
+    LogicObject* p = parent<LogicObject>();
+    int isFirst = false;
+    if (c->first() == p) {
+        isFirst = true;
+    } else if (c->second() != p){
+        return;
+    }
+    Direction d;
+    if (isFirst) {
+        d = c->directionForFirst();
+    } else {
+        d = c->directionForSecond();
+    }
+    if (d == Direction::Up) {
+        parent<LogicObject>()->changeState(new OnGround());
     }
 }
 
@@ -92,8 +127,6 @@ void Running::process(Event* e)
     if (key->mode() == KeyEvent::Mode::Down) {
         if (key->key() == m_changeDir) {
             p->changeState(new Running(m_antiDirection));
-        } else if (key->key() == InputManager::Key::Jump) {
-            p->addState(new Jumping);
         }
     } else {
         if (key->key() == m_stopRunning) {

@@ -22,6 +22,7 @@ private:
         addCollider();
         addPhysics();
         addState(new Core::Standing);
+        addState(new Core::OnGround); // contains bug
     }
 };
 

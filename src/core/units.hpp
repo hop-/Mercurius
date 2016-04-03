@@ -42,6 +42,7 @@ enum class Direction {
     , Right
     , Up
     , Down
+    , None
 };
 
 enum class HorizontalDirection {

@@ -19,6 +19,14 @@ public:
     Command* command();
 };
 
+class OnGround
+    : public State
+{
+public:
+    void init();
+    void process(Event* e);
+};
+
 class Jumping
     : public State
 {

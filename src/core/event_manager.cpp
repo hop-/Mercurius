@@ -8,6 +8,7 @@ namespace Core
 
 EventManager::EventManager()
     : m_eventQueue()
+    , m_waitingEvents()
 {}
 
 Event* EventManager::getEvent()
@@ -29,9 +30,10 @@ void EventManager::pop()
 {
     if (m_eventQueue.size() > 0) {
         Event* e = m_eventQueue.front();
-        m_eventQueue.pop();
+        m_eventQueue.pop_front();
         delete e;
     }
+    moveWaitingsToQueue();
 }
 
 } // namespace core
