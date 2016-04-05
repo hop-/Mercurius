@@ -44,7 +44,6 @@ bool Game::deleteInstance()
 Game::Game(Frame* frame, EventManager* eventManager)
     : m_frame(frame)
     , m_eventManager(eventManager)
-    , m_inputManager()
     , m_layers()
 {
     assert(0 != m_frame);

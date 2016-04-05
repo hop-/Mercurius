@@ -17,7 +17,6 @@ class Game
 {
     Frame* m_frame = 0;
     EventManager* m_eventManager = 0;
-    InputManager m_inputManager;
     std::vector<Layer*> m_layers;
     static Game* m_instance;
 
@@ -40,11 +39,6 @@ public:
     EventManager* eventManager()
     {
         return m_eventManager;
-    }
-
-    const InputManager& getInputManager() const
-    {
-        return m_inputManager;
     }
 
 public:
