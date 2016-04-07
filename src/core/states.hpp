@@ -22,6 +22,8 @@ public:
 class OnGround
     : public State
 {
+    int m_countOfGroundObjects = 1;
+
 public:
     void init();
     void process(Event* e);
@@ -41,6 +43,14 @@ public:
     void init();
     void process(Event* e);
     Command* command();
+};
+
+class Falling
+    : public State
+{
+public:
+    void init();
+    void process(Event* e);
 };
 
 class Running   // better to use template

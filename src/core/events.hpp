@@ -100,6 +100,7 @@ private:
 
 public:
     ObjectCollision(ObjectPair pair, Status status);
+    Direction getCollisionSide(const LogicObject* object) const;
 
     inline const LogicObject* first() const
     {

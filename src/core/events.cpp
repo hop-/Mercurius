@@ -47,6 +47,16 @@ ObjectCollision::ObjectCollision(ObjectPair pair, Status status)
     }
 }
 
+Direction ObjectCollision::getCollisionSide(const LogicObject* object) const
+{
+    if (m_objects.first == object) {
+        return directionForFirst();
+    } else if (m_objects.second == object) {
+        return directionForSecond();
+    }
+    return Direction::None;
+}
+
 bool ObjectCollision::less(Base::TypedBase* obj)
 {
     return m_objects < static_cast<ObjectCollision*>(obj)->m_objects;

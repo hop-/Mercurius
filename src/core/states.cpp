@@ -43,11 +43,26 @@ void OnGround::init()
 void OnGround::process(Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
-    if (0 == key || key->mode() == KeyEvent::Mode::Up) {
+    if (0 != key && key->mode() == KeyEvent::Mode::Down) {
+        if (key->key() == InputManager::Key::Jump) {
+            parent<LogicObject>()->changeState(new Jumping);
+        }
         return;
     }
-    if (key->key() == InputManager::Key::Jump) {
-        parent<LogicObject>()->changeState(new Jumping);
+    ObjectCollision* c = ObjectCollision::cast(e);
+    if (0 != c && !c->isTrigger()) {
+        if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up
+                && c->status() == ObjectCollision::Status::Attached) {
+            ++m_countOfGroundObjects;
+        } else if (c->getCollisionSide(parent<LogicObject>())
+                == Direction::None
+                && c->status() == ObjectCollision::Status::Detached) {
+            --m_countOfGroundObjects;
+            if (m_countOfGroundObjects == 0) {
+                parent<LogicObject>()->changeState(new Falling);
+            }
+        }
+        return;
     }
 }
 
@@ -76,22 +91,10 @@ void Jumping::process(Event* e)
             || c->status() == ObjectCollision::Status::Detached) {
         return;
     }
-    LogicObject* p = parent<LogicObject>();
-    int isFirst = false;
-    if (c->first() == p) {
-        isFirst = true;
-    } else if (c->second() != p){
-        return;
-    }
-    Direction d;
-    if (isFirst) {
-        d = c->directionForFirst();
-    } else {
-        d = c->directionForSecond();
-    }
-    if (d == Direction::Up) {
+    if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up) {
         parent<LogicObject>()->changeState(new OnGround());
     }
+    // TODO activate Falling state if collide on air
 }
 
 Command* Jumping::command()
@@ -101,6 +104,24 @@ Command* Jumping::command()
     }
     --m_count;
     return new Jump(parent<LogicObject>(), m_power);
+}
+
+void Falling::init()
+{
+    // TODO change texture state
+}
+
+void Falling::process(Event* e)
+{
+    ObjectCollision* c = ObjectCollision::cast(e);
+    if (0 == c
+            || c->isTrigger()
+            || c->status() == ObjectCollision::Status::Detached) {
+        return;
+    }
+    if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up) {
+        parent<LogicObject>()->changeState(new OnGround());
+    }
 }
 
 Running::Running(HorizontalDirection d)
