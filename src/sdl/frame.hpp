@@ -32,6 +32,7 @@ private:
 private:
     void draw(const Core::GuiObject* object);
     void show();
+    void correctResolution();
 };
 
 } // namespace Sdl

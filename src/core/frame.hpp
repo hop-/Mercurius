@@ -57,6 +57,16 @@ protected:
     {
         m_msPerUpdate = ms;
     }
+
+    inline void setWidth(int w)
+    {
+        m_width = w;
+    }
+
+    inline void setHeight(int h)
+    {
+        m_height = h;
+    }
 };
 
 } // namespace Core

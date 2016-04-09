@@ -66,10 +66,19 @@ void Frame::init()
             , height()
             , toSDLScreenMode(screenMode()));
     assert(0 != m_window);
+    correctResolution();
     m_renderer = SDL_CreateRenderer(m_window
             , -1
             , SDL_RENDERER_ACCELERATED);
     assert(0 != m_renderer);
+}
+
+void Frame::correctResolution()
+{
+    int w, h;
+    SDL_GetWindowSize(m_window, &w, &h);
+    setWidth(w);
+    setHeight(h);
 }
 
 void Frame::clear()

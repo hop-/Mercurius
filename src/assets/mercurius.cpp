@@ -18,7 +18,7 @@ void Mercurius::start()
 {
     loadConfigs();
     Core::Frame* frame = new Sdl::Frame;
-    frame->setScreenMode(Core::Frame::window);
+    //frame->setScreenMode(Core::Frame::window);
     frame->setResolution(800, 600);
     Core::EventManager* eventManager = new Sdl::EventManager;
     Core::Game* game = Core::Game::getInstance(frame, eventManager);
