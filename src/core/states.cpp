@@ -24,9 +24,10 @@ void Standing::process(Event* e)
     }
 }
 
-void Standing::init()
+Command* Standing::onInit()
 {
-    // TODO change texture state
+    // TODO return command to change texture
+    return 0;
 }
 
 Command* Standing::command()
@@ -35,9 +36,10 @@ Command* Standing::command()
     return new Stand(parent<LogicObject>());
 }
 
-void OnGround::init()
+Command* OnGround::onInit()
 {
-    // TODO change texture state
+    // TODO return command to change texture
+    return 0;
 }
 
 void OnGround::process(Event* e)
@@ -70,9 +72,10 @@ Jumping::Jumping(EngineUnit power)
     : m_power(power)
 {}
 
-void Jumping::init()
+Command* Jumping::onInit()
 {
-    // TODO change texture state
+    // TODO return command to change texture
+    return 0;
 }
 
 void Jumping::process(Event* e)
@@ -106,9 +109,10 @@ Command* Jumping::command()
     return new Jump(parent<LogicObject>(), m_power);
 }
 
-void Falling::init()
+Command* Falling::onInit()
 {
-    // TODO change texture state
+    // TODO return command to change texture
+    return 0;
 }
 
 void Falling::process(Event* e)
@@ -156,13 +160,14 @@ void Running::process(Event* e)
     }
 }
 
-void Running::init()
+Command* Running::onInit()
 {
-    // TODO change texture state
+    // TODO return command to change texture and set direction
     assert(0 != parent<LogicObject>());
     assert(0 != parent<LogicObject>()->component<TextureRenderer>());
     parent<LogicObject>()
         ->component<TextureRenderer>()->setDirection(m_direction);
+    return 0;
 }
 
 Command* Running::command()

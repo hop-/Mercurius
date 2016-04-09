@@ -14,7 +14,7 @@ class Standing
     : public State
 {
 public:
-    virtual void init();
+    virtual Command* onInit();
     void process(Event* e);
     Command* command();
 };
@@ -25,7 +25,7 @@ class OnGround
     int m_countOfGroundObjects = 1;
 
 public:
-    void init();
+    Command* onInit();
     void process(Event* e);
 };
 
@@ -40,7 +40,7 @@ public:
     Jumping(EngineUnit power);
 
 public:
-    void init();
+    Command* onInit();
     void process(Event* e);
     Command* command();
 };
@@ -49,7 +49,7 @@ class Falling
     : public State
 {
 public:
-    void init();
+    Command* onInit();
     void process(Event* e);
 };
 
@@ -65,7 +65,7 @@ public:
     Running(HorizontalDirection d);
 
 public:
-    virtual void init();
+    virtual Command* onInit();
     void process(Event* e);
     Command* command();
 };

@@ -13,9 +13,16 @@ class State
     : public Base::Object
 {
 public:
-    virtual void init() = 0;
+    void init() final;
     virtual void process(Event* e) = 0;
+
     virtual Command* command()
+    {
+        return 0;
+    }
+
+protected:
+    virtual Command* onInit()
     {
         return 0;
     }
