@@ -44,7 +44,7 @@ parseFile(const std::string& f)
     if (!checkSyntax(data)) {
         throw MMLSyntaxError();
     }
-    parseLayers(data);
+    parseObjects(data);
     return true;
 }
 
@@ -109,7 +109,7 @@ isMetaSymbol(char c)
 }
 
 void MMLParser::
-parseLayers(const std::string& data)
+parseObjects(const std::string& data)
 {
     std::string tmp = data;
     unsigned brackets = 0;
@@ -147,7 +147,7 @@ parseLayers(const std::string& data)
         child->setParent(level);
     }
     if (!tmp.empty()) {
-        parseLayers(tmp);
+        parseObjects(tmp);
     }
 }
 

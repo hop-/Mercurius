@@ -16,6 +16,7 @@ namespace Assets
 
 void Mercurius::start()
 {
+    loadConfigs();
     Core::Frame* frame = new Sdl::Frame;
     frame->setScreenMode(Core::Frame::window);
     frame->setResolution(800, 600);
@@ -30,6 +31,25 @@ void Mercurius::start()
     r = TypeManager::deleteInstance();
     assert(r);
     Base::Utility::ignoreUnused(r);
+}
+
+void Mercurius::loadConfigs()
+{
+    typedef MML::MMLManager manager;
+    manager* m = manager::getInstance();
+    assert(0 != m);
+    m->loadData("resources/mmls/config.mml");
+    MML::MMLRegistery* registery = m->getRegistery();
+    assert(0 != registery);
+    TypeManager* tm = TypeManager::getInstance();
+    assert(0 != tm);
+    for(MML::MMLRegistery::iterator i = registery->begin();
+                                    i != registery->end(); ++i) {
+        MML::MMLObject* config = *i;
+        assert(0 != config);
+        // TODO pass configs to coresponding class
+    }
+
 }
 
 void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)

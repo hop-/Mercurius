@@ -12,6 +12,7 @@ public:
     static void start();
 
 private:
+    static void loadConfigs();
     static void loadLayers(Core::Game&, Core::Frame*);
 };
 

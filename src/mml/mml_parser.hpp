@@ -28,7 +28,7 @@ private:
     void parseMMLAtribute(const std::string&, MMLObject*);
     void parseMMLValue(const std::string&, MMLAttribute*);
     bool isMetaSymbol(char);
-    void parseLayers(const std::string&);
+    void parseObjects(const std::string&);
 
 private:
     MMLParser(const MMLParser&) = delete;

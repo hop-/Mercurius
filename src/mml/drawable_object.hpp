@@ -1,5 +1,5 @@
-#ifndef _MML_DRAWABLE_OBJECT_HPP
-#define _MML_DRAWABLE_OBJECT_HPP
+#ifndef _MML_DRAWABLE_OBJECT_HPP_
+#define _MML_DRAWABLE_OBJECT_HPP_
 
 #include "macros.hpp"
 #include "mml_attribute.hpp"
@@ -26,4 +26,4 @@ public:
 
 } // namespae MML
 
-#endif // _MML_DRAWABLE_OBJECT_HPP
+#endif // _MML_DRAWABLE_OBJECT_HPP_

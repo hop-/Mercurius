@@ -3,6 +3,7 @@
 #include "mml_registery.hpp"
 
 #include "background.hpp"
+#include "config.hpp"
 #include "mml_box.hpp"
 #include "dude.hpp"
 #include "ground.hpp"
@@ -77,6 +78,7 @@ registerTypes()
     m_types["dude"] = new Dude::Factory();
     m_types["ground"] = new Ground::Factory();
     m_types["background"] = new Background::BackgroundFactory();
+    m_types["config"] = new Config::Factory();
 }
 
 void MMLManager::

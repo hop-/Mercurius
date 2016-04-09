@@ -1,0 +1,7 @@
+config {
+
+name: default;
+resolution: 800, 600;
+screenMode: fullscreen;
+
+}
