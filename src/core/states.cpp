@@ -52,7 +52,7 @@ void OnGround::process(Event* e)
         return;
     }
     ObjectCollision* c = ObjectCollision::cast(e);
-    if (0 != c && !c->isTrigger()) {
+    if (0 != c && !c->isTrigger() && c->contains(parent<LogicObject>())) {
         if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up
                 && c->status() == ObjectCollision::Status::Attached) {
             ++m_countOfGroundObjects;
@@ -90,6 +90,7 @@ void Jumping::process(Event* e)
     }
     ObjectCollision* c = ObjectCollision::cast(e);
     if (0 == c
+            || !c->contains(parent<LogicObject>())
             || c->isTrigger()
             || c->status() == ObjectCollision::Status::Detached) {
         return;
@@ -119,6 +120,7 @@ void Falling::process(Event* e)
 {
     ObjectCollision* c = ObjectCollision::cast(e);
     if (0 == c
+            || !c->contains(parent<LogicObject>())
             || c->isTrigger()
             || c->status() == ObjectCollision::Status::Detached) {
         return;

@@ -112,6 +112,11 @@ public:
         return m_objects.second;
     }
 
+    inline bool contains(const LogicObject* object) const
+    {
+        return (m_objects.first == object || m_objects.second == object);
+    }
+
     inline bool isTrigger() const
     {
         return m_isTrigger;
