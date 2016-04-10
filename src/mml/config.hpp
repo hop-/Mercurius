@@ -23,6 +23,7 @@ public:
 public:
     ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "resolution", resolution);
     ATTRIBUTE_INTERFACE(std::string, "screenMode", screenMode);
+    ATTRIBUTE_INTERFACE(bool, "default", isDefault);
 
 };
 

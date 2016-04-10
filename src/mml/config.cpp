@@ -15,6 +15,7 @@ Config(const std::string& name)
     setType("config");
     addAttribute(new MMLAttribute("resolution", MMLAttribute::IntPair(800, 600)));
     addAttribute(new MMLAttribute("screenMode", std::string("fullScreen")));
+    addAttribute(new MMLAttribute("default", bool(false)));
 }
 
 } // end of namespace MML

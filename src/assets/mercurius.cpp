@@ -6,6 +6,7 @@
 #include <core/gui.hpp>
 #include <core/objects_factory.hpp>
 #include <core/layer.hpp>
+#include <mml/config.hpp>
 #include <mml/mml_manager.hpp>
 #include <mml/mml_registery.hpp>
 #include <sdl/event_manager.hpp>
@@ -14,12 +15,18 @@
 namespace Assets
 {
 
+Mercurius::Configs Mercurius::m_configs;
+
 void Mercurius::start()
 {
     loadConfigs();
     Core::Frame* frame = new Sdl::Frame;
+    //TODO TMP begin
+    Config* c = m_configs[0];
+    assert(0 != c);
     //frame->setScreenMode(Core::Frame::window);
-    frame->setResolution(800, 600);
+    frame->setResolution(c->m_width, c->m_height);
+    //TODO TMP end
     Core::EventManager* eventManager = new Sdl::EventManager;
     Core::Game* game = Core::Game::getInstance(frame, eventManager);
     loadLayers(*game, frame);
@@ -47,7 +54,7 @@ void Mercurius::loadConfigs()
                                     i != registery->end(); ++i) {
         MML::MMLObject* config = *i;
         assert(0 != config);
-        // TODO pass configs to coresponding class
+        addConfig(*i);
     }
 
 }
@@ -77,6 +84,18 @@ void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
         l->gui()->setFrame(frame); // TODO pase frame before creating child widgets
         game.pushLayer(l); // TODO some how get layers from here
     }
+}
+
+void Mercurius::addConfig(const MML::MMLObject* config)
+{
+    assert(0 != config);
+    const MML::Config* c = dynamic_cast<const MML::Config*>(config);
+    assert(0 != c);
+    Config* newConfig = new Config();
+    newConfig->m_width = c->resolution().first;
+    newConfig->m_height = c->resolution().second;
+    newConfig->m_isDefault = c->isDefault();
+    m_configs.push_back(newConfig);
 }
 
 } // namespace Assets

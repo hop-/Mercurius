@@ -1,7 +1,8 @@
 config {
 
 name: default;
-resolution: 800, 600;
-screenMode: fullscreen;
+resolution: 1600, 900;
+screenMode: fullScreenFit;
+default: true;
 
 }
