@@ -1,6 +1,8 @@
 #ifndef _MML_MMLATTRIBUTE_PRIVATE_HPP
 #define _MML_MMLATTRIBUTE_PRIVATE_HPP
 
+#include <core/frame.hpp>
+
 #include <cassert>
 #include <string>
 
@@ -20,64 +22,53 @@ public:
             int_t,
             double_t,
             bool_t,
-            int_pair_t
+            int_pair_t,
+            screen_mode_t
         };
 
     public:
         typedef std::pair<int, int> IntPair;
+        typedef Core::Frame::ScreenMode ScreenMode;
 
     public:
         AttrHolder(const std::string& v)
             : m_string(v)
-            , m_int(0)
-            , m_double(0)
-            , m_bool(false)
-            , m_intPair(0, 0)
             , m_type(string_t)
         {
         }
 
     public:
         AttrHolder(int v)
-            : m_string("")
-            , m_int(v)
-            , m_double(0)
-            , m_bool(false)
-            , m_intPair(0, 0)
+            : m_int(v)
             , m_type(int_t)
         {
         }
 
     public:
         AttrHolder(double v)
-            : m_string("")
-            , m_int(0)
-            , m_double(v)
-            , m_bool(false)
-            , m_intPair(0, 0)
+            : m_double(v)
             , m_type(double_t)
         {
         }
 
     public:
         AttrHolder(bool v)
-            : m_string("")
-            , m_int(0)
-            , m_double(0)
-            , m_bool(v)
-            , m_intPair(0, 0)
+            : m_bool(v)
             , m_type(bool_t)
         {
         }
 
     public:
         AttrHolder(IntPair v)
-            : m_string("")
-            , m_int(0)
-            , m_double(0)
-            , m_bool(false)
-            , m_intPair(v)
+            : m_intPair(v)
             , m_type(int_pair_t)
+        {
+        }
+
+    public:
+        AttrHolder(ScreenMode v)
+            : m_screenMode(v)
+            , m_type(screen_mode_t)
         {
         }
 
@@ -132,6 +123,11 @@ public:
             return m_intPair;
         }
 
+        operator ScreenMode() const
+        {
+            return m_screenMode;
+        }
+
     public:
         Type getType() const
         {
@@ -139,11 +135,12 @@ public:
         }
 
     private:
-        std::string m_string;
-        int m_int;
-        double m_double;
-        bool m_bool;
-        IntPair m_intPair;
+        std::string m_string = "";
+        int m_int = 0;
+        double m_double = 0;
+        bool m_bool = false;
+        IntPair m_intPair = IntPair(0, 0);
+        ScreenMode m_screenMode = ScreenMode::fullScreenFit;
         Type m_type;
     };
 

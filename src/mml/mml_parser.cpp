@@ -215,6 +215,17 @@ MMLAttribute::IntPair toIntPair(const std::string& v)
                                  convertto<int>(second));
 }
 
+MMLAttribute::ScreenMode toScreenMode(const std::string& v)
+{
+    if ("window" == v) {
+        return MMLAttribute::ScreenMode::window;
+    } else if ("full_screen" == v) {
+        return MMLAttribute::ScreenMode::fullScreen;
+    } else {
+        return MMLAttribute::ScreenMode::fullScreenFit;
+    }
+}
+
 }
 
 void MMLParser::
@@ -241,6 +252,10 @@ parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
     case 4:
         // IntPair
         attr->setValue(toIntPair(attr_value));
+        break;
+    case 5:
+        // ScreenMode
+        attr->setValue(toScreenMode(attr_value));
         break;
     default:
         break;

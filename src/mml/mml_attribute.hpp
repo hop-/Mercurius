@@ -3,6 +3,9 @@
 
 #include "mml_object.hpp"
 #include "mml_attribute_p.hpp"
+
+#include <core/frame.hpp>
+
 #include <cassert>
 
 namespace MML
@@ -15,6 +18,7 @@ class MMLAttribute
 
 public:
     typedef std::pair<int, int> IntPair;
+    typedef Core::Frame::ScreenMode ScreenMode;
 
 public:
     MMLAttribute(const MMLAttribute&);
@@ -23,6 +27,7 @@ public:
     MMLAttribute(const std::string& n, double v);
     MMLAttribute(const std::string& n, bool v);
     MMLAttribute(const std::string& n, IntPair);
+    MMLAttribute(const std::string& n, ScreenMode v);
     virtual ~MMLAttribute();
 
     MMLAttribute& operator=(const MMLAttribute&);

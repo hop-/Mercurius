@@ -24,7 +24,7 @@ void Mercurius::start()
     //TODO TMP begin
     Config* c = m_configs[0];
     assert(0 != c);
-    //frame->setScreenMode(Core::Frame::window);
+    frame->setScreenMode(c->m_screenMode);
     frame->setResolution(c->m_width, c->m_height);
     //TODO TMP end
     Core::EventManager* eventManager = new Sdl::EventManager;
@@ -92,6 +92,7 @@ void Mercurius::addConfig(const MML::MMLObject* config)
     const MML::Config* c = dynamic_cast<const MML::Config*>(config);
     assert(0 != c);
     Config* newConfig = new Config();
+    newConfig->m_screenMode = c->screenMode();
     newConfig->m_width = c->resolution().first;
     newConfig->m_height = c->resolution().second;
     newConfig->m_isDefault = c->isDefault();

@@ -21,11 +21,11 @@ namespace {
 SDL_WindowFlags toSDLScreenMode(Core::Frame::ScreenMode m)
 {
     switch (m) {
-    case Core::Frame::fullScreen:
+    case Core::Frame::ScreenMode::fullScreen:
         return SDL_WINDOW_FULLSCREEN;
-    case Core::Frame::window:
+    case Core::Frame::ScreenMode::window:
         return SDL_WINDOW_SHOWN;
-    case Core::Frame::fullScreenFit:
+    case Core::Frame::ScreenMode::fullScreenFit:
         return SDL_WINDOW_FULLSCREEN_DESKTOP;
     default:
         break;

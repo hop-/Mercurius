@@ -12,7 +12,7 @@ class GuiObject;
 class Frame
 {
 public:
-    enum ScreenMode {fullScreen, window, fullScreenFit};
+    enum class ScreenMode {fullScreen, window, fullScreenFit};
 
 private:
     unsigned m_msPerUpdate;
