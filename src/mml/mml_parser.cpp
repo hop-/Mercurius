@@ -52,7 +52,7 @@ void MMLParser::
 removeSpaceses(std::string& string)
 {
     string.erase(std::remove_if(
-                    string.begin(), string.end(), 
+                    string.begin(), string.end(),
                     [](char c){ return std::isspace(c);}), string.end());
 }
 
@@ -255,7 +255,7 @@ parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
         break;
     case 5:
         // ScreenMode
-        attr->setValue(toScreenMode(attr_value));
+        attr->setValue(static_cast<MMLAttribute::ScreenMode>(toScreenMode(attr_value)));
         break;
     default:
         break;

@@ -79,6 +79,7 @@ public:
             , m_double(a.m_double)
             , m_bool(a.m_bool)
             , m_intPair(a.m_intPair)
+            , m_screenMode(a.m_screenMode)
             , m_type(a.m_type)
         {
         }
@@ -94,6 +95,7 @@ public:
             m_double = a.m_double;
             m_bool = a.m_bool;
             m_intPair = a.m_intPair;
+            m_screenMode = a.m_screenMode;
             m_type = a.m_type;
             return *this;
         }
