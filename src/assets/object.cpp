@@ -53,12 +53,13 @@ void Object::addLogicObject()
     }
 }
 
-void Object::addCollider()
+void Object::addCollider(bool trigger)
 {
     assert(0 != m_drawableObject);
     assert(0 != m_logicObject);
     Core::Collider* collider = new Core::Collider();
     collider->setSizes(m_drawableObject->width(), m_drawableObject->height());
+    collider->trigger(trigger);
     m_logicObject->addComponent(collider);
 }
 

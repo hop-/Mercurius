@@ -23,6 +23,7 @@ void TypeManager::registerTypes()
     m_factories["dude"] = new DudeFactory();
     m_factories["ground"] = new GroundFactory();
     m_factories["background"] = new BackgroundFactory();
+    m_factories["stairs"] = new StairsFactory();
 }
 
 const Core::ObjectsFactory* TypeManager::getFactory(const std::string& type) const

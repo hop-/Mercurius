@@ -42,7 +42,7 @@ protected:
     virtual void setupLogicObject() = 0;
     void addGuiObject();
     void addLogicObject();
-    void addCollider();
+    void addCollider(bool trigger = false);
     void addPhysics();
     void addState(Core::State* state);
 };
