@@ -16,6 +16,11 @@ Config(const std::string& name)
     addAttribute(new MMLAttribute("resolution", MMLAttribute::IntPair(800, 600)));
     addAttribute(new MMLAttribute("screenMode", MMLAttribute::ScreenMode::fullScreenFit));
     addAttribute(new MMLAttribute("default", bool(false)));
+    addAttribute(new MMLAttribute("left", 80));
+    addAttribute(new MMLAttribute("right", 79));
+    addAttribute(new MMLAttribute("up", 82));
+    addAttribute(new MMLAttribute("down", 81));
+    addAttribute(new MMLAttribute("jump", 44));
 }
 
 } // end of namespace MML

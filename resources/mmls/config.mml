@@ -4,5 +4,10 @@ name: default;
 resolution: 800, 600;
 screenMode: full_screen_fit;
 default: true;
+left: 80;
+right: 79;
+up: 82;
+down: 81;
+jump: 44;
 
 }

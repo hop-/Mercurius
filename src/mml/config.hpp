@@ -24,7 +24,11 @@ public:
     ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "resolution", resolution);
     ATTRIBUTE_INTERFACE(MMLAttribute::ScreenMode, "screenMode", screenMode);
     ATTRIBUTE_INTERFACE(bool, "default", isDefault);
-
+    ATTRIBUTE_INTERFACE(int, "left", left);
+    ATTRIBUTE_INTERFACE(int, "right", right);
+    ATTRIBUTE_INTERFACE(int, "up", up);
+    ATTRIBUTE_INTERFACE(int, "down", down);
+    ATTRIBUTE_INTERFACE(int, "jump", jump);
 };
 
 } // namespace MML

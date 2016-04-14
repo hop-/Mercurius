@@ -4,6 +4,7 @@
 #include <base/utility.hpp>
 #include <core/game.hpp>
 #include <core/gui.hpp>
+#include <core/input_manager.hpp>
 #include <core/objects_factory.hpp>
 #include <core/layer.hpp>
 #include <mml/config.hpp>
@@ -97,6 +98,12 @@ void Mercurius::addConfig(const MML::MMLObject* config)
     newConfig->m_height = c->resolution().second;
     newConfig->m_isDefault = c->isDefault();
     m_configs.push_back(newConfig);
+    Core::InputManager::reset();
+    Core::InputManager::setMapping(Core::InputManager::Key::Left, c->left());
+    Core::InputManager::setMapping(Core::InputManager::Key::Right, c->right());
+    Core::InputManager::setMapping(Core::InputManager::Key::Up, c->up());
+    Core::InputManager::setMapping(Core::InputManager::Key::Down, c->down());
+    Core::InputManager::setMapping(Core::InputManager::Key::Jump, c->jump());
 }
 
 } // namespace Assets

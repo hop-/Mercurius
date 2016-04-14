@@ -5,7 +5,6 @@
 #include "event_manager.hpp"
 #include "command.hpp"
 #include "events.hpp"
-#include "input_manager.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -19,14 +18,6 @@ Game* Game::getInstance(Frame* frame, EventManager* eventManager)
 {
     if (frame != 0 && eventManager != 0 && m_instance == 0) {
         m_instance = new Game(frame, eventManager);
-        // should be set in another place from configs
-        InputManager::reset();
-        InputManager::setMapping(InputManager::Key::Left, 80);
-        InputManager::setMapping(InputManager::Key::Right, 79);
-        InputManager::setMapping(InputManager::Key::Up, 82);
-        InputManager::setMapping(InputManager::Key::Down, 81);
-        InputManager::setMapping(InputManager::Key::Jump, 44);
-        //
     }
     return m_instance;
 }
