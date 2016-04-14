@@ -59,7 +59,7 @@ public:
 
 };
 
-class StairsFactory
+class LadderFactory
     : public Core::ObjectsFactory
 {
 public:

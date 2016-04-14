@@ -3,7 +3,7 @@
 #include "box.hpp"
 #include "dude.hpp"
 #include "ground.hpp"
-#include "stairs.hpp"
+#include "ladder.hpp"
 #include "type_manager.hpp"
 
 #include <mml/mml_box.hpp>
@@ -11,7 +11,7 @@
 #include <mml/background.hpp>
 #include <mml/dude.hpp>
 #include <mml/ground.hpp>
-#include <mml/stairs.hpp>
+#include <mml/ladder.hpp>
 
 namespace Assets
 {
@@ -87,16 +87,16 @@ Base::Object* BackgroundFactory::create(const MML::MMLObject* mml,
     return new Background(bg, layer);
 }
 
-Base::Object* StairsFactory::create(const MML::MMLObject* mml
+Base::Object* LadderFactory::create(const MML::MMLObject* mml
         , Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
-    const MML::Stairs* stairs = dynamic_cast<const MML::Stairs*>(mml);
-    assert(0 != stairs);
+    const MML::Ladder* ladder = dynamic_cast<const MML::Ladder*>(mml);
+    assert(0 != ladder);
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
-    return new Stairs(stairs, layer);
+    return new Ladder(ladder, layer);
 }
 
 } // namespace Assets

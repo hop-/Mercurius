@@ -1,18 +1,18 @@
-#ifndef _ASSETS_STAIRS_HPP_
-#define _ASSETS_STAIRS_HPP_
+#ifndef _ASSETS_LADDER_HPP_
+#define _ASSETS_LADDER_HPP_
 
 #include "object.hpp"
 
-#include "mml/stairs.hpp"
+#include "mml/ladder.hpp"
 
 namespace Assets
 {
 
-class Stairs
+class Ladder
     :public Object
 {
 public:
-    Stairs(const MML::Stairs* s, Core::Layer* l)
+    Ladder(const MML::Ladder* s, Core::Layer* l)
         : Object(s, l)
     {}
 
@@ -25,4 +25,4 @@ private:
 
 } // namespace Assets
 
-#endif //_ASSETS_STAIRS_HPP_
+#endif //_ASSETS_LADDER_HPP_

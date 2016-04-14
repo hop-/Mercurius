@@ -7,7 +7,7 @@
 #include "mml_box.hpp"
 #include "dude.hpp"
 #include "ground.hpp"
-#include "stairs.hpp"
+#include "ladder.hpp"
 #include "mml_layer.hpp"
 
 #include <algorithm>
@@ -79,7 +79,7 @@ registerTypes()
     m_types["dude"] = new Dude::Factory();
     m_types["ground"] = new Ground::Factory();
     m_types["background"] = new Background::BackgroundFactory();
-    m_types["stairs"] = new Stairs::Factory();
+    m_types["ladder"] = new Ladder::Factory();
     m_types["config"] = new Config::Factory();
 }
 

@@ -1,12 +1,12 @@
-#ifndef _MML_STAIRS_HPP_
-#define _MML_STAIRS_HPP_
+#ifndef _MML_LADDER_HPP_
+#define _MML_LADDER_HPP_
 
 #include "drawable_object.hpp"
 
 namespace MML
 {
 
-class Stairs
+class Ladder
     : public DrawableObject
 {
 public:
@@ -18,9 +18,9 @@ public:
     };
 
 public:
-    Stairs(const std::string& n);
+    Ladder(const std::string& n);
 };
 
 } // namespace MML
 
-#endif //_MML_STAIRS_HPP_
+#endif //_MML_LADDER_HPP_
