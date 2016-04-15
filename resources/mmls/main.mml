@@ -3,6 +3,7 @@ layer {
 name: layer1;
 level: 1;
 visible: true;
+stopped: true;
 
 box {
 

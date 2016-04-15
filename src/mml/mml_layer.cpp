@@ -19,6 +19,7 @@ MMLLayer(const std::string& n)
     setType("layer");
     addAttribute(new MMLAttribute("visible", false));
     addAttribute(new MMLAttribute("level", 0));
+    addAttribute(new MMLAttribute("stopped", false));
     MMLManager* m = MMLManager::getInstance();
     assert(0 != m);
     MMLRegistery* r = m->getLayerRegistery();

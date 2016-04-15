@@ -24,7 +24,7 @@ create(const MML::MMLObject* mml, Base::Object*) const
     assert(0 != mml_layer);
     Core::Gui* gui = new Core::Gui();
     Core::Logic* logic = new Core::Logic();
-    Core::Layer* layer = new Core::Layer(gui, logic, Core::Controls(), false, !mml_layer->isVisible());
+    Core::Layer* layer = new Core::Layer(gui, logic, Core::Controls(), mml_layer->isStopped(), !mml_layer->isVisible());
     // TODO get attributes from mml_layer and set on layer
     TypeManager* tm = TypeManager::getInstance();
     assert(0 != tm);
