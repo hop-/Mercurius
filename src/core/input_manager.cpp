@@ -31,9 +31,8 @@ void InputManager::setMapping(InputManager::Key key, int id)
     m_keyMap[id] = key;
 }
 
-void InputManager::setMappings(InputManager::Key* keys)
+void InputManager::setMappings(const InputManager::Key keys[])
 {
-    assert(keys != 0);
     for (int i = 0 ; i < 256; ++i) {
         m_keyMap[i] = keys[i];
     }

@@ -98,6 +98,7 @@ void Mercurius::addConfig(const MML::MMLObject* config)
     newConfig->m_width = c->resolution().first;
     newConfig->m_height = c->resolution().second;
     newConfig->m_isDefault = c->isDefault();
+    std::fill_n(newConfig->m_mapping, 256, Key::None);
     newConfig->m_mapping[c->left()] = Key::Left;
     newConfig->m_mapping[c->right()] = Key::Right;
     newConfig->m_mapping[c->up()] = Key::Up;
