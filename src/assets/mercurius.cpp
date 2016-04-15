@@ -4,7 +4,6 @@
 #include <base/utility.hpp>
 #include <core/game.hpp>
 #include <core/gui.hpp>
-#include <core/input_manager.hpp>
 #include <core/objects_factory.hpp>
 #include <core/layer.hpp>
 #include <mml/config.hpp>
@@ -27,6 +26,8 @@ void Mercurius::start()
     assert(0 != c);
     frame->setScreenMode(c->m_screenMode);
     frame->setResolution(c->m_width, c->m_height);
+    Core::InputManager::reset();
+    Core::InputManager::setMappings(c->m_mapping);
     //TODO TMP end
     Core::EventManager* eventManager = new Sdl::EventManager;
     Core::Game* game = Core::Game::getInstance(frame, eventManager);
@@ -97,13 +98,12 @@ void Mercurius::addConfig(const MML::MMLObject* config)
     newConfig->m_width = c->resolution().first;
     newConfig->m_height = c->resolution().second;
     newConfig->m_isDefault = c->isDefault();
+    newConfig->m_mapping[c->left()] = Key::Left;
+    newConfig->m_mapping[c->right()] = Key::Right;
+    newConfig->m_mapping[c->up()] = Key::Up;
+    newConfig->m_mapping[c->down()] = Key::Down;
+    newConfig->m_mapping[c->jump()] = Key::Jump;
     m_configs.push_back(newConfig);
-    Core::InputManager::reset();
-    Core::InputManager::setMapping(Core::InputManager::Key::Left, c->left());
-    Core::InputManager::setMapping(Core::InputManager::Key::Right, c->right());
-    Core::InputManager::setMapping(Core::InputManager::Key::Up, c->up());
-    Core::InputManager::setMapping(Core::InputManager::Key::Down, c->down());
-    Core::InputManager::setMapping(Core::InputManager::Key::Jump, c->jump());
 }
 
 } // namespace Assets

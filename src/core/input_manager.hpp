@@ -27,6 +27,7 @@ public:
     Key operator [](int id) const;
     static Key key(int id);
     static void setMapping(Key key, int muppingValue);
+    static void setMappings(Key*);
     static void reset();
 };
 

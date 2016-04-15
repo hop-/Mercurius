@@ -118,6 +118,16 @@ texture: resources/textures/ground.png;
 
 }
 
+ground {
+
+name: ground2;
+width: 1024;
+height: 189;
+scale: 1;
+position: 1200, 0;
+texture: resources/textures/ground.png;
+
+}
 background {
 width: 2560;
 height: 1440;

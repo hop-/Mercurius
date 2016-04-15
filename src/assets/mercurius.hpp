@@ -3,6 +3,7 @@
 
 #include <core/frame.hpp>
 #include <core/game.hpp>
+#include <core/input_manager.hpp>
 
 #include <vector>
 
@@ -27,9 +28,11 @@ private:
         int m_width;
         int m_height;
         bool m_isDefault;
+        Core::InputManager::Key m_mapping[256];
     };
 
 private:
+    typedef Core::InputManager::Key Key;
     typedef std::vector<Config*> Configs;
     static Configs m_configs;
 
