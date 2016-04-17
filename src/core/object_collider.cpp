@@ -126,6 +126,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
         }
     }
     m_quadTree.insert(c);
+    m_currentCollidedPairs.unique();
 }
 
 void ObjectCollider::remove(const LogicObject* object)

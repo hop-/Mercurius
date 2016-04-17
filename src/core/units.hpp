@@ -50,6 +50,11 @@ enum class HorizontalDirection {
     , Right
 };
 
+enum class VerticalDirection {
+    Up = 0
+    , Down
+};
+
 } // namespace Core
 
 #endif //_CORE_UNITS_HPP_

@@ -13,10 +13,52 @@ class Event;
 class Standing
     : public State
 {
+    int a = 12;
+
 public:
-    virtual Command* onInit();
-    void process(Event* e);
+    Standing();
+    ~Standing();
+
+public:
+    Command* onInit();
     Command* command();
+
+private:
+    void onKeyEvent(Event* e);
+    void onObjectCollision(Event* e);
+};
+
+class OnLadder
+    : public State
+{
+public:
+    OnLadder();
+    ~OnLadder();
+
+public:
+    Command* onInit();
+
+private:
+    void onKeyEvent(Event* e);
+    void onObjectCollision(Event* e);
+};
+
+class MoveOnLadder // better to use template
+    : public State
+{
+    InputManager::Key m_stopKey;
+
+public:
+    MoveOnLadder(VerticalDirection d);
+    ~MoveOnLadder();
+
+public:
+    Command* onInit();
+    Command* command();
+
+private:
+    void onKeyEvent(Event* e);
+    void onObjectCollision(Event* e);
 };
 
 class OnGround
@@ -25,8 +67,15 @@ class OnGround
     int m_countOfGroundObjects = 1;
 
 public:
+    OnGround();
+    ~OnGround();
+
+public:
     Command* onInit();
-    void process(Event* e);
+
+private:
+    void onKeyEvent(Event* e);
+    void onObjectCollision(Event* e);
 };
 
 class Jumping
@@ -36,21 +85,31 @@ class Jumping
     EngineUnit m_power = 25;
 
 public:
-    Jumping() = default;
+    Jumping();
     Jumping(EngineUnit power);
+    ~Jumping();
 
 public:
     Command* onInit();
-    void process(Event* e);
     Command* command();
+
+private:
+    void onKeyEvent(Event* e);
+    void onObjectCollision(Event* e);
 };
 
 class Falling
     : public State
 {
 public:
+    Falling();
+    ~Falling();
+
+public:
     Command* onInit();
-    void process(Event* e);
+
+private:
+    void onObjectCollision(Event* e);
 };
 
 class Running   // better to use template
@@ -63,11 +122,15 @@ class Running   // better to use template
 
 public:
     Running(HorizontalDirection d);
+    ~Running();
 
 public:
     virtual Command* onInit();
-    void process(Event* e);
     Command* command();
+
+private:
+    void onKeyEvent(Event* e);
+    void onObjectCollision(Event* e);
 };
 
 } // namespace Core

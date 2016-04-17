@@ -45,7 +45,6 @@ private:
 
 private:
     void applyPowers();
-    void processEvents();
     void updateLogicObjects();
     void createViewPortObject();
     virtual void onObjectAdding(const LogicObject* object);

@@ -57,6 +57,19 @@ Direction ObjectCollision::getCollisionSide(const LogicObject* object) const
     return Direction::None;
 }
 
+const LogicObject*
+ObjectCollision::anouther(const LogicObject* object) const
+{
+    if (!contains(object)) {
+        return 0;
+    }
+    if (first() == object) {
+        return second();
+    } else {
+        return first();
+    }
+}
+
 bool ObjectCollision::less(Base::TypedBase* obj)
 {
     return m_objects < static_cast<ObjectCollision*>(obj)->m_objects;

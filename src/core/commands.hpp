@@ -25,6 +25,21 @@ private:
     Accelerate& operator=(const Core::Accelerate&) = delete;
 };
 
+class SetYVelocity
+    : public Command
+{
+    LogicObject* m_object;
+    EngineUnit m_yVelocity;
+
+public:
+    SetYVelocity(LogicObject* object, EngineUnit v);
+    void execute();
+
+private:
+    SetYVelocity(const SetYVelocity&) = delete;
+    SetYVelocity& operator=(const SetYVelocity&) = delete;
+};
+
 class Jump
     : public Command
 {

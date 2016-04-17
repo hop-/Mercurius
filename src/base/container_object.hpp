@@ -37,8 +37,8 @@ public:
 
     bool removeObject(const C* o)
     {
-        assert(o->parent() == this);
         assert(0 != o);
+        assert(o->parent() == this);
         typename Children::iterator i =
                 std::find(m_children.begin(), m_children.end(), o);
         if (m_children.end() == i) {

@@ -39,6 +39,7 @@ Game::Game(Frame* frame, EventManager* eventManager)
 {
     assert(0 != m_frame);
     assert(0 != eventManager);
+    QuitEvent::registerCallback(&Game::quit, this);
 }
 
 Game::~Game()
@@ -55,6 +56,7 @@ Game::~Game()
     }
     m_layers.clear();
     assert(m_layers.empty());
+    QuitEvent::removeCallbacks(this);
 }
 
 void Game::mainLoop()
@@ -62,9 +64,8 @@ void Game::mainLoop()
     unsigned previousTicks = m_eventManager->getTicks();
     unsigned realLag = 0;
     const unsigned msToUpdate = m_frame->msPerUpdate();
-    bool finish = false;
     // game loop
-    while (m_layers.size() && !finish) {
+    while (m_layers.size() && m_isRunning) {
         assert(0 != m_eventManager);
         unsigned currentTicks = m_eventManager->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
@@ -74,6 +75,11 @@ void Game::mainLoop()
         unsigned lag = realLag;
         // run update for each layer
         while (lag >= msToUpdate) {
+            Event* e = m_eventManager->getEvent();
+            if (e != 0) {
+                e->trigger();
+            }
+            // END OF TMP
             lag -= msToUpdate;
             for (Layer* layer : m_layers) {
                 assert(0 != layer);
@@ -81,12 +87,6 @@ void Game::mainLoop()
                     layer->update();
                 }
             }
-            // TMP
-            Event* e = m_eventManager->getEvent();
-            if (e != 0 && Core::QuitEvent::castable(e)) {
-                finish = true;
-            }
-            // END OF TMP
             m_eventManager->pop();
         }
         realLag = lag;

@@ -31,11 +31,10 @@ void LogicObject::addComponent(Component* component)
                 , component));
 }
 
-void LogicObject::changeState(State* newState)
+void LogicObject::changeState(State* oldState, State* newState)
 {
-    removeState(m_currentState);
+    removeState(oldState);
     addState(newState);
-    m_currentState = newState;
 }
 
 void LogicObject::addState(State* newState)
@@ -54,16 +53,6 @@ void LogicObject::removeState(State* state)
     assert(state != 0);
     delete state;
     Base::Utility::ignoreUnused(status);
-}
-
-void LogicObject::process(Event* event)
-{
-    std::vector<State*> states = children();
-    for (auto currentState : states) {
-        assert(0 != currentState);
-        m_currentState = currentState;
-        m_currentState->process(event);
-    }
 }
 
 void LogicObject::initObject()

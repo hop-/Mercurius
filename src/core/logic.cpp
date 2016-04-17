@@ -1,7 +1,6 @@
 #include "logic.hpp"
 #include "event.hpp"
 #include "components.hpp"
-#include "game.hpp"
 #include "powers.hpp"
 
 #include <cassert>
@@ -12,7 +11,6 @@ namespace Core
 void Logic::update()
 {
     applyPowers();
-    processEvents();
     updateLogicObjects();
     m_collider.throwCollisionEvents();
 }
@@ -24,19 +22,6 @@ void Logic::applyPowers()
         for (auto* object : LogicObjects::children()) {
             assert(0 != object);
             p->applyToObject(object);
-        }
-    }
-}
-
-void Logic::processEvents()
-{
-    Game* game = Game::getInstance();
-    assert(0 != game);
-    Event* e = game->getEvent();
-    if (0 != e) {
-        for (auto* object : LogicObjects::children()) {
-            assert(0 != object);
-            object->process(e);
         }
     }
 }

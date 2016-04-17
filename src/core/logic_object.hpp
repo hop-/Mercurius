@@ -9,6 +9,7 @@
 #include <base/observer.hpp>
 #include <base/typed_base.hpp>
 
+#include <string>
 #include <map>
 #include <cassert>
 
@@ -82,16 +83,26 @@ private:
     Position m_position;
     State* m_currentState = 0;
     float m_weight = 0;
+    std::string m_typeName = "";
 
 public:
     void update();
     virtual void initObject();
     void addComponent(Component* component);
     void addState(State* newState);
-    void changeState(State* newState);
+    void changeState(State* oldState, State* newState);
     void removeState(State* state);
-    void process(Event* event);
     void requestNewPosition(Position p);
+
+    inline std::string typeName() const
+    {
+        return m_typeName;
+    }
+
+    inline void setTypeName(const std::string& typeName)
+    {
+        m_typeName = typeName;
+    }
 
     inline Position position() const
     {

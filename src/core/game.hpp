@@ -19,6 +19,7 @@ class Game
     EventManager* m_eventManager = 0;
     std::vector<Layer*> m_layers;
     static Game* m_instance;
+    bool m_isRunning = true;
 
 private:
     Game(Frame* frame, EventManager* eventManager);
@@ -48,6 +49,11 @@ public:
 
 private:
     void mainLoop();
+
+    void quit(Event*)
+    {
+        m_isRunning = false;
+    }
 };
 
 } // namespace core

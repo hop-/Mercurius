@@ -23,6 +23,20 @@ void Accelerate::execute()
     }
 }
 
+SetYVelocity::SetYVelocity(LogicObject* object, EngineUnit v)
+    : m_object(object)
+    , m_yVelocity(v)
+{}
+
+void SetYVelocity::execute()
+{
+    assert(0 != m_object);
+    Physics* physics = m_object->component<Physics>();
+    if (0 != physics) {
+        physics->setVelocity(Vector(physics->velocity().x(), m_yVelocity));
+    }
+}
+
 Jump::Jump(LogicObject* object, EngineUnit power)
     : m_object(object)
     , m_power(power)

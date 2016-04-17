@@ -14,7 +14,6 @@ class State
 {
 public:
     void init() final;
-    virtual void process(Event* e) = 0;
 
     virtual Command* command()
     {
