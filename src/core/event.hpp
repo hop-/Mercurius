@@ -28,7 +28,8 @@ class EventCreator
 {
 private:
     static const ID type;
-    static std::map<void*, std::list<Callback>> m_callbacks;
+    typedef std::map<void*, std::list<Callback>> Callbacks;
+    static Callbacks m_callbacks;
 
 public:
     static bool castable(Event* e)
@@ -43,7 +44,7 @@ public:
     }
 
     template<class F, class OBJTYPE>
-    static void registerCallback(F c, OBJTYPE object)
+    static void registerCallback(F c, OBJTYPE* object)
     {
         using std::placeholders::_1;
         m_callbacks[object].push_back(std::bind(c, object, _1));
@@ -75,7 +76,7 @@ template <class T>
 const Event::ID EventCreator<T>::type;
 
 template <class T>
-std::map<void*, std::list<Event::Callback>> EventCreator<T>::m_callbacks;
+typename EventCreator<T>::Callbacks EventCreator<T>::m_callbacks;
 
 } // namespace Core
 

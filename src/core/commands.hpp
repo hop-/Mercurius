@@ -30,9 +30,10 @@ class SetYVelocity
 {
     LogicObject* m_object;
     EngineUnit m_yVelocity;
+    VerticalDirection m_direction;
 
 public:
-    SetYVelocity(LogicObject* object, EngineUnit v);
+    SetYVelocity(LogicObject* object, EngineUnit v, VerticalDirection d);
     void execute();
 
 private:

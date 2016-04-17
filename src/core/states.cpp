@@ -170,13 +170,14 @@ Command* MoveOnLadder::onInit()
 
 Command* MoveOnLadder::command()
 {
-    EngineUnit vY;
+    const EngineUnit vY = 10;
+    VerticalDirection vd;
     if (m_stopKey == InputManager::Key::Up) {
-        vY = 20;
+        vd = VerticalDirection::Up;
     } else {
-        vY = -20;
+        vd = VerticalDirection::Down;
     }
-    return new SetYVelocity(parent<LogicObject>(), vY);
+    return new SetYVelocity(parent<LogicObject>(), vY, vd);
 }
 
 Command* OnGround::onInit()

@@ -23,9 +23,10 @@ void Accelerate::execute()
     }
 }
 
-SetYVelocity::SetYVelocity(LogicObject* object, EngineUnit v)
+SetYVelocity::SetYVelocity(LogicObject* object, EngineUnit v, VerticalDirection d)
     : m_object(object)
     , m_yVelocity(v)
+    , m_direction(d)
 {}
 
 void SetYVelocity::execute()
@@ -33,7 +34,7 @@ void SetYVelocity::execute()
     assert(0 != m_object);
     Physics* physics = m_object->component<Physics>();
     if (0 != physics) {
-        physics->setVelocity(Vector(physics->velocity().x(), m_yVelocity));
+        physics->addVelocity(Vector(m_yVelocity, (m_direction == VerticalDirection::Up) ? 90: 270));
     }
 }
 
