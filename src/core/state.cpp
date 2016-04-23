@@ -1,8 +1,15 @@
 #include "state.hpp"
 #include "command.hpp"
+#include "events.hpp"
 
 namespace Core
 {
+
+State::State()
+{
+    KeyEvent::registerCallback(&State::onKeyEvent, this);
+    ObjectCollision::registerCallback(&State::onObjectCollision, this);
+}
 
 void State::init()
 {

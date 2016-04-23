@@ -24,8 +24,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e);
-    void onObjectCollision(Event* e);
+    void onKeyEvent(Event* e) override;
+    void onObjectCollision(Event* e) override;
 };
 
 class OnLadder
@@ -40,8 +40,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e);
-    void onObjectCollision(Event* e);
+    void onKeyEvent(Event* e) override;
+    void onObjectCollision(Event* e) override;
 };
 
 class MoveOnLadder // better to use template
@@ -58,8 +58,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e);
-    void onObjectCollision(Event* e);
+    void onKeyEvent(Event* e) override;
+    void onObjectCollision(Event* e) override;
 };
 
 class OnGround
@@ -75,8 +75,8 @@ public:
     Command* onInit() override;
 
 private:
-    void onKeyEvent(Event* e);
-    void onObjectCollision(Event* e);
+    void onKeyEvent(Event* e) override;
+    void onObjectCollision(Event* e) override;
 };
 
 class Jumping
@@ -95,8 +95,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e);
-    void onObjectCollision(Event* e);
+    void onKeyEvent(Event* e) override;
+    void onObjectCollision(Event* e) override;
 };
 
 class Falling
@@ -130,8 +130,22 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e);
-    void onObjectCollision(Event* e);
+    void onKeyEvent(Event* e) override;
+    void onObjectCollision(Event* e) override;
+};
+
+class LayerChanger
+    : public State
+{
+private:
+    bool m_is_active = false;
+
+public:
+    Command* command() override;
+
+private:
+    void onKeyEvent(Event* e) override;
+
 };
 
 } // namespace Core

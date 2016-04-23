@@ -9,8 +9,6 @@ namespace Core
 
 Standing::Standing()
 {
-    KeyEvent::registerCallback(&Standing::onKeyEvent, this);
-    ObjectCollision::registerCallback(&Standing::onObjectCollision, this);
 }
 
 Standing::~Standing()
@@ -69,8 +67,6 @@ Command* Standing::command()
 
 OnLadder::OnLadder()
 {
-    KeyEvent::registerCallback(&OnLadder::onKeyEvent, this);
-    ObjectCollision::registerCallback(&OnLadder::onObjectCollision, this);
 }
 
 OnLadder::~OnLadder()
@@ -130,9 +126,6 @@ MoveOnLadder::MoveOnLadder(VerticalDirection d)
             ? InputManager::Key::Up
             : InputManager::Key::Down)
 {
-    KeyEvent::registerCallback(&MoveOnLadder::onKeyEvent, this);
-    ObjectCollision::registerCallback(
-            &MoveOnLadder::onObjectCollision, this);
 }
 
 MoveOnLadder::~MoveOnLadder()
@@ -193,8 +186,6 @@ Command* OnGround::onInit()
 
 OnGround::OnGround()
 {
-    KeyEvent::registerCallback(&OnGround::onKeyEvent, this);
-    ObjectCollision::registerCallback(&OnGround::onObjectCollision, this);
 }
 
 OnGround::~OnGround()
@@ -237,8 +228,6 @@ void OnGround::onObjectCollision(Event* e)
 
 Jumping::Jumping()
 {
-    KeyEvent::registerCallback(&Jumping::onKeyEvent, this);
-    ObjectCollision::registerCallback(&Jumping::onObjectCollision, this);
 }
 
 Jumping::~Jumping()
@@ -335,8 +324,6 @@ Running::Running(HorizontalDirection d)
             ? InputManager::Key::Left
             : InputManager::Key::Right)
 {
-    KeyEvent::registerCallback(&Running::onKeyEvent, this);
-    ObjectCollision::registerCallback(&Running::onObjectCollision, this);
 }
 
 Running::~Running()
@@ -398,6 +385,19 @@ Command* Running::command()
     }
     return new Accelerate(parent<LogicObject>()
             , Vector(1, angle));
+}
+
+Command* LayerChanger::command()
+{
+    if (m_is_active) {
+        return 0; // TODO return command which will change layer
+    }
+    return 0;
+}
+
+void LayerChanger::onKeyEvent(Event*)
+{
+    // TODO handle ALT+Tab event
 }
 
 } // namespace Core

@@ -13,6 +13,8 @@ class State
     : public Base::Object
 {
 public:
+    State();
+
     void init() final;
 
     virtual Command* command()
@@ -25,6 +27,13 @@ protected:
     {
         return 0;
     }
+
+protected:
+    virtual void onKeyEvent(Event*)
+    {}
+
+    virtual void onObjectCollision(Event*)
+    {}
 };
 
 } // namespace Core
