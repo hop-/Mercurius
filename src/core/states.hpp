@@ -20,8 +20,8 @@ public:
     ~Standing();
 
 public:
-    Command* onInit();
-    Command* command();
+    Command* onInit() override;
+    Command* command() override;
 
 private:
     void onKeyEvent(Event* e);
@@ -36,8 +36,8 @@ public:
     ~OnLadder();
 
 public:
-    Command* onInit();
-    Command* command();
+    Command* onInit() override;
+    Command* command() override;
 
 private:
     void onKeyEvent(Event* e);
@@ -54,8 +54,8 @@ public:
     ~MoveOnLadder();
 
 public:
-    Command* onInit();
-    Command* command();
+    Command* onInit() override;
+    Command* command() override;
 
 private:
     void onKeyEvent(Event* e);
@@ -72,7 +72,7 @@ public:
     ~OnGround();
 
 public:
-    Command* onInit();
+    Command* onInit() override;
 
 private:
     void onKeyEvent(Event* e);
@@ -91,8 +91,8 @@ public:
     ~Jumping();
 
 public:
-    Command* onInit();
-    Command* command();
+    Command* onInit() override;
+    Command* command() override;
 
 private:
     void onKeyEvent(Event* e);
@@ -107,7 +107,7 @@ public:
     ~Falling();
 
 public:
-    Command* onInit();
+    Command* onInit() override;
 
 private:
     void onObjectCollision(Event* e);
@@ -126,8 +126,8 @@ public:
     ~Running();
 
 public:
-    virtual Command* onInit();
-    Command* command();
+    Command* onInit() override;
+    Command* command() override;
 
 private:
     void onKeyEvent(Event* e);

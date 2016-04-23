@@ -13,7 +13,6 @@ class LogicObject;
 class Accelerate
     : public Command
 {
-    LogicObject* m_object;
     Vector m_acceleration;
 
 public:
@@ -28,7 +27,6 @@ private:
 class Stop
     : public Command
 {
-    LogicObject* m_object;
     Direction m_direction;
 public:
     Stop(LogicObject* object, Direction d);
@@ -42,7 +40,6 @@ private:
 class SetYVelocity
     : public Command
 {
-    LogicObject* m_object;
     EngineUnit m_yVelocity;
     VerticalDirection m_direction;
 
@@ -58,7 +55,6 @@ private:
 class Jump
     : public Command
 {
-    LogicObject* m_object;
     EngineUnit m_power;
 
 public:
@@ -73,7 +69,6 @@ private:
 class Stand
     : public Command
 {
-    LogicObject* m_object;
 
 public:
     Stand(LogicObject* object);
