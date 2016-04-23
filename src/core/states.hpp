@@ -37,6 +37,7 @@ public:
 
 public:
     Command* onInit();
+    Command* command();
 
 private:
     void onKeyEvent(Event* e);

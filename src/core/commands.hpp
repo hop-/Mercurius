@@ -25,6 +25,20 @@ private:
     Accelerate& operator=(const Core::Accelerate&) = delete;
 };
 
+class Stop
+    : public Command
+{
+    LogicObject* m_object;
+    Direction m_direction;
+public:
+    Stop(LogicObject* object, Direction d);
+    void execute();
+
+private:
+    Stop(const Stop&) = delete;
+    Stop& operator=(const Stop&) = delete;
+};
+
 class SetYVelocity
     : public Command
 {

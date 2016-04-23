@@ -120,6 +120,11 @@ Command* OnLadder::onInit()
     return 0;
 }
 
+Command* OnLadder::command()
+{
+    return new Stop(parent<LogicObject>(), Direction::Down);
+}
+
 MoveOnLadder::MoveOnLadder(VerticalDirection d)
     : m_stopKey((d == VerticalDirection::Up)
             ? InputManager::Key::Up
@@ -170,7 +175,7 @@ Command* MoveOnLadder::onInit()
 
 Command* MoveOnLadder::command()
 {
-    const EngineUnit vY = 10;
+    const UserUnit vY = 0.7;
     VerticalDirection vd;
     if (m_stopKey == InputManager::Key::Up) {
         vd = VerticalDirection::Up;

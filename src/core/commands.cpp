@@ -23,18 +23,59 @@ void Accelerate::execute()
     }
 }
 
+Stop::Stop(LogicObject* object, Direction d)
+    : m_object(object)
+    , m_direction(d)
+{
+    assert(0 != m_object);
+}
+
+void Stop::execute()
+{
+    assert(0 != m_object);
+    Physics* physics = m_object->component<Physics>();
+    if (0 == physics) {
+        return;
+    }
+    switch (m_direction) {
+    case Direction::Up:
+        if (physics->velocity().y() > 0) {
+            physics->stopY();
+        }
+        break;
+    case Direction::Down:
+        if (physics->velocity().y() < 0) {
+            physics->stopY();
+        }
+        break;
+    case Direction::Left:
+        if (physics->velocity().x() < 0) {
+            physics->stopX();
+        }
+        break;
+    case Direction::Right:
+        if (physics->velocity().x() > 0) {
+            physics->stopX();
+        }
+    default:
+        break;
+    }
+}
+
 SetYVelocity::SetYVelocity(LogicObject* object, EngineUnit v, VerticalDirection d)
     : m_object(object)
     , m_yVelocity(v)
     , m_direction(d)
-{}
+{
+    assert(0 != m_object);
+}
 
 void SetYVelocity::execute()
 {
     assert(0 != m_object);
     Physics* physics = m_object->component<Physics>();
     if (0 != physics) {
-        physics->addVelocity(Vector(m_yVelocity, (m_direction == VerticalDirection::Up) ? 90: 270));
+        physics->setVelocity(Vector(m_yVelocity, (m_direction == VerticalDirection::Up) ? 90: 270));
     }
 }
 
