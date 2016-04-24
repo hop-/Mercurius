@@ -6,12 +6,12 @@
 namespace Sdl
 {
 
-class EventManager
-    : public Core::EventManager
+class InputHandler
+    : public Core::InputHandler
 {
 public:
-    void catchEvent();
-    unsigned getTicks();
+    unsigned getTicks() override final;
+    void catchUserInput() override final;
 };
 
 } // namespace Sdl

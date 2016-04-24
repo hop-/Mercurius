@@ -14,10 +14,10 @@ namespace Core
 
 Game* Game::m_instance = 0;
 
-Game* Game::getInstance(Frame* frame, EventManager* eventManager)
+Game* Game::getInstance(Frame* frame, InputHandler* inputHandler)
 {
-    if (frame != 0 && eventManager != 0 && m_instance == 0) {
-        m_instance = new Game(frame, eventManager);
+    if (frame != 0 && inputHandler != 0 && m_instance == 0) {
+        m_instance = new Game(frame, inputHandler);
     }
     return m_instance;
 }
@@ -32,24 +32,24 @@ bool Game::deleteInstance()
     return true;
 }
 
-Game::Game(Frame* frame, EventManager* eventManager)
+Game::Game(Frame* frame, InputHandler* inputHandler)
     : m_frame(frame)
-    , m_eventManager(eventManager)
+    , m_inputHandler(inputHandler)
     , m_layers()
 {
     assert(0 != m_frame);
-    assert(0 != eventManager);
+    assert(0 != inputHandler);
     QuitEvent::registerCallback(&Game::quit, this);
 }
 
 Game::~Game()
 {
     assert(0 != m_frame);
-    assert(0 != m_eventManager);
+    assert(0 != m_inputHandler);
     delete m_frame;
     m_frame = 0;
-    delete m_eventManager;
-    m_eventManager = 0;
+    delete m_inputHandler;
+    m_inputHandler = 0;
     for (auto l : m_layers) {
         assert(0 != l);
         delete l;
@@ -61,25 +61,21 @@ Game::~Game()
 
 void Game::mainLoop()
 {
-    unsigned previousTicks = m_eventManager->getTicks();
+    assert(0 != m_inputHandler);
+    unsigned previousTicks = m_inputHandler->getTicks();
     unsigned realLag = 0;
     const unsigned msToUpdate = m_frame->msPerUpdate();
     // game loop
     while (m_layers.size() && m_isRunning) {
-        assert(0 != m_eventManager);
-        unsigned currentTicks = m_eventManager->getTicks();
+        assert(0 != m_inputHandler);
+        unsigned currentTicks = m_inputHandler->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
         previousTicks = currentTicks;
         realLag += deltaTicks;
-        m_eventManager->catchEvent();
+        m_inputHandler->catchUserInput();
         unsigned lag = realLag;
         // run update for each layer
         while (lag >= msToUpdate) {
-            Event* e = m_eventManager->getEvent();
-            if (e != 0) {
-                e->trigger();
-            }
-            // END OF TMP
             lag -= msToUpdate;
             for (Layer* layer : m_layers) {
                 assert(0 != layer);
@@ -87,7 +83,6 @@ void Game::mainLoop()
                     layer->update();
                 }
             }
-            m_eventManager->pop();
         }
         realLag = lag;
         // clear frame
@@ -126,12 +121,6 @@ const Frame* Game::frame() const
 {
     assert(0 != m_frame);
     return m_frame;
-}
-
-Event* Game::getEvent()
-{
-    assert(0 != m_eventManager);
-    return m_eventManager->getEvent();
 }
 
 } // namespace core

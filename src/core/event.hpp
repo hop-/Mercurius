@@ -31,6 +31,11 @@ private:
     typedef std::map<void*, std::list<Callback>> Callbacks;
     static Callbacks m_callbacks;
 
+protected:
+    EventCreator() = default;
+    EventCreator(const EventCreator&) = delete;
+    EventCreator& operator=(const EventCreator&) = delete;
+
 public:
     static bool castable(Event* e)
     {

@@ -29,8 +29,8 @@ void Mercurius::start()
     Core::InputManager::reset();
     Core::InputManager::setMappings(c->m_mapping);
     //TODO TMP end
-    Core::EventManager* eventManager = new Sdl::EventManager;
-    Core::Game* game = Core::Game::getInstance(frame, eventManager);
+    Core::InputHandler* inputHandler = new Sdl::InputHandler;
+    Core::Game* game = Core::Game::getInstance(frame, inputHandler);
     loadLayers(*game, frame);
     game->start();
     bool r = Core::Game::deleteInstance();

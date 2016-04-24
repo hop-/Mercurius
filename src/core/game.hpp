@@ -10,19 +10,19 @@ namespace Core
 
 class Frame;
 class Event;
-class EventManager;
+class InputHandler;
 class Layer;
 
 class Game
 {
     Frame* m_frame = 0;
-    EventManager* m_eventManager = 0;
+    InputHandler* m_inputHandler = 0;
     std::vector<Layer*> m_layers;
     static Game* m_instance;
     bool m_isRunning = true;
 
 private:
-    Game(Frame* frame, EventManager* eventManager);
+    Game(Frame* frame, InputHandler* inputHandler);
     ~Game();
 
 private:
@@ -30,16 +30,15 @@ private:
     Game& operator=(const Game&) = delete;
 
 public:
-    static Game* getInstance(Frame* frame = 0, EventManager* eventManager = 0);
+    static Game* getInstance(Frame* frame = 0, InputHandler* inputHandler = 0);
     static bool deleteInstance();
 
 public:
-    Event* getEvent();
     const Frame* frame() const;
 
-    EventManager* eventManager()
+    InputHandler* inputHandler()
     {
-        return m_eventManager;
+        return m_inputHandler;
     }
 
 public:

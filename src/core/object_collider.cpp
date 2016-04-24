@@ -3,7 +3,6 @@
 #include "logic_object.hpp"
 #include "components.hpp"
 #include "position.hpp"
-#include "game.hpp"
 #include "event_manager.hpp"
 #include "events.hpp"
 
@@ -154,14 +153,13 @@ void ObjectCollider::throwCollisionEvents()
             }
         }
         if (!found) {
-            Game::getInstance()->eventManager()
-                ->push(new ObjectCollision(
+            EventManager::process(new ObjectCollision(
                             pair
                             , ObjectCollision::Status::Attached));
         }
     }
     for (const auto& existPair : m_collidedPairs) {
-        Game::getInstance()->eventManager()->push(new ObjectCollision(
+        EventManager::process(new ObjectCollision(
                     existPair
                     , ObjectCollision::Status::Detached));
     }

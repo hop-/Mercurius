@@ -8,7 +8,7 @@
 namespace Sdl
 {
 
-void EventManager::catchEvent()
+void InputHandler::catchUserInput()
 {
     SDL_Event event;
     Core::InputManager::Key k;
@@ -44,12 +44,12 @@ void EventManager::catchEvent()
             cevent = 0;
         }
         if (0 != cevent) {
-            pushToQueue(cevent);
+            Core::EventManager::process(cevent);
         }
     }
 }
 
-unsigned EventManager::getTicks()
+unsigned InputHandler::getTicks()
 {
     return SDL_GetTicks();
 }
