@@ -3,7 +3,7 @@
 
 #include <base/typed_base.hpp>
 
-#include <list>
+#include <vector>
 #include <map>
 #include <functional>
 #include <cassert>
@@ -28,7 +28,7 @@ class EventCreator
 {
 private:
     static const ID type;
-    typedef std::map<void*, std::list<Callback>> Callbacks;
+    typedef std::map<void*, std::vector<Callback>> Callbacks;
     static Callbacks m_callbacks;
 
 protected:
