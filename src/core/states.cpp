@@ -4,6 +4,8 @@
 #include "logic_object.hpp"
 #include "components.hpp"
 
+#include <assets/events.hpp>
+
 namespace Core
 {
 
@@ -186,12 +188,14 @@ Command* OnGround::onInit()
 
 OnGround::OnGround()
 {
+    Assets::OnAir::registerCallback(&OnGround::onAir, this);
 }
 
 OnGround::~OnGround()
 {
     KeyEvent::removeCallbacks(this);
     ObjectCollision::removeCallbacks(this);
+    Assets::OnAir::removeCallbacks(this);
 }
 
 void OnGround::onKeyEvent(Event* e)
@@ -206,34 +210,28 @@ void OnGround::onKeyEvent(Event* e)
     }
 }
 
-void OnGround::onObjectCollision(Event* e)
+void OnGround::onAir(Event* e)
 {
-    ObjectCollision* c = ObjectCollision::cast(e);
-    assert(0 != c);
-    if (c->isTrigger() || !c->contains(parent<LogicObject>())) {
+    Assets::OnAir* oa = Assets::OnAir::cast(e);
+    assert(0 != oa);
+    LogicObject* p = parent<LogicObject>();
+    assert(0 != p);
+    if (oa->object() != p) {
         return;
     }
-    if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up
-            && c->status() == ObjectCollision::Status::Attached) {
-        ++m_countOfGroundObjects;
-    } else if (c->getCollisionSide(parent<LogicObject>())
-            == Direction::None
-            && c->status() == ObjectCollision::Status::Detached) {
-        --m_countOfGroundObjects;
-        if (m_countOfGroundObjects == 0) {
-            parent<LogicObject>()->changeState(this, new Falling);
-        }
-    }
+    p->changeState(this, new Falling);
 }
 
 Jumping::Jumping()
 {
+    Assets::OnSurface::registerCallback(&Jumping::onSurface, this);
 }
 
 Jumping::~Jumping()
 {
     KeyEvent::removeCallbacks(this);
     ObjectCollision::removeCallbacks(this);
+    Assets::OnSurface::removeCallbacks(this);
 }
 
 Jumping::Jumping(EngineUnit power)
@@ -252,20 +250,18 @@ void Jumping::onKeyEvent(Event* e)
     }
 }
 
-void Jumping::onObjectCollision(Event* e)
+void Jumping::onSurface(Event* e)
 {
-    ObjectCollision* c = ObjectCollision::cast(e);
-    assert(0 != c);
-    if (!c->contains(parent<LogicObject>())
-            || c->isTrigger()
-            || c->status() == ObjectCollision::Status::Detached) {
+    Assets::OnSurface* os = Assets::OnSurface::cast(e);
+    assert(0 != os);
+    LogicObject* p = parent<LogicObject>();
+    assert(0 != p);
+    if (os->object() != p) {
         return;
     }
-    if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up) {
-        parent<LogicObject>()->changeState(this, new OnGround());
-    }
-    // TODO activate Falling state if collide on air
+    p->changeState(this, new OnGround());
 }
+// TODO activate Falling state if collide during Jumping
 
 Command* Jumping::onInit()
 {
@@ -284,12 +280,14 @@ Command* Jumping::command()
 
 Falling::Falling()
 {
+    Assets::OnSurface::registerCallback(&Falling::onSurface, this);
 }
 
 Falling::~Falling()
 {
     KeyEvent::removeCallbacks(this);
     ObjectCollision::removeCallbacks(this);
+    Assets::OnSurface::removeCallbacks(this);
 }
 
 Command* Falling::onInit()
@@ -298,18 +296,16 @@ Command* Falling::onInit()
     return 0;
 }
 
-void Falling::onObjectCollision(Event* e)
+void Falling::onSurface(Event* e)
 {
-    ObjectCollision* c = ObjectCollision::cast(e);
-    assert(0 != c);
-    if (!c->contains(parent<LogicObject>())
-            || c->isTrigger()
-            || c->status() == ObjectCollision::Status::Detached) {
+    Assets::OnSurface* os = Assets::OnSurface::cast(e);
+    assert(0 != os);
+    LogicObject* p = parent<LogicObject>();
+    assert(0 != p);
+    if (os->object() != p) {
         return;
     }
-    if (c->getCollisionSide(parent<LogicObject>()) == Direction::Up) {
-        parent<LogicObject>()->changeState(this, new OnGround());
-    }
+    p->changeState(this, new OnGround());
 }
 
 Running::Running(HorizontalDirection d)

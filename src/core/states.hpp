@@ -65,8 +65,6 @@ private:
 class OnGround
     : public State
 {
-    int m_countOfGroundObjects = 1;
-
 public:
     OnGround();
     ~OnGround();
@@ -76,7 +74,7 @@ public:
 
 private:
     void onKeyEvent(Event* e) override;
-    void onObjectCollision(Event* e) override;
+    void onAir(Event* e);
 };
 
 class Jumping
@@ -96,7 +94,7 @@ public:
 
 private:
     void onKeyEvent(Event* e) override;
-    void onObjectCollision(Event* e) override;
+    void onSurface(Event* e);
 };
 
 class Falling
@@ -110,7 +108,7 @@ public:
     Command* onInit() override;
 
 private:
-    void onObjectCollision(Event* e);
+    void onSurface(Event* e);
 };
 
 class Running   // better to use template
