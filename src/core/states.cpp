@@ -15,8 +15,6 @@ Standing::Standing()
 
 Standing::~Standing()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
 }
 
 void Standing::onKeyEvent(Event* e)
@@ -73,8 +71,6 @@ OnLadder::OnLadder()
 
 OnLadder::~OnLadder()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
 }
 
 void OnLadder::onKeyEvent(Event* e)
@@ -132,8 +128,6 @@ MoveOnLadder::MoveOnLadder(VerticalDirection d)
 
 MoveOnLadder::~MoveOnLadder()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
 }
 
 void MoveOnLadder::onKeyEvent(Event* e)
@@ -193,8 +187,6 @@ OnGround::OnGround()
 
 OnGround::~OnGround()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
     Assets::OnAir::removeCallbacks(this);
 }
 
@@ -229,8 +221,6 @@ Jumping::Jumping()
 
 Jumping::~Jumping()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
     Assets::OnSurface::removeCallbacks(this);
 }
 
@@ -285,8 +275,6 @@ Falling::Falling()
 
 Falling::~Falling()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
     Assets::OnSurface::removeCallbacks(this);
 }
 
@@ -324,8 +312,6 @@ Running::Running(HorizontalDirection d)
 
 Running::~Running()
 {
-    KeyEvent::removeCallbacks(this);
-    ObjectCollision::removeCallbacks(this);
 }
 
 void Running::onKeyEvent(Event* e)
