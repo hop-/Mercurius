@@ -11,6 +11,12 @@ State::State()
     ObjectCollision::registerCallback(&State::onObjectCollision, this);
 }
 
+State::~State()
+{
+    KeyEvent::removeCallbacks(this);
+    ObjectCollision::removeCallbacks(this);
+}
+
 void State::init()
 {
     Command* initCommand = onInit();
