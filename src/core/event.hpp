@@ -63,7 +63,7 @@ public:
 
     void trigger()
     {
-        for (auto pair : m_callbacks) {
+        for (auto& pair : m_callbacks) {
             for (auto& callback : pair.second) {
                 assert(callback && "callback target is invalid");
                 callback(this);
