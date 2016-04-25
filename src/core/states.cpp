@@ -284,11 +284,11 @@ Command* Jumping::command()
 
 Falling::Falling()
 {
-    ObjectCollision::registerCallback(&Falling::onObjectCollision, this);
 }
 
 Falling::~Falling()
 {
+    KeyEvent::removeCallbacks(this);
     ObjectCollision::removeCallbacks(this);
 }
 
