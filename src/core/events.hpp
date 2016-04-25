@@ -101,7 +101,7 @@ private:
 public:
     ObjectCollision(ObjectPair pair, Status status);
     Direction getCollisionSide(const LogicObject* object) const;
-    const LogicObject* anouther(const LogicObject* object) const;
+    const LogicObject* another(const LogicObject* object) const;
 
     inline const LogicObject* first() const
     {

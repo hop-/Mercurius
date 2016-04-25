@@ -14,12 +14,12 @@ namespace Assets
 class OnSurface
     : public Core::EventCreator<OnSurface>
 {
-    Core::LogicObject* m_object;
+    const Core::LogicObject* m_object;
 
 public:
-    OnSurface(Core::LogicObject* object);
+    OnSurface(const Core::LogicObject* object);
 
-    inline Core::LogicObject* object() const
+    inline const Core::LogicObject* object() const
     {
         return m_object;
     }
@@ -34,12 +34,12 @@ private:
 class OnAir
     : public Core::EventCreator<OnAir>
 {
-    Core::LogicObject* m_object;
+    const Core::LogicObject* m_object;
 
 public:
-    OnAir(Core::LogicObject* object);
+    OnAir(const Core::LogicObject* object);
 
-    inline Core::LogicObject* object() const
+    inline const Core::LogicObject* object() const
     {
         return m_object;
     }

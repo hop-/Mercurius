@@ -3,7 +3,7 @@
 namespace Assets
 {
 
-OnSurface::OnSurface(Core::LogicObject* object)
+OnSurface::OnSurface(const Core::LogicObject* object)
     : m_object(object)
 {}
 
@@ -12,7 +12,7 @@ bool OnSurface::less(Base::TypedBase* obj)
     return (this < obj);
 }
 
-OnAir::OnAir(Core::LogicObject* object)
+OnAir::OnAir(const Core::LogicObject* object)
     : m_object(object)
 {}
 

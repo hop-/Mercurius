@@ -58,7 +58,7 @@ Direction ObjectCollision::getCollisionSide(const LogicObject* object) const
 }
 
 const LogicObject*
-ObjectCollision::anouther(const LogicObject* object) const
+ObjectCollision::another(const LogicObject* object) const
 {
     if (!contains(object)) {
         return 0;

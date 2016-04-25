@@ -45,8 +45,8 @@ void Standing::onObjectCollision(Event* e)
     if (!c->contains(p)) {
         return;
     }
-    assert(0 != c->anouther(p));
-    if (c->anouther(p)->typeName() == "ladder") { // TODO hardcoded
+    assert(0 != c->another(p));
+    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
         if (c->status() == ObjectCollision::Status::Attached) {
             p->addState(new OnLadder);
         }
@@ -103,8 +103,8 @@ void OnLadder::onObjectCollision(Event* e)
     if (!c->contains(p)) {
         return;
     }
-    assert(0 != c->anouther(p));
-    if (c->anouther(p)->typeName() == "ladder") { // TODO hardcoded
+    assert(0 != c->another(p));
+    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
         if (c->status() == ObjectCollision::Status::Detached) {
             p->removeState(this);
         }
@@ -152,8 +152,8 @@ void MoveOnLadder::onObjectCollision(Event* e)
     if (!c->contains(p)) {
         return;
     }
-    assert(0 != c->anouther(p));
-    if (c->anouther(p)->typeName() == "ladder") { // TODO hardcoded
+    assert(0 != c->another(p));
+    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
         if (c->status() == ObjectCollision::Status::Detached) {
             p->removeState(this);
         }
@@ -357,8 +357,8 @@ void Running::onObjectCollision(Event* e)
     if (!c->contains(p)) {
         return;
     }
-    assert(0 != c->anouther(p));
-    if (c->anouther(p)->typeName() == "ladder") { // TODO hardcoded
+    assert(0 != c->another(p));
+    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
         if (c->status() == ObjectCollision::Status::Attached) {
             p->addState(new OnLadder);
         }
