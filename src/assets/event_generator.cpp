@@ -19,9 +19,11 @@ EventGenerator::~EventGenerator()
 void EventGenerator::init()
 {
     Core::ObjectCollision::registerCallback(
-            &EventGenerator::ObjColl2OnSurface, this);
+            new Base::DelegateCreator<EventGenerator>(this,
+                &EventGenerator::ObjColl2OnSurface));
     Core::ObjectCollision::registerCallback(
-            &EventGenerator::ObjColl2OnAir, this);
+            new Base::DelegateCreator<EventGenerator>(this,
+                &EventGenerator::ObjColl2OnAir));
 }
 
 void EventGenerator::ObjColl2OnSurface(Base::Event* e)

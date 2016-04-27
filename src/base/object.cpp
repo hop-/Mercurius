@@ -13,7 +13,7 @@ Object::Object()
     , m_parent(0)
 {
     std::stringstream converter;
-    converter<<id;
+    converter<<id++;
     std::string i;
     converter>>i;
     m_name = base_name + i;

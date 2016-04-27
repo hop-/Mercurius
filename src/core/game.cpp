@@ -39,7 +39,7 @@ Game::Game(Frame* frame, InputHandler* inputHandler)
 {
     assert(0 != m_frame);
     assert(0 != inputHandler);
-    QuitEvent::registerCallback(&Game::quit, this);
+    QuitEvent::registerCallback(new Base::DelegateCreator<Game>(this, &Game::quit));
 }
 
 Game::~Game()

@@ -182,7 +182,7 @@ Command* OnGround::onInit()
 
 OnGround::OnGround()
 {
-    Assets::OnAir::registerCallback(&OnGround::onAir, this);
+    Assets::OnAir::registerCallback(new Base::DelegateCreator<OnGround>(this, &OnGround::onAir));
 }
 
 OnGround::~OnGround()
@@ -216,7 +216,7 @@ void OnGround::onAir(Base::Event* e)
 
 Jumping::Jumping()
 {
-    Assets::OnSurface::registerCallback(&Jumping::onSurface, this);
+    Assets::OnSurface::registerCallback(new Base::DelegateCreator<Jumping>(this, &Jumping::onSurface));
 }
 
 Jumping::~Jumping()
@@ -270,7 +270,7 @@ Command* Jumping::command()
 
 Falling::Falling()
 {
-    Assets::OnSurface::registerCallback(&Falling::onSurface, this);
+    Assets::OnSurface::registerCallback(new Base::DelegateCreator<Falling>(this, &Falling::onSurface));
 }
 
 Falling::~Falling()

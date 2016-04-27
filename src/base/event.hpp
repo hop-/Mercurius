@@ -1,11 +1,11 @@
 #ifndef _BASE_EVENT_HPP_
 #define _BASE_EVENT_HPP_
 
+#include "delegate.hpp"
 #include "typed_base.hpp"
 
-#include <vector>
-#include <map>
-#include <functional>
+#include <algorithm>
+#include <list>
 #include <cassert>
 
 namespace Base
@@ -14,10 +14,6 @@ namespace Base
 class Event
     : public Base::TypedBase
 {
-public:
-    typedef void (*OnNotify) (Event*);
-    using Callback = std::function<void(Event*)>;
-
 public:
     virtual void trigger() = 0;
 };
@@ -28,7 +24,7 @@ class EventCreator
 {
 private:
     static const ID type;
-    typedef std::map<void*, std::vector<Callback>> Callbacks;
+    typedef std::list<Delegate*> Callbacks;
     static Callbacks m_callbacks;
 
 protected:
@@ -48,27 +44,29 @@ public:
         return (castable(e)) ? static_cast<T*>(e) : 0;
     }
 
-    template<class F, class OBJTYPE>
-    static void registerCallback(F c, OBJTYPE* object)
+    static void registerCallback(Delegate* delegate)
     {
-        using std::placeholders::_1;
-        m_callbacks[object].push_back(std::bind(c, object, _1));
+        assert(0 != delegate);
+        m_callbacks.push_back(delegate);
     }
 
-    static void removeCallbacks(void* object)
+    static void removeCallbacks(void* )
     {
-        m_callbacks[object].clear();
-        m_callbacks.erase(object);
+/*        Callbacks::iterator i = std::find_if(m_callbacks.begin(), m_callbacks.end(), [&](Delegate* d) {
+                assert(0 != d);
+                return d->m_obj == object;
+                });
+        assert(i != m_callbacks.end());
+        delete *i;
+        m_callbacks.erase(i);*/
     }
 
     void trigger()
     {
-        for (auto& pair : m_callbacks) {
-            for (auto& callback : pair.second) {
-                assert(callback && "callback target is invalid");
-                callback(this);
+        for (Callbacks::iterator i = m_callbacks.begin(); i != m_callbacks.end() ; ++i) {
+                assert(0 != *i);
+                (*i)->invoke(this);
             }
-        }
     }
 
     int getType() const

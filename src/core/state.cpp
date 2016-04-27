@@ -7,8 +7,8 @@ namespace Core
 
 State::State()
 {
-    KeyEvent::registerCallback(&State::onKeyEvent, this);
-    ObjectCollision::registerCallback(&State::onObjectCollision, this);
+    KeyEvent::registerCallback(new Base::DelegateCreator<State>(this, &State::onKeyEvent));
+    ObjectCollision::registerCallback(new Base::DelegateCreator<State>(this, &State::onObjectCollision));
 }
 
 State::~State()
