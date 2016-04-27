@@ -9,11 +9,10 @@
 namespace Core
 {
 
-Layer::Layer(Gui* gui, Logic* logic, Controls controls,
+Layer::Layer(Gui* gui, Logic* logic,
         bool stopped, bool hidden, bool ignoreEvents)
     : m_gui(gui)
     , m_logic(logic)
-    , m_controls(controls)
     , m_stopped(stopped)
     , m_hidden(hidden)
     , m_ignoreEvent(ignoreEvents)
@@ -35,15 +34,10 @@ Layer::~Layer()
     m_logic = 0;
 }
 
-void Layer::changeControls(Controls controls)
-{
-    m_controls = controls;
-}
-
 Command* Layer::getCommand(Event* event)
 {
     assert(0 != event);
-    return m_controls.getCommand(event);
+    return 0;
 }
 
 void Layer::update()

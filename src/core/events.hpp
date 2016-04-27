@@ -1,9 +1,10 @@
 #ifndef _CORE_EVENTS_HPP_
 #define _CORE_EVENTS_HPP_
 
-#include "event.hpp"
 #include "input_manager.hpp"
 #include "units.hpp"
+
+#include <base/event.hpp>
 
 namespace Core
 {
@@ -11,7 +12,7 @@ namespace Core
 class LogicObject;
 
 class KeyEvent
-    : public EventCreator<KeyEvent>
+    : public Base::EventCreator<KeyEvent>
 {
 public:
     enum class Mode {Up, Down};
@@ -41,7 +42,7 @@ private:
 };
 
 class MouseClickEvent
-    : public EventCreator<MouseClickEvent>
+    : public Base::EventCreator<MouseClickEvent>
 {
 public:
     enum class Mode {Up, Down};
@@ -86,7 +87,7 @@ private:
 };
 
 class ObjectCollision
-    : public EventCreator<ObjectCollision>
+    : public Base::EventCreator<ObjectCollision>
 {
 public:
     using ObjectPair = std::pair<const LogicObject*, const LogicObject*>;
@@ -155,7 +156,7 @@ private:
 };
 
 class QuitEvent
-    : public EventCreator<QuitEvent>
+    : public Base::EventCreator<QuitEvent>
 {
 private:
     bool less(Base::TypedBase* obj);

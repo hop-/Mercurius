@@ -5,11 +5,17 @@
 
 #include <vector>
 
+namespace Base
+{
+
+class Event;
+
+}
+
 namespace Core
 {
 
 class Frame;
-class Event;
 class InputHandler;
 class Layer;
 
@@ -49,7 +55,7 @@ public:
 private:
     void mainLoop();
 
-    void quit(Event*)
+    void quit(Base::Event*)
     {
         m_isRunning = false;
     }

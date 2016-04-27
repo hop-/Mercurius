@@ -17,7 +17,7 @@ Standing::~Standing()
 {
 }
 
-void Standing::onKeyEvent(Event* e)
+void Standing::onKeyEvent(Base::Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
     assert(0 != key);
@@ -36,7 +36,7 @@ void Standing::onKeyEvent(Event* e)
     }
 }
 
-void Standing::onObjectCollision(Event* e)
+void Standing::onObjectCollision(Base::Event* e)
 {
     ObjectCollision* c = ObjectCollision::cast(e);
     assert (0 != c);
@@ -73,7 +73,7 @@ OnLadder::~OnLadder()
 {
 }
 
-void OnLadder::onKeyEvent(Event* e)
+void OnLadder::onKeyEvent(Base::Event* e)
 {
     KeyEvent* k = KeyEvent::cast(e);
     assert(0 != k);
@@ -92,7 +92,7 @@ void OnLadder::onKeyEvent(Event* e)
     }
 }
 
-void OnLadder::onObjectCollision(Event* e)
+void OnLadder::onObjectCollision(Base::Event* e)
 {
     ObjectCollision* c = ObjectCollision::cast(e);
     assert (0 != c);
@@ -130,7 +130,7 @@ MoveOnLadder::~MoveOnLadder()
 {
 }
 
-void MoveOnLadder::onKeyEvent(Event* e)
+void MoveOnLadder::onKeyEvent(Base::Event* e)
 {
     KeyEvent* k = KeyEvent::cast(e);
     assert(0 != k);
@@ -139,7 +139,7 @@ void MoveOnLadder::onKeyEvent(Event* e)
     }
 }
 
-void MoveOnLadder::onObjectCollision(Event* e)
+void MoveOnLadder::onObjectCollision(Base::Event* e)
 {
     ObjectCollision* c = ObjectCollision::cast(e);
     assert (0 != c);
@@ -190,7 +190,7 @@ OnGround::~OnGround()
     Assets::OnAir::removeCallbacks(this);
 }
 
-void OnGround::onKeyEvent(Event* e)
+void OnGround::onKeyEvent(Base::Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
     assert(0 != key);
@@ -202,7 +202,7 @@ void OnGround::onKeyEvent(Event* e)
     }
 }
 
-void OnGround::onAir(Event* e)
+void OnGround::onAir(Base::Event* e)
 {
     Assets::OnAir* oa = Assets::OnAir::cast(e);
     assert(0 != oa);
@@ -230,7 +230,7 @@ Jumping::Jumping(EngineUnit power)
     m_power = power;
 }
 
-void Jumping::onKeyEvent(Event* e)
+void Jumping::onKeyEvent(Base::Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
     assert(0 != key);
@@ -240,7 +240,7 @@ void Jumping::onKeyEvent(Event* e)
     }
 }
 
-void Jumping::onSurface(Event* e)
+void Jumping::onSurface(Base::Event* e)
 {
     Assets::OnSurface* os = Assets::OnSurface::cast(e);
     assert(0 != os);
@@ -284,7 +284,7 @@ Command* Falling::onInit()
     return 0;
 }
 
-void Falling::onSurface(Event* e)
+void Falling::onSurface(Base::Event* e)
 {
     Assets::OnSurface* os = Assets::OnSurface::cast(e);
     assert(0 != os);
@@ -314,7 +314,7 @@ Running::~Running()
 {
 }
 
-void Running::onKeyEvent(Event* e)
+void Running::onKeyEvent(Base::Event* e)
 {
     KeyEvent* key = KeyEvent::cast(e);
     assert(0 != key);
@@ -331,7 +331,7 @@ void Running::onKeyEvent(Event* e)
     }
 }
 
-void Running::onObjectCollision(Event* e)
+void Running::onObjectCollision(Base::Event* e)
 {
     ObjectCollision* c = ObjectCollision::cast(e);
     LogicObject* p = parent<LogicObject>();
@@ -377,7 +377,7 @@ Command* LayerChanger::command()
     return 0;
 }
 
-void LayerChanger::onKeyEvent(Event*)
+void LayerChanger::onKeyEvent(Base::Event*)
 {
     // TODO handle ALT+Tab event
 }

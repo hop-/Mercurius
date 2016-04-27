@@ -1,7 +1,7 @@
 #ifndef _CORE_CONTROLS_HPP_
 #define _CORE_CONTROLS_HPP_
 
-#include "event.hpp"
+#include <base/event.hpp>
 
 #include <map>
 
@@ -12,12 +12,12 @@ class Command;
 
 class Controls
 {
-    std::map<Event*, Command*, Event::Less> m_controlMap;
+    std::map<Base::Event*, Command*, Base::Event::Less> m_controlMap;
 
 public:
-    void add(Event* event, Command* command);
-    void remove(Event* event);
-    Command* getCommand(Event* event);
+    void add(Base::Event* event, Command* command);
+    void remove(Base::Event* event);
+    Command* getCommand(Base::Event* event);
 
 public:
     Controls()

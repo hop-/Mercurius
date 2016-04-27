@@ -4,10 +4,16 @@
 #include <map>
 #include <list>
 
-namespace Core
+namespace Base
 {
 
 class Event;
+
+} // namespace Base
+
+namespace Core
+{
+
 class LogicObject;
 
 } // namespace Core
@@ -31,8 +37,8 @@ public:
     void init();
 
 private:
-    void ObjColl2OnSurface(Core::Event* e);
-    void ObjColl2OnAir(Core::Event* e);
+    void ObjColl2OnSurface(Base::Event* e);
+    void ObjColl2OnAir(Base::Event* e);
 };
 
 } // namespace Assets

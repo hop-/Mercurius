@@ -1,14 +1,14 @@
-#ifndef _CORE_EVENT_HPP_
-#define _CORE_EVENT_HPP_
+#ifndef _BASE_EVENT_HPP_
+#define _BASE_EVENT_HPP_
 
-#include <base/typed_base.hpp>
+#include "typed_base.hpp"
 
 #include <vector>
 #include <map>
 #include <functional>
 #include <cassert>
 
-namespace Core
+namespace Base
 {
 
 class Event
@@ -83,6 +83,6 @@ const Event::ID EventCreator<T>::type;
 template <class T>
 typename EventCreator<T>::Callbacks EventCreator<T>::m_callbacks;
 
-} // namespace Core
+} // namespace Base
 
-#endif //_CORE_EVENT_HPP_
+#endif //_BASE_EVENT_HPP_

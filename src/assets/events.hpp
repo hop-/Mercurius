@@ -1,7 +1,7 @@
 #ifndef _ASSETS_EVENTS_HPP_
 #define _ASSETS_EVENTS_HPP_
 
-#include <core/event.hpp>
+#include <base/event.hpp>
 
 namespace Core
 {
@@ -12,7 +12,7 @@ namespace Assets
 {
 
 class OnSurface
-    : public Core::EventCreator<OnSurface>
+    : public Base::EventCreator<OnSurface>
 {
     const Core::LogicObject* m_object;
 
@@ -32,7 +32,7 @@ private:
 };
 
 class OnAir
-    : public Core::EventCreator<OnAir>
+    : public Base::EventCreator<OnAir>
 {
     const Core::LogicObject* m_object;
 

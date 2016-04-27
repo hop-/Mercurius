@@ -5,10 +5,15 @@
 #include "units.hpp"
 #include "input_manager.hpp"
 
-namespace Core
+namespace Base
 {
 
 class Event;
+
+}
+
+namespace Core
+{
 
 class Standing
     : public State
@@ -24,8 +29,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e) override;
-    void onObjectCollision(Event* e) override;
+    void onKeyEvent(Base::Event* e) override;
+    void onObjectCollision(Base::Event* e) override;
 };
 
 class OnLadder
@@ -40,8 +45,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e) override;
-    void onObjectCollision(Event* e) override;
+    void onKeyEvent(Base::Event* e) override;
+    void onObjectCollision(Base::Event* e) override;
 };
 
 class MoveOnLadder // better to use template
@@ -58,8 +63,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e) override;
-    void onObjectCollision(Event* e) override;
+    void onKeyEvent(Base::Event* e) override;
+    void onObjectCollision(Base::Event* e) override;
 };
 
 class OnGround
@@ -73,8 +78,8 @@ public:
     Command* onInit() override;
 
 private:
-    void onKeyEvent(Event* e) override;
-    void onAir(Event* e);
+    void onKeyEvent(Base::Event* e) override;
+    void onAir(Base::Event* e);
 };
 
 class Jumping
@@ -93,8 +98,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e) override;
-    void onSurface(Event* e);
+    void onKeyEvent(Base::Event* e) override;
+    void onSurface(Base::Event* e);
 };
 
 class Falling
@@ -108,7 +113,7 @@ public:
     Command* onInit() override;
 
 private:
-    void onSurface(Event* e);
+    void onSurface(Base::Event* e);
 };
 
 class Running   // better to use template
@@ -128,8 +133,8 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e) override;
-    void onObjectCollision(Event* e) override;
+    void onKeyEvent(Base::Event* e) override;
+    void onObjectCollision(Base::Event* e) override;
 };
 
 class LayerChanger
@@ -142,7 +147,7 @@ public:
     Command* command() override;
 
 private:
-    void onKeyEvent(Event* e) override;
+    void onKeyEvent(Base::Event* e) override;
 
 };
 

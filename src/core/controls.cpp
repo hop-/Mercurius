@@ -3,20 +3,20 @@
 namespace Core
 {
 
-void Controls::add(Event* event, Command* command)
+void Controls::add(Base::Event* event, Command* command)
 {
     assert(0 != event);
     assert(0 != command);
-    m_controlMap.insert(std::pair<Event*, Command*>(event, command));
+    m_controlMap.insert(std::pair<Base::Event*, Command*>(event, command));
 }
 
-void Controls::remove(Event* event)
+void Controls::remove(Base::Event* event)
 {
     assert(0 != event);
     m_controlMap.erase(event);
 }
 
-Command* Controls::getCommand(Event* event)
+Command* Controls::getCommand(Base::Event* event)
 {
     assert(0 != event);
     try {

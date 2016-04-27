@@ -3,10 +3,16 @@
 
 #include <base/object.hpp>
 
-namespace Core
+namespace Base
 {
 
 class Event;
+
+}
+
+namespace Core
+{
+
 class Command;
 
 class State
@@ -30,10 +36,10 @@ protected:
     }
 
 protected:
-    virtual void onKeyEvent(Event*)
+    virtual void onKeyEvent(Base::Event*)
     {}
 
-    virtual void onObjectCollision(Event*)
+    virtual void onObjectCollision(Base::Event*)
     {}
 };
 

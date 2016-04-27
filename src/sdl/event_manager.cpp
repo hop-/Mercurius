@@ -3,6 +3,8 @@
 #include <core/events.hpp>
 #include <core/input_manager.hpp>
 
+#include <base/event.hpp>
+
 #include <SDL2/SDL.h>
 
 namespace Sdl
@@ -13,7 +15,7 @@ void InputHandler::catchUserInput()
     SDL_Event event;
     Core::InputManager::Key k;
     if (SDL_PollEvent(&event)) {
-        Core::Event* cevent = 0;
+        Base::Event* cevent = 0;
         switch (event.type) {
         case SDL_QUIT :
             cevent = new Core::QuitEvent;

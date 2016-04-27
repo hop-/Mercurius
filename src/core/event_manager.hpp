@@ -1,10 +1,16 @@
 #ifndef _CORE_EVENT_MANAGER_HPP_
 #define _CORE_EVENT_MANAGER_HPP_
 
-namespace Core
+namespace Base
 {
 
 class Event;
+
+}
+
+namespace Core
+{
+
 class Layer;
 class Command;
 
@@ -14,7 +20,7 @@ private:
     EventManager() = delete;
 
 public:
-    static void process(Event* e);
+    static void process(Base::Event* e);
 };
 
 class InputHandler

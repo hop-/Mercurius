@@ -24,7 +24,7 @@ void EventGenerator::init()
             &EventGenerator::ObjColl2OnAir, this);
 }
 
-void EventGenerator::ObjColl2OnSurface(Core::Event* e)
+void EventGenerator::ObjColl2OnSurface(Base::Event* e)
 {
     Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
     assert(0 != oc);
@@ -56,7 +56,7 @@ void EventGenerator::ObjColl2OnSurface(Core::Event* e)
     }
 }
 
-void EventGenerator::ObjColl2OnAir(Core::Event* e)
+void EventGenerator::ObjColl2OnAir(Base::Event* e)
 {
     Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
     assert(0 != oc);
