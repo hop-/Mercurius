@@ -49,9 +49,11 @@ void LogicObject::addState(State* newState)
 void LogicObject::removeState(State* state)
 {
     bool status = removeObject(state);
-    assert(status);
+    if (!status) {
+        return;
+    }
     assert(state != 0);
-    delete state;
+    state->deleteLater();
     Base::Utility::ignoreUnused(status);
 }
 

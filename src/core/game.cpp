@@ -40,7 +40,7 @@ Game::Game(Frame* frame, Base::InputHandler* inputHandler)
 {
     assert(0 != m_frame);
     assert(0 != inputHandler);
-    QuitEvent::registerCallback(new Base::DelegateCreator<Game>(this, &Game::quit));
+    QuitEvent::registerCallback(this, new Base::DelegateCreator<Game>(this, &Game::quit));
 }
 
 Game::~Game()
@@ -94,6 +94,7 @@ void Game::mainLoop()
         }
         // visualize frame
         m_frame->draw();
+        Base::EventManager::processAllDeleteEvents();
     }
 }
 

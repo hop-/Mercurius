@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <list>
+#include <map>
 #include <cassert>
 
 namespace Base
@@ -24,7 +25,7 @@ class EventCreator
 {
 private:
     static const ID type;
-    typedef std::list<Delegate*> Callbacks;
+    typedef std::map<void*, std::list<Delegate*> > Callbacks;
     static Callbacks m_callbacks;
 
 protected:
@@ -44,28 +45,29 @@ public:
         return (castable(e)) ? static_cast<T*>(e) : 0;
     }
 
-    static void registerCallback(Delegate* delegate)
+    static void registerCallback(void* o, Delegate* delegate)
     {
         assert(0 != delegate);
-        m_callbacks.push_back(delegate);
+        assert(0 != o);
+        m_callbacks[o].push_back(delegate);
     }
 
-    static void removeCallbacks(void* )
+    static void removeCallbacks(void* o)
     {
-/*        Callbacks::iterator i = std::find_if(m_callbacks.begin(), m_callbacks.end(), [&](Delegate* d) {
-                assert(0 != d);
-                return d->m_obj == object;
-                });
-        assert(i != m_callbacks.end());
-        delete *i;
-        m_callbacks.erase(i);*/
+        assert(m_callbacks.find(o) != m_callbacks.end());
+        for (auto& i : m_callbacks[o]) {
+            delete i;
+        }
+        m_callbacks.erase(o);
     }
 
     void trigger() override
     {
         for (Callbacks::iterator i = m_callbacks.begin(); i != m_callbacks.end() ; ++i) {
-                assert(0 != *i);
-                (*i)->invoke(this);
+                for (auto j: (*i).second) {
+                    assert(0 != j);
+                    j->invoke(this);
+                }
             }
     }
 

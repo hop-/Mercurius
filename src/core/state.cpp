@@ -1,14 +1,14 @@
 #include "state.hpp"
 #include "command.hpp"
 #include "events.hpp"
-
+#include <iostream>
 namespace Core
 {
 
 State::State()
 {
-    KeyEvent::registerCallback(new Base::DelegateCreator<State>(this, &State::onKeyEvent));
-    ObjectCollision::registerCallback(new Base::DelegateCreator<State>(this, &State::onObjectCollision));
+    KeyEvent::registerCallback(this, new Base::DelegateCreator<State>(this, &State::onKeyEvent));
+    ObjectCollision::registerCallback(this, new Base::DelegateCreator<State>(this, &State::onObjectCollision));
 }
 
 State::~State()

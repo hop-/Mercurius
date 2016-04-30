@@ -1,4 +1,6 @@
 #include "object.hpp"
+#include "delete_event.hpp"
+#include "event_manager.hpp"
 
 #include <sstream>
 
@@ -46,7 +48,7 @@ void Object::setParent(Object* o)
 
 void Object::deleteLater()
 {
-
+    EventManager::processDeleteEvent(new DeleteEvent(this));
 }
 
 } // namespace Base
