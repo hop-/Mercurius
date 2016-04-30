@@ -2,9 +2,10 @@
 
 #include "layer.hpp"
 #include "frame.hpp"
-#include "event_manager.hpp"
 #include "command.hpp"
 #include "events.hpp"
+
+#include <base/event_manager.hpp>
 
 #include <algorithm>
 #include <cassert>
@@ -14,7 +15,7 @@ namespace Core
 
 Game* Game::m_instance = 0;
 
-Game* Game::getInstance(Frame* frame, InputHandler* inputHandler)
+Game* Game::getInstance(Frame* frame, Base::InputHandler* inputHandler)
 {
     if (frame != 0 && inputHandler != 0 && m_instance == 0) {
         m_instance = new Game(frame, inputHandler);
@@ -32,7 +33,7 @@ bool Game::deleteInstance()
     return true;
 }
 
-Game::Game(Frame* frame, InputHandler* inputHandler)
+Game::Game(Frame* frame, Base::InputHandler* inputHandler)
     : m_frame(frame)
     , m_inputHandler(inputHandler)
     , m_layers()

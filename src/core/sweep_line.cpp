@@ -3,7 +3,6 @@
 #include "logic_object.hpp"
 #include "components.hpp"
 #include "game.hpp"
-#include "event_manager.hpp"
 #include "events.hpp"
 
 #include <set>

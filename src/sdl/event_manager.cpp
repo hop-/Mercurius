@@ -46,7 +46,7 @@ void InputHandler::catchUserInput()
             cevent = 0;
         }
         if (0 != cevent) {
-            Core::EventManager::process(cevent);
+            Base::EventManager::process(cevent);
         }
     }
 }

@@ -61,7 +61,7 @@ public:
         m_callbacks.erase(i);*/
     }
 
-    void trigger()
+    void trigger() override
     {
         for (Callbacks::iterator i = m_callbacks.begin(); i != m_callbacks.end() ; ++i) {
                 assert(0 != *i);

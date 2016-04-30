@@ -32,7 +32,7 @@ void Mercurius::start()
     Core::InputManager::reset();
     Core::InputManager::setMappings(c->m_mapping);
     //TODO TMP end
-    Core::InputHandler* inputHandler = new Sdl::InputHandler;
+    Base::InputHandler* inputHandler = new Sdl::InputHandler;
     Core::Game* game = Core::Game::getInstance(frame, inputHandler);
     loadLayers(*game, frame);
     game->start();

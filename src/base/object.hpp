@@ -14,7 +14,6 @@ public:
     virtual ~Object();
 
 private:
-    // TMP
     Object(const Object&) = delete;
     Object& operator=(const Object&) = delete;
 
@@ -34,6 +33,9 @@ public:
 
 public:
     void setParent(Object* p);
+
+public:
+    void deleteLater();
 
 public:
     const std::string& name() const;

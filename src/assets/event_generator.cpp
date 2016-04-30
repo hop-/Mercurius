@@ -1,8 +1,8 @@
 #include "event_generator.hpp"
 #include "events.hpp"
 
+#include <base/event_manager.hpp>
 #include <core/events.hpp>
-#include <core/event_manager.hpp>
 #include <core/logic_object.hpp>
 #include <core/components.hpp>
 
@@ -54,7 +54,7 @@ void EventGenerator::ObjColl2OnSurface(Base::Event* e)
     }
     m_groundsOfObject[o1].push_back(o2);
     if (m_groundsOfObject[o1].size() == 1) {
-        Core::EventManager::process(new OnSurface(o1));
+        Base::EventManager::process(new OnSurface(o1));
     }
 }
 
@@ -76,7 +76,7 @@ void EventGenerator::ObjColl2OnAir(Base::Event* e)
         if (m_groundsOfObject[of].size()) {
             m_groundsOfObject[of].remove(os);
             if (m_groundsOfObject[of].size() == 0) {
-                Core::EventManager::process(new OnAir(of));
+                Base::EventManager::process(new OnAir(of));
             }
         }
     }
@@ -84,7 +84,7 @@ void EventGenerator::ObjColl2OnAir(Base::Event* e)
         if (m_groundsOfObject[os].size()) {
             m_groundsOfObject[os].remove(of);
             if (m_groundsOfObject[os].size() == 0) {
-                Core::EventManager::process(new OnAir(os));
+                Base::EventManager::process(new OnAir(os));
             }
         }
     }

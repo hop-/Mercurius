@@ -1,13 +1,13 @@
 #ifndef _SDL_EVENT_MANAGER_HPP_
 #define _SDL_EVENT_MANAGER_HPP_
 
-#include <core/event_manager.hpp>
+#include <base/event_manager.hpp>
 
 namespace Sdl
 {
 
 class InputHandler
-    : public Core::InputHandler
+    : public Base::InputHandler
 {
 public:
     unsigned getTicks() override final;

@@ -44,4 +44,9 @@ void Object::setParent(Object* o)
     m_parent = o;
 }
 
+void Object::deleteLater()
+{
+
+}
+
 } // namespace Base

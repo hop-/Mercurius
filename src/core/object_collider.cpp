@@ -3,8 +3,9 @@
 #include "logic_object.hpp"
 #include "components.hpp"
 #include "position.hpp"
-#include "event_manager.hpp"
 #include "events.hpp"
+
+#include <base/event_manager.hpp>
 
 namespace Core
 {
@@ -153,13 +154,13 @@ void ObjectCollider::throwCollisionEvents()
             }
         }
         if (!found) {
-            EventManager::process(new ObjectCollision(
+            Base::EventManager::process(new ObjectCollision(
                             pair
                             , ObjectCollision::Status::Attached));
         }
     }
     for (const auto& existPair : m_collidedPairs) {
-        EventManager::process(new ObjectCollision(
+        Base::EventManager::process(new ObjectCollision(
                     existPair
                     , ObjectCollision::Status::Detached));
     }

@@ -9,6 +9,7 @@ namespace Base
 {
 
 class Event;
+class InputHandler;
 
 }
 
@@ -16,19 +17,18 @@ namespace Core
 {
 
 class Frame;
-class InputHandler;
 class Layer;
 
 class Game
 {
     Frame* m_frame = 0;
-    InputHandler* m_inputHandler = 0;
+    Base::InputHandler* m_inputHandler = 0;
     std::vector<Layer*> m_layers;
     static Game* m_instance;
     bool m_isRunning = true;
 
 private:
-    Game(Frame* frame, InputHandler* inputHandler);
+    Game(Frame* frame, Base::InputHandler* inputHandler);
     ~Game();
 
 private:
@@ -36,13 +36,13 @@ private:
     Game& operator=(const Game&) = delete;
 
 public:
-    static Game* getInstance(Frame* frame = 0, InputHandler* inputHandler = 0);
+    static Game* getInstance(Frame* frame = 0, Base::InputHandler* inputHandler = 0);
     static bool deleteInstance();
 
 public:
     const Frame* frame() const;
 
-    InputHandler* inputHandler()
+    Base::InputHandler* inputHandler()
     {
         return m_inputHandler;
     }
