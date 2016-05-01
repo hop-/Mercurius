@@ -26,9 +26,11 @@ Object::
 ~Object()
 {
     for (auto& callback : m_callbacks) {
+        assert(0 != callback);
         delete callback;
     }
     m_callbacks.clear();
+    assert(m_callbacks.empty());
 }
 
 void Object::setName(const std::string& name)
@@ -60,6 +62,7 @@ void Object::deleteLater()
 void Object::deactivateCallbacks()
 {
     for (auto& callback : m_callbacks) {
+        assert(0 != callback);
         callback->deactivate();
     }
 }
