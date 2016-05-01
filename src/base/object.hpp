@@ -50,7 +50,7 @@ protected:
     template <class T>
     void registerCallback(Delegate* d)
     {
-        m_callbacks.push_back(new CallbackCreator<T>(this, d));
+        m_callbacks.push_back(new CallbackCreator<T>(d));
     }
 
 private:

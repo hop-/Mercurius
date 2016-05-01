@@ -19,26 +19,24 @@ template <class T>
 class CallbackCreator
     : public Callback
 {
-    void* m_object;
+    int m_id = 0;
 
 public:
-    CallbackCreator(void* o, Delegate* d)
-        : m_object(o)
+    CallbackCreator(Delegate* d)
     {
-        assert(0 != m_object);
         assert(0 != d);
-        T::registerCallback(m_object, d);
+        m_id = T::registerCallback(d);
     }
 
     ~CallbackCreator()
     {
-        T::removeCallbacks(m_object);
+        T::removeCallbacks(m_id);
     }
 
 public:
     void deactivate() override final
     {
-        T::deactivate(m_object);
+        T::deactivate(m_id);
     }
 
 private:

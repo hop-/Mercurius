@@ -1,6 +1,8 @@
 #ifndef _ASSETS_EVENT_GENERATOR_HPP_
 #define _ASSETS_EVENT_GENERATOR_HPP_
 
+#include <base/object.hpp>
+
 #include <map>
 #include <list>
 
@@ -22,6 +24,7 @@ namespace Assets
 {
 
 class EventGenerator
+    : public Base::Object
 {
 public:
     using Grounds = std::list<const Core::LogicObject*>;

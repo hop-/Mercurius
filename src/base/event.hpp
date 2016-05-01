@@ -5,7 +5,6 @@
 #include "typed_base.hpp"
 
 #include <algorithm>
-#include <list>
 #include <map>
 #include <cassert>
 
@@ -25,7 +24,8 @@ class EventCreator
 {
 private:
     static const ID type;
-    typedef std::map<void*, std::list<Delegate*> > Callbacks;
+    static int m_callbackID;
+    typedef std::map<int, Delegate*> Callbacks;
     static Callbacks m_callbacks;
 
 protected:
@@ -45,37 +45,32 @@ public:
         return (castable(e)) ? static_cast<T*>(e) : 0;
     }
 
-    static void registerCallback(void* o, Delegate* delegate)
+    static int registerCallback(Delegate* delegate)
     {
         assert(0 != delegate);
-        assert(0 != o);
-        m_callbacks[o].push_back(delegate);
+        assert(m_callbacks.find(m_callbackID) == m_callbacks.end());
+        m_callbacks[m_callbackID] = delegate;
+        return m_callbackID++;
     }
 
-    static void removeCallbacks(void* o)
+    static void removeCallbacks(int id)
     {
-        assert(m_callbacks.find(o) != m_callbacks.end());
-        for (auto& i : m_callbacks[o]) {
-            delete i;
-        }
-        m_callbacks.erase(o);
+        assert(m_callbacks.find(id) != m_callbacks.end());
+        delete m_callbacks[id];
+        m_callbacks.erase(id);
     }
-    static void deactivate(void* o)
+    static void deactivate(int id)
     {
-        assert(m_callbacks.find(o) != m_callbacks.end());
-        for (auto& i : m_callbacks[o]) {
-            i->deactivate();
-        }
+        assert(m_callbacks.find(id) != m_callbacks.end());
+        m_callbacks[id]->deactivate();
     }
 
     void trigger() override
     {
         for (auto& pair : m_callbacks) {
-                for (auto& callback: pair.second) {
-                    assert(0 != callback);
-                    callback->invoke(this);
-                }
-            }
+            assert(0 != pair.second);
+            pair.second->invoke(this);
+        }
     }
 
     int getType() const
@@ -86,6 +81,9 @@ public:
 
 template <class T>
 const Event::ID EventCreator<T>::type;
+
+template <class T>
+int EventCreator<T>::m_callbackID = 0;
 
 template <class T>
 typename EventCreator<T>::Callbacks EventCreator<T>::m_callbacks;

@@ -40,7 +40,7 @@ Game::Game(Frame* frame, Base::InputHandler* inputHandler)
 {
     assert(0 != m_frame);
     assert(0 != inputHandler);
-    QuitEvent::registerCallback(this, new Base::DelegateCreator<Game>(this, &Game::quit));
+    QuitEvent::registerCallback(new Base::DelegateCreator<Game>(this, &Game::quit));
 }
 
 Game::~Game()
@@ -57,7 +57,8 @@ Game::~Game()
     }
     m_layers.clear();
     assert(m_layers.empty());
-    QuitEvent::removeCallbacks(this);
+    //QuitEvent::removeCallbacks(this);
+    // TODO remove callback
 }
 
 void Game::mainLoop()

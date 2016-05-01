@@ -12,16 +12,14 @@ namespace Assets
 EventGenerator::GroundsOfObject EventGenerator::m_groundsOfObject;
 
 EventGenerator::~EventGenerator()
-{
-    Core::ObjectCollision::removeCallbacks(this);
-}
+{}
 
 void EventGenerator::init()
 {
-    Core::ObjectCollision::registerCallback(this,
+    registerCallback<Core::ObjectCollision>(
             new Base::DelegateCreator<EventGenerator>(this,
                 &EventGenerator::ObjColl2OnSurface));
-    Core::ObjectCollision::registerCallback(this,
+    registerCallback<Core::ObjectCollision>(
             new Base::DelegateCreator<EventGenerator>(this,
                 &EventGenerator::ObjColl2OnAir));
 }
