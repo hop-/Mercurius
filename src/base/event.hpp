@@ -60,13 +60,20 @@ public:
         }
         m_callbacks.erase(o);
     }
+    static void deactivate(void* o)
+    {
+        assert(m_callbacks.find(o) != m_callbacks.end());
+        for (auto& i : m_callbacks[o]) {
+            i->deactivate();
+        }
+    }
 
     void trigger() override
     {
-        for (Callbacks::iterator i = m_callbacks.begin(); i != m_callbacks.end() ; ++i) {
-                for (auto j: (*i).second) {
-                    assert(0 != j);
-                    j->invoke(this);
+        for (auto& pair : m_callbacks) {
+                for (auto& callback: pair.second) {
+                    assert(0 != callback);
+                    callback->invoke(this);
                 }
             }
     }

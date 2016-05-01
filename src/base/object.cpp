@@ -11,7 +11,8 @@ static const std::string base_name = "baseObject";
 static unsigned id = 0;
 
 Object::Object()
-    : m_name()
+    : m_callbacks()
+    , m_name()
     , m_parent(0)
 {
     std::stringstream converter;
@@ -24,6 +25,10 @@ Object::Object()
 Object::
 ~Object()
 {
+    for (auto& callback : m_callbacks) {
+        delete callback;
+    }
+    m_callbacks.clear();
 }
 
 void Object::setName(const std::string& name)
@@ -48,7 +53,15 @@ void Object::setParent(Object* o)
 
 void Object::deleteLater()
 {
+    deactivateCallbacks();
     EventManager::processDeleteEvent(new DeleteEvent(this));
+}
+
+void Object::deactivateCallbacks()
+{
+    for (auto& callback : m_callbacks) {
+        callback->deactivate();
+    }
 }
 
 } // namespace Base

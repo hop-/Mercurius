@@ -1,8 +1,11 @@
 #ifndef _BASE_OBJECT_HPP_
 #define _BASE_OBJECT_HPP_
 
+#include "callback.hpp"
+
 #include <cassert>
 #include <string>
+#include <vector>
 
 namespace Base
 {
@@ -42,8 +45,18 @@ public:
 
 protected:
     void setName(const std::string&);
+    void deactivateCallbacks();
+
+    template <class T>
+    void registerCallback(Delegate* d)
+    {
+        m_callbacks.push_back(new CallbackCreator<T>(this, d));
+    }
 
 private:
+    using Callbacks = std::vector<Callback*>;
+
+    Callbacks m_callbacks;
     std::string m_name;
     Object* m_parent;
 };

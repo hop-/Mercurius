@@ -11,9 +11,27 @@ class Event;
 
 class Delegate
 {
+    bool m_isNotActive = false;
+
 public:
     virtual void invoke(Event*) = 0;
     virtual ~Delegate() = default;
+
+    inline void activate()
+    {
+        m_isNotActive = false;
+    }
+
+    inline void deactivate()
+    {
+        m_isNotActive = true;
+    }
+
+protected:
+    inline bool isNotActive() const
+    {
+        return m_isNotActive;
+    }
 };
 
 template <class T>
@@ -40,6 +58,9 @@ public:
     void invoke(Event* e) override final
     {
         assert(0 != m_object);
+        if (isNotActive()) {
+            return;
+        }
         m_function(m_object, e);
     }
 
