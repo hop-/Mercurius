@@ -31,21 +31,23 @@ void Standing::onKeyEvent(Base::Event* e)
     }
 }
 
-void Standing::onObjectCollision(Base::Event* e)
+Standing::Standing()
 {
-    Core::ObjectCollision* c = Core::ObjectCollision::cast(e);
-    assert (0 != c);
+    registerCallback<OnLadderEvent>(
+            new Base::DelegateCreator<Standing>(this
+                , &Standing::onLadder));
+}
+
+void Standing::onLadder(Base::Event* e)
+{
+    OnLadderEvent* l = OnLadderEvent::cast(e);
+    assert(0 != l);
     Core::LogicObject* p = parent<Core::LogicObject>();
-    assert (0 != p);
-    if (!c->contains(p)) {
+    assert(0 != p);
+    if (l->object() != p) {
         return;
     }
-    assert(0 != c->another(p));
-    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
-        if (c->status() == Core::ObjectCollision::Status::Attached) {
-            p->addState(new OnLadder);
-        }
-    }
+    p->addState(new NearLadder);
 }
 
 Core::Command* Standing::onInit()
@@ -60,9 +62,28 @@ Core::Command* Standing::command()
     return new Stand(parent<Core::LogicObject>());
 }
 
-void OnLadder::onKeyEvent(Base::Event* e)
+NearLadder::NearLadder()
 {
-    Core::KeyEvent* k = Core::KeyEvent::cast(e);
+    registerCallback<OutLadderEvent>(
+            new Base::DelegateCreator<NearLadder>(this
+                , &NearLadder::outLadder));
+}
+
+void NearLadder::outLadder(Base::Event* e)
+{
+    OutLadderEvent* ol = OutLadderEvent::cast(e);
+    assert(0 != ol);
+    Core::LogicObject* p = parent<Core::LogicObject>();
+    assert(0 != p);
+    if (ol->object() != p) {
+        return;
+    }
+    p->removeState(this);
+}
+
+void NearLadder::onKeyEvent(Base::Event* e)
+{
+   Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
     if (k->mode() == Core::KeyEvent::Mode::Up) {
         return;
@@ -76,23 +97,6 @@ void OnLadder::onKeyEvent(Base::Event* e)
         parent<Core::LogicObject>()->changeState(this, new MoveOnLadder(Core::VerticalDirection::Down));
     default:
         break;
-    }
-}
-
-void OnLadder::onObjectCollision(Base::Event* e)
-{
-    Core::ObjectCollision* c = Core::ObjectCollision::cast(e);
-    assert (0 != c);
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    assert (0 != p);
-    if (!c->contains(p)) {
-        return;
-    }
-    assert(0 != c->another(p));
-    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
-        if (c->status() == Core::ObjectCollision::Status::Detached) {
-            p->removeState(this);
-        }
     }
 }
 
@@ -119,23 +123,6 @@ void MoveOnLadder::onKeyEvent(Base::Event* e)
     assert(0 != k);
     if (k->mode() == Core::KeyEvent::Mode::Up && k->key() == m_stopKey) {
         parent<Core::LogicObject>()->changeState(this, new OnLadder);
-    }
-}
-
-void MoveOnLadder::onObjectCollision(Base::Event* e)
-{
-    Core::ObjectCollision* c = Core::ObjectCollision::cast(e);
-    assert (0 != c);
-    Core::LogicObject* p = parent<Core::LogicObject>();
-    assert (0 != p);
-    if (!c->contains(p)) {
-        return;
-    }
-    assert(0 != c->another(p));
-    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
-        if (c->status() == Core::ObjectCollision::Status::Detached) {
-            p->removeState(this);
-        }
     }
 }
 
@@ -278,7 +265,11 @@ Running::Running(Core::HorizontalDirection d)
     , m_stopRunning((d == Core::HorizontalDirection::Left)
             ? Core::InputManager::Key::Left
             : Core::InputManager::Key::Right)
-{}
+{
+    registerCallback<OnLadderEvent>(
+            new Base::DelegateCreator<Running>(this
+                , &Running::onLadder));
+}
 
 void Running::onKeyEvent(Base::Event* e)
 {
@@ -297,20 +288,16 @@ void Running::onKeyEvent(Base::Event* e)
     }
 }
 
-void Running::onObjectCollision(Base::Event* e)
+void Running::onLadder(Base::Event* e)
 {
-    Core::ObjectCollision* c = Core::ObjectCollision::cast(e);
+    OnLadderEvent* l = OnLadderEvent::cast(e);
+    assert(0 != l);
     Core::LogicObject* p = parent<Core::LogicObject>();
-    assert(c != 0);
-    if (!c->contains(p)) {
+    assert(0 != p);
+    if (l->object() != p) {
         return;
     }
-    assert(0 != c->another(p));
-    if (c->another(p)->typeName() == "ladder") { // TODO hardcoded
-        if (c->status() == Core::ObjectCollision::Status::Attached) {
-            p->addState(new OnLadder);
-        }
-    }
+    p->addState(new NearLadder);
 }
 
 Core::Command* Running::onInit()

@@ -42,6 +42,7 @@ public:
 private:
     void ObjColl2OnSurface(Base::Event* e);
     void ObjColl2OnAir(Base::Event* e);
+    void ObjColl2LadderEvents(Base::Event* e);
 };
 
 } // namespace Assets

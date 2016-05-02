@@ -22,6 +22,9 @@ void EventGenerator::init()
     registerCallback<Core::ObjectCollision>(
             new Base::DelegateCreator<EventGenerator>(this,
                 &EventGenerator::ObjColl2OnAir));
+    registerCallback<Core::ObjectCollision>(
+            new Base::DelegateCreator<EventGenerator>(this,
+                &EventGenerator::ObjColl2LadderEvents));
 }
 
 void EventGenerator::ObjColl2OnSurface(Base::Event* e)
@@ -85,6 +88,34 @@ void EventGenerator::ObjColl2OnAir(Base::Event* e)
                 Base::EventManager::process(new OnAir(os));
             }
         }
+    }
+}
+
+void EventGenerator::ObjColl2LadderEvents(Base::Event* e)
+{
+    // TODO multiple ladders support
+    Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
+    assert(0 != oc);
+    if (!oc->isTrigger()) {
+        return;
+    }
+    const Core::LogicObject* o;
+    const Core::LogicObject* l;
+    if (oc->first()->typeName() == "ladder"  // TODO change hardcode
+            && oc->second()->typeName() != "ladder") {
+        o = oc->second();
+        l = oc->first();
+    } else if (oc->first()->typeName() != "ladder"
+            && oc->second()->typeName() == "ladder") {
+        o = oc->first();
+        l = oc->second();
+    } else {
+        return;
+    }
+    if (oc->status() == Core::ObjectCollision::Status::Attached) {
+        Base::EventManager::process(new OnLadderEvent(o, l));
+    } else {
+        Base::EventManager::process(new OutLadderEvent(o, l));
     }
 }
 

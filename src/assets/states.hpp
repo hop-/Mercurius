@@ -19,28 +19,38 @@ class Standing
     : public Core::State
 {
 public:
-    Core::Command* onInit() override;
-    Core::Command* command() override;
+    Standing();
 
-private:
-    void onKeyEvent(Base::Event* e) override;
-    void onObjectCollision(Base::Event* e) override;
-};
-
-class OnLadder
-    : public Core::State
-{
 public:
     Core::Command* onInit() override;
     Core::Command* command() override;
 
 private:
     void onKeyEvent(Base::Event* e) override;
-    void onObjectCollision(Base::Event* e) override;
+    void onLadder(Base::Event* e);
+};
+
+class NearLadder
+    : public Core::State
+{
+public:
+    NearLadder();
+
+private:
+    void onKeyEvent(Base::Event* e) override;
+    virtual void outLadder(Base::Event* e);
+};
+
+class OnLadder
+    : public NearLadder
+{
+public:
+    Core::Command* onInit() override;
+    Core::Command* command() override;
 };
 
 class MoveOnLadder // better to use template
-    : public Core::State
+    : public NearLadder
 {
     Core::InputManager::Key m_stopKey;
 
@@ -53,7 +63,6 @@ public:
 
 private:
     void onKeyEvent(Base::Event* e) override;
-    void onObjectCollision(Base::Event* e) override;
 };
 
 class OnGround
@@ -119,7 +128,7 @@ public:
 
 private:
     void onKeyEvent(Base::Event* e) override;
-    void onObjectCollision(Base::Event* e) override;
+    void onLadder(Base::Event* e);
 };
 
 class LayerChanger
