@@ -7,6 +7,8 @@
 #include <core/components.hpp>
 #include <core/vector.hpp>
 
+#include <base/event_manager.hpp>
+
 namespace Assets
 {
 
@@ -100,6 +102,13 @@ void NearLadder::onKeyEvent(Base::Event* e)
     }
 }
 
+OnLadder::OnLadder()
+{
+    registerCallback<Core::KeyEvent>(
+            new Base::DelegateCreator<OnLadder>(this
+                , &OnLadder::onKeyEvent2));
+}
+
 Core::Command* OnLadder::onInit()
 {
     return 0;
@@ -108,6 +117,17 @@ Core::Command* OnLadder::onInit()
 Core::Command* OnLadder::command()
 {
     return new Stop(parent<Core::LogicObject>(), Core::Direction::Down);
+}
+
+void OnLadder::onKeyEvent2(Base::Event* e)
+{
+    Core::KeyEvent* k = Core::KeyEvent::cast(e);
+    assert(0 != k);
+    if (k->mode() == Core::KeyEvent::Mode::Down
+            && k->key() == Core::InputManager::Key::Jump) {
+        Base::EventManager::process(new OnAir(parent<Core::LogicObject>()));
+        parent<Core::LogicObject>()->changeState(this, new NearLadder);
+    }
 }
 
 MoveOnLadder::MoveOnLadder(Core::VerticalDirection d)

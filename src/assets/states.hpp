@@ -45,12 +45,17 @@ class OnLadder
     : public NearLadder
 {
 public:
+    OnLadder();
+
+public:
     Core::Command* onInit() override;
     Core::Command* command() override;
+private:
+    virtual void onKeyEvent2(Base::Event* e);
 };
 
 class MoveOnLadder // better to use template
-    : public NearLadder
+    : public OnLadder
 {
     Core::InputManager::Key m_stopKey;
 
