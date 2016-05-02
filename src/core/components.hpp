@@ -7,19 +7,21 @@
 #include "vector.hpp"
 #include "units.hpp"
 
+#include <base/singleton.hpp>
 #include <base/subject.hpp>
 
 namespace Core
 {
 
 class ViewPort
-    : public LogicObject::ComponentCreator<ViewPort>
+    : public Base::Singleton<ViewPort>
+    , public LogicObject::ComponentCreator<ViewPort>
     , public Rectangle
     , public Base::Subject
 {
     Rectangle m_movingArea;
 
-public:
+private:
     ViewPort();
 
 public:
@@ -54,6 +56,9 @@ private:
     {
          return static_cast<const LogicObject*>(subject());
     }
+
+private:
+    friend class Base::Singleton<ViewPort>;
 };
 
 class Physics

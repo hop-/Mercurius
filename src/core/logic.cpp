@@ -96,7 +96,7 @@ void Logic::updateObject(LogicObject* object, Position p)
 void Logic::createViewPortObject()
 {
     m_viewPort = new LogicObject();
-    ViewPort* component = new ViewPort();
+    ViewPort* component = ViewPort::getInstance();
     m_viewPort->addComponent(component);
 }
 

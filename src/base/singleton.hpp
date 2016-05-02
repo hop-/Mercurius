@@ -12,12 +12,10 @@ private:
     Singleton(const Singleton&) = delete;
 
 protected:
-    Singleton()
-    {}
+    Singleton() = default;
 
 protected:
-    virtual ~Singleton()
-    {}
+    virtual ~Singleton() = default;
 
 private:
     static T* m_s_instance;
