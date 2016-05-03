@@ -3,12 +3,14 @@
 
 #include <base/object.hpp>
 #include <core/state.hpp>
+#include <core/logic_object.hpp>
 
 namespace Core
 {
+
 class GuiObject;
 class Layer;
-class LogicObject;
+
 }
 
 namespace MML
@@ -44,6 +46,7 @@ protected:
     void addLogicObject();
     void addCollider(bool trigger = false);
     void addPhysics();
+    void addComponent(Core::LogicObject::Component* c);
     void addState(Core::State* state);
 };
 

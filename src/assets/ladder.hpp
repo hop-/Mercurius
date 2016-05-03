@@ -2,8 +2,9 @@
 #define _ASSETS_LADDER_HPP_
 
 #include "object.hpp"
+#include "components.hpp"
 
-#include "mml/ladder.hpp"
+#include <mml/ladder.hpp>
 
 namespace Assets
 {
@@ -20,6 +21,7 @@ private:
     void setupLogicObject()
     {
         addCollider(true);
+        addComponent(new LadderZone);
     }
 };
 

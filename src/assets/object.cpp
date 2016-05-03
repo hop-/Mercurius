@@ -2,7 +2,6 @@
 
 #include <core/components.hpp>
 #include <core/layer.hpp>
-#include <core/logic_object.hpp>
 #include <core/rectangle.hpp>
 #include <core/position.hpp>
 #include <mml/drawable_object.hpp>
@@ -69,6 +68,13 @@ void Object::addPhysics()
     assert(0 != m_logicObject);
     Core::Physics* physics = new Core::Physics();
     m_logicObject->addComponent(physics);
+}
+
+void Object::addComponent(Core::LogicObject::Component* c)
+{
+    assert(0 != c);
+    assert(0 != m_logicObject);
+    m_logicObject->addComponent(c);
 }
 
 void Object::addState(Core::State* state)
