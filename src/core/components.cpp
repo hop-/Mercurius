@@ -2,6 +2,9 @@
 #include "events.hpp"
 #include "frame.hpp"
 #include "logic.hpp"
+#include "events.hpp"
+
+#include <base/event_manager.hpp>
 
 namespace Core
 {
@@ -48,13 +51,69 @@ void ViewPort::onNotify()
     notify();
 }
 
+Physics::Physics()
+    : m_grounds()
+{
+    registerCallback<Core::ObjectCollision>(
+            new Base::DelegateCreator<Physics>(this
+                , &Physics::onCollisionEnter));
+    registerCallback<Core::ObjectCollision>(
+            new Base::DelegateCreator<Physics>(this
+                , &Physics::onCollisionExit));
+}
+
 void Physics::update()
 {
-    assert(0 != parent());
-    Position position = parent()->position();
+    assert(0 != Component::parent());
+    Position position = Component::parent()->position();
     if (m_velocity.magnitude() != 0) {
         position.move(m_velocity);
-        parent()->requestNewPosition(position);
+        Component::parent()->requestNewPosition(position);
+    }
+}
+
+void Physics::onCollisionEnter(Base::Event* e)
+{
+    ObjectCollision* oc = ObjectCollision::cast(e);
+    assert(0 != oc);
+    LogicObject* owner = Component::parent();
+    if (oc->isTrigger()
+            || oc->status() == ObjectCollision::Status::Detached
+            || !oc->contains(owner)) {
+        return;
+    }
+    const LogicObject* g;
+    if (oc->first() == owner) {
+        if (oc->directionForFirst() != Direction::Up) {
+            return;
+        }
+        g = oc->second();
+    } else {
+        if (oc->directionForSecond() != Direction::Up) {
+            return;
+        }
+        g = oc->first();
+    }
+    assert(0 != g);
+    m_grounds.push_back(g);
+    if (m_grounds.size() == 1) {
+        Base::EventManager::process(new OnSurface(owner));
+    }
+}
+
+void Physics::onCollisionExit(Base::Event* e)
+{
+    ObjectCollision* oc = ObjectCollision::cast(e);
+    assert(0 != oc);
+    LogicObject* owner = Component::parent();
+    if (oc->isTrigger()
+            || oc->status() == ObjectCollision::Status::Attached
+            || !oc->contains(owner)) {
+        return;
+    }
+    m_grounds.remove(oc->another(owner));
+    if (m_grounds.size() == 0) {
+        Base::EventManager::process(new OnAir(owner));
     }
 }
 

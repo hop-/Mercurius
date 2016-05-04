@@ -125,7 +125,7 @@ void OnLadder::onKeyEvent2(Base::Event* e)
     assert(0 != k);
     if (k->mode() == Core::KeyEvent::Mode::Down
             && k->key() == Core::InputManager::Key::Jump) {
-        Base::EventManager::process(new OnAir(parent<Core::LogicObject>()));
+        Base::EventManager::process(new Core::OnAir(parent<Core::LogicObject>()));
         parent<Core::LogicObject>()->changeState(this, new NearLadder);
     }
 }
@@ -172,7 +172,7 @@ Core::Command* OnGround::onInit()
 
 OnGround::OnGround()
 {
-    registerCallback<OnAir>(
+    registerCallback<Core::OnAir>(
             new Base::DelegateCreator<OnGround>(this, &OnGround::onAir));
 }
 
@@ -190,7 +190,7 @@ void OnGround::onKeyEvent(Base::Event* e)
 
 void OnGround::onAir(Base::Event* e)
 {
-    OnAir* oa = OnAir::cast(e);
+    Core::OnAir* oa = Core::OnAir::cast(e);
     assert(0 != oa);
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
@@ -202,7 +202,7 @@ void OnGround::onAir(Base::Event* e)
 
 Jumping::Jumping()
 {
-    registerCallback<OnSurface>(
+    registerCallback<Core::OnSurface>(
             new Base::DelegateCreator<Jumping>(this, &Jumping::onSurface));
 }
 
@@ -224,7 +224,7 @@ void Jumping::onKeyEvent(Base::Event* e)
 
 void Jumping::onSurface(Base::Event* e)
 {
-    OnSurface* os = OnSurface::cast(e);
+    Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
@@ -252,7 +252,7 @@ Core::Command* Jumping::command()
 
 Falling::Falling()
 {
-    registerCallback<OnSurface>(
+    registerCallback<Core::OnSurface>(
             new Base::DelegateCreator<Falling>(this, &Falling::onSurface));
 }
 
@@ -264,7 +264,7 @@ Core::Command* Falling::onInit()
 
 void Falling::onSurface(Base::Event* e)
 {
-    OnSurface* os = OnSurface::cast(e);
+    Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);

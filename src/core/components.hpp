@@ -9,6 +9,16 @@
 
 #include <base/singleton.hpp>
 #include <base/subject.hpp>
+#include <base/object.hpp>
+
+#include <list>
+
+namespace Base
+{
+
+class Event;
+
+}
 
 namespace Core
 {
@@ -63,11 +73,18 @@ private:
 
 class Physics
     : public LogicObject::ComponentCreator<Physics>
+    , public Base::Object
 {
     int m_mass = 0;
     Vector m_velocity = Vector();
+    std::list<const LogicObject*> m_grounds;
 
 public:
+    Physics();
+
+public:
+    void init() {}
+
     inline int mass() const
     {
         return m_mass;
@@ -109,6 +126,8 @@ public:
 
 private:
     void update();
+    void onCollisionEnter(Base::Event* e);
+    void onCollisionExit(Base::Event* e);
 
 };
 

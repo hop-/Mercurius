@@ -1,6 +1,5 @@
 #include "mercurius.hpp"
 #include "type_manager.hpp"
-#include "event_generator.hpp"
 
 #include <base/utility.hpp>
 #include <core/game.hpp>
@@ -20,8 +19,6 @@ Mercurius::Configs Mercurius::m_configs;
 
 void Mercurius::start()
 {
-    EventGenerator eg;
-    eg.init();
     loadConfigs();
     Core::Frame* frame = new Sdl::Frame;
     //TODO TMP begin

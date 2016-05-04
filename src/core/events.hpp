@@ -162,6 +162,47 @@ private:
     bool less(Base::TypedBase* obj);
 };
 
+class OnSurface
+    : public Base::EventCreator<OnSurface>
+{
+    const LogicObject* m_object;
+
+public:
+    OnSurface(const LogicObject* object);
+
+    inline const LogicObject* object() const
+    {
+        return m_object;
+    }
+
+private:
+    OnSurface(const OnSurface&) = delete;
+    OnSurface& operator=(const OnSurface&) = delete;
+
+    bool less(Base::TypedBase* obj) override;
+};
+
+class OnAir
+    : public Base::EventCreator<OnAir>
+{
+    const LogicObject* m_object;
+
+public:
+    OnAir(const LogicObject* object);
+
+    inline const LogicObject* object() const
+    {
+        return m_object;
+    }
+
+private:
+    OnAir(const OnAir&) = delete;
+    OnAir& operator=(const OnAir&) = delete;
+
+    bool less(Base::TypedBase* obj) override;
+};
+
+
 } // namespace Core
 
 #endif //_CORE_EVENTS_HPP_
