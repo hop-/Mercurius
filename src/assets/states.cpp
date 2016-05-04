@@ -238,7 +238,7 @@ void Jumping::onSurface(Base::Event* e)
 Core::Command* Jumping::onInit()
 {
     // TODO return command to change texture
-    return 0;
+    return new Jump(parent<Core::LogicObject>(), 20*m_power);
 }
 
 Core::Command* Jumping::command()
@@ -333,14 +333,13 @@ Core::Command* Running::onInit()
 
 Core::Command* Running::command()
 {
-    float angle;
+    Core::Direction d;
     if (m_direction == Core::HorizontalDirection::Left) {
-        angle = 180;
+        d = Core::Direction::Left;
     } else {
-        angle = 0;
+        d = Core::Direction::Right;
     }
-    return new Accelerate(parent<Core::LogicObject>()
-            , Core::Vector(1, angle));
+    return new ApplyMovement(parent<Core::LogicObject>(), 500, d);
 }
 
 Core::Command* LayerChanger::command()

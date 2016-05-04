@@ -57,6 +57,23 @@ private:
     SetYVelocity& operator=(const SetYVelocity&) = delete;
 };
 
+class ApplyMovement
+    : public Core::Command
+{
+    Core::EngineUnit m_velocity;
+    Core::Direction m_direction;
+
+public:
+    ApplyMovement(Core::LogicObject* object
+            , Core::EngineUnit v
+            , Core::Direction d);
+    void execute();
+
+private:
+    ApplyMovement(const ApplyMovement&) = delete;
+    ApplyMovement& operator=(const ApplyMovement&) = delete;
+};
+
 class Jump
     : public Core::Command
 {

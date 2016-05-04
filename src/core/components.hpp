@@ -75,7 +75,7 @@ class Physics
     : public LogicObject::ComponentCreator<Physics>
     , public Base::Object
 {
-    int m_mass = 0;
+    int m_gravityScale = 1;
     Vector m_velocity = Vector();
     std::list<const LogicObject*> m_grounds;
 
@@ -85,19 +85,19 @@ public:
 public:
     void init() {}
 
-    inline int mass() const
+    inline int gravityScale() const
     {
-        return m_mass;
+        return m_gravityScale;
+    }
+
+    inline void setGravityScale(int gravityScale)
+    {
+        m_gravityScale = gravityScale;
     }
 
     inline Vector velocity()
     {
         return m_velocity;
-    }
-
-    inline void setMass(int mass)
-    {
-        m_mass = mass;
     }
 
     inline void setVelocity(const Vector& velocity)
@@ -108,6 +108,11 @@ public:
     inline void addVelocity(const Vector& velocity)
     {
         m_velocity += velocity;
+    }
+
+    inline void applyGravity(const Vector& gravity)
+    {
+        m_velocity += gravity * m_gravityScale;
     }
 
     inline void stopX()

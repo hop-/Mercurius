@@ -88,7 +88,7 @@ class Jumping
     : public Core::State
 {
     int m_count = 100;
-    Core::EngineUnit m_power = 25;
+    Core::EngineUnit m_power = 20;
 
 public:
     Jumping();

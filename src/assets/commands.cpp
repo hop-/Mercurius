@@ -77,6 +77,40 @@ void SetYVelocity::execute()
     }
 }
 
+ApplyMovement::ApplyMovement(Core::LogicObject* o
+        , Core::EngineUnit v
+        , Core::Direction d)
+    : Core::Command(o)
+    , m_velocity(v)
+    , m_direction(d)
+{
+    assert(0 != object());
+}
+
+void ApplyMovement::execute()
+{
+    assert(0 != object());
+    Core::Physics* ph = object()->component<Core::Physics>();
+    assert(0 != ph);
+    Core::Vector v = ph->velocity();
+    switch (m_direction) {
+    case Core::Direction::Up:
+        v.setY(m_velocity);
+        break;
+    case Core::Direction::Down:
+        v.setY(-m_velocity);
+        break;
+    case Core::Direction::Left:
+        v.setX(-m_velocity);
+        break;
+    case Core::Direction::Right:
+        v.setX(m_velocity);
+    default:
+        break;
+    }
+    ph->setVelocity(v);
+}
+
 Jump::Jump(Core::LogicObject* object, Core::EngineUnit power)
     : Core::Command(object)
     , m_power(power)
