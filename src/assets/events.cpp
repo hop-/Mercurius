@@ -3,24 +3,24 @@
 namespace Assets
 {
 
-OnLadderEvent::OnLadderEvent(const Core::LogicObject* object
+LadderEnter::LadderEnter(const Core::LogicObject* object
         , const Core::LogicObject* ladder)
     : m_object(object)
     , m_ladder(ladder)
 {}
 
-bool OnLadderEvent::less(Base::TypedBase* obj)
+bool LadderEnter::less(Base::TypedBase* obj)
 {
     return (this < obj);
 }
 
-OutLadderEvent::OutLadderEvent(const Core::LogicObject* object
+LadderExit::LadderExit(const Core::LogicObject* object
         , const Core::LogicObject* ladder)
     : m_object(object)
     , m_ladder(ladder)
 {}
 
-bool OutLadderEvent::less(Base::TypedBase* obj)
+bool LadderExit::less(Base::TypedBase* obj)
 {
     return (this < obj);
 }

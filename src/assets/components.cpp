@@ -27,10 +27,10 @@ void LadderZone::onObjectCollision(Base::Event* e)
     }
     if (oc->status() == Core::ObjectCollision::Status::Attached) {
         Base::EventManager::process(
-                new OnLadderEvent(oc->another(owner), owner));
+                new LadderEnter(oc->another(owner), owner));
     } else {
         Base::EventManager::process(
-                new OutLadderEvent(oc->another(owner), owner));
+                new LadderExit(oc->another(owner), owner));
     }
 }
 

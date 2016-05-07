@@ -11,14 +11,14 @@ class LogicObject;
 namespace Assets
 {
 
-class OnLadderEvent
-    : public Base::EventCreator<OnLadderEvent>
+class LadderEnter
+    : public Base::EventCreator<LadderEnter>
 {
     const Core::LogicObject* m_object;
     const Core::LogicObject* m_ladder;
 
 public:
-    OnLadderEvent(const Core::LogicObject* object
+    LadderEnter(const Core::LogicObject* object
             , const Core::LogicObject* ladder);
 
     inline const Core::LogicObject* object() const
@@ -32,20 +32,20 @@ public:
     }
 
 private:
-    OnLadderEvent(const OnLadderEvent&) = delete;
-    OnLadderEvent& operator=(const OnLadderEvent&) = delete;
+    LadderEnter(const LadderEnter&) = delete;
+    LadderEnter& operator=(const LadderEnter&) = delete;
 
     bool less(Base::TypedBase* obj) override;
 };
 
-class OutLadderEvent
-    : public Base::EventCreator<OutLadderEvent>
+class LadderExit
+    : public Base::EventCreator<LadderExit>
 {
     const Core::LogicObject* m_object;
     const Core::LogicObject* m_ladder;
 
 public:
-    OutLadderEvent(const Core::LogicObject* object
+    LadderExit(const Core::LogicObject* object
             , const Core::LogicObject* ladder);
 
     inline const Core::LogicObject* object() const
@@ -59,8 +59,8 @@ public:
     }
 
 private:
-    OutLadderEvent(const OutLadderEvent&) = delete;
-    OutLadderEvent& operator=(const OutLadderEvent&) = delete;
+    LadderExit(const LadderExit&) = delete;
+    LadderExit& operator=(const LadderExit&) = delete;
 
     bool less(Base::TypedBase* obj) override;
 };

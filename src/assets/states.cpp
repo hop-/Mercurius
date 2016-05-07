@@ -35,14 +35,14 @@ void Standing::onKeyEvent(Base::Event* e)
 
 Standing::Standing()
 {
-    registerCallback<OnLadderEvent>(
+    registerCallback<LadderEnter>(
             new Base::DelegateCreator<Standing>(this
                 , &Standing::onLadder));
 }
 
 void Standing::onLadder(Base::Event* e)
 {
-    OnLadderEvent* l = OnLadderEvent::cast(e);
+    LadderEnter* l = LadderEnter::cast(e);
     assert(0 != l);
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
@@ -66,14 +66,14 @@ Core::Command* Standing::command()
 
 NearLadder::NearLadder()
 {
-    registerCallback<OutLadderEvent>(
+    registerCallback<LadderExit>(
             new Base::DelegateCreator<NearLadder>(this
                 , &NearLadder::outLadder));
 }
 
 void NearLadder::outLadder(Base::Event* e)
 {
-    OutLadderEvent* ol = OutLadderEvent::cast(e);
+    LadderExit* ol = LadderExit::cast(e);
     assert(0 != ol);
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
@@ -286,7 +286,7 @@ Running::Running(Core::HorizontalDirection d)
             ? Core::InputManager::Key::Left
             : Core::InputManager::Key::Right)
 {
-    registerCallback<OnLadderEvent>(
+    registerCallback<LadderEnter>(
             new Base::DelegateCreator<Running>(this
                 , &Running::onLadder));
 }
@@ -310,7 +310,7 @@ void Running::onKeyEvent(Base::Event* e)
 
 void Running::onLadder(Base::Event* e)
 {
-    OnLadderEvent* l = OnLadderEvent::cast(e);
+    LadderEnter* l = LadderEnter::cast(e);
     assert(0 != l);
     Core::LogicObject* p = parent<Core::LogicObject>();
     assert(0 != p);
