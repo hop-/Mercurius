@@ -23,6 +23,7 @@ public:
     Rectangle scaled(float scale);
     bool isInside(const Rectangle& rect) const;
     bool intersects(const Rectangle& rect) const;
+    bool contacts(const Rectangle& rect) const;
 
     EngineUnit right() const;
     EngineUnit left() const;

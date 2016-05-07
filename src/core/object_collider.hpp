@@ -19,8 +19,8 @@ class ObjectCollider
     using Pairs = std::list<Pair>;
 
     QuadTree m_quadTree;
+    Pairs m_contactedPairs;
     Pairs m_collidedPairs;
-    Pairs m_currentCollidedPairs;
 
 public:
     ObjectCollider();

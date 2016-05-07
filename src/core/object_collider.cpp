@@ -12,14 +12,14 @@ namespace Core
 
 ObjectCollider::ObjectCollider()
     : m_quadTree(0, Rectangle(0, 0, Position(0, 0)))
+    , m_contactedPairs()
     , m_collidedPairs()
-    , m_currentCollidedPairs()
 {}
 
 ObjectCollider::ObjectCollider(Rectangle bounds)
     : m_quadTree(0, bounds)
+    , m_contactedPairs()
     , m_collidedPairs()
-    , m_currentCollidedPairs()
 {}
 
 void ObjectCollider::setBounds(Rectangle bounds)
@@ -53,11 +53,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
                 || !collider->rect().intersects(c->rect())) {
             continue;
         }
-        //Game::getInstance()->eventManager()
-        //      ->push(new ObjectCollision(
-        //            ObjectCollision::ObjectPair{object, collieded}
-        //            , ObjectCollision::Status::Collided));
-        m_currentCollidedPairs.push_back(Pair{object, collieded});
+        m_collidedPairs.push_back(Pair{object, collieded});
         if (!c->isTrigger() && !collider->isTrigger()) {
             EngineUnit dX;
             if (p.x() - pOld.x() > 0) {
@@ -90,7 +86,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
                 || !collider->rect().intersects(c->rect())) {
             continue;
         }
-        m_currentCollidedPairs.push_back(Pair{object, collieded});
+        m_collidedPairs.push_back(Pair{object, collieded});
         if (!c->isTrigger() && !collider->isTrigger()) {
             EngineUnit dy;
             if (p.y() - pOld.y() > 0) {
@@ -115,7 +111,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
     m_quadTree.remove(c);
     object->setPosition(p);
     Physics* ph = object->component<Physics>();
-    // May be need to move in other place
+    // TODO: need to move to the other place
     // stopping moving in collided direction
     if (ph != 0) {
         if (maxDX != 0) {
@@ -126,7 +122,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
         }
     }
     m_quadTree.insert(c);
-    m_currentCollidedPairs.unique();
+    m_collidedPairs.unique();
 }
 
 void ObjectCollider::remove(const LogicObject* object)
@@ -138,34 +134,34 @@ void ObjectCollider::remove(const LogicObject* object)
 
 void ObjectCollider::throwCollisionEvents()
 {
-    for (const auto& pair : m_currentCollidedPairs) {
-        bool found = false;
-        for (Pairs::iterator existPair = m_collidedPairs.begin()
-                ; existPair != m_collidedPairs.end()
-                ; ++existPair) {
-            if ((pair.first == existPair->first
-                        && pair.second == existPair->second)
-                    || (pair.first == existPair->second
-                        && pair.second == existPair->first))
-            {
-                m_collidedPairs.erase(existPair);
-                found = true;
-                break;
-            }
+    for (Pairs::iterator pair = m_contactedPairs.begin()
+            ; pair != m_contactedPairs.end()
+            ; ++pair) {
+        assert(pair->first->component<Collider>());
+        assert(pair->second->component<Collider>());
+        if (!pair->first->component<Collider>()->rect().intersects(
+                    pair->second->component<Collider>()->rect())
+                && !pair->first->component<Collider>()->rect().contacts(
+                    pair->second->component<Collider>()->rect())) {
+            Base::EventManager::process(new ObjectCollision(
+                    (*pair)
+                    , ObjectCollision::Status::Detached));
+            Pairs::iterator tmpIt = pair;
+            --pair;
+            m_contactedPairs.erase(tmpIt);
         }
-        if (!found) {
+    }
+
+    for (const auto& pair : m_collidedPairs) {
+        if (find(m_contactedPairs.begin(), m_contactedPairs.end(), pair)
+                == m_contactedPairs.end()) {
+            m_contactedPairs.push_back(pair);
             Base::EventManager::process(new ObjectCollision(
                             pair
                             , ObjectCollision::Status::Attached));
         }
     }
-    for (const auto& existPair : m_collidedPairs) {
-        Base::EventManager::process(new ObjectCollision(
-                    existPair
-                    , ObjectCollision::Status::Detached));
-    }
-    m_collidedPairs = m_currentCollidedPairs;
-    m_currentCollidedPairs.clear();
+    m_collidedPairs.clear();
 }
 
 } // namespace Core

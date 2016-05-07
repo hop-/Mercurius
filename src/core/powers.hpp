@@ -16,7 +16,7 @@ public:
         assert(0 != lo);
         Physics* ph = lo->component<Physics>();
         if (ph != 0 && 0 != lo->weight()) {
-            ph->addVelocity(Vector(9.8, 270));
+            ph->applyGravity(Vector(9.8, 270));
         }
     }
 };

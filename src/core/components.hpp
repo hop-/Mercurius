@@ -112,6 +112,9 @@ public:
 
     inline void applyGravity(const Vector& gravity)
     {
+        if (isOnSurface()) {
+            return;
+        }
         m_velocity += gravity * m_gravityScale;
     }
 
@@ -134,6 +137,9 @@ private:
     void onCollisionEnter(Base::Event* e);
     void onCollisionExit(Base::Event* e);
 
+    bool isOnSurface() {
+        return m_grounds.size();
+    }
 };
 
 class Collider

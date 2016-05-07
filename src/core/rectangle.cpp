@@ -46,6 +46,14 @@ bool Rectangle::intersects(const Rectangle& rect) const
             && top() > rect.bottom());
 }
 
+bool Rectangle::contacts(const Rectangle& rect) const
+{
+    return (!intersects(rect) && !(left() > rect.right()
+            || right() < rect.left()
+            || bottom() > rect.top()
+            || top() < rect.bottom()));
+}
+
 EngineUnit Rectangle::right() const
 {
     if (m_width > 0) {
