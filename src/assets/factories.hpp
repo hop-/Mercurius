@@ -1,7 +1,6 @@
 #ifndef _ASSETS_FACTORIES_HPP_
 #define _ASSETS_FACTORIES_HPP_
 
-#include <core/controls.hpp>
 #include <core/gui.hpp>
 #include <core/layer.hpp>
 #include <core/logic.hpp>
