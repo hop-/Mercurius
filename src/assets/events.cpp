@@ -25,4 +25,15 @@ bool LadderExit::less(Base::TypedBase* obj)
     return (this < obj);
 }
 
+OnLadderEvent::OnLadderEvent(const Core::LogicObject* object
+        , const Core::VerticalDirection d)
+    : m_object(object)
+    , m_direction(d)
+{}
+
+bool OnLadderEvent::less(Base::TypedBase* obj)
+{
+    return (this < obj);
+}
+
 } // namespace Assets

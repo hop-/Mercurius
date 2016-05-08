@@ -42,7 +42,7 @@ private:
 };
 
 class OnLadder
-    : public NearLadder
+    : public Core::State
 {
 public:
     OnLadder();
@@ -51,6 +51,8 @@ public:
     Core::Command* onInit() override;
     Core::Command* command() override;
 private:
+    void onKeyEvent(Base::Event* e) override;
+    virtual void outLadder(Base::Event* e);
     virtual void onKeyEvent2(Base::Event* e);
 };
 
@@ -70,8 +72,19 @@ private:
     void onKeyEvent(Base::Event* e) override;
 };
 
-class OnGround
+class VerticalMovementState
     : public Core::State
+{
+public:
+    VerticalMovementState();
+
+private:
+    void registerOnLadder();
+    virtual void onLadder(Base::Event* e);
+};
+
+class OnGround
+    : public VerticalMovementState
 {
 public:
     OnGround();
@@ -85,7 +98,7 @@ private:
 };
 
 class Jumping
-    : public Core::State
+    : public VerticalMovementState
 {
     int m_count = 100;
     Core::EngineUnit m_power = 20;
@@ -104,7 +117,7 @@ private:
 };
 
 class Falling
-    : public Core::State
+    : public VerticalMovementState
 {
 public:
     Falling();

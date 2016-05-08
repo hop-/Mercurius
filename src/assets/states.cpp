@@ -9,6 +9,8 @@
 
 #include <base/event_manager.hpp>
 
+#define OWNER parent<Core::LogicObject>
+
 namespace Assets
 {
 
@@ -16,17 +18,17 @@ void Standing::onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
-    assert(0 != parent<Core::LogicObject>());
+    assert(0 != OWNER());
     if (key->mode() == Core::KeyEvent::Mode::Up) {
         return;
     }
     switch (key->key()) {
     case Core::InputManager::Key::Right:
-        parent<Core::LogicObject>()->changeState(this
+        OWNER()->changeState(this
                 , new Running(Core::HorizontalDirection::Right));
         break;
     case Core::InputManager::Key::Left:
-        parent<Core::LogicObject>()->changeState(this
+        OWNER()->changeState(this
                 , new Running(Core::HorizontalDirection::Left));
     default:
         break;
@@ -44,7 +46,7 @@ void Standing::onLadder(Base::Event* e)
 {
     LadderEnter* l = LadderEnter::cast(e);
     assert(0 != l);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (l->object() != p) {
         return;
@@ -60,8 +62,8 @@ Core::Command* Standing::onInit()
 
 Core::Command* Standing::command()
 {
-    assert(0 != parent<Core::LogicObject>());
-    return new Stand(parent<Core::LogicObject>());
+    assert(0 != OWNER());
+    return new Stand(OWNER());
 }
 
 NearLadder::NearLadder()
@@ -75,7 +77,7 @@ void NearLadder::outLadder(Base::Event* e)
 {
     LadderExit* ol = LadderExit::cast(e);
     assert(0 != ol);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (ol->object() != p) {
         return;
@@ -85,18 +87,22 @@ void NearLadder::outLadder(Base::Event* e)
 
 void NearLadder::onKeyEvent(Base::Event* e)
 {
-   Core::KeyEvent* k = Core::KeyEvent::cast(e);
+    Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
     if (k->mode() == Core::KeyEvent::Mode::Up) {
         return;
     }
-    assert(0 != parent<Core::LogicObject>());
+    assert(0 != OWNER());
     switch (k->key()) {
     case Core::InputManager::Key::Up:
-        parent<Core::LogicObject>()->changeState(this, new MoveOnLadder(Core::VerticalDirection::Up));
+        Base::EventManager::process(new OnLadderEvent(OWNER()
+                    , Core::VerticalDirection::Up));
+        OWNER()->removeState(this);
         break;
     case Core::InputManager::Key::Down:
-        parent<Core::LogicObject>()->changeState(this, new MoveOnLadder(Core::VerticalDirection::Down));
+        Base::EventManager::process(new OnLadderEvent(OWNER()
+                    , Core::VerticalDirection::Down));
+        OWNER()->removeState(this);
     default:
         break;
     }
@@ -107,6 +113,9 @@ OnLadder::OnLadder()
     registerCallback<Core::KeyEvent>(
             new Base::DelegateCreator<OnLadder>(this
                 , &OnLadder::onKeyEvent2));
+    registerCallback<LadderExit>(
+            new Base::DelegateCreator<OnLadder>(this
+                , &OnLadder::outLadder));
 }
 
 Core::Command* OnLadder::onInit()
@@ -116,7 +125,40 @@ Core::Command* OnLadder::onInit()
 
 Core::Command* OnLadder::command()
 {
-    return new Stop(parent<Core::LogicObject>(), Core::Direction::Down);
+    return new Stop(OWNER(), Core::Direction::Down);
+}
+
+void OnLadder::onKeyEvent(Base::Event* e)
+{
+    Core::KeyEvent* k = Core::KeyEvent::cast(e);
+    assert(0 != k);
+    if (k->mode() == Core::KeyEvent::Mode::Up) {
+        return;
+    }
+    assert(0 != OWNER());
+    switch (k->key()) {
+    case Core::InputManager::Key::Up:
+        OWNER()->changeState(this, new MoveOnLadder(
+                    Core::VerticalDirection::Up));
+        break;
+    case Core::InputManager::Key::Down:
+        OWNER()->changeState(this, new MoveOnLadder(
+                    Core::VerticalDirection::Down));
+    default:
+        break;
+    }
+}
+
+void OnLadder::outLadder(Base::Event* e)
+{
+    LadderExit* ol = LadderExit::cast(e);
+    assert(0 != ol);
+    Core::LogicObject* p = OWNER();
+    assert(0 != p);
+    if (ol->object() != p) {
+        return;
+    }
+    p->changeState(this, new Falling);
 }
 
 void OnLadder::onKeyEvent2(Base::Event* e)
@@ -125,8 +167,8 @@ void OnLadder::onKeyEvent2(Base::Event* e)
     assert(0 != k);
     if (k->mode() == Core::KeyEvent::Mode::Down
             && k->key() == Core::InputManager::Key::Jump) {
-        Base::EventManager::process(new Core::OnAir(parent<Core::LogicObject>()));
-        parent<Core::LogicObject>()->changeState(this, new NearLadder);
+        Base::EventManager::process(new Core::OnAir(OWNER()));
+        OWNER()->changeState(this, new Jumping);
     }
 }
 
@@ -142,7 +184,7 @@ void MoveOnLadder::onKeyEvent(Base::Event* e)
     Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
     if (k->mode() == Core::KeyEvent::Mode::Up && k->key() == m_stopKey) {
-        parent<Core::LogicObject>()->changeState(this, new OnLadder);
+        OWNER()->changeState(this, new OnLadder);
     }
 }
 
@@ -161,7 +203,33 @@ Core::Command* MoveOnLadder::command()
     } else {
         vd = Core::VerticalDirection::Down;
     }
-    return new SetYVelocity(parent<Core::LogicObject>(), vY, vd);
+    return new SetYVelocity(OWNER(), vY, vd);
+}
+
+VerticalMovementState::VerticalMovementState()
+{
+    registerOnLadder();
+}
+
+void VerticalMovementState::registerOnLadder()
+{
+    registerCallback<OnLadderEvent>(
+            new Base::DelegateCreator<VerticalMovementState>(this
+                , &VerticalMovementState::onLadder));
+}
+
+void VerticalMovementState::onLadder(Base::Event* e)
+{
+    OnLadderEvent* ol = OnLadderEvent::cast(e);
+    assert(0 != ol);
+    if (ol->object() != OWNER()) {
+        return;
+    }
+    if (ol->direction() == Core::VerticalDirection::None) {
+        OWNER()->changeState(this, new OnLadder);
+    } else {
+        OWNER()->changeState(this, new MoveOnLadder(ol->direction()));
+    }
 }
 
 Core::Command* OnGround::onInit()
@@ -184,7 +252,7 @@ void OnGround::onKeyEvent(Base::Event* e)
         return;
     }
     if (key->key() == Core::InputManager::Key::Jump) {
-        parent<Core::LogicObject>()->changeState(this, new Jumping);
+        OWNER()->changeState(this, new Jumping);
     }
 }
 
@@ -192,7 +260,7 @@ void OnGround::onAir(Base::Event* e)
 {
     Core::OnAir* oa = Core::OnAir::cast(e);
     assert(0 != oa);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (oa->object() != p) {
         return;
@@ -226,7 +294,7 @@ void Jumping::onSurface(Base::Event* e)
 {
     Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (os->object() != p) {
         return;
@@ -238,7 +306,7 @@ void Jumping::onSurface(Base::Event* e)
 Core::Command* Jumping::onInit()
 {
     // TODO return command to change texture
-    return new Jump(parent<Core::LogicObject>(), 20*m_power);
+    return new Jump(OWNER(), 20 * m_power);
 }
 
 Core::Command* Jumping::command()
@@ -247,7 +315,7 @@ Core::Command* Jumping::command()
         return 0;
     }
     --m_count;
-    return new Jump(parent<Core::LogicObject>(), m_power);
+    return new Jump(OWNER(), m_power);
 }
 
 Falling::Falling()
@@ -266,7 +334,7 @@ void Falling::onSurface(Base::Event* e)
 {
     Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (os->object() != p) {
         return;
@@ -295,7 +363,7 @@ void Running::onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (key->mode() == Core::KeyEvent::Mode::Down) {
         if (key->key() == m_changeDir) {
@@ -312,7 +380,7 @@ void Running::onLadder(Base::Event* e)
 {
     LadderEnter* l = LadderEnter::cast(e);
     assert(0 != l);
-    Core::LogicObject* p = parent<Core::LogicObject>();
+    Core::LogicObject* p = OWNER();
     assert(0 != p);
     if (l->object() != p) {
         return;
@@ -323,11 +391,9 @@ void Running::onLadder(Base::Event* e)
 Core::Command* Running::onInit()
 {
     // TODO return command to change texture and set direction
-    assert(0 != parent<Core::LogicObject>());
-    assert(0 != parent<Core::LogicObject>()
-            ->component<Core::TextureRenderer>());
-    parent<Core::LogicObject>()
-        ->component<Core::TextureRenderer>()->setDirection(m_direction);
+    assert(0 != OWNER());
+    assert(0 != OWNER()->component<Core::TextureRenderer>());
+    OWNER()->component<Core::TextureRenderer>()->setDirection(m_direction);
     return 0;
 }
 
@@ -339,7 +405,7 @@ Core::Command* Running::command()
     } else {
         d = Core::Direction::Right;
     }
-    return new ApplyMovement(parent<Core::LogicObject>(), 500, d);
+    return new ApplyMovement(OWNER(), 500, d);
 }
 
 Core::Command* LayerChanger::command()

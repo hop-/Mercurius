@@ -1,7 +1,6 @@
 #include "state.hpp"
 #include "command.hpp"
 #include "events.hpp"
-#include <iostream>
 
 namespace Core
 {

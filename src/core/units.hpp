@@ -48,11 +48,13 @@ enum class Direction {
 enum class HorizontalDirection {
     Left = 0
     , Right
+    , None
 };
 
 enum class VerticalDirection {
     Up = 0
     , Down
+    , None
 };
 
 } // namespace Core

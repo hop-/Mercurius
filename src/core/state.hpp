@@ -13,6 +13,7 @@ class Event;
 namespace Core
 {
 
+class LogicObject;
 class Command;
 
 class State
