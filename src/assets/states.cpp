@@ -176,8 +176,23 @@ MoveOnLadder::MoveOnLadder(Core::VerticalDirection d)
     : m_stopKey((d == Core::VerticalDirection::Up)
             ? Core::InputManager::Key::Up
             : Core::InputManager::Key::Down)
-{}
+{
+    registerCallback<Core::OnSurface>(
+            new Base::DelegateCreator<MoveOnLadder>(this
+                , &MoveOnLadder::onSurface));
+}
 
+void MoveOnLadder::onSurface(Base::Event* e)
+{
+    Core::OnSurface* os = Core::OnSurface::cast(e);
+    assert(0 != os);
+    Core::LogicObject* p = OWNER();
+    assert(0 != p);
+    if (os->object() != p) {
+        return;
+    }
+    p->changeState(this, new OnGround());
+}
 
 void MoveOnLadder::onKeyEvent(Base::Event* e)
 {

@@ -70,6 +70,7 @@ public:
 
 private:
     void onKeyEvent(Base::Event* e) override;
+    void onSurface(Base::Event* e);
 };
 
 class VerticalMovementState
