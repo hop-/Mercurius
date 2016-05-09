@@ -97,12 +97,12 @@ void NearLadder::onKeyEvent(Base::Event* e)
     case Core::InputManager::Key::Up:
         Base::EventManager::process(new OnLadderEvent(OWNER()
                     , Core::VerticalDirection::Up));
-        OWNER()->removeState(this);
+        //OWNER()->removeState(this);
         break;
     case Core::InputManager::Key::Down:
         Base::EventManager::process(new OnLadderEvent(OWNER()
                     , Core::VerticalDirection::Down));
-        OWNER()->removeState(this);
+        //OWNER()->removeState(this);
     default:
         break;
     }
