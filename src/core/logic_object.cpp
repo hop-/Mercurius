@@ -9,16 +9,16 @@ namespace Core
 
 void LogicObject::update()
 {
-    for (auto& pair : m_components) {
-        assert(0 != pair.second);
-        pair.second->update();
-    }
     for (const auto& state : children()) {
         Command* command = state->command();
         if (0 != command) {
             command->execute();
             delete command;
         }
+    }
+    for (auto& pair : m_components) {
+        assert(0 != pair.second);
+        pair.second->update();
     }
 }
 
