@@ -7,7 +7,7 @@
 #include <core/position.hpp>
 #include <core/units.hpp>
 
-#include <SDL2/SDL_image.h>
+#include <SDL2/SDL.h>
 
 #include <cassert>
 
@@ -40,8 +40,7 @@ void GuiObject::init()
     SDL_Renderer* renderer = static_cast<SDL_Renderer*>(
             parent<Core::Gui>()->frame()->renderer());
     assert(0 != renderer);
-    m_texture.texture = IMG_LoadTexture(renderer,
-            textureLocation().c_str());
+    m_texture.initTexture(renderer, textureLocation());
     assert(m_texture.texture);
     m_texture.sourceRect = SDL_Rect{0, 0, (int)width(), (int)height()};
     m_texture.flip = flip(direction());
