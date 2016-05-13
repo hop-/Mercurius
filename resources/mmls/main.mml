@@ -120,6 +120,17 @@ texture: resources/textures/ladder.png;
 
 }
 
+door {
+
+name: door1;
+width: 80;
+height: 120;
+position: 850, 189;
+priority: -1;
+texture: resources/textures/door.png;
+
+}
+
 ground {
 
 name: ground1;

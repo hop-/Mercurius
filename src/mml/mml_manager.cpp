@@ -6,6 +6,7 @@
 #include "config.hpp"
 #include "mml_box.hpp"
 #include "dude.hpp"
+#include "door.hpp"
 #include "ground.hpp"
 #include "ladder.hpp"
 #include "mml_layer.hpp"
@@ -77,6 +78,7 @@ registerTypes()
     m_types["layer"] = new MMLLayer::LayerFactory();
     m_types["box"] = new MMLBox::BoxFactory();
     m_types["dude"] = new Dude::Factory();
+    m_types["door"] = new Door::Factory();
     m_types["ground"] = new Ground::Factory();
     m_types["background"] = new Background::BackgroundFactory();
     m_types["ladder"] = new Ladder::Factory();

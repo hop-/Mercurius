@@ -21,6 +21,7 @@ void TypeManager::registerTypes()
     m_factories["layer"] = new LayerFactory();
     m_factories["box"] = new BoxFactory();
     m_factories["dude"] = new DudeFactory();
+    m_factories["door"] = new DoorFactory();
     m_factories["ground"] = new GroundFactory();
     m_factories["background"] = new BackgroundFactory();
     m_factories["ladder"] = new LadderFactory();

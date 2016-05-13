@@ -2,6 +2,7 @@
 #include "background.hpp"
 #include "box.hpp"
 #include "dude.hpp"
+#include "door.hpp"
 #include "ground.hpp"
 #include "ladder.hpp"
 #include "type_manager.hpp"
@@ -10,6 +11,7 @@
 #include <mml/mml_layer.hpp>
 #include <mml/background.hpp>
 #include <mml/dude.hpp>
+#include <mml/door.hpp>
 #include <mml/ground.hpp>
 #include <mml/ladder.hpp>
 
@@ -61,6 +63,18 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
     return new Dude(dude, layer);
+}
+
+Base::Object* DoorFactory::create(const MML::MMLObject* mml
+        , Base::Object* p) const
+{
+    assert(0 != mml);
+    assert(0 != p);
+    const MML::Door* door = dynamic_cast<const MML::Door*>(mml);
+    assert(0 != door);
+    Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
+    assert(0 != layer);
+    return new Door(door, layer);
 }
 
 Base::Object* GroundFactory::create(const MML::MMLObject* mml
