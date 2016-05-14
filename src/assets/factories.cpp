@@ -4,6 +4,7 @@
 #include "dude.hpp"
 #include "door.hpp"
 #include "ground.hpp"
+#include "platform.hpp"
 #include "ladder.hpp"
 #include "type_manager.hpp"
 
@@ -13,6 +14,7 @@
 #include <mml/dude.hpp>
 #include <mml/door.hpp>
 #include <mml/ground.hpp>
+#include <mml/platform.hpp>
 #include <mml/ladder.hpp>
 
 namespace Assets
@@ -87,6 +89,18 @@ Base::Object* GroundFactory::create(const MML::MMLObject* mml
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
     return new Ground(ground, layer);
+}
+
+Base::Object* PlatformFactory::create(const MML::MMLObject* mml
+        , Base::Object* p) const
+{
+    assert(0 != mml);
+    assert(0 != p);
+    const MML::Platform* platform = dynamic_cast<const MML::Platform*>(mml);
+    assert(0 != platform);
+    Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
+    assert(0 != layer);
+    return new Platform(platform, layer);
 }
 
 Base::Object* BackgroundFactory::create(const MML::MMLObject* mml,

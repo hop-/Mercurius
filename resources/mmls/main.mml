@@ -131,6 +131,17 @@ texture: resources/textures/door.png;
 
 }
 
+platform {
+
+name: platform1;
+width: 500;
+height: 20;
+position: 500, 500;
+priority: -1;
+texture: resources/textures/platform.png;
+
+}
+
 ground {
 
 name: ground1;
