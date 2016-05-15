@@ -27,10 +27,10 @@ void QuadTree::split()
 {
     EngineUnit w = m_bounds.width() / 2;
     EngineUnit h = m_bounds.height() / 2;
-    EngineUnit x0 = m_bounds.position().x();
-    EngineUnit y0 = m_bounds.position().y();
-    EngineUnit x1 = m_bounds.position().x() + w;
-    EngineUnit y1 = m_bounds.position().y() + h;
+    EngineUnit x0 = m_bounds.left();
+    EngineUnit y0 = m_bounds.bottom();
+    EngineUnit x1 = x0 + w;
+    EngineUnit y1 = y0 + h;
     m_nodes.push_back(QuadTree(m_level + 1
             , Rectangle(w, h, Position(x1, y0))));
     m_nodes.push_back(QuadTree(m_level + 1
@@ -47,21 +47,21 @@ int QuadTree::getIndex(Rectangle rect)
     if (m_nodes.size() == 0) {
         return index;
     }
-    double verticalMidpoint = m_bounds.position().x()
+    double verticalMidpoint = m_bounds.left()
         + (m_bounds.width() / 2);
-    double horizontalMidpoint = m_bounds.position().y()
+    double horizontalMidpoint = m_bounds.bottom()
         + (m_bounds.height() / 2);
-    bool topQuadrant = (rect.position().y() < horizontalMidpoint
-            && rect.position().y() + rect.height() < horizontalMidpoint);
-    bool bottomQuadrant = (rect.position().y() > horizontalMidpoint);
-    if (rect.position().x() < verticalMidpoint
-            && rect.position().x() + rect.width() < verticalMidpoint) {
+    bool topQuadrant = (rect.bottom() < horizontalMidpoint
+            && rect.top() < horizontalMidpoint);
+    bool bottomQuadrant = (rect.bottom() > horizontalMidpoint);
+    if (rect.left() < verticalMidpoint
+            && rect.right() < verticalMidpoint) {
         if (topQuadrant) {
             index = 1;
         } else if (bottomQuadrant) {
             index = 2;
         }
-    } else if (rect.position().x() > verticalMidpoint) {
+    } else if (rect.left() > verticalMidpoint) {
         if (topQuadrant) {
             index = 0;
         } else if (bottomQuadrant) {
@@ -117,7 +117,7 @@ void QuadTree::remove(const Collider* c)
     }
 }
 
-/* TODO
+/* TODO optimize
 bool QuadTree::update(const Collider* c, const Rectangle& newRect)
 {
     bool returnFlag = false;
@@ -148,6 +148,11 @@ QuadTree::Objects QuadTree::retreive(const Rectangle& rect)
     if (index != -1) {
         Objects tmp = m_nodes[index].retreive(rect);
         returnList.insert(returnList.end(), tmp.begin(), tmp.end());
+    } else {
+        for (auto& node : m_nodes) {
+            Objects tmp = node.retreive(rect);
+            returnList.insert(returnList.end(), tmp.begin(), tmp.end());
+        }
     }
     returnList.insert(returnList.end()
         , m_objects.begin()

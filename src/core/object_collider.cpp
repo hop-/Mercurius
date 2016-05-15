@@ -46,8 +46,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
     object->setPosition(positionWithNewX);
     m_quadTree.insert(c);
     EngineUnit maxDX = 0;
-    for (const auto* collider
-            : m_quadTree.retreive(c)) {
+    for (const auto* collider : m_quadTree.retreive(c)) {
         LogicObject* collieded = collider->parent();
         if (collieded == object
                 || !collider->rect().intersects(c->rect())) {
@@ -79,8 +78,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
     object->setPosition(p);
     m_quadTree.insert(c);
     EngineUnit maxDY = 0;
-    for (const auto* collider
-            : m_quadTree.retreive(c)) {
+    for (const auto* collider : m_quadTree.retreive(c)) {
         LogicObject* collieded = collider->parent();
         if (collieded == object
                 || !collider->rect().intersects(c->rect())) {

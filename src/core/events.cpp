@@ -3,8 +3,6 @@
 #include "components.hpp"
 #include "rectangle.hpp"
 
-#include <iostream>
-
 namespace Core
 {
 
