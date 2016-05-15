@@ -3,6 +3,7 @@
 #include "box.hpp"
 #include "dude.hpp"
 #include "door.hpp"
+#include "switch.hpp"
 #include "ground.hpp"
 #include "platform.hpp"
 #include "ladder.hpp"
@@ -13,6 +14,7 @@
 #include <mml/background.hpp>
 #include <mml/dude.hpp>
 #include <mml/door.hpp>
+#include <mml/switch.hpp>
 #include <mml/ground.hpp>
 #include <mml/platform.hpp>
 #include <mml/ladder.hpp>
@@ -77,6 +79,18 @@ Base::Object* DoorFactory::create(const MML::MMLObject* mml
     Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
     assert(0 != layer);
     return new Door(door, layer);
+}
+
+Base::Object* SwitchFactory::create(const MML::MMLObject* mml
+        , Base::Object* p) const
+{
+    assert(0 != mml);
+    assert(0 != p);
+    const MML::Switch* s = dynamic_cast<const MML::Switch*>(mml);
+    assert(0 != s);
+    Core::Layer* layer = dynamic_cast<Core::Layer*>(p);
+    assert(0 != layer);
+    return new Switch(s, layer);
 }
 
 Base::Object* GroundFactory::create(const MML::MMLObject* mml

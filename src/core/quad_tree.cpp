@@ -87,8 +87,11 @@ void QuadTree::insert(const Collider* c)
         while (it != m_objects.end()) {
             int index = getIndex((*it)->rect());
             if (index != -1) {
+                Objects::iterator tmp = it;
+                tmp++;
                 m_nodes[index].insert(*it);
                 m_objects.erase(it);
+                it = tmp;
             } else {
                 ++it;
             }

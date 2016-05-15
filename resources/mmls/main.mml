@@ -131,6 +131,17 @@ texture: resources/textures/door.png;
 
 }
 
+switch {
+
+name: switch;
+width: 60;
+height: 60;
+position: 140, 189;
+priority: 1;
+texture: resources/textures/switch.png;
+
+}
+
 platform {
 
 name: platform1;

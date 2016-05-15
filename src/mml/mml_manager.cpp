@@ -7,6 +7,7 @@
 #include "mml_box.hpp"
 #include "dude.hpp"
 #include "door.hpp"
+#include "switch.hpp"
 #include "ground.hpp"
 #include "platform.hpp"
 #include "ladder.hpp"
@@ -80,6 +81,7 @@ registerTypes()
     m_types["box"] = new MMLBox::BoxFactory();
     m_types["dude"] = new Dude::Factory();
     m_types["door"] = new Door::Factory();
+    m_types["switch"] = new Switch::Factory();
     m_types["ground"] = new Ground::Factory();
     m_types["platform"] = new Platform::Factory();
     m_types["background"] = new Background::BackgroundFactory();

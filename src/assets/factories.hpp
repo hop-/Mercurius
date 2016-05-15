@@ -48,6 +48,15 @@ public:
                                 Base::Object* p) const;
 };
 
+class SwitchFactory
+    : public Core::ObjectsFactory
+{
+public:
+    /// Reimplemented interface
+    virtual Base::Object* create(const MML::MMLObject* mml,
+                                Base::Object* p) const;
+};
+
 class GroundFactory
     : public Core::ObjectsFactory
 {
