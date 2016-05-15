@@ -2,7 +2,7 @@
 #define _ASSETS_DOOR_HPP_
 
 #include "object.hpp"
-#include "states.hpp"
+#include "components.hpp"
 
 #include <mml/door.hpp>
 
@@ -20,6 +20,7 @@ private:
     void setupLogicObject()
     {
         addCollider(true);
+        addComponent(new DoorZone);
     }
 };
 

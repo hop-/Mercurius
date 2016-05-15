@@ -28,6 +28,18 @@ private:
     void onObjectCollision(Base::Event* e);
 };
 
+class DoorZone
+    : public Core::LogicObject::ComponentCreator<DoorZone>
+    , public Base::Object
+{
+public:
+    DoorZone();
+    void init() {}
+
+private:
+    void onObjectCollision(Base::Event* e);
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_COMPONENTS_HPP_

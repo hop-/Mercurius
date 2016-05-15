@@ -94,6 +94,32 @@ private:
     bool less(Base::TypedBase* obj) override;
 };
 
+class AtTheDoor
+    : public Base::EventCreator<AtTheDoor>
+{
+    const Core::LogicObject* m_door;
+    bool m_status;
+
+public:
+    AtTheDoor(const Core::LogicObject* door, bool status);
+
+    inline bool status() const
+    {
+        return m_status;
+    }
+
+    inline const Core::LogicObject* door() const
+    {
+        return m_door;
+    }
+
+private:
+    AtTheDoor(const AtTheDoor&) = delete;
+    AtTheDoor& operator=(const AtTheDoor&) = delete;
+
+    bool less(Base::TypedBase* obj) override;
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_EVENTS_HPP_

@@ -36,4 +36,14 @@ bool OnLadderEvent::less(Base::TypedBase* obj)
     return (this < obj);
 }
 
+AtTheDoor::AtTheDoor(const Core::LogicObject* door, bool status)
+    : m_door(door)
+    , m_status(status)
+{}
+
+bool AtTheDoor::less(Base::TypedBase* obj)
+{
+    return (this < obj);
+}
+
 } // namespace Assets

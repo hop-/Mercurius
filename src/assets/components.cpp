@@ -34,4 +34,24 @@ void LadderZone::onObjectCollision(Base::Event* e)
     }
 }
 
+DoorZone::DoorZone()
+{
+    registerCallback<Core::ObjectCollision>(
+            new Base::DelegateCreator<DoorZone>(this
+                , &DoorZone::onObjectCollision));
+}
+
+void DoorZone::onObjectCollision(Base::Event* e)
+{
+    Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
+    assert(0 != oc);
+    const Core::LogicObject* owner = Component::parent();
+    if (!oc->contains(owner)
+            || oc->another(owner)->typeName() != "dude") { // hardcode
+        return;
+    }
+    Base::EventManager::process(new AtTheDoor(oc->another(owner)
+              , (oc->status() == Core::ObjectCollision::Status::Attached)));
+}
+
 } // namespace Assets
