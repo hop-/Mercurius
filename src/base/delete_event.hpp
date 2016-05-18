@@ -33,12 +33,6 @@ public:
         m_object = 0;
     }
 
-public:
-    bool less(TypedBase*) override final
-    {
-        return false;
-    }
-
 private:
     DeleteEvent(const DeleteEvent&) = delete;
     DeleteEvent& operator=(const DeleteEvent&) = delete;

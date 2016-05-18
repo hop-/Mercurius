@@ -36,9 +36,6 @@ public:
     {
         return m_mode;
     }
-
-private:
-    bool less(Base::TypedBase* obj);
 };
 
 class MouseClickEvent
@@ -81,9 +78,6 @@ public:
     {
         return m_mode;
     }
-
-private:
-    bool less(Base::TypedBase* obj);
 };
 
 class ObjectCollision
@@ -150,17 +144,11 @@ public:
         }
         return Direction::None;
     }
-
-private:
-    bool less(Base::TypedBase* obj);
 };
 
 class QuitEvent
     : public Base::EventCreator<QuitEvent>
-{
-private:
-    bool less(Base::TypedBase* obj);
-};
+{};
 
 class OnSurface
     : public Base::EventCreator<OnSurface>
@@ -178,8 +166,6 @@ public:
 private:
     OnSurface(const OnSurface&) = delete;
     OnSurface& operator=(const OnSurface&) = delete;
-
-    bool less(Base::TypedBase* obj) override;
 };
 
 class OnAir
@@ -198,8 +184,6 @@ public:
 private:
     OnAir(const OnAir&) = delete;
     OnAir& operator=(const OnAir&) = delete;
-
-    bool less(Base::TypedBase* obj) override;
 };
 
 

@@ -36,8 +36,6 @@ public:
 private:
     LadderEnter(const LadderEnter&) = delete;
     LadderEnter& operator=(const LadderEnter&) = delete;
-
-    bool less(Base::TypedBase* obj) override;
 };
 
 class LadderExit
@@ -63,8 +61,6 @@ public:
 private:
     LadderExit(const LadderExit&) = delete;
     LadderExit& operator=(const LadderExit&) = delete;
-
-    bool less(Base::TypedBase* obj) override;
 };
 
 class OnLadderEvent
@@ -90,8 +86,6 @@ public:
 private:
     OnLadderEvent(const OnLadderEvent&) = delete;
     OnLadderEvent& operator=(const OnLadderEvent&) = delete;
-
-    bool less(Base::TypedBase* obj) override;
 };
 
 class AtTheDoor
@@ -116,8 +110,6 @@ public:
 private:
     AtTheDoor(const AtTheDoor&) = delete;
     AtTheDoor& operator=(const AtTheDoor&) = delete;
-
-    bool less(Base::TypedBase* obj) override;
 };
 
 } // namespace Assets

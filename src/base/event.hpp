@@ -40,9 +40,16 @@ public:
         return e->getType() == type;
     }
 
-    static T* cast(Event* e)
+    static T* chechedCast(Event* e)
     {
         return (castable(e)) ? static_cast<T*>(e) : 0;
+    }
+
+    static T* cast(Event* e)
+    {
+        assert(0 != e);
+        assert(static_cast<T*>(e));
+        return static_cast<T*>(e);
     }
 
     static int registerCallback(Delegate* delegate)

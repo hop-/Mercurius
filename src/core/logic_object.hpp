@@ -46,11 +46,6 @@ public:
     protected:
         virtual void update() {};
         virtual void init() {};
-
-        bool less(Base::TypedBase*) final
-        {
-            return false;
-        }
     };
 
 public:

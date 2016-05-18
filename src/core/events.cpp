@@ -7,22 +7,6 @@ namespace Core
 {
 
 
-bool KeyEvent::less(Base::TypedBase* obj)
-{
-    KeyEvent* keyEvent = static_cast<KeyEvent*>(obj);
-    return (m_keyCode < keyEvent->key()
-            || (m_keyCode == keyEvent->key() && m_mode < keyEvent->mode()));
-}
-
-bool MouseClickEvent::less(Base::TypedBase* obj)
-{
-    MouseClickEvent* mouseEvent = static_cast<MouseClickEvent*>(obj);
-    return (m_button < mouseEvent->button()
-            && m_mode < mouseEvent->mode()
-            && (m_y < mouseEvent->y()
-                || (m_y == mouseEvent->y() && m_x < mouseEvent->x())));
-}
-
 ObjectCollision::ObjectCollision(ObjectPair pair, Status status)
     : m_objects(pair)
     , m_status(status)
@@ -70,33 +54,13 @@ ObjectCollision::another(const LogicObject* object) const
     }
 }
 
-bool ObjectCollision::less(Base::TypedBase* obj)
-{
-    return m_objects < static_cast<ObjectCollision*>(obj)->m_objects;
-}
-
-bool QuitEvent::less(Base::TypedBase*)
-{
-    return false;
-}
-
 OnSurface::OnSurface(const LogicObject* object)
     : m_object(object)
 {}
 
-bool OnSurface::less(Base::TypedBase* obj)
-{
-    return (this < obj);
-}
-
 OnAir::OnAir(const LogicObject* object)
     : m_object(object)
 {}
-
-bool OnAir::less(Base::TypedBase* obj)
-{
-    return (this < obj);
-}
 
 
 } // namespace Sdl
