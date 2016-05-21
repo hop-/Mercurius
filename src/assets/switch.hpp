@@ -23,6 +23,7 @@ private:
         addCollider(true);
         addComponent(new SwitchZone);
         addState(new SwitchInactive);
+        addState(new SwitchState(false));
     }
 };
 

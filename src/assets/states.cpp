@@ -497,4 +497,33 @@ void SwitchActive::atTheSwitch(Base::Event* e)
     OWNER()->changeState(this, new SwitchInactive);
 }
 
+SwitchState::SwitchState(bool s)
+    : m_status(s)
+{
+    registerCallback<ToggleTheSwitch>(
+            new Base::DelegateCreator<SwitchState>(this
+                , &SwitchState::onToggle));
+}
+
+Core::Command* SwitchState::onInit()
+{
+    // TODO return command to change texture
+    assert(0 != OWNER());
+    assert(0 != OWNER()->component<Core::TextureRenderer>());
+    OWNER()->component<Core::TextureRenderer>()->setDirection((m_status)
+            ? Core::HorizontalDirection::Left
+            : Core::HorizontalDirection::Right);
+    return 0;
+}
+
+void SwitchState::onToggle(Base::Event* e)
+{
+    ToggleTheSwitch* t = ToggleTheSwitch::cast(e);
+    assert(0 != t);
+    if (t->switchObject() != OWNER()) {
+        return;
+    }
+    OWNER()->changeState(this, new SwitchState(!m_status));
+}
+
 } // namespace Assets

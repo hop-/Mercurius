@@ -190,6 +190,21 @@ private:
     void atTheSwitch(Base::Event* e);
 };
 
+class SwitchState
+    : public Core::State
+{
+    bool m_status;
+
+public:
+    SwitchState(bool status);
+
+public:
+    Core::Command* onInit() override;
+
+private:
+    void onToggle(Base::Event* e);
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_STATES_HPP_
