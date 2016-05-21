@@ -3,6 +3,7 @@
 
 #include "object.hpp"
 #include "states.hpp"
+#include "components.hpp"
 
 #include <mml/switch.hpp>
 
@@ -20,6 +21,8 @@ private:
     void setupLogicObject()
     {
         addCollider(true);
+        addComponent(new SwitchZone);
+        addState(new SwitchInactive);
     }
 };
 

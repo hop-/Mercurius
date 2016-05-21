@@ -112,6 +112,48 @@ private:
     AtTheDoor& operator=(const AtTheDoor&) = delete;
 };
 
+class AtTheSwitch
+    : public Base::EventCreator<AtTheSwitch>
+{
+    const Core::LogicObject* m_switch;
+    bool m_status;
+
+public:
+    AtTheSwitch(const Core::LogicObject* s, bool status);
+
+    inline bool status() const
+    {
+        return m_status;
+    }
+
+    inline const Core::LogicObject* switchObject() const
+    {
+        return m_switch;
+    }
+
+private:
+    AtTheSwitch(const AtTheSwitch&) = delete;
+    AtTheSwitch& operator=(const AtTheSwitch) = delete;
+};
+
+class ToggleTheSwitch
+    : public Base::EventCreator<ToggleTheSwitch>
+{
+    const Core::LogicObject* m_switch;
+
+public:
+    ToggleTheSwitch(const Core::LogicObject* s);
+
+    inline const Core::LogicObject* switchObject() const
+    {
+        return m_switch;
+    }
+
+private:
+    ToggleTheSwitch(const ToggleTheSwitch&) = delete;
+    ToggleTheSwitch& operator=(const ToggleTheSwitch&) = delete;
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_EVENTS_HPP_

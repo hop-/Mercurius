@@ -161,7 +161,33 @@ public:
 
 private:
     void onKeyEvent(Base::Event* e) override;
+};
 
+class SwitchInactive
+    : public Core::State
+{
+public:
+    SwitchInactive();
+
+public:
+    Core::Command* onInit() override;
+
+private:
+    void atTheSwitch(Base::Event* e);
+};
+
+class SwitchActive
+    : public Core::State
+{
+public:
+    SwitchActive();
+
+public:
+    Core::Command* onInit() override;
+
+private:
+    void onKeyEvent(Base::Event* e) override;
+    void atTheSwitch(Base::Event* e);
 };
 
 } // namespace Assets

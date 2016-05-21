@@ -40,6 +40,18 @@ private:
     void onObjectCollision(Base::Event* e);
 };
 
+class SwitchZone
+    : public Core::LogicObject::ComponentCreator<SwitchZone>
+    , public Base::Object
+{
+public:
+    SwitchZone();
+    void init() {}
+
+private:
+    void onObjectCollision(Base::Event* e);
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_COMPONENTS_HPP_

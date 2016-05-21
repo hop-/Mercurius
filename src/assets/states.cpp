@@ -436,4 +436,65 @@ void LayerChanger::onKeyEvent(Base::Event*)
     // TODO handle ALT+Tab event
 }
 
+SwitchInactive::SwitchInactive()
+{
+    registerCallback<AtTheSwitch>(
+            new Base::DelegateCreator<SwitchInactive>(this
+                , &SwitchInactive::atTheSwitch));
+}
+
+Core::Command* SwitchInactive::onInit()
+{
+    // TODO return command to change texture
+    return 0;
+}
+
+void SwitchInactive::atTheSwitch(Base::Event* e)
+{
+    AtTheSwitch* as = AtTheSwitch::cast(e);
+    assert(0 != as);
+    if (as->switchObject() != OWNER()
+            && as->status() == false) {
+        return;
+    }
+    OWNER()->changeState(this, new SwitchActive);
+}
+
+SwitchActive::SwitchActive()
+{
+    registerCallback<AtTheSwitch>(
+            new Base::DelegateCreator<SwitchActive>(this
+                , &SwitchActive::atTheSwitch));
+}
+
+Core::Command* SwitchActive::onInit()
+{
+    // TODO return command to change texture
+    return 0;
+}
+
+void SwitchActive::onKeyEvent(Base::Event* e)
+{
+    Core::KeyEvent* key = Core::KeyEvent::cast(e);
+    assert(0 != key);
+    Core::LogicObject* p = OWNER();
+    assert(0 != p);
+    if (key->mode() == Core::KeyEvent::Mode::Up
+            || key->key() != Core::InputManager::Key::Up) {
+        return;
+    }
+    Base::EventManager::process(new ToggleTheSwitch(OWNER()));
+}
+
+void SwitchActive::atTheSwitch(Base::Event* e)
+{
+    AtTheSwitch* as = AtTheSwitch::cast(e);
+    assert(0 != as);
+    if (as->switchObject() != OWNER()
+            && as->status() == true) {
+        return;
+    }
+    OWNER()->changeState(this, new SwitchInactive);
+}
+
 } // namespace Assets

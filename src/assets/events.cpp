@@ -26,4 +26,13 @@ AtTheDoor::AtTheDoor(const Core::LogicObject* door, bool status)
     , m_status(status)
 {}
 
+AtTheSwitch::AtTheSwitch(const Core::LogicObject* s, bool status)
+    : m_switch(s)
+    , m_status(status)
+{}
+
+ToggleTheSwitch::ToggleTheSwitch(const Core::LogicObject* s)
+    : m_switch(s)
+{}
+
 } // namespace Assets

@@ -40,12 +40,12 @@ public:
         return e->getType() == type;
     }
 
-    static T* chechedCast(Event* e)
+    static T* cast(Event* e)
     {
         return (castable(e)) ? static_cast<T*>(e) : 0;
     }
 
-    static T* cast(Event* e)
+    static T* uncheckedCast(Event* e)
     {
         assert(0 != e);
         assert(static_cast<T*>(e));
