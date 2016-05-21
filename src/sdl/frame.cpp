@@ -59,6 +59,12 @@ void Frame::init()
     assert(0 == m_window);
     assert(0 == m_renderer);
     // TODO check SDL_Init(SDL_INIT_VIDEO) == 0 for success
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "linear" ); // antialiasing
+                                                            // possible:
+                                                            // 0 / nearest
+                                                            // 1 / linear
+                                                            // 2 / best
     m_window = SDL_CreateWindow("Mercurius :P" // TODO title
             , SDL_WINDOWPOS_UNDEFINED
             , SDL_WINDOWPOS_UNDEFINED
