@@ -5,12 +5,45 @@
 #include <cassert>
 
 #ifndef NDEBUG
-#define DRAW_BOARDS(RENDERER, RECT) \
-    SDL_SetRenderDrawColor(RENDERER, 0xFF, 0x00, 0x00, 0x00); \
-    SDL_RenderDrawRect(RENDERER, RECT); \
-    SDL_SetRenderDrawColor(RENDERER, 0x00, 0x00, 0x00, 0x00);
+    #include <SDL2/SDL_ttf.h>
+    #include <string>
+    #include <sstream>
+    #include <iostream>
+
+    #define DRAW_BOARDS(RENDERER, RECT) \
+        SDL_SetRenderDrawColor(RENDERER, 0xFF, 0x00, 0x00, 0x00); \
+        SDL_RenderDrawRect(RENDERER, RECT); \
+        SDL_SetRenderDrawColor(RENDERER, 0x00, 0x00, 0x00, 0x00);
+
+    static unsigned PREVIOUS_TICKS = 0;
+    static TTF_Font* FONT = TTF_OpenFont("./resources/font.mft", 12);
+    static SDL_Color COLOR = {0, 0, 0, 0};
+
+    #define INIT_TTF() \
+        TTF_Init(); \
+        TTF_CloseFont(FONT); \
+        FONT = TTF_OpenFont("./resources/font.mft", 20);
+
+    #define SHOW_FPS(RENDERER, CURRENT_TICKS) \
+        unsigned DELTA_TICKS = CURRENT_TICKS - PREVIOUS_TICKS; \
+        unsigned UFPS = 1000 / DELTA_TICKS;\
+        PREVIOUS_TICKS = CURRENT_TICKS; \
+        std::ostringstream OSS; \
+        OSS << UFPS; \
+        std::string FPS = "fps = " + OSS.str();\
+        assert(0 != FONT); \
+        SDL_Surface* SFC = TTF_RenderText_Solid(FONT, FPS.c_str(), COLOR); \
+        assert(0 != SFC); \
+        SDL_Texture* TXTR = SDL_CreateTextureFromSurface(RENDERER, SFC); \
+        assert(0 != TXTR); \
+        SDL_Rect R = {10, 10, SFC->w, SFC->h}; \
+        SDL_RenderCopy(RENDERER, TXTR, 0, &R); \
+        SDL_DestroyTexture(TXTR); \
+        SDL_FreeSurface(SFC);
 #else
-#define DRAW_BOARDS(RENDERER, RECT)
+    #define DRAW_BOARDS(RENDERER, RECT)
+    #define SHOW_FPS(RENDERER, CURRENT_TICKS)
+    #define INIT_TTF()
 #endif
 
 namespace Sdl
@@ -60,6 +93,7 @@ void Frame::init()
     assert(0 == m_renderer);
     // TODO check SDL_Init(SDL_INIT_VIDEO) == 0 for success
     SDL_Init(SDL_INIT_VIDEO);
+    INIT_TTF();
     SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "linear" ); // antialiasing
                                                             // possible:
                                                             // 0 / nearest
@@ -113,6 +147,7 @@ void Frame::draw(const Core::GuiObject* object)
 
 void Frame::show()
 {
+    SHOW_FPS(m_renderer, SDL_GetTicks());
     SDL_RenderPresent(m_renderer);
 }
 
