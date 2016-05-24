@@ -33,6 +33,7 @@ public:
 
 public:
     virtual unsigned getTicks() = 0;
+    virtual void delay(unsigned ms) = 0;
     virtual void catchUserInput() = 0;
 };
 

@@ -65,20 +65,22 @@ void Game::mainLoop()
 {
     assert(0 != m_inputHandler);
     unsigned previousTicks = m_inputHandler->getTicks();
-    unsigned realLag = 0;
-    const unsigned msToUpdate = m_frame->msPerUpdate();
+    unsigned updateLag = 0;
+    unsigned drawLag = 0;
+    const unsigned msPerUpdate = 2; // hardcoded TODO
+    const unsigned msPerDraw = m_frame->msPerUpdate();
     // game loop
     while (m_layers.size() && m_isRunning) {
         assert(0 != m_inputHandler);
         unsigned currentTicks = m_inputHandler->getTicks();
         unsigned deltaTicks = currentTicks - previousTicks;
         previousTicks = currentTicks;
-        realLag += deltaTicks;
+        updateLag += deltaTicks;
+        drawLag += deltaTicks;
         m_inputHandler->catchUserInput();
-        unsigned lag = realLag;
         // run update for each layer
-        while (lag >= msToUpdate) {
-            lag -= msToUpdate;
+        while (updateLag >= msPerUpdate) {
+            updateLag -= msPerUpdate;
             for (Layer* layer : m_layers) {
                 assert(0 != layer);
                 if (!layer->isStopped()) {
@@ -86,15 +88,21 @@ void Game::mainLoop()
                 }
             }
         }
-        realLag = lag;
-        // clear frame
-        m_frame->clear();
-        // draw layers on frame
-        for (Layer* layer : m_layers) {
-            layer->draw();
+        if (drawLag >= msPerDraw) {
+            // clear the frame
+            m_frame->clear();
+            // draw layers on frame
+            for (Layer* layer : m_layers) {
+                layer->draw();
+            }
+            // visualize the frame
+            m_frame->draw();
+            drawLag = drawLag % msPerDraw;
         }
-        // visualize frame
-        m_frame->draw();
+        // to prevent most of idle loops: decreace processor usage
+        if (drawLag < msPerDraw / 1.5) {
+            m_inputHandler->delay(msPerDraw / 1.5);
+        }
         Base::EventManager::processAllDeleteEvents();
     }
 }

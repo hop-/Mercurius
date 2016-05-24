@@ -51,6 +51,11 @@ void InputHandler::catchUserInput()
     }
 }
 
+void InputHandler::delay(unsigned ms)
+{
+    SDL_Delay(ms);
+}
+
 unsigned InputHandler::getTicks()
 {
     return SDL_GetTicks();

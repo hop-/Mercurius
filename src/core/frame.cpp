@@ -7,7 +7,7 @@ namespace Core
 {
 
 Frame::Frame()
-    : m_msPerUpdate(2)
+    : m_msPerUpdate(16)
     , m_width(800)
     , m_height(600)
     , m_screenMode(ScreenMode::fullScreenFit)

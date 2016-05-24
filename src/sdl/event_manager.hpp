@@ -11,6 +11,7 @@ class InputHandler
 {
 public:
     unsigned getTicks() override final;
+    void delay(unsigned ms) override final;
     void catchUserInput() override final;
 };
 
