@@ -79,6 +79,7 @@ debug:
 	@echo -e "$(YELLOW)Debug.$(RCOLOR)"
 noassert:
 	$(eval DEF_FLAGS += -DNDEBUG)
+	$(eval DEF_FLAGS += -DM_NO_DEBUG)
 	@echo -e "$(GREEN)Noassert.$(RCOLOR)"
 mingw:
 	$(eval execable := mercurius.exe)
