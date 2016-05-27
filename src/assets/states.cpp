@@ -483,7 +483,7 @@ void SwitchActive::onKeyEvent(Base::Event* e)
             || key->key() != Core::InputManager::Key::Up) {
         return;
     }
-    Base::EventManager::process(new ToggleTheSwitch(OWNER()));
+    Base::EventManager::process(new ToggleTheSwitch(p));
 }
 
 void SwitchActive::atTheSwitch(Base::Event* e)

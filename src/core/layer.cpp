@@ -34,9 +34,8 @@ Layer::~Layer()
     m_logic = 0;
 }
 
-Command* Layer::getCommand(Event* event)
+Command* Layer::getCommand(Event*)
 {
-    assert(0 != event);
     return 0;
 }
 

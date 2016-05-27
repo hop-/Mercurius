@@ -50,13 +50,11 @@ void Mercurius::loadConfigs()
     m->loadData("resources/mmls/config.mml");
     MML::MMLRegistery* registery = m->getRegistery();
     assert(0 != registery);
-    TypeManager* tm = TypeManager::getInstance();
-    assert(0 != tm);
     for(MML::MMLRegistery::iterator i = registery->begin();
                                     i != registery->end(); ++i) {
         MML::MMLObject* config = *i;
         assert(0 != config);
-        addConfig(*i);
+        addConfig(config);
     }
 
 }
