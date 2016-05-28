@@ -74,7 +74,10 @@ public:
 
     void trigger() override
     {
-        for (auto& pair : m_callbacks) {
+        // Fixed issue #26.
+        // TODO: need to be reviewed to determine bugs and problems.
+        // Now it uses copy of callbacks insted of callbacks itself.
+        for (auto& pair : Callbacks(m_callbacks)) {
             assert(0 != pair.second);
             pair.second->invoke(this);
         }
