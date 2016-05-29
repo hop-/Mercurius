@@ -154,6 +154,33 @@ private:
     ToggleTheSwitch& operator=(const ToggleTheSwitch&) = delete;
 };
 
+class MakeTriggerForPlatforms
+    : public Base::EventCreator<MakeTriggerForPlatforms>
+{
+    const Core::LogicObject* m_object;
+    bool m_status;
+
+public:
+    MakeTriggerForPlatforms(const Core::LogicObject* object, bool status)
+        : m_object(object)
+        , m_status(status)
+    {}
+
+    inline const Core::LogicObject* object() const
+    {
+        return m_object;
+    }
+
+    inline bool status() const
+    {
+        return m_status;
+    }
+
+private:
+    MakeTriggerForPlatforms(const MakeTriggerForPlatforms&) = delete;
+    MakeTriggerForPlatforms& operator=(const MakeTriggerForPlatforms&) = delete;
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_EVENTS_HPP_

@@ -2,6 +2,7 @@
 #define _ASSETS_PLATFORM_HPP_
 
 #include "object.hpp"
+#include "components.hpp"
 
 #include <mml/platform.hpp>
 
@@ -19,7 +20,8 @@ public:
 private:
     void setupLogicObject()
     {
-        addCollider(true);
+        addCollider();
+        addComponent(new PlatformZone);
     }
 };
 

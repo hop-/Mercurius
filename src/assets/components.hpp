@@ -52,6 +52,23 @@ private:
     void onObjectCollision(Base::Event* e);
 };
 
+class PlatformZone
+    : public Core::LogicObject::ComponentCreator<PlatformZone>
+    , public Base::Object
+{
+public:
+    PlatformZone();
+    void init() {}
+
+    Core::LogicObject* parent()
+    {
+        return Component::parent();
+    }
+
+private:
+    void makeTrigger(Base::Event* e);
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_COMPONENTS_HPP_

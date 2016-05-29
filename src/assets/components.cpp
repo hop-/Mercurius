@@ -3,6 +3,7 @@
 #include "states.hpp"
 
 #include <core/events.hpp>
+#include <core/components.hpp>
 
 #include <base/delegate.hpp>
 #include <base/event_manager.hpp>
@@ -65,6 +66,7 @@ SwitchZone::SwitchZone()
 void SwitchZone::onObjectCollision(Base::Event* e)
 {
     Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
+    assert(0 != oc);
     const Core::LogicObject* owner = Component::parent();
     if (!oc->contains(owner)
             || oc->another(owner)->typeName() != "dude") { // hardcode
@@ -72,6 +74,27 @@ void SwitchZone::onObjectCollision(Base::Event* e)
     }
     Base::EventManager::process(new AtTheSwitch(oc->another(owner)
               , (oc->status() == Core::ObjectCollision::Status::Attached)));
+}
+
+PlatformZone::PlatformZone()
+{
+    registerCallback<MakeTriggerForPlatforms>(
+            new Base::DelegateCreator<PlatformZone>(this
+                , &PlatformZone::makeTrigger));
+}
+
+void PlatformZone::makeTrigger(Base::Event* e)
+{
+    MakeTriggerForPlatforms* mt = MakeTriggerForPlatforms::cast(e);
+    assert(0 != mt);
+    assert(0 != parent()->component<Core::Collider>());
+    if (mt->status()) {
+        parent()->component<Core::Collider>()
+            ->addTriggerObject(mt->object());
+    } else {
+        parent()->component<Core::Collider>()
+            ->removeTriggerObject(mt->object());
+    }
 }
 
 } // namespace Assets

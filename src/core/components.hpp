@@ -145,12 +145,18 @@ private:
 class Collider
     : public LogicObject::ComponentCreator<Collider>
 {
+    using Objects = std::list<const LogicObject*>;
+
     EngineUnit m_width = 0;
     EngineUnit m_height = 0;
     bool m_isTrigger = false;
+    Objects m_triggerObjects = Objects();
 
 public:
     void onNotify();
+    void addTriggerObject(const LogicObject* object);
+    void removeTriggerObject(const LogicObject* object);
+    bool isTrigger(const LogicObject* object) const;
 
     inline Rectangle rect() const
     {

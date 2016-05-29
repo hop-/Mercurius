@@ -120,6 +120,28 @@ void Physics::onCollisionExit(Base::Event* e)
 void Collider::onNotify()
 {}
 
+bool Collider::isTrigger(const LogicObject* object) const
+{
+    return (isTrigger()
+            || std::find(m_triggerObjects.begin()
+                , m_triggerObjects.end()
+                , object) != m_triggerObjects.end());
+}
+
+void Collider::addTriggerObject(const LogicObject* object)
+{
+    if (std::find(m_triggerObjects.begin()
+                , m_triggerObjects.end()
+                , object) == m_triggerObjects.end()) {
+        m_triggerObjects.push_back(object);
+    }
+}
+
+void Collider::removeTriggerObject(const LogicObject* object)
+{
+    m_triggerObjects.remove(object);
+}
+
 void TextureRenderer::init()
 {
     assert(0 != parent());
