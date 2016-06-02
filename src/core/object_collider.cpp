@@ -47,13 +47,13 @@ void ObjectCollider::update(LogicObject* object, Position p)
     m_quadTree.insert(c);
     EngineUnit maxDX = 0;
     for (const auto* collider : m_quadTree.retreive(c)) {
-        LogicObject* collieded = collider->parent();
-        if (collieded == object
+        LogicObject* collided = collider->parent();
+        if (collided == object
                 || !collider->rect().intersects(c->rect())) {
             continue;
         }
-        m_collidedPairs.push_back(Pair{object, collieded});
-        if (!c->isTrigger() && !collider->isTrigger()) {
+        m_collidedPairs.push_back(Pair{object, collided});
+        if (!c->isTrigger(collided) && !collider->isTrigger(object)) {
             EngineUnit dX;
             if (p.x() - pOld.x() > 0) {
                 // moved right
@@ -79,13 +79,13 @@ void ObjectCollider::update(LogicObject* object, Position p)
     m_quadTree.insert(c);
     EngineUnit maxDY = 0;
     for (const auto* collider : m_quadTree.retreive(c)) {
-        LogicObject* collieded = collider->parent();
-        if (collieded == object
+        LogicObject* collided = collider->parent();
+        if (collided == object
                 || !collider->rect().intersects(c->rect())) {
             continue;
         }
-        m_collidedPairs.push_back(Pair{object, collieded});
-        if (!c->isTrigger() && !collider->isTrigger()) {
+        m_collidedPairs.push_back(Pair{object, collided});
+        if (!c->isTrigger(collided) && !collider->isTrigger(object)) {
             EngineUnit dy;
             if (p.y() - pOld.y() > 0) {
                 // moved up
@@ -160,6 +160,19 @@ void ObjectCollider::throwCollisionEvents()
         }
     }
     m_collidedPairs.clear();
+}
+
+bool ObjectCollider::areCollided(const LogicObject* o1
+        , const LogicObject* o2) const
+{
+    Pair p1{o1, o2};
+    Pair p2{o2, o1};
+    return (std::find(m_contactedPairs.begin(),
+                m_contactedPairs.end(),
+                p1) != m_contactedPairs.end()
+            || std::find(m_contactedPairs.begin(),
+                m_contactedPairs.end(),
+                p2) != m_contactedPairs.end());
 }
 
 } // namespace Core

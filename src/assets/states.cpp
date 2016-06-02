@@ -316,16 +316,21 @@ void Jumping::onSurface(Base::Event* e)
     }
     p->changeState(this, new OnGround());
 }
-// TODO activate Falling state if collide during Jumping
 
 Core::Command* Jumping::onInit()
 {
     // TODO return command to change texture
+    Base::EventManager::process(new MakeTriggerForPlatforms(OWNER(), true));
     return new Jump(OWNER(), 20 * m_power);
 }
 
 Core::Command* Jumping::command()
 {
+    assert(0 != OWNER()->component<Core::Physics>());
+    if (OWNER()->component<Core::Physics>()->velocity().y() < 0) {
+        OWNER()->changeState(this, new Falling);
+        return 0;
+    }
     if (0 == m_count) {
         return 0;
     }
@@ -342,6 +347,7 @@ Falling::Falling()
 Core::Command* Falling::onInit()
 {
     // TODO return command to change texture
+    Base::EventManager::process(new MakeTriggerForPlatforms(OWNER(), false));
     return 0;
 }
 

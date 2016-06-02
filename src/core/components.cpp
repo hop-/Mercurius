@@ -139,6 +139,11 @@ void Collider::addTriggerObject(const LogicObject* object)
 
 void Collider::removeTriggerObject(const LogicObject* object)
 {
+    assert(0 != parent());
+    assert(0 != parent()->parent());
+    if (parent()->parent<Logic>()->checkCollision(parent(), object)) {
+        return; // TODO this part may contain bug
+    }
     m_triggerObjects.remove(object);
 }
 

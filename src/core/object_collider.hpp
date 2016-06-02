@@ -32,6 +32,7 @@ public:
     void update(LogicObject* object, Position p);
     void remove(const LogicObject* object);
     void throwCollisionEvents();
+    bool areCollided(const LogicObject* o1, const LogicObject* o2) const;
 };
 
 } // namespace Core

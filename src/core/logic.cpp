@@ -106,4 +106,10 @@ void Logic::aimTo(LogicObject* l)
     m_viewPort->component<ViewPort>()->target(l);
 }
 
+bool Logic::checkCollision(const LogicObject* o1
+        , const LogicObject* o2) const
+{
+    return m_collider.areCollided(o1, o2);
+}
+
 } // namespace Core

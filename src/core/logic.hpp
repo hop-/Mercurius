@@ -38,6 +38,7 @@ public:
     void addToViewPort(LogicObject* object);
     void updateObject(LogicObject* object, Position p);
     bool addLogicObject(LogicObject* object);
+    bool checkCollision(const LogicObject* o1, const LogicObject* o2) const;
 
 private:
     Logic(const Logic&) = delete;
