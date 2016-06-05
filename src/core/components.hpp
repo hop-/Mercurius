@@ -218,6 +218,7 @@ public:
     inline void setDirection(HorizontalDirection d)
     {
         m_direction = d;
+        notify();
     }
 
     inline int state() const
