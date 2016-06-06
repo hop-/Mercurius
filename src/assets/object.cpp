@@ -27,12 +27,11 @@ void Object::addGuiObject()
     m_guiObject = new Sdl::GuiObject(m_drawableObject->texture());
     m_guiObject->setPriority(m_drawableObject->priority());
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
+    m_logicObject->addComponent(textureRenderer);
     textureRenderer->addObserver(m_guiObject);
-    textureRenderer->setScaleFactor(m_drawableObject->scale());
     m_guiObject->setDimensions(m_drawableObject->width()
             , m_drawableObject->height()
             , textureRenderer->scaleFactor());
-    m_logicObject->addComponent(textureRenderer);
     assert(0 != m_layer);
     m_layer->addGuiObject(m_guiObject);
 }
@@ -45,6 +44,7 @@ void Object::addLogicObject()
     m_logicObject->setPosition(m_drawableObject->position().first, m_drawableObject->position().second);
     m_logicObject->setWeight(m_drawableObject->weight());
     m_logicObject->setTypeName(m_drawableObject->getType());
+    m_logicObject->setScale(m_drawableObject->scale());
     setupLogicObject();
     assert(0 != m_layer);
     m_layer->addLogicObject(m_logicObject);

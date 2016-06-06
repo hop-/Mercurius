@@ -147,6 +147,12 @@ void Collider::removeTriggerObject(const LogicObject* object)
     m_triggerObjects.remove(object);
 }
 
+void Collider::onParentSet()
+{
+    m_scaleFactor = parent()->scale();
+    scaleSizes();
+}
+
 void TextureRenderer::init()
 {
     assert(0 != parent());
@@ -154,6 +160,11 @@ void TextureRenderer::init()
         dynamic_cast<Logic*>(parent()->parent())->addToViewPort(parent());
     }
     notify();
+}
+
+void TextureRenderer::onParentSet()
+{
+    m_scaleFactor = parent()->scale();
 }
 
 void TextureRenderer::onNotify()

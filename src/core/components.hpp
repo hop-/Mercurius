@@ -151,6 +151,7 @@ class Collider
     EngineUnit m_height = 0;
     bool m_isTrigger = false;
     Objects m_triggerObjects = Objects();
+    float m_scaleFactor = 1;
 
 public:
     void onNotify();
@@ -167,6 +168,7 @@ public:
     {
         m_width = width;
         m_height = height;
+        scaleSizes();
     }
 
     inline bool isTrigger() const
@@ -177,6 +179,15 @@ public:
     inline void trigger(bool isTrigger)
     {
         m_isTrigger = isTrigger;
+    }
+
+private:
+    void onParentSet();
+
+    void scaleSizes()
+    {
+        m_width = m_width * float(m_scaleFactor);
+        m_height = m_height * float(m_scaleFactor);
     }
 };
 
@@ -200,19 +211,14 @@ public:
         m_numberOfStates = numberOfStates;
     }
 
-    inline void setScaleFactor(float scaleFactor)
+    inline HorizontalDirection direction() const
     {
-        m_scaleFactor = scaleFactor;
+        return m_direction;
     }
 
     inline float scaleFactor() const
     {
         return m_scaleFactor;
-    }
-
-    inline HorizontalDirection direction() const
-    {
-        return m_direction;
     }
 
     inline void setDirection(HorizontalDirection d)
@@ -233,6 +239,7 @@ public:
 
 private:
     void init();
+    void onParentSet();
 };
 
 } // namespace Core

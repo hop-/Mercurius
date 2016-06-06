@@ -59,6 +59,7 @@ height: 100;
 weight: 20;
 position: 400, 600;
 priority: 1;
+scale: 0.6;
 texture: resources/textures/box.png;
 
 }
@@ -81,6 +82,7 @@ width: 100;
 height: 100;
 weight: 20;
 position: 600, 200;
+scale: 1.2;
 texture: resources/textures/box.png;
 
 }
@@ -91,7 +93,7 @@ name: box7;
 width: 100;
 height: 100;
 weight: 20;
-position: 700, 200;
+position: 720, 200;
 texture: resources/textures/box.png;
 
 }

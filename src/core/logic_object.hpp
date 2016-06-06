@@ -39,6 +39,7 @@ public:
         inline void setParent(LogicObject* parent)
         {
             m_parent = parent;
+            onParentSet();
         }
 
         void onNotify(){}
@@ -46,6 +47,7 @@ public:
     protected:
         virtual void update() {};
         virtual void init() {};
+        virtual void onParentSet() {};
     };
 
 public:
@@ -79,6 +81,7 @@ private:
     State* m_currentState = 0;
     float m_weight = 0;
     std::string m_typeName = "";
+    float m_scale = 1;
 
 public:
     void update();
@@ -110,6 +113,15 @@ public:
         notify();
     }
 
+    inline float scale() const
+    {
+        return m_scale;
+    }
+
+    inline void setScale(float scale)
+    {
+        m_scale = scale;
+    }
 
     inline float weight() const
     {
