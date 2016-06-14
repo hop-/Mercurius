@@ -18,6 +18,7 @@ class MMLAttribute
 
 public:
     typedef std::pair<int, int> IntPair;
+    typedef std::pair<float, float> Pair;
     typedef Core::Frame::ScreenMode ScreenMode;
 
 public:
@@ -27,6 +28,7 @@ public:
     MMLAttribute(const std::string& n, double v);
     MMLAttribute(const std::string& n, bool v);
     MMLAttribute(const std::string& n, IntPair);
+    MMLAttribute(const std::string& n, Pair);
     MMLAttribute(const std::string& n, ScreenMode v);
     virtual ~MMLAttribute();
 

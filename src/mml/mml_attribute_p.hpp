@@ -23,11 +23,13 @@ public:
             double_t,
             bool_t,
             int_pair_t,
-            screen_mode_t
+            screen_mode_t,
+            pair_t
         };
 
     public:
         typedef std::pair<int, int> IntPair;
+        typedef std::pair<float, float> Pair;
         typedef Core::Frame::ScreenMode ScreenMode;
 
     public:
@@ -66,6 +68,13 @@ public:
         }
 
     public:
+        AttrHolder(Pair v)
+            : m_pair(v)
+            , m_type(pair_t)
+        {
+        }
+
+    public:
         AttrHolder(ScreenMode v)
             : m_screenMode(v)
             , m_type(screen_mode_t)
@@ -79,6 +88,7 @@ public:
             , m_double(a.m_double)
             , m_bool(a.m_bool)
             , m_intPair(a.m_intPair)
+            , m_pair(a.m_pair)
             , m_screenMode(a.m_screenMode)
             , m_type(a.m_type)
         {
@@ -95,6 +105,7 @@ public:
             m_double = a.m_double;
             m_bool = a.m_bool;
             m_intPair = a.m_intPair;
+            m_pair = a.m_pair;
             m_screenMode = a.m_screenMode;
             m_type = a.m_type;
             return *this;
@@ -125,6 +136,11 @@ public:
             return m_intPair;
         }
 
+        operator Pair() const
+        {
+            return m_pair;
+        }
+
         operator ScreenMode() const
         {
             return m_screenMode;
@@ -142,6 +158,7 @@ public:
         double m_double = 0;
         bool m_bool = false;
         IntPair m_intPair = IntPair(0, 0);
+        Pair m_pair = Pair(0.0f, 0.0f);
         ScreenMode m_screenMode = ScreenMode::fullScreenFit;
         Type m_type;
     };

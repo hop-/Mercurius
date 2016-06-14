@@ -58,7 +58,16 @@ void Object::addCollider(bool trigger)
     assert(0 != m_drawableObject);
     assert(0 != m_logicObject);
     Core::Collider* collider = new Core::Collider();
-    collider->setSizes(m_drawableObject->width(), m_drawableObject->height());
+    if (m_drawableObject->body().first == 0
+            && m_drawableObject->body().second == 0) { // TODO move to MML
+        collider->setSizes(m_drawableObject->width()
+                , m_drawableObject->height());
+    } else {
+        collider->setSizes(m_drawableObject->body().first
+                , m_drawableObject->body().second);
+    }
+    collider->setOffset(m_drawableObject->offset().first,
+                m_drawableObject->offset().second);
     collider->trigger(trigger);
     m_logicObject->addComponent(collider);
 }

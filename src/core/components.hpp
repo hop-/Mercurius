@@ -11,6 +11,8 @@
 #include <base/subject.hpp>
 #include <base/object.hpp>
 
+#include <debug/log.hpp>
+
 #include <list>
 
 namespace Base
@@ -149,6 +151,7 @@ class Collider
 
     EngineUnit m_width = 0;
     EngineUnit m_height = 0;
+    Position m_offset = Position();
     bool m_isTrigger = false;
     Objects m_triggerObjects = Objects();
     float m_scaleFactor = 1;
@@ -158,10 +161,21 @@ public:
     void addTriggerObject(const LogicObject* object);
     void removeTriggerObject(const LogicObject* object);
     bool isTrigger(const LogicObject* object) const;
+    Position position() const;
 
     inline Rectangle rect() const
     {
-        return Rectangle(m_width, m_height, parent()->position());
+        return Rectangle(m_width, m_height, position());
+    }
+
+    inline void setOffset(Position offset)
+    {
+        m_offset = offset;
+    }
+
+    inline void setOffset(UserUnit x, UserUnit y)
+    {
+        m_offset = Position(x, y);
     }
 
     inline void setSizes(UserUnit width, UserUnit height)

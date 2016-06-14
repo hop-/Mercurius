@@ -15,6 +15,8 @@ public:
 
 public:
     ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "position", position);
+    ATTRIBUTE_INTERFACE(MMLAttribute::Pair, "body", body);
+    ATTRIBUTE_INTERFACE(MMLAttribute::Pair, "offset", offset)
     ATTRIBUTE_INTERFACE(double, "weight", weight);
     ATTRIBUTE_INTERFACE(double, "width", width);
     ATTRIBUTE_INTERFACE(double, "height", height);

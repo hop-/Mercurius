@@ -41,7 +41,7 @@ void ObjectCollider::update(LogicObject* object, Position p)
     assert(0 != object->component<Collider>());
     Collider* c = object->component<Collider>();
     m_quadTree.remove(c);
-    Position pOld = c->rect().position();
+    Position pOld = object->position();
     Position positionWithNewX(p.x(), pOld.y());
     object->setPosition(positionWithNewX);
     m_quadTree.insert(c);

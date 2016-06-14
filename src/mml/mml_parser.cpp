@@ -215,6 +215,15 @@ MMLAttribute::IntPair toIntPair(const std::string& v)
                                  convertto<int>(second));
 }
 
+MMLAttribute::Pair toPair(const std::string& v)
+{
+    int cp = v.find_first_of(comma_value);
+    std::string first = v.substr(0, cp);
+    std::string second = v.substr(cp + 1, v.size());
+    return MMLAttribute::Pair(convertto<float>(first),
+                                 convertto<float>(second));
+}
+
 MMLAttribute::ScreenMode toScreenMode(const std::string& v)
 {
     if ("window" == v) {
@@ -256,6 +265,10 @@ parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
     case 5:
         // ScreenMode
         attr->setValue(static_cast<MMLAttribute::ScreenMode>(toScreenMode(attr_value)));
+        break;
+    case 6:
+        // Pair
+        attr->setValue(toPair(attr_value));
         break;
     default:
         break;

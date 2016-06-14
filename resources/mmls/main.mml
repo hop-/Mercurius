@@ -164,6 +164,8 @@ height: 189;
 scale: 1;
 position: 0, 0;
 texture: resources/textures/ground.png;
+body: 1024, 183;
+offset: 0, 0;
 
 }
 

@@ -128,6 +128,11 @@ bool Collider::isTrigger(const LogicObject* object) const
                 , object) != m_triggerObjects.end());
 }
 
+Position Collider::position() const
+{
+    return parent()->position() + m_offset;
+}
+
 void Collider::addTriggerObject(const LogicObject* object)
 {
     if (std::find(m_triggerObjects.begin()
