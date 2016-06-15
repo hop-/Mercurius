@@ -2,6 +2,7 @@
 #define _DEBUG_LOG_HPP_
 
 #include <core/position.hpp>
+#include <core/rectangle.hpp>
 
 #include <iostream>
 
@@ -30,6 +31,14 @@ public:
     static void print(const Core::Position& p)
     {
         std::cout << p.x() << ", " << p.y() << std::endl;
+    }
+
+    static void print(const Core::Rectangle& r)
+    {
+        std::cout << "(" << r.position().x()
+            << ", " << r.position().y()
+            << "), " << r.width()
+            << ", " << r.height() << std::endl;
     }
 
     template <class T>
