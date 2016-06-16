@@ -60,8 +60,8 @@ void Gui::drawBody(SDL_Renderer* rend, const Core::GuiObject* o, int hh)
         return;
     }
     Core::Rectangle rect = t->parent()->component<Core::Collider>()->rect().scaled(o->scale());
-    SDL_Rect sdlRect = {rect.position().x(), rect.position().y()
-        , rect.width(), rect.height()
+    SDL_Rect sdlRect = {int(rect.position().x()), int(rect.position().y())
+        , int(rect.width()), int(rect.height())
     };
     sdlRect.y = hh - sdlRect.y - sdlRect.h;
     drawRect(rend, &sdlRect);
