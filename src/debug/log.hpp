@@ -13,7 +13,7 @@ class Log
 {
 
 // use static functions to implement logging mechanism
-#ifdef DM_NO_DEBUG
+#ifdef M_NO_DEBUG
 public:
     template <class T>
     static void print(T) {}

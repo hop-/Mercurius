@@ -21,17 +21,17 @@ TTF_Font* Gui::m_font = TTF_OpenFont("./resources/font.mft", 20);
 SDL_Color Gui::m_color = {0, 0, 0, 0};
 unsigned Gui::m_previousTicks = 0;
 
-#ifdef DM_NO_DEBUG
+#ifdef M_NO_DEBUG
 void Gui::init()
 {}
 
-void Gui::drawRect(const SDL_Renderer*, const SDL_Rect*)
+void Gui::drawRect(SDL_Renderer*, const SDL_Rect*)
 {}
 
-void Gui::drawBody(const SDL_Renderer*, const Core::GuiObject*)
+void Gui::drawBody(SDL_Renderer*, const Core::GuiObject*, int)
 {}
 
-void Gui::showFPS(const SDL_Renderer*, unsigned)
+void Gui::showFPS(SDL_Renderer*, unsigned)
 {}
 #else
 void Gui::init()
