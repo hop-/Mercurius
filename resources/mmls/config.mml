@@ -3,7 +3,7 @@ config {
 name: default;
 resolution: 800, 600;
 screenMode: window;
-FPS: 100000000000000;
+FPS: 1000;
 default: true;
 left: 80;
 right: 79;

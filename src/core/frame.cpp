@@ -36,6 +36,8 @@ void Frame::setFPS(int fps)
 {
     if (fps > 1000) {
         fps = 1000;
+    } else if (fps < 1) {
+        fps = 1;
     }
     m_msPerUpdate = 1000 / fps;
 }
