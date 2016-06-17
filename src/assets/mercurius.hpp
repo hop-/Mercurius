@@ -25,6 +25,7 @@ private:
     struct Config
     {
         Core::Frame::ScreenMode m_screenMode;
+        int m_fps;
         int m_width;
         int m_height;
         bool m_isDefault;

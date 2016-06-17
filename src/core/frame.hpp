@@ -34,6 +34,7 @@ public:
     virtual void* renderer() const = 0;
     void setScreenMode(ScreenMode m);
     ScreenMode screenMode() const;
+    void setFPS(int fps);
 
     inline int width() const
     {
@@ -53,6 +54,7 @@ public:
 protected:
     virtual void show() = 0;
     virtual void draw(const GuiObject* object) = 0;
+
     inline void setMsPerUpdate(const unsigned& ms)
     {
         m_msPerUpdate = ms;

@@ -32,6 +32,14 @@ void Frame::prepareToDraw(const GuiObject* object)
     m_sortedObjects[object->priority()].push_back(object);
 }
 
+void Frame::setFPS(int fps)
+{
+    if (fps > 1000) {
+        fps = 1000;
+    }
+    m_msPerUpdate = 1000 / fps;
+}
+
 void Frame::setResolution(int width, int height)
 {
     m_width = width;

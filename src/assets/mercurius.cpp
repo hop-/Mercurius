@@ -26,6 +26,7 @@ void Mercurius::start()
     assert(0 != c);
     frame->setScreenMode(c->m_screenMode);
     frame->setResolution(c->m_width, c->m_height);
+    frame->setFPS(c->m_fps);
     Core::InputManager::reset();
     Core::InputManager::setMappings(c->m_mapping);
     //TODO TMP end
@@ -93,6 +94,7 @@ void Mercurius::addConfig(const MML::MMLObject* config)
     assert(0 != c);
     Config* newConfig = new Config();
     newConfig->m_screenMode = c->screenMode();
+    newConfig->m_fps = c->fps();
     newConfig->m_width = c->resolution().first;
     newConfig->m_height = c->resolution().second;
     newConfig->m_isDefault = c->isDefault();

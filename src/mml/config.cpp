@@ -15,6 +15,7 @@ Config(const std::string& name)
     setType("config");
     addAttribute(new MMLAttribute("resolution", MMLAttribute::IntPair(800, 600)));
     addAttribute(new MMLAttribute("screenMode", MMLAttribute::ScreenMode::fullScreenFit));
+    addAttribute(new MMLAttribute("FPS", 120));
     addAttribute(new MMLAttribute("default", bool(false)));
     addAttribute(new MMLAttribute("left", 80));
     addAttribute(new MMLAttribute("right", 79));
