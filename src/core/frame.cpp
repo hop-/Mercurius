@@ -11,6 +11,7 @@ Frame::Frame()
     , m_width(800)
     , m_height(600)
     , m_screenMode(ScreenMode::fullScreenFit)
+    , m_layersViewMode(LayersViewMode::active)
     , m_sortedObjects()
 {}
 
@@ -56,6 +57,16 @@ void Frame::setScreenMode(ScreenMode m)
 Frame::ScreenMode Frame::screenMode() const
 {
     return m_screenMode;
+}
+
+void Frame::setLayersViewMode(LayersViewMode m)
+{
+    m_layersViewMode = m;
+}
+
+Frame::LayersViewMode Frame::layersViewMode() const
+{
+    return m_layersViewMode;
 }
 
 } // namespace Core

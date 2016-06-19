@@ -1,8 +1,8 @@
 #ifndef _CORE_FRAME_HPP_
 #define _CORE_FRAME_HPP_
 
-#include <map>
 #include <list>
+#include <map>
 
 namespace Core
 {
@@ -13,13 +13,17 @@ class Frame
 {
 public:
     enum class ScreenMode {fullScreen, window, fullScreenFit};
+    enum class LayersViewMode {active, list, grid};
 
 private:
     unsigned m_msPerUpdate;
     int m_width;
     int m_height;
     ScreenMode m_screenMode;
-    std::map<const int, std::list<const GuiObject*> > m_sortedObjects; // need to descuse
+    LayersViewMode m_layersViewMode;
+
+    typedef std::map<const int, std::list<const GuiObject*> > SortedObjects; // priority to objects
+    SortedObjects m_sortedObjects;
 
 public:
     Frame();
@@ -35,6 +39,8 @@ public:
     void setScreenMode(ScreenMode m);
     ScreenMode screenMode() const;
     void setFPS(int fps);
+    void setLayersViewMode(LayersViewMode m);
+    LayersViewMode layersViewMode() const;
 
     inline int width() const
     {

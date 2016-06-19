@@ -40,6 +40,7 @@ Game::Game(Frame* frame, Base::InputHandler* inputHandler)
     : m_frame(frame)
     , m_inputHandler(inputHandler)
     , m_layers()
+    , m_activeLayerName()
 {
     assert(0 != m_frame);
     assert(0 != inputHandler);
@@ -178,6 +179,11 @@ const Frame* Game::frame() const
 {
     assert(0 != m_frame);
     return m_frame;
+}
+
+const Game::Layers& Game::layers() const
+{
+    return m_layers;
 }
 
 } // namespace core

@@ -22,11 +22,16 @@ class Layer;
 
 class Game
 {
+public:
+    typedef std::vector<Layer*> Layers;
+
+private:
     Frame* m_frame = 0;
     Base::InputHandler* m_inputHandler = 0;
-    std::vector<Layer*> m_layers;
+    Layers m_layers;
     static Game* m_instance;
     bool m_isRunning = true;
+    std::string m_activeLayerName;
 
 private:
     Game(Frame* frame, Base::InputHandler* inputHandler);
@@ -52,6 +57,7 @@ public:
     void start();
     void pushLayer(Layer* layer);
     void popLayer();
+    const Layers& layers() const;
     Rectangle mapRect();
 
 private:
