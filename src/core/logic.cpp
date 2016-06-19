@@ -51,6 +51,11 @@ void Logic::init()
     Base::ContainerObject<NaturalPower>::init();
 }
 
+const std::vector<LogicObject*>& Logic::objects() const
+{
+    return Base::ContainerObject<LogicObject>::childrenConst();
+}
+
 bool Logic::addLogicObject(LogicObject* object)
 {
     assert(0 != object);

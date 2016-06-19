@@ -2,6 +2,7 @@
 #define _CORE_GAME_HPP_
 
 #include "input_manager.hpp"
+#include "rectangle.hpp"
 
 #include <vector>
 
@@ -51,6 +52,7 @@ public:
     void start();
     void pushLayer(Layer* layer);
     void popLayer();
+    Rectangle mapRect();
 
 private:
     void mainLoop();

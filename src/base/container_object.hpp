@@ -55,6 +55,11 @@ protected:
         return m_children;
     }
 
+    const Children& childrenConst() const
+    {
+        return m_children;
+    }
+
 protected:
     /**
      * @brief This function sould be implemented in child objects

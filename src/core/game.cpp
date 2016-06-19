@@ -2,6 +2,9 @@
 
 #include "layer.hpp"
 #include "frame.hpp"
+#include "logic.hpp"
+#include "logic_object.hpp"
+#include "components.hpp"
 #include "command.hpp"
 #include "events.hpp"
 
@@ -64,6 +67,7 @@ Game::~Game()
 void Game::mainLoop()
 {
     assert(0 != m_inputHandler);
+    ViewPort::getInstance()->setMovingArea(mapRect());
     unsigned previousTicks = m_inputHandler->getTicks();
     unsigned updateLag = 0;
     unsigned drawLag = 0;
@@ -121,6 +125,48 @@ void Game::start()
 void Game::pushLayer(Layer* layer)
 {
     m_layers.push_back(layer);
+}
+
+Rectangle Game::mapRect()
+{
+    EngineUnit x1, x2, y1, y2;
+    bool firstTime = true;
+    for (const auto* layer : m_layers) {
+        assert(0 != layer);
+        const Logic* logic = layer->logic();
+        assert(0 != logic);
+        for (const auto* object : logic->objects()) {
+            assert(0 != object);
+            const TextureRenderer* tr =
+                object->component<TextureRenderer>();
+            if (0 == tr) {
+                continue;
+            }
+            Rectangle rect = tr->rect();
+            if (firstTime) {
+                firstTime = false;
+                x1 = rect.left();
+                x2 = rect.right();
+                y1 = rect.bottom();
+                y2 = rect.top();
+                continue;
+            }
+            if (x1 > rect.left()) {
+                x1 = rect.left();
+            }
+            if (x2 < rect.right()) {
+                x2 = rect.right();
+            }
+            if (y1 > rect.bottom()) {
+                y1 = rect.bottom();
+            }
+            if (y2 < rect.top()) {
+                y2 = rect.top();
+            }
+        }
+    }
+    assert(!firstTime);
+    return Rectangle(x2 - x1, y2 - y1, Position(x1, y1));
 }
 
 void Game::popLayer()

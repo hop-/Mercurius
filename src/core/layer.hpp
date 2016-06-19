@@ -51,6 +51,11 @@ public:
         return m_stopped;
     }
 
+    inline const Logic* logic() const
+    {
+        return m_logic;
+    }
+
     inline Gui* gui()
     {
         return m_gui;

@@ -32,6 +32,7 @@ public:
     virtual void update();
     virtual void init() final;
     virtual void initObject(){}
+    const std::vector<LogicObject*>& objects() const;
     void aimTo(LogicObject* l);
     const LogicObject* viewPort() const;
     const ViewPort* viewPortComponent() const;

@@ -42,6 +42,7 @@ public:
     inline void setMovingArea(Rectangle area)
     {
         m_movingArea = area;
+        setPosition(area.position());
     }
 
     Rectangle movingArea()
@@ -214,11 +215,35 @@ class TextureRenderer
     float m_scaleFactor = 1;
     Position m_position = Position();
     HorizontalDirection m_direction = HorizontalDirection::Right;
+    EngineUnit m_width = 0;
+    EngineUnit m_height = 0;
 
 public:
     // TODO add some useful functions
     void setState(int state);
     void onNotify();
+
+    inline void setSizes(UserUnit w, UserUnit h)
+    {
+        m_width = w;
+        m_height = h;
+    }
+
+    inline UserUnit width() const
+    {
+        return m_width;
+    }
+
+    inline UserUnit height() const
+    {
+        return m_height;
+    }
+
+    inline Rectangle rect() const
+    {
+        return Rectangle(m_width, m_height, m_position)
+            .scaled(scaleFactor());
+    }
 
     inline void setStateNumber(int numberOfStates)
     {
