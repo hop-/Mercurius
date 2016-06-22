@@ -164,6 +164,8 @@ void TextureRenderer::init()
     if (0 != parent()->parent()) {
         dynamic_cast<Logic*>(parent()->parent())->addToViewPort(parent());
     }
+    assert(0 != parent());
+    m_position = parent()->position();
     notify();
 }
 
