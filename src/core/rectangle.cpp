@@ -29,12 +29,12 @@ bool Rectangle::isInside(const Rectangle& rect) const
             && bottom() <= rect.bottom());
 }
 
-Rectangle Rectangle::scaled(float scale)
+Rectangle Rectangle::scaled(float scale) const
 {
     Rectangle rectangle;
     rectangle.setWidth(m_width * scale);
     rectangle.setHeight(m_height * scale);
-    rectangle.setPosition(m_position * scale);
+    rectangle.setPosition(m_position);
     return rectangle;
 }
 

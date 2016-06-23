@@ -20,7 +20,7 @@ public:
 
 public:
     Rectangle represent(const Rectangle& rectangle) const;
-    Rectangle scaled(float scale);
+    Rectangle scaled(float scale) const;
     bool isInside(const Rectangle& rect) const;
     bool intersects(const Rectangle& rect) const;
     bool contacts(const Rectangle& rect) const;
