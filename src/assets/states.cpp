@@ -7,6 +7,8 @@
 #include <core/components.hpp>
 #include <core/vector.hpp>
 
+#include <debug/log.hpp>
+
 #include <base/event_manager.hpp>
 
 #define OWNER parent<Core::LogicObject>
@@ -51,7 +53,7 @@ void Standing::onLadder(Base::Event* e)
     if (l->object() != p) {
         return;
     }
-    p->addState(new NearLadder);
+    p->addState(new NearLadder(l->ladder()));
 }
 
 Core::Command* Standing::onInit()
@@ -66,12 +68,16 @@ Core::Command* Standing::command()
     return new Stand(OWNER());
 }
 
-NearLadder::NearLadder()
+NearLadder::NearLadder(const Core::LogicObject* ladder)
+    : m_ladder(ladder)
 {
     registerCallback<LadderExit>(
             new Base::DelegateCreator<NearLadder>(this
                 , &NearLadder::outLadder));
 }
+
+NearLadder::~NearLadder()
+{}
 
 void NearLadder::outLadder(Base::Event* e)
 {
@@ -79,7 +85,7 @@ void NearLadder::outLadder(Base::Event* e)
     assert(0 != ol);
     Core::LogicObject* p = OWNER();
     assert(0 != p);
-    if (ol->object() != p) {
+    if (ol->object() != p || ol->ladder() != m_ladder) {
         return;
     }
     p->removeState(this);
@@ -406,7 +412,7 @@ void Running::onLadder(Base::Event* e)
     if (l->object() != p) {
         return;
     }
-    p->addState(new NearLadder);
+    p->addState(new NearLadder(l->ladder()));
 }
 
 Core::Command* Running::onInit()

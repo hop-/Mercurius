@@ -33,8 +33,15 @@ private:
 class NearLadder
     : public Core::State
 {
+    const Core::LogicObject* m_ladder;
+
 public:
-    NearLadder();
+    NearLadder(const Core::LogicObject* ladder);
+    ~NearLadder();
+
+private:
+    NearLadder(const NearLadder&) = delete;
+    NearLadder& operator=(const NearLadder&) = delete;
 
 private:
     void onKeyEvent(Base::Event* e) override;
