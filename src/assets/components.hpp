@@ -69,6 +69,27 @@ private:
     void makeTrigger(Base::Event* e);
 };
 
+class CameraFollower
+    : public Core::LogicObject::ComponentCreator<CameraFollower>
+{
+    int m_velocityScaleX = 1;
+    int m_velocityScaleY = 1;
+    Core::Position m_viewPortLastPosition = Core::Position();
+
+public:
+    void onNotify() override;
+    void init();
+
+    inline void setVelocityScale(int sx, int sy)
+    {
+        m_velocityScaleX = sx;
+        m_velocityScaleY = sy;
+    }
+
+private:
+    void move(Core::Position p);
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_COMPONENTS_HPP_

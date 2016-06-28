@@ -8,6 +8,8 @@
 #include <base/delegate.hpp>
 #include <base/event_manager.hpp>
 
+#include <debug/log.hpp>
+
 namespace Assets
 {
 
@@ -95,6 +97,30 @@ void PlatformZone::makeTrigger(Base::Event* e)
         parent()->component<Core::Collider>()
             ->removeTriggerObject(mt->object());
     }
+}
+
+void CameraFollower::init()
+{
+    Core::ViewPort::getInstance()->addObserver(this);
+}
+
+void CameraFollower::onNotify()
+{
+    Core::ViewPort* vp = static_cast<Core::ViewPort*>(subject());
+    assert(0 != vp);
+    move(vp->position());
+}
+
+void CameraFollower::move(Core::Position p)
+{
+    Core::Position dp = p - m_viewPortLastPosition;
+    m_viewPortLastPosition = p;
+    Core::Position parentPosition = parent()->position();
+    Core::Vector moveVector;
+    moveVector.setX(dp.x() * m_velocityScaleX);
+    moveVector.setY(dp.y() * m_velocityScaleY);
+    parentPosition.move(moveVector);
+    //parent()->setPosition(parentPosition); // TODO seg fault
 }
 
 } // namespace Assets

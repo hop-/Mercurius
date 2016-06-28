@@ -2,6 +2,7 @@
 #define _ASSETS_BACKGROUND_HPP_
 
 #include "object.hpp"
+#include "components.hpp"
 
 #include <mml/background.hpp>
 
@@ -18,7 +19,9 @@ public:
 
 private:
     void setupLogicObject()
-    {}
+    {
+        addComponent(new CameraFollower);
+    }
 
 };
 
