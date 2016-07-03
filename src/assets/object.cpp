@@ -19,6 +19,12 @@ Object::Object(const MML::DrawableObject* dr, Core::Layer* layer)
     layer->addObject(this);
 }
 
+void Object::init()
+{
+    addLogicObject();
+    addGuiObject();
+}
+
 void Object::addGuiObject()
 {
     assert(0 == m_guiObject);
@@ -93,6 +99,27 @@ void Object::addState(Core::State* state)
     assert(0 != state);
     assert(0 != m_logicObject);
     m_logicObject->addObject(state);
+}
+
+
+const MML::DrawableObject* Object::drawableObject() const
+{
+    return m_drawableObject;
+}
+
+Core::Layer* Object::layer()
+{
+    return m_layer;
+}
+
+Core::LogicObject* Object::logicObject()
+{
+    return m_logicObject;
+}
+
+Core::GuiObject* Object::guiObject()
+{
+    return m_guiObject;
 }
 
 } // namespace Assets

@@ -120,18 +120,8 @@ scale: 1;
 position: 300, 189;
 priority: -1;
 texture: resources/textures/ladder.png;
-
-}
-
-ladder {
-
-name: ladder2;
-width: 100;
-height: 300;
-scale: 1;
-position: 300, 489;
-priority: -1;
-texture: resources/textures/ladder.png;
+rows: 2;
+columns: 1;
 
 }
 

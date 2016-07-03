@@ -9,9 +9,10 @@ MMLObject* Ladder::Factory::create(const std::string& n)
 }
 
 Ladder::Ladder(const std::string& n)
-    : DrawableObject(n)
+    : ObjectArray(n)
 {
     setType("ladder");
+    allowColumns(false);
 }
 
 } // namespace MML

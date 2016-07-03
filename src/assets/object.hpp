@@ -2,7 +2,6 @@
 #define _ASSETS_OBJECT_HPP_
 
 #include <base/object.hpp>
-#include <core/state.hpp>
 #include <core/logic_object.hpp>
 
 namespace Core
@@ -36,18 +35,19 @@ private:
     Object& operator=(const Object&) = delete;
 
 protected:
-    void init()
-    {
-        addLogicObject();
-        addGuiObject();
-    }
+    void init();
     virtual void setupLogicObject() = 0;
-    void addGuiObject();
-    void addLogicObject();
-    void addCollider(bool trigger = false);
-    void addPhysics();
-    void addComponent(Core::LogicObject::Component* c);
-    void addState(Core::State* state);
+    virtual void addGuiObject();
+    virtual void addLogicObject();
+    virtual void addCollider(bool trigger = false);
+    virtual void addPhysics();
+    virtual void addComponent(Core::LogicObject::Component* c);
+    virtual void addState(Core::State* state);
+
+    const MML::DrawableObject* drawableObject() const;
+    Core::Layer* layer();
+    Core::LogicObject* logicObject();
+    Core::GuiObject* guiObject();
 };
 
 } // namespace Assets
