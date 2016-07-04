@@ -1,13 +1,13 @@
 #ifndef _MML_LADDER_HPP_
 #define _MML_LADDER_HPP_
 
-#include "drawable_object.hpp"
+#include "object_array.hpp"
 
 namespace MML
 {
 
 class Ladder
-    : public DrawableObject
+    : public ObjectArray
 {
 public:
     class Factory

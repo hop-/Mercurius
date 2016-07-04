@@ -186,6 +186,16 @@ public:
         scaleSizes();
     }
 
+    inline UserUnit width() const
+    {
+        return m_width;
+    }
+
+    inline UserUnit height() const
+    {
+        return m_height;
+    }
+
     inline bool isTrigger() const
     {
         return m_isTrigger;
@@ -279,6 +289,37 @@ public:
 private:
     void init();
     void onParentSet();
+};
+
+class ArrayObject
+    : public LogicObject::ComponentCreator<ArrayObject>
+{
+    int m_rows = 1;
+    int m_columns = 1;
+
+public:
+    inline int rows() const
+    {
+        return m_rows;
+    }
+
+    inline void setRows(int rows)
+    {
+        m_rows = rows;
+    }
+
+    inline int columns() const
+    {
+        return m_columns;
+    }
+
+    inline void setColumns(int columns)
+    {
+        m_columns = columns;
+    }
+
+private:
+    void init();
 };
 
 } // namespace Core

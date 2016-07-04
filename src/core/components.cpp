@@ -189,4 +189,13 @@ void TextureRenderer::setState(int state)
     notify();
 }
 
+void ArrayObject::init()
+{
+    Collider* c = parent()->component<Collider>();
+    if (0 != c) {
+        c->setSizes(c->width() * m_columns, c->height() * m_rows);
+    }
+    // TODO add gui part
+}
+
 } // namespace Core
