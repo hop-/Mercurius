@@ -93,11 +93,11 @@ SDL_Rect* Frame::mapToFrame(SDL_Rect& r, int id)
     SDL_Rect* rect = 0;
     switch(layersViewMode()) {
         case LayersViewMode::active:
-        rect = mapToActive(r, id);
-        break;
+            rect = mapToActive(r, id);
+            break;
         case LayersViewMode::list:
-//        rect = mapToList(r, id)
-        break;
+            rect = mapToList(r, id);
+            break;
         case LayersViewMode::grid:
 //        rect = mapToGrid(r, id);
         break;
@@ -109,7 +109,7 @@ SDL_Rect* Frame::mapToFrame(SDL_Rect& r, int id)
 
 SDL_Rect* Frame::mapToActive(SDL_Rect& r, int id)
 {
-    Core::Game* game = Core::Game::Game::getInstance();
+    Core::Game* game = Core::Game::getInstance();
     assert(0 != game);
     if (game->activeLayerId() != id) {
         return 0;
@@ -117,11 +117,20 @@ SDL_Rect* Frame::mapToActive(SDL_Rect& r, int id)
     return &r;
 }
 
-/*SDL_Rect* Frame::mapToList(SDL_Rect& r, int id)
+SDL_Rect* Frame::mapToList(SDL_Rect& r, int id)
 {
+    SDL_Rect* rect = new SDL_Rect(r);
+    const int screenWidth = width();
+    const int scaleFactor = screenWidth / (screenWidth / Core::Layer::maxId());
+    int pos = (screenWidth / Core::Layer::maxId()) * id;
+    rect->x = pos + rect->x / scaleFactor ;
+    rect->y /= scaleFactor ;
+    rect->w /= scaleFactor ;
+    rect->h /= scaleFactor ;
+    return rect;
 }
 
-SDL_Rect* Frame::mapToGrid(SDL_Rect& r, int id)
+/*SDL_Rect* Frame::mapToGrid(SDL_Rect& r, int id)
 {
 }*/
 
@@ -148,7 +157,7 @@ void Frame::draw(const Core::GuiObject* object)
             , dest_rect
             , 0, 0
             , texture.flip);
-    Debug::Gui::drawRect(m_renderer, &(texture.destinationRect));
+    Debug::Gui::drawRect(m_renderer, dest_rect);
 }
 
 void Frame::show()

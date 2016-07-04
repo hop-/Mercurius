@@ -32,6 +32,8 @@ public:
 
     virtual ~Layer();
 
+    static unsigned maxId();
+
     inline unsigned id() const
     {
         return m_id;

@@ -11,6 +11,11 @@ namespace Core
 
 static unsigned s_layer_id = 0;
 
+unsigned Layer::maxId()
+{
+    return s_layer_id;
+}
+
 Layer::Layer(Gui* gui, Logic* logic,
         bool stopped, bool hidden, bool ignoreEvents)
     : m_gui(gui)

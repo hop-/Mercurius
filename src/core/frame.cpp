@@ -11,7 +11,7 @@ Frame::Frame()
     , m_width(800)
     , m_height(600)
     , m_screenMode(ScreenMode::fullScreenFit)
-    , m_layersViewMode(LayersViewMode::active)
+    , m_layersViewMode(LayersViewMode::list)
     , m_sortedObjects()
 {}
 
