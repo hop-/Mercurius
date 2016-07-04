@@ -2,6 +2,8 @@
 #include "texture.hpp"
 #include "gui_object.hpp"
 
+#include <core/game.hpp>
+#include <core/layer.hpp>
 #include <debug/gui.hpp>
 
 #include <cassert>
@@ -86,6 +88,43 @@ void Frame::clear()
     SDL_RenderClear(m_renderer);
 }
 
+SDL_Rect* Frame::mapToFrame(SDL_Rect& r, int id)
+{
+    SDL_Rect* rect = 0;
+    switch(layersViewMode()) {
+        case LayersViewMode::active:
+        rect = mapToActive(r, id);
+        break;
+        case LayersViewMode::list:
+//        rect = mapToList(r, id)
+        break;
+        case LayersViewMode::grid:
+//        rect = mapToGrid(r, id);
+        break;
+    default:
+        assert(!"This case shouldn't happen");
+    }
+    return rect;
+}
+
+SDL_Rect* Frame::mapToActive(SDL_Rect& r, int id)
+{
+    Core::Game* game = Core::Game::Game::getInstance();
+    assert(0 != game);
+    if (game->activeLayerId() != id) {
+        return 0;
+    }
+    return &r;
+}
+
+/*SDL_Rect* Frame::mapToList(SDL_Rect& r, int id)
+{
+}
+
+SDL_Rect* Frame::mapToGrid(SDL_Rect& r, int id)
+{
+}*/
+
 void Frame::draw(const Core::GuiObject* object)
 {
     assert(0 != object);
@@ -97,9 +136,16 @@ void Frame::draw(const Core::GuiObject* object)
     texture.destinationRect.y = height()
         - texture.destinationRect.y
         - texture.destinationRect.h;
+    assert(0 != object->parent());
+    Core::Layer* layer = dynamic_cast<Core::Layer*>(object->parent()->parent());
+    assert(0 != layer);
+    SDL_Rect* dest_rect = mapToFrame(texture.destinationRect, layer->id());
+    if (dest_rect == 0) {
+        return;
+    }
     SDL_RenderCopyEx(m_renderer, texture.texture
             , &(texture.sourceRect)
-            , &(texture.destinationRect)
+            , dest_rect
             , 0, 0
             , texture.flip);
     Debug::Gui::drawRect(m_renderer, &(texture.destinationRect));

@@ -35,12 +35,13 @@ void Frame::prepareToDraw(const GuiObject* object)
 
 void Frame::setFPS(int fps)
 {
-    if (fps > 1000) {
-        fps = 1000;
+    static const int s_max_fps = 1000;
+    if (fps > s_max_fps) {
+        fps = s_max_fps;
     } else if (fps < 1) {
         fps = 1;
     }
-    m_msPerUpdate = 1000 / fps;
+    m_msPerUpdate = s_max_fps / fps;
 }
 
 void Frame::setResolution(int width, int height)

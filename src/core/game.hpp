@@ -31,7 +31,7 @@ private:
     Layers m_layers;
     static Game* m_instance;
     bool m_isRunning = true;
-    std::string m_activeLayerName;
+    int m_activeLayerId = 0;
 
 private:
     Game(Frame* frame, Base::InputHandler* inputHandler);
@@ -48,10 +48,7 @@ public:
 public:
     const Frame* frame() const;
 
-    Base::InputHandler* inputHandler()
-    {
-        return m_inputHandler;
-    }
+    Base::InputHandler* inputHandler();
 
 public:
     void start();
@@ -59,14 +56,11 @@ public:
     void popLayer();
     const Layers& layers() const;
     Rectangle mapRect();
+    int activeLayerId() const;
 
 private:
     void mainLoop();
-
-    void quit(Base::Event*)
-    {
-        m_isRunning = false;
-    }
+    void quit(Base::Event*);
 };
 
 } // namespace core

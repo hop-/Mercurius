@@ -40,7 +40,6 @@ Game::Game(Frame* frame, Base::InputHandler* inputHandler)
     : m_frame(frame)
     , m_inputHandler(inputHandler)
     , m_layers()
-    , m_activeLayerName()
 {
     assert(0 != m_frame);
     assert(0 != inputHandler);
@@ -170,6 +169,11 @@ Rectangle Game::mapRect()
     return Rectangle(x2 - x1, y2 - y1, Position(x1, y1));
 }
 
+int Game::activeLayerId() const
+{
+    return m_activeLayerId;
+}
+
 void Game::popLayer()
 {
     return m_layers.pop_back();
@@ -184,6 +188,16 @@ const Frame* Game::frame() const
 const Game::Layers& Game::layers() const
 {
     return m_layers;
+}
+
+Base::InputHandler* Game::inputHandler()
+{
+    return m_inputHandler;
+}
+
+void Game::quit(Base::Event*)
+{
+    m_isRunning = false;
 }
 
 } // namespace core

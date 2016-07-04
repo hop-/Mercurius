@@ -22,7 +22,6 @@ public:
     virtual ~MMLLayer();
 
     ATTRIBUTE_INTERFACE(bool, "visible", isVisible);
-    ATTRIBUTE_INTERFACE(int, "level", level);
     ATTRIBUTE_INTERFACE(bool, "stopped", isStopped);
 };
 

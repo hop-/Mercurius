@@ -1,7 +1,6 @@
 layer {
 
-name: layer1;
-level: 1;
+name: layer3;
 visible: true;
 stopped: false;
 
@@ -11,7 +10,7 @@ name: ground14;
 width: 1024;
 height: 189;
 scale: 1;
-position: 0, -300;
+position: 0, -289;
 texture: resources/textures/ground.png;
 
 }
@@ -29,6 +28,7 @@ texture: resources/textures/box.png;
 }
 
 }
+
 layer {
 name: layer2;
 stopped: true;
@@ -48,7 +48,7 @@ texture: resources/textures/box.png;
 }
 
 layer {
-name: layer3;
+name: layer1;
 visible: true;
 
 box {

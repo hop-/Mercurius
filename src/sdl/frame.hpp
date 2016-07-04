@@ -33,6 +33,12 @@ private:
     void draw(const Core::GuiObject* object);
     void show();
     void correctResolution();
+
+private:
+    SDL_Rect* mapToFrame(SDL_Rect&, int);
+    SDL_Rect* mapToActive(SDL_Rect&, int);
+//    SDL_Rect* mapToList(SDL_Rect&, int);
+//    SDL_Rect* mapToGrid(SDL_Rect&, int);
 };
 
 } // namespace Sdl

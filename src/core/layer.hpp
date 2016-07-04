@@ -22,14 +22,20 @@ class Layer
     bool m_stopped;
     bool m_hidden;
     bool m_ignoreEvent;
+    unsigned m_id;
 
 public:
-    Layer();
     Layer(Gui* gui, Logic* logic,
             bool stopped = false,
             bool hidden = false,
             bool ignoreEvents = false);
+
     virtual ~Layer();
+
+    inline unsigned id() const
+    {
+        return m_id;
+    }
 
     inline void stop(bool stop)
     {

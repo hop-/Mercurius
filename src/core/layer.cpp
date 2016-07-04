@@ -9,6 +9,8 @@
 namespace Core
 {
 
+static unsigned s_layer_id = 0;
+
 Layer::Layer(Gui* gui, Logic* logic,
         bool stopped, bool hidden, bool ignoreEvents)
     : m_gui(gui)
@@ -16,6 +18,7 @@ Layer::Layer(Gui* gui, Logic* logic,
     , m_stopped(stopped)
     , m_hidden(hidden)
     , m_ignoreEvent(ignoreEvents)
+    , m_id(s_layer_id++)
 {
     assert(0 != gui);
     assert(0 != logic);

@@ -221,7 +221,7 @@ class TextureRenderer
 public:
     // TODO add some useful functions
     void setState(int state);
-    void onNotify();
+    virtual void onNotify() override;
 
     inline void setSizes(UserUnit w, UserUnit h)
     {
