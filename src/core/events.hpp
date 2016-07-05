@@ -16,15 +16,20 @@ class KeyEvent
 {
 public:
     enum class Mode {Up, Down};
+    enum class Modifier {None, Ctrl, Alt, Shift};
 
 private:
     InputManager::Key m_keyCode;
     Mode m_mode;
+    Modifier m_modifier;
 
 public:
-    KeyEvent(InputManager::Key keyCode, Mode mode)
+    KeyEvent(InputManager::Key keyCode,
+             Mode mode,
+             Modifier modifier = Modifier::None)
     : m_keyCode(keyCode)
     , m_mode(mode)
+    , m_modifier(modifier)
     {}
 
     inline InputManager::Key key() const
@@ -35,6 +40,11 @@ public:
     inline Mode mode() const
     {
         return m_mode;
+    }
+
+    inline Modifier modifier() const
+    {
+        return m_modifier;
     }
 };
 

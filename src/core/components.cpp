@@ -13,9 +13,7 @@ template<>
 ViewPort* Base::Singleton<ViewPort>::m_s_instance = 0;
 
 ViewPort::ViewPort()
-    : m_movingArea(UserUnit(1500)
-            , UserUnit(1500)
-            , Position(UserUnit(-200), UserUnit(-300)))    // TODO TMP for testing
+    : m_movingArea()
 {
     setWidth(UserUnit(1200));
     setHeight(UserUnit(900));

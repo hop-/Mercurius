@@ -45,7 +45,7 @@ public:
         setPosition(area.position());
     }
 
-    Rectangle movingArea()
+    Rectangle movingArea() const
     {
         return m_movingArea;
     }
@@ -55,12 +55,12 @@ public:
 private:
     void aim();
 
-    inline EngineUnit middleX()
+    inline EngineUnit middleX() const
     {
         return (right() - left()) / 2;
     }
 
-    inline EngineUnit middleY()
+    inline EngineUnit middleY() const
     {
         return (top() - bottom()) / 2;
     }
@@ -98,7 +98,7 @@ public:
         m_gravityScale = gravityScale;
     }
 
-    inline Vector velocity()
+    inline Vector velocity() const
     {
         return m_velocity;
     }

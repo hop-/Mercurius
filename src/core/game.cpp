@@ -67,7 +67,8 @@ Game::~Game()
 void Game::mainLoop()
 {
     assert(0 != m_inputHandler);
-    ViewPort::getInstance()->setMovingArea(mapRect());
+    ViewPort::getInstance()->setMovingArea(mapRect()); // TODO. Moving area should be updated for each layer
+                                                       // after swithing to them, not before it and for all layers.
     unsigned previousTicks = m_inputHandler->getTicks();
     unsigned updateLag = 0;
     unsigned drawLag = 0;

@@ -10,6 +10,28 @@
 namespace Sdl
 {
 
+namespace {
+
+Core::KeyEvent::Modifier getModifier(SDL_Event event)
+{
+    Core::KeyEvent::Modifier m;
+    switch(event.key.keysym.mod) {
+        case KMOD_SHIFT:
+            m = Core::KeyEvent::Modifier::Shift;
+            break;
+        case KMOD_CTRL:
+            m = Core::KeyEvent::Modifier::Ctrl;
+            break;
+        case KMOD_ALT:
+            m = Core::KeyEvent::Modifier::Alt;
+        default:
+            m = Core::KeyEvent::Modifier::None;
+    }
+    return m;
+}
+
+} // end of unnamed namespace
+
 void InputHandler::catchUserInput()
 {
     SDL_Event event;
@@ -29,7 +51,7 @@ void InputHandler::catchUserInput()
                 break;
             }
             cevent = new Core::KeyEvent(k
-                        , Core::KeyEvent::Mode::Down);
+                        , Core::KeyEvent::Mode::Down, getModifier(event));
             break;
         case SDL_KEYUP:
             if (event.key.repeat != 0) {
@@ -40,7 +62,7 @@ void InputHandler::catchUserInput()
                 break;
             }
             cevent = new Core::KeyEvent(k
-                        , Core::KeyEvent::Mode::Up);
+                        , Core::KeyEvent::Mode::Up, getModifier(event));
             break;
         default:
             cevent = 0;
