@@ -123,10 +123,10 @@ SDL_Rect* Frame::mapToList(SDL_Rect& r, int id)
     const int screenWidth = width();
     const int scaleFactor = screenWidth / (screenWidth / Core::Layer::maxId());
     int pos = (screenWidth / Core::Layer::maxId()) * id;
-    rect->x = pos + rect->x / scaleFactor ;
-    rect->y /= scaleFactor ;
-    rect->w /= scaleFactor ;
-    rect->h /= scaleFactor ;
+    rect->x = pos + rect->x / scaleFactor;
+    rect->y /= scaleFactor;
+    rect->w /= scaleFactor;
+    rect->h /= scaleFactor;
     return rect;
 }
 

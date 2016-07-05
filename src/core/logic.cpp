@@ -73,7 +73,10 @@ void Logic::addToViewPort(LogicObject* object)
     assert(0 != object);
     TextureRenderer* objectTR = object->component<TextureRenderer>();
     if (0 != objectTR) {
-        m_viewPort->component<ViewPort>()->addObserver(objectTR);
+        assert(0 != m_viewPort);
+        ViewPort* vp = m_viewPort->component<ViewPort>();
+        assert(0 != vp);
+        vp->addObserver(objectTR);
     }
 }
 
