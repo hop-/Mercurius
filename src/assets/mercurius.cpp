@@ -17,7 +17,8 @@ namespace Assets
 
 Mercurius::Configs Mercurius::m_configs;
 
-void Mercurius::start()
+void Mercurius::
+start()
 {
     loadConfigs();
     Core::Frame* frame = new Sdl::Frame;
@@ -43,7 +44,8 @@ void Mercurius::start()
     Base::Utility::ignoreUnused(r);
 }
 
-void Mercurius::loadConfigs()
+void Mercurius::
+loadConfigs()
 {
     typedef MML::MMLManager manager;
     manager* m = manager::getInstance();
@@ -60,7 +62,8 @@ void Mercurius::loadConfigs()
 
 }
 
-void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
+void Mercurius::
+loadLayers(Core::Game& game, Core::Frame* frame)
 {
     typedef MML::MMLManager manager;
     manager* m = manager::getInstance();
@@ -87,7 +90,8 @@ void Mercurius::loadLayers(Core::Game& game, Core::Frame* frame)
     }
 }
 
-void Mercurius::addConfig(const MML::MMLObject* config)
+void Mercurius::
+addConfig(const MML::MMLObject* config)
 {
     assert(0 != config);
     const MML::Config* c = dynamic_cast<const MML::Config*>(config);

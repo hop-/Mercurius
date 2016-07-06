@@ -12,19 +12,10 @@ namespace Assets
 class Dude : public Object
 {
 public:
-    Dude(const MML::Dude* d, Core::Layer* l)
-        : Object(d, l)
-    {}
+    Dude(const MML::Dude* d, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addCollider();
-        addPhysics();
-        addState(new LayerChanger);
-        addState(new Standing);
-        addState(new OnGround); // contains bug
-    }
+    void setupLogicObject() override;
 };
 
 } // namepsace Assets

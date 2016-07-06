@@ -11,18 +11,10 @@ namespace Assets
 class Box : public Object
 {
 public:
-    Box(const MML::MMLBox* b, Core::Layer* l)
-        : Object(b, l)
-    {
-    }
+    Box(const MML::MMLBox* b, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addPhysics();
-        addCollider();
-    }
-
+    void setupLogicObject() override;
 };
 
 } // namespace Asset

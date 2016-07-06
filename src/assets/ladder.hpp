@@ -13,16 +13,10 @@ class Ladder
     :public ObjectArray
 {
 public:
-    Ladder(const MML::Ladder* s, Core::Layer* l)
-        : ObjectArray(s, l)
-    {}
+    Ladder(const MML::Ladder* s, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addCollider(true);
-        addComponent(new LadderZone);
-    }
+    void setupLogicObject() override;
 };
 
 } // namespace Assets

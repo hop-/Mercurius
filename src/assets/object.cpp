@@ -10,7 +10,8 @@
 namespace Assets
 {
 
-Object::Object(const MML::DrawableObject* dr, Core::Layer* layer)
+Object::
+Object(const MML::DrawableObject* dr, Core::Layer* layer)
     : m_drawableObject(dr)
     , m_layer(layer)
 {
@@ -19,13 +20,15 @@ Object::Object(const MML::DrawableObject* dr, Core::Layer* layer)
     layer->addObject(this);
 }
 
-void Object::init()
+void Object::
+init()
 {
     addLogicObject();
     addGuiObject();
 }
 
-void Object::addGuiObject()
+void Object::
+addGuiObject()
 {
     assert(0 == m_guiObject);
     assert(0 != m_drawableObject);
@@ -44,7 +47,8 @@ void Object::addGuiObject()
     m_layer->addGuiObject(m_guiObject);
 }
 
-void Object::addLogicObject()
+void Object::
+addLogicObject()
 {
     assert(0 == m_logicObject);
     assert(0 != m_drawableObject);
@@ -61,7 +65,8 @@ void Object::addLogicObject()
     }
 }
 
-void Object::addCollider(bool trigger)
+void Object::
+addCollider(bool trigger)
 {
     assert(0 != m_drawableObject);
     assert(0 != m_logicObject);
@@ -80,21 +85,24 @@ void Object::addCollider(bool trigger)
     m_logicObject->addComponent(collider);
 }
 
-void Object::addPhysics()
+void Object::
+addPhysics()
 {
     assert(0 != m_logicObject);
     Core::Physics* physics = new Core::Physics();
     m_logicObject->addComponent(physics);
 }
 
-void Object::addComponent(Core::LogicObject::Component* c)
+void Object::
+addComponent(Core::LogicObject::Component* c)
 {
     assert(0 != c);
     assert(0 != m_logicObject);
     m_logicObject->addComponent(c);
 }
 
-void Object::addState(Core::State* state)
+void Object::
+addState(Core::State* state)
 {
     assert(0 != state);
     assert(0 != m_logicObject);
@@ -102,22 +110,26 @@ void Object::addState(Core::State* state)
 }
 
 
-const MML::DrawableObject* Object::drawableObject() const
+const MML::DrawableObject* Object::
+drawableObject() const
 {
     return m_drawableObject;
 }
 
-Core::Layer* Object::layer()
+Core::Layer* Object::
+layer()
 {
     return m_layer;
 }
 
-Core::LogicObject* Object::logicObject()
+Core::LogicObject* Object::
+logicObject()
 {
     return m_logicObject;
 }
 
-Core::GuiObject* Object::guiObject()
+Core::GuiObject* Object::
+guiObject()
 {
     return m_guiObject;
 }

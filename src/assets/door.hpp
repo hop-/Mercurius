@@ -12,16 +12,10 @@ namespace Assets
 class Door : public Object
 {
 public:
-    Door(const MML::Door* d, Core::Layer* l)
-        : Object(d, l)
-    {}
+    Door(const MML::Door* d, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addCollider(true);
-        addComponent(new DoorZone);
-    }
+    void setupLogicObject() override;
 };
 
 } // namepsace Assets

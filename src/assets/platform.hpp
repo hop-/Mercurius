@@ -13,16 +13,10 @@ class Platform
     : public Object
 {
 public:
-    Platform(const MML::Platform* d, Core::Layer* l)
-        : Object(d, l)
-    {}
+    Platform(const MML::Platform* d, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addCollider();
-        addComponent(new PlatformZone);
-    }
+    void setupLogicObject() override;
 };
 
 } // namepsace Assets

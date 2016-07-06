@@ -12,17 +12,10 @@ namespace Assets
 class Background : public Object
 {
 public:
-    Background(const MML::Background* b, Core::Layer* l)
-        : Object(b, l)
-    {
-    }
+    Background(const MML::Background* b, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addComponent(new CameraFollower);
-    }
-
+    void setupLogicObject();
 };
 
 } // namespace Asset

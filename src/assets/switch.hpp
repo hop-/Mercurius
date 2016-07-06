@@ -13,18 +13,10 @@ namespace Assets
 class Switch : public Object
 {
 public:
-    Switch(const MML::Switch* d, Core::Layer* l)
-        : Object(d, l)
-    {}
+    Switch(const MML::Switch* d, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addCollider(true);
-        addComponent(new SwitchZone);
-        addState(new SwitchInactive);
-        addState(new SwitchState(false));
-    }
+    void setupLogicObject() override;
 };
 
 } // namepsace Assets

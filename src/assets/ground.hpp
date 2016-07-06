@@ -11,15 +11,10 @@ namespace Assets
 class Ground : public Object
 {
 public:
-    Ground(const MML::Ground* d, Core::Layer* l)
-        : Object(d, l)
-    {}
+    Ground(const MML::Ground* d, Core::Layer* l);
 
 private:
-    void setupLogicObject()
-    {
-        addCollider();
-    }
+    void setupLogicObject() override;
 };
 
 } // namepsace Assets

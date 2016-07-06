@@ -16,7 +16,8 @@
 namespace Assets
 {
 
-void Standing::onKeyEvent(Base::Event* e)
+void Standing::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
@@ -37,14 +38,16 @@ void Standing::onKeyEvent(Base::Event* e)
     }
 }
 
-Standing::Standing()
+Standing::
+Standing()
 {
     registerCallback<LadderEnter>(
             new Base::DelegateCreator<Standing>(this
                 , &Standing::onLadder));
 }
 
-void Standing::onLadder(Base::Event* e)
+void Standing::
+onLadder(Base::Event* e)
 {
     LadderEnter* l = LadderEnter::cast(e);
     assert(0 != l);
@@ -56,19 +59,22 @@ void Standing::onLadder(Base::Event* e)
     p->addState(new NearLadder(l->ladder()));
 }
 
-Core::Command* Standing::onInit()
+Core::Command* Standing::
+onInit()
 {
     // TODO return command to change texture
     return 0;
 }
 
-Core::Command* Standing::command()
+Core::Command* Standing::
+command()
 {
     assert(0 != OWNER());
     return new Stand(OWNER());
 }
 
-NearLadder::NearLadder(const Core::LogicObject* ladder)
+NearLadder::
+NearLadder(const Core::LogicObject* ladder)
     : m_ladder(ladder)
 {
     registerCallback<LadderExit>(
@@ -76,10 +82,12 @@ NearLadder::NearLadder(const Core::LogicObject* ladder)
                 , &NearLadder::outLadder));
 }
 
-NearLadder::~NearLadder()
+NearLadder::
+~NearLadder()
 {}
 
-void NearLadder::outLadder(Base::Event* e)
+void NearLadder::
+outLadder(Base::Event* e)
 {
     LadderExit* ol = LadderExit::cast(e);
     assert(0 != ol);
@@ -91,7 +99,8 @@ void NearLadder::outLadder(Base::Event* e)
     p->removeState(this);
 }
 
-void NearLadder::onKeyEvent(Base::Event* e)
+void NearLadder::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
@@ -114,7 +123,8 @@ void NearLadder::onKeyEvent(Base::Event* e)
     }
 }
 
-OnLadder::OnLadder()
+OnLadder::
+OnLadder()
 {
     registerCallback<Core::KeyEvent>(
             new Base::DelegateCreator<OnLadder>(this
@@ -124,17 +134,20 @@ OnLadder::OnLadder()
                 , &OnLadder::outLadder));
 }
 
-Core::Command* OnLadder::onInit()
+Core::Command* OnLadder::
+onInit()
 {
     return 0;
 }
 
-Core::Command* OnLadder::command()
+Core::Command* OnLadder::
+command()
 {
     return new Stop(OWNER(), Core::Direction::Down);
 }
 
-void OnLadder::onKeyEvent(Base::Event* e)
+void OnLadder::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
@@ -155,7 +168,8 @@ void OnLadder::onKeyEvent(Base::Event* e)
     }
 }
 
-void OnLadder::outLadder(Base::Event* e)
+void OnLadder::
+outLadder(Base::Event* e)
 {
     LadderExit* ol = LadderExit::cast(e);
     assert(0 != ol);
@@ -167,7 +181,8 @@ void OnLadder::outLadder(Base::Event* e)
     p->changeState(this, new Falling);
 }
 
-void OnLadder::onKeyEvent2(Base::Event* e)
+void OnLadder::
+onKeyEvent2(Base::Event* e)
 {
     Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
@@ -178,17 +193,19 @@ void OnLadder::onKeyEvent2(Base::Event* e)
     }
 }
 
-MoveOnLadder::MoveOnLadder(Core::VerticalDirection d)
+MoveOnLadder::
+MoveOnLadder(Core::VerticalDirection d)
     : m_stopKey((d == Core::VerticalDirection::Up)
-            ? Core::InputManager::Key::Up
-            : Core::InputManager::Key::Down)
+                ? Core::InputManager::Key::Up
+                : Core::InputManager::Key::Down)
 {
     registerCallback<Core::OnSurface>(
             new Base::DelegateCreator<MoveOnLadder>(this
                 , &MoveOnLadder::onSurface));
 }
 
-void MoveOnLadder::onSurface(Base::Event* e)
+void MoveOnLadder::
+onSurface(Base::Event* e)
 {
     Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
@@ -200,7 +217,8 @@ void MoveOnLadder::onSurface(Base::Event* e)
     p->changeState(this, new OnGround());
 }
 
-void MoveOnLadder::onKeyEvent(Base::Event* e)
+void MoveOnLadder::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* k = Core::KeyEvent::cast(e);
     assert(0 != k);
@@ -209,13 +227,15 @@ void MoveOnLadder::onKeyEvent(Base::Event* e)
     }
 }
 
-Core::Command* MoveOnLadder::onInit()
+Core::Command* MoveOnLadder::
+onInit()
 {
     // TODO return command to change texture
     return 0;
 }
 
-Core::Command* MoveOnLadder::command()
+Core::Command* MoveOnLadder::
+command()
 {
     const Core::UserUnit vY = 0.7;
     Core::VerticalDirection vd;
@@ -227,19 +247,22 @@ Core::Command* MoveOnLadder::command()
     return new SetYVelocity(OWNER(), vY, vd);
 }
 
-VerticalMovementState::VerticalMovementState()
+VerticalMovementState::
+VerticalMovementState()
 {
     registerOnLadder();
 }
 
-void VerticalMovementState::registerOnLadder()
+void VerticalMovementState::
+registerOnLadder()
 {
     registerCallback<OnLadderEvent>(
             new Base::DelegateCreator<VerticalMovementState>(this
                 , &VerticalMovementState::onLadder));
 }
 
-void VerticalMovementState::onLadder(Base::Event* e)
+void VerticalMovementState::
+onLadder(Base::Event* e)
 {
     OnLadderEvent* ol = OnLadderEvent::cast(e);
     assert(0 != ol);
@@ -253,19 +276,22 @@ void VerticalMovementState::onLadder(Base::Event* e)
     }
 }
 
-Core::Command* OnGround::onInit()
+Core::Command* OnGround::
+onInit()
 {
     // TODO return command to change texture
     return 0;
 }
 
-OnGround::OnGround()
+OnGround::
+OnGround()
 {
     registerCallback<Core::OnAir>(
             new Base::DelegateCreator<OnGround>(this, &OnGround::onAir));
 }
 
-void OnGround::onKeyEvent(Base::Event* e)
+void OnGround::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
@@ -277,7 +303,8 @@ void OnGround::onKeyEvent(Base::Event* e)
     }
 }
 
-void OnGround::onAir(Base::Event* e)
+void OnGround::
+onAir(Base::Event* e)
 {
     Core::OnAir* oa = Core::OnAir::cast(e);
     assert(0 != oa);
@@ -289,19 +316,22 @@ void OnGround::onAir(Base::Event* e)
     p->changeState(this, new Falling);
 }
 
-Jumping::Jumping()
+Jumping::
+Jumping()
 {
     registerCallback<Core::OnSurface>(
             new Base::DelegateCreator<Jumping>(this, &Jumping::onSurface));
 }
 
-Jumping::Jumping(Core::EngineUnit power)
+Jumping::
+Jumping(Core::EngineUnit power)
     : Jumping()
 {
     m_power = power;
 }
 
-void Jumping::onKeyEvent(Base::Event* e)
+void Jumping::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
@@ -311,7 +341,8 @@ void Jumping::onKeyEvent(Base::Event* e)
     }
 }
 
-void Jumping::onSurface(Base::Event* e)
+void Jumping::
+onSurface(Base::Event* e)
 {
     Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
@@ -323,14 +354,16 @@ void Jumping::onSurface(Base::Event* e)
     p->changeState(this, new OnGround());
 }
 
-Core::Command* Jumping::onInit()
+Core::Command* Jumping::
+onInit()
 {
     // TODO return command to change texture
     Base::EventManager::process(new MakeTriggerForPlatforms(OWNER(), true));
     return new Jump(OWNER(), 20 * m_power);
 }
 
-Core::Command* Jumping::command()
+Core::Command* Jumping::
+command()
 {
     assert(0 != OWNER()->component<Core::Physics>());
     if (OWNER()->component<Core::Physics>()->velocity().y() < 0) {
@@ -344,20 +377,23 @@ Core::Command* Jumping::command()
     return new Jump(OWNER(), m_power);
 }
 
-Falling::Falling()
+Falling::
+Falling()
 {
     registerCallback<Core::OnSurface>(
             new Base::DelegateCreator<Falling>(this, &Falling::onSurface));
 }
 
-Core::Command* Falling::onInit()
+Core::Command* Falling::
+onInit()
 {
     // TODO return command to change texture
     Base::EventManager::process(new MakeTriggerForPlatforms(OWNER(), false));
     return 0;
 }
 
-void Falling::onSurface(Base::Event* e)
+void Falling::
+onSurface(Base::Event* e)
 {
     Core::OnSurface* os = Core::OnSurface::cast(e);
     assert(0 != os);
@@ -369,7 +405,8 @@ void Falling::onSurface(Base::Event* e)
     p->changeState(this, new OnGround());
 }
 
-Running::Running(Core::HorizontalDirection d)
+Running::
+Running(Core::HorizontalDirection d)
     : m_direction(d)
     , m_antiDirection((d == Core::HorizontalDirection::Left)
             ? Core::HorizontalDirection::Right
@@ -386,7 +423,8 @@ Running::Running(Core::HorizontalDirection d)
                 , &Running::onLadder));
 }
 
-void Running::onKeyEvent(Base::Event* e)
+void Running::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
@@ -403,7 +441,8 @@ void Running::onKeyEvent(Base::Event* e)
     }
 }
 
-void Running::onLadder(Base::Event* e)
+void Running::
+onLadder(Base::Event* e)
 {
     LadderEnter* l = LadderEnter::cast(e);
     assert(0 != l);
@@ -415,7 +454,8 @@ void Running::onLadder(Base::Event* e)
     p->addState(new NearLadder(l->ladder()));
 }
 
-Core::Command* Running::onInit()
+Core::Command* Running::
+onInit()
 {
     // TODO return command to change texture and set direction
     assert(0 != OWNER());
@@ -424,7 +464,8 @@ Core::Command* Running::onInit()
     return 0;
 }
 
-Core::Command* Running::command()
+Core::Command* Running::
+command()
 {
     Core::Direction d;
     if (m_direction == Core::HorizontalDirection::Left) {
@@ -435,7 +476,8 @@ Core::Command* Running::command()
     return new ApplyMovement(OWNER(), 500, d);
 }
 
-Core::Command* LayerChanger::command()
+Core::Command* LayerChanger::
+command()
 {
     if (m_is_active) {
         return 0; // TODO return command which will change layer
@@ -443,25 +485,29 @@ Core::Command* LayerChanger::command()
     return 0;
 }
 
-void LayerChanger::onKeyEvent(Base::Event*)
+void LayerChanger::
+onKeyEvent(Base::Event*)
 {
     // TODO handle ALT+Tab event
 }
 
-SwitchInactive::SwitchInactive()
+SwitchInactive::
+SwitchInactive()
 {
     registerCallback<AtTheSwitch>(
             new Base::DelegateCreator<SwitchInactive>(this
                 , &SwitchInactive::atTheSwitch));
 }
 
-Core::Command* SwitchInactive::onInit()
+Core::Command* SwitchInactive::
+onInit()
 {
     // TODO return command to change texture
     return 0;
 }
 
-void SwitchInactive::atTheSwitch(Base::Event* e)
+void SwitchInactive::
+atTheSwitch(Base::Event* e)
 {
     AtTheSwitch* as = AtTheSwitch::cast(e);
     assert(0 != as);
@@ -472,20 +518,23 @@ void SwitchInactive::atTheSwitch(Base::Event* e)
     OWNER()->changeState(this, new SwitchActive);
 }
 
-SwitchActive::SwitchActive()
+SwitchActive::
+SwitchActive()
 {
     registerCallback<AtTheSwitch>(
             new Base::DelegateCreator<SwitchActive>(this
                 , &SwitchActive::atTheSwitch));
 }
 
-Core::Command* SwitchActive::onInit()
+Core::Command* SwitchActive::
+onInit()
 {
     // TODO return command to change texture
     return 0;
 }
 
-void SwitchActive::onKeyEvent(Base::Event* e)
+void SwitchActive::
+onKeyEvent(Base::Event* e)
 {
     Core::KeyEvent* key = Core::KeyEvent::cast(e);
     assert(0 != key);
@@ -498,7 +547,8 @@ void SwitchActive::onKeyEvent(Base::Event* e)
     Base::EventManager::process(new ToggleTheSwitch(p));
 }
 
-void SwitchActive::atTheSwitch(Base::Event* e)
+void SwitchActive::
+atTheSwitch(Base::Event* e)
 {
     AtTheSwitch* as = AtTheSwitch::cast(e);
     assert(0 != as);
@@ -509,7 +559,8 @@ void SwitchActive::atTheSwitch(Base::Event* e)
     OWNER()->changeState(this, new SwitchInactive);
 }
 
-SwitchState::SwitchState(bool s)
+SwitchState::
+SwitchState(bool s)
     : m_status(s)
 {
     registerCallback<ToggleTheSwitch>(
@@ -517,7 +568,8 @@ SwitchState::SwitchState(bool s)
                 , &SwitchState::onToggle));
 }
 
-Core::Command* SwitchState::onInit()
+Core::Command* SwitchState::
+onInit()
 {
     // TODO return command to change texture
     assert(0 != OWNER());
@@ -528,13 +580,15 @@ Core::Command* SwitchState::onInit()
     return 0;
 }
 
-void SwitchState::onToggle(Base::Event* e)
+void SwitchState::
+onToggle(Base::Event* e)
 {
     ToggleTheSwitch* t = ToggleTheSwitch::cast(e);
     assert(0 != t);
     if (t->switchObject() != OWNER()) {
         return;
     }
+    assert(0 != OWNER());
     OWNER()->changeState(this, new SwitchState(!m_status));
 }
 

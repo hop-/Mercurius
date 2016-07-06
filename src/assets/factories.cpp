@@ -57,8 +57,8 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     return new Box(box, l);
 }
 
-Base::Object* DudeFactory::create(const MML::MMLObject* mml
-        , Base::Object* p) const
+Base::Object* DudeFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
@@ -69,8 +69,8 @@ Base::Object* DudeFactory::create(const MML::MMLObject* mml
     return new Dude(dude, layer);
 }
 
-Base::Object* DoorFactory::create(const MML::MMLObject* mml
-        , Base::Object* p) const
+Base::Object* DoorFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
@@ -81,8 +81,8 @@ Base::Object* DoorFactory::create(const MML::MMLObject* mml
     return new Door(door, layer);
 }
 
-Base::Object* SwitchFactory::create(const MML::MMLObject* mml
-        , Base::Object* p) const
+Base::Object* SwitchFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
@@ -93,8 +93,8 @@ Base::Object* SwitchFactory::create(const MML::MMLObject* mml
     return new Switch(s, layer);
 }
 
-Base::Object* GroundFactory::create(const MML::MMLObject* mml
-        , Base::Object* p) const
+Base::Object* GroundFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
@@ -105,8 +105,8 @@ Base::Object* GroundFactory::create(const MML::MMLObject* mml
     return new Ground(ground, layer);
 }
 
-Base::Object* PlatformFactory::create(const MML::MMLObject* mml
-        , Base::Object* p) const
+Base::Object* PlatformFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
@@ -117,8 +117,8 @@ Base::Object* PlatformFactory::create(const MML::MMLObject* mml
     return new Platform(platform, layer);
 }
 
-Base::Object* BackgroundFactory::create(const MML::MMLObject* mml,
-        Base::Object* p) const
+Base::Object* BackgroundFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);
@@ -129,8 +129,8 @@ Base::Object* BackgroundFactory::create(const MML::MMLObject* mml,
     return new Background(bg, layer);
 }
 
-Base::Object* LadderFactory::create(const MML::MMLObject* mml
-        , Base::Object* p) const
+Base::Object* LadderFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
 {
     assert(0 != mml);
     assert(0 != p);

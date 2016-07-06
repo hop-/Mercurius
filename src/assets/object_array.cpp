@@ -8,17 +8,20 @@
 namespace Assets
 {
 
-ObjectArray::ObjectArray(const MML::ObjectArray* s, Core::Layer* l)
+ObjectArray::
+ObjectArray(const MML::ObjectArray* s, Core::Layer* l)
     : Object(s, l)
 {}
 
-void ObjectArray::addLogicObject()
+void ObjectArray::
+addLogicObject()
 {
     Object::addLogicObject();
     addArrayComponent();
 }
 
-void ObjectArray::addArrayComponent()
+void ObjectArray::
+addArrayComponent()
 {
     Core::ArrayObject* array = new Core::ArrayObject;
     if (objectArray()->rowsAreAllowed()) {
@@ -30,7 +33,8 @@ void ObjectArray::addArrayComponent()
     addComponent(array);
 }
 
-const MML::ObjectArray* ObjectArray::objectArray() const
+const MML::ObjectArray* ObjectArray::
+objectArray() const
 {
     assert(0 != static_cast<const MML::ObjectArray*>(drawableObject()));
     return static_cast<const MML::ObjectArray*>(drawableObject());

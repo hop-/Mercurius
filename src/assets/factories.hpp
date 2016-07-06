@@ -17,8 +17,8 @@ class LayerFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* = 0) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* = 0) const override;
 };
 
 class BoxFactory
@@ -26,8 +26,8 @@ class BoxFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 class DudeFactory
@@ -35,8 +35,8 @@ class DudeFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 class DoorFactory
@@ -44,8 +44,8 @@ class DoorFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 class SwitchFactory
@@ -53,8 +53,8 @@ class SwitchFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 class GroundFactory
@@ -62,8 +62,8 @@ class GroundFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 class PlatformFactory
@@ -71,8 +71,8 @@ class PlatformFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 class BackgroundFactory
@@ -80,8 +80,8 @@ class BackgroundFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 
 };
 
@@ -90,8 +90,8 @@ class LadderFactory
 {
 public:
     /// Reimplemented interface
-    virtual Base::Object* create(const MML::MMLObject* mml,
-                                Base::Object* p) const;
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
 };
 
 } // namespace Assets

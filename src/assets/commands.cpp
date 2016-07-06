@@ -8,13 +8,15 @@
 namespace Assets
 {
 
-Accelerate::Accelerate(Core::LogicObject* object, Core::Vector acceleration)
+Accelerate::
+Accelerate(Core::LogicObject* object, Core::Vector acceleration)
     : Core::Command(object)
     , m_acceleration(acceleration)
 {
 }
 
-void Accelerate::execute()
+void Accelerate::
+execute()
 {
     assert(0 != object());
     Core::Physics* physics = object()->component<Core::Physics>();
@@ -23,13 +25,15 @@ void Accelerate::execute()
     }
 }
 
-Stop::Stop(Core::LogicObject* object, Core::Direction d)
+Stop::
+Stop(Core::LogicObject* object, Core::Direction d)
     : Core::Command(object)
     , m_direction(d)
 {
 }
 
-void Stop::execute()
+void Stop::
+execute()
 {
     assert(0 != object());
     Core::Physics* physics = object()->component<Core::Physics>();
@@ -61,25 +65,31 @@ void Stop::execute()
     }
 }
 
-SetYVelocity::SetYVelocity(Core::LogicObject* object, Core::EngineUnit v, Core::VerticalDirection d)
+SetYVelocity::
+SetYVelocity(Core::LogicObject* object,
+             Core::EngineUnit v,
+             Core::VerticalDirection d)
     : Core::Command(object)
     , m_yVelocity(v)
     , m_direction(d)
 {
 }
 
-void SetYVelocity::execute()
+void SetYVelocity::
+execute()
 {
     assert(0 != object());
     Core::Physics* physics = object()->component<Core::Physics>();
     if (0 != physics) {
-        physics->setVelocity(Core::Vector(m_yVelocity, (m_direction == Core::VerticalDirection::Up) ? 90: 270));
+        physics->setVelocity(Core::Vector(m_yVelocity,
+                             (m_direction == Core::VerticalDirection::Up) ? 90: 270));
     }
 }
 
-ApplyMovement::ApplyMovement(Core::LogicObject* o
-        , Core::EngineUnit v
-        , Core::Direction d)
+ApplyMovement::
+ApplyMovement(Core::LogicObject* o,
+              Core::EngineUnit v,
+              Core::Direction d)
     : Core::Command(o)
     , m_velocity(v)
     , m_direction(d)
@@ -87,7 +97,8 @@ ApplyMovement::ApplyMovement(Core::LogicObject* o
     assert(0 != object());
 }
 
-void ApplyMovement::execute()
+void ApplyMovement::
+execute()
 {
     assert(0 != object());
     Core::Physics* ph = object()->component<Core::Physics>();
@@ -111,13 +122,15 @@ void ApplyMovement::execute()
     ph->setVelocity(v);
 }
 
-Jump::Jump(Core::LogicObject* object, Core::EngineUnit power)
+Jump::
+Jump(Core::LogicObject* object, Core::EngineUnit power)
     : Core::Command(object)
     , m_power(power)
 {
 }
 
-void Jump::execute()
+void Jump::
+execute()
 {
     assert(0 != object());
     Core::Physics* physics = object()->component<Core::Physics>();
@@ -126,12 +139,14 @@ void Jump::execute()
     }
 }
 
-Stand::Stand(Core::LogicObject* object)
+Stand::
+Stand(Core::LogicObject* object)
     : Core::Command(object)
 {
 }
 
-void Stand::execute()
+void Stand::
+execute()
 {
     assert(0 != object());
     Core::Physics* physics = object()->component<Core::Physics>();

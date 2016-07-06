@@ -23,15 +23,9 @@ public:
     LadderEnter(const Core::LogicObject* object
             , const Core::LogicObject* ladder);
 
-    inline const Core::LogicObject* object() const
-    {
-        return m_object;
-    }
-
-    inline const Core::LogicObject* ladder() const
-    {
-        return m_ladder;
-    }
+public:
+    const Core::LogicObject* object() const;
+    const Core::LogicObject* ladder() const;
 
 private:
     LadderEnter(const LadderEnter&) = delete;
@@ -48,15 +42,9 @@ public:
     LadderExit(const Core::LogicObject* object
             , const Core::LogicObject* ladder);
 
-    inline const Core::LogicObject* object() const
-    {
-        return m_object;
-    }
-
-    inline const Core::LogicObject* ladder() const
-    {
-        return m_ladder;
-    }
+public:
+    const Core::LogicObject* object() const;
+    const Core::LogicObject* ladder() const;
 
 private:
     LadderExit(const LadderExit&) = delete;
@@ -73,15 +61,9 @@ public:
     OnLadderEvent(const Core::LogicObject* object
             , const Core::VerticalDirection d);
 
-    inline const Core::LogicObject* object() const
-    {
-        return m_object;
-    }
-
-    inline Core::VerticalDirection direction() const
-    {
-        return m_direction;
-    }
+public:
+    const Core::LogicObject* object() const;
+    Core::VerticalDirection direction() const;
 
 private:
     OnLadderEvent(const OnLadderEvent&) = delete;
@@ -97,15 +79,9 @@ class AtTheDoor
 public:
     AtTheDoor(const Core::LogicObject* door, bool status);
 
-    inline bool status() const
-    {
-        return m_status;
-    }
-
-    inline const Core::LogicObject* door() const
-    {
-        return m_door;
-    }
+public:
+    bool status() const;
+    const Core::LogicObject* door() const;
 
 private:
     AtTheDoor(const AtTheDoor&) = delete;
@@ -121,15 +97,9 @@ class AtTheSwitch
 public:
     AtTheSwitch(const Core::LogicObject* s, bool status);
 
-    inline bool status() const
-    {
-        return m_status;
-    }
-
-    inline const Core::LogicObject* switchObject() const
-    {
-        return m_switch;
-    }
+public:
+    bool status() const;
+    const Core::LogicObject* switchObject() const;
 
 private:
     AtTheSwitch(const AtTheSwitch&) = delete;
@@ -144,10 +114,8 @@ class ToggleTheSwitch
 public:
     ToggleTheSwitch(const Core::LogicObject* s);
 
-    inline const Core::LogicObject* switchObject() const
-    {
-        return m_switch;
-    }
+public:
+    const Core::LogicObject* switchObject() const;
 
 private:
     ToggleTheSwitch(const ToggleTheSwitch&) = delete;
@@ -161,20 +129,11 @@ class MakeTriggerForPlatforms
     bool m_status;
 
 public:
-    MakeTriggerForPlatforms(const Core::LogicObject* object, bool status)
-        : m_object(object)
-        , m_status(status)
-    {}
+    MakeTriggerForPlatforms(const Core::LogicObject* object, bool status);
 
-    inline const Core::LogicObject* object() const
-    {
-        return m_object;
-    }
-
-    inline bool status() const
-    {
-        return m_status;
-    }
+public:
+    const Core::LogicObject* object() const;
+    bool status() const;
 
 private:
     MakeTriggerForPlatforms(const MakeTriggerForPlatforms&) = delete;

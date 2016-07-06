@@ -8,14 +8,16 @@ namespace Assets
 template <>
 TypeManager* Base::Singleton<TypeManager>::m_s_instance = 0;
 
-TypeManager::TypeManager()
+TypeManager::
+TypeManager()
     : Base::Singleton<TypeManager>()
     , m_factories()
 {
     registerTypes();
 }
 
-void TypeManager::registerTypes()
+void TypeManager::
+registerTypes()
 {
     // TODO register all types here
     m_factories["layer"] = new LayerFactory();
@@ -29,7 +31,8 @@ void TypeManager::registerTypes()
     m_factories["ladder"] = new LadderFactory();
 }
 
-const Core::ObjectsFactory* TypeManager::getFactory(const std::string& type) const
+const Core::ObjectsFactory* TypeManager::
+getFactory(const std::string& type) const
 {
     Factories::const_iterator i = m_factories.find(type);
     return i != m_factories.end() ? i->second : 0;
