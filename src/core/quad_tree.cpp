@@ -3,19 +3,23 @@
 #include "components.hpp"
 #include "units.hpp"
 
+#include <cassert>
+
 namespace Core
 {
 const int QuadTree::m_maxObjects = 10;
 const int QuadTree::m_maxLevel = 5;
 
-QuadTree::QuadTree(int level, Rectangle bound)
+QuadTree::
+QuadTree(int level, Rectangle bound)
     : m_level(level)
     , m_objects()
     , m_bounds(bound)
     , m_nodes()
 {}
 
-void QuadTree::clear()
+void QuadTree::
+clear()
 {
     m_objects.clear();
     for (auto& node : m_nodes) {
@@ -23,7 +27,8 @@ void QuadTree::clear()
     }
 }
 
-void QuadTree::split()
+void QuadTree::
+split()
 {
     EngineUnit w = m_bounds.width() / 2;
     EngineUnit h = m_bounds.height() / 2;
@@ -41,7 +46,15 @@ void QuadTree::split()
             , Rectangle(w, h, Position(x1, y1))));
 }
 
-int QuadTree::getIndex(Rectangle rect)
+void QuadTree::
+setBounds(Rectangle bounds)
+{
+    assert(0 == m_nodes.size());
+    m_bounds = bounds;
+}
+
+int QuadTree::
+getIndex(Rectangle rect)
 {
     int index = -1;
     if (m_nodes.size() == 0) {
@@ -71,7 +84,8 @@ int QuadTree::getIndex(Rectangle rect)
     return index;
 }
 
-void QuadTree::insert(const Collider* c)
+void QuadTree::
+insert(const Collider* c)
 {
     int index = getIndex(c->rect());
     if (index != -1) {
@@ -99,7 +113,8 @@ void QuadTree::insert(const Collider* c)
     }
 }
 
-void QuadTree::remove(const Collider* c)
+void QuadTree::
+remove(const Collider* c)
 {
     int index = getIndex(c->rect());
     if (index != -1) {
@@ -136,12 +151,14 @@ bool QuadTree::update(const Collider* c, const Rectangle& newRect)
 }
 */
 
-QuadTree::Objects QuadTree::retreive(const Collider* c)
+QuadTree::Objects QuadTree::
+retreive(const Collider* c)
 {
     return retreive(c->rect());
 }
 
-QuadTree::Objects QuadTree::retreive(const Rectangle& rect)
+QuadTree::Objects QuadTree::
+retreive(const Rectangle& rect)
 {
     Objects returnList;
     int index = getIndex(rect);

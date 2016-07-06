@@ -10,11 +10,8 @@ class NaturalPower : public Base::Object
 {
 
 public:
-    virtual ~NaturalPower()
-    {}
-
-    virtual void init()
-    {}
+    virtual ~NaturalPower() {}
+    virtual void init() {}
 
 public:
     /**

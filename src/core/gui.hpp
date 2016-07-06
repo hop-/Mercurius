@@ -26,12 +26,7 @@ private:
     {}
 
 public:
-    Gui()
-        : Base::ContainerObject<GuiObject>()
-        , m_viewPort(0)
-        , m_frame(0)
-    {
-    }
+    Gui();
     virtual ~Gui();
 
 private:
@@ -39,27 +34,10 @@ private:
     Gui& operator=(const Gui&) = delete;
 
 public:
-    inline Frame* frame() const
-    {
-        return m_frame;
-    }
-
-    inline void setFrame(Frame* frame)
-    {
-        assert(0 != frame);
-        m_frame = frame;
-    }
-
-    inline void setViewPort(const Rectangle* viewPort)
-    {
-        assert(0 != viewPort);
-        m_viewPort = viewPort;
-    }
-
-    inline const Rectangle* viewPort() const
-    {
-        return m_viewPort;
-    }
+    Frame* frame() const;
+    void setFrame(Frame* frame);
+    void setViewPort(const Rectangle* viewPort);
+    const Rectangle* viewPort() const;
 
 public:
     float scale() const;

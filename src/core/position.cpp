@@ -20,6 +20,30 @@ Position Position::operator-(const Position& p) const
     return returnPosition;
 }
 
+const EngineUnit& Position::
+x() const
+{
+    return m_x;
+}
+
+const EngineUnit& Position::
+y() const
+{
+    return m_y;
+}
+
+void Position::
+setX(const EngineUnit& x)
+{
+    m_x = x;
+}
+
+void Position::
+setY(const EngineUnit& y)
+{
+    m_y = y;
+}
+
 Position Position::operator+(const Position& p) const
 {
     Position returnPosition;

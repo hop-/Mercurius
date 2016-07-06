@@ -5,7 +5,6 @@
 
 #include <list>
 #include <vector>
-#include <cassert>
 
 namespace Core
 {
@@ -34,12 +33,7 @@ public:
 //    bool update(const Collider* c, const Rectangle& newRect);
     Objects retreive(const Collider* c);
     Objects retreive(const Rectangle& r);
-
-    void setBounds(Rectangle bounds)
-    {
-        assert(0 == m_nodes.size());
-        m_bounds = bounds;
-    }
+    void setBounds(Rectangle bounds);
 
 private:
     void split();

@@ -7,7 +7,21 @@
 namespace Core
 {
 
-void LogicObject::update()
+LogicObject* LogicObject::Component::
+parent() const
+{
+    return m_parent;
+}
+
+void LogicObject::Component::
+setParent(LogicObject* parent)
+{
+    m_parent = parent;
+    onParentSet();
+}
+
+void LogicObject::
+update()
 {
     for (const auto& state : children()) {
         Command* command = state->command();
@@ -22,7 +36,8 @@ void LogicObject::update()
     }
 }
 
-void LogicObject::addComponent(Component* component)
+void LogicObject::
+addComponent(Component* component)
 {
     assert(component != 0);
     component->setParent(this); // automatically set parent
@@ -31,13 +46,70 @@ void LogicObject::addComponent(Component* component)
                 , component));
 }
 
-void LogicObject::changeState(State* oldState, State* newState)
+void LogicObject::
+changeState(State* oldState, State* newState)
 {
     removeState(oldState);
     addState(newState);
 }
 
-void LogicObject::addState(State* newState)
+std::string LogicObject::
+typeName() const
+{
+    return m_typeName;
+}
+
+void LogicObject::
+setTypeName(const std::string& typeName)
+{
+    m_typeName = typeName;
+}
+
+Position LogicObject::
+position() const
+{
+    return m_position;
+}
+
+void LogicObject::
+setPosition(Position p)
+{
+    m_position = p;
+    notify();
+}
+
+void LogicObject::
+setPosition(UserUnit x, UserUnit y)
+{
+    setPosition(Position(x, y));
+}
+
+float LogicObject::
+scale() const
+{
+    return m_scale;
+}
+
+void LogicObject::
+setScale(float scale)
+{
+    m_scale = scale;
+}
+
+float LogicObject::
+weight() const
+{
+    return m_weight;
+}
+
+void LogicObject::
+setWeight(float w)
+{
+    m_weight = w;
+}
+
+void LogicObject::
+addState(State* newState)
 {
     bool status = addObject(newState);
     assert(status);
@@ -46,7 +118,8 @@ void LogicObject::addState(State* newState)
     Base::Utility::ignoreUnused(status);
 }
 
-void LogicObject::removeState(State* state)
+void LogicObject::
+removeState(State* state)
 {
     bool status = removeObject(state);
     if (!status) {
@@ -57,7 +130,8 @@ void LogicObject::removeState(State* state)
     Base::Utility::ignoreUnused(status);
 }
 
-void LogicObject::initObject()
+void LogicObject::
+initObject()
 {
     for (auto& pair : m_components) {
         assert(0 != pair.second);
@@ -65,18 +139,21 @@ void LogicObject::initObject()
     }
 }
 
-void LogicObject::requestNewPosition(Position p)
+void LogicObject::
+requestNewPosition(Position p)
 {
     assert(0 != parent<Logic>());
     parent<Logic>()->updateObject(this, p);
 }
 
-LogicObject::LogicObject()
+LogicObject::
+LogicObject()
     : m_components()
     , m_position(Position())
 {}
 
-LogicObject::~LogicObject()
+LogicObject::
+~LogicObject()
 {
     std::for_each(m_components.begin(), m_components.end(), [](Components::value_type v) {
         assert(0 != v.second);

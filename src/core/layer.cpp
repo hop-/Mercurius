@@ -42,6 +42,49 @@ Layer::~Layer()
     m_logic = 0;
 }
 
+unsigned Layer::
+id() const
+{
+    return m_id;
+}
+
+void Layer::
+stop(bool stop)
+{
+    m_stopped = stop;
+}
+
+void Layer::
+hide(bool hide)
+{
+    m_hidden = hide;
+}
+
+void Layer::
+ignoreEvents(bool ignoreEvents)
+{
+    m_ignoreEvent = ignoreEvents;
+}
+
+bool Layer::
+isStopped() const
+{
+    return m_stopped;
+}
+
+const Logic* Layer::
+logic() const
+{
+    return m_logic;
+}
+
+Gui* Layer::
+gui()
+{
+    return m_gui;
+}
+
+
 Command* Layer::getCommand(Event*)
 {
     return 0;

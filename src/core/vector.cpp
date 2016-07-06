@@ -11,46 +11,78 @@
 namespace Core
 {
 
-Vector::Vector()
+Vector::
+Vector()
     : m_x(0)
     , m_y(0)
 {}
 
-Vector::Vector(EngineUnit magnitude, float angle)
+Vector::
+Vector(EngineUnit magnitude, float angle)
     : m_x(magnitude * std::cos(angle *_PI / 180))
     , m_y(magnitude * std::sin(angle *_PI / 180))
 {}
 
-EngineUnit Vector::magnitude() const
+const EngineUnit& Vector::
+x() const
+{
+    return m_x;
+}
+
+const EngineUnit& Vector::
+y() const
+{
+    return m_y;
+}
+
+void Vector::
+setX(EngineUnit x)
+{
+    m_x = x;
+}
+
+void Vector::
+setY(EngineUnit y)
+{
+    m_y = y;
+}
+
+EngineUnit Vector::
+magnitude() const
 {
     return std::sqrt(m_x*m_x + m_y*m_y);
 }
 
-float Vector::angle() const
+float Vector::
+angle() const
 {
     return angleInRadians() * 180 / _PI;
 }
 
-float Vector::angleInRadians() const
+float Vector::
+angleInRadians() const
 {
     return std::atan2(engineUnit(m_y), engineUnit(m_x));
 }
 
-void Vector::setAngle(float angle)
+void Vector::
+setAngle(float angle)
 {
     EngineUnit m = magnitude();
     m_x = m * std::cos(angle *_PI / 180);
     m_y = m * std::sin(angle *_PI / 180);
 }
 
-Vector& Vector::operator+=(const Vector& vector)
+Vector& Vector::
+operator+=(const Vector& vector)
 {
     m_x += vector.x();
     m_y += vector.y();
     return *this;
 }
 
-Vector& Vector::operator*=(const float& multiplier)
+Vector& Vector::
+operator*=(const float& multiplier)
 {
     m_x *= multiplier;
     m_y *= multiplier;

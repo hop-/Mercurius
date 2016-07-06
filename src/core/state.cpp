@@ -5,7 +5,8 @@
 namespace Core
 {
 
-State::State()
+State::
+State()
 {
     registerCallback<KeyEvent>(new Base::DelegateCreator<State>
             (this, &State::onKeyEvent));
@@ -13,15 +14,29 @@ State::State()
             (this, &State::onObjectCollision));
 }
 
-State::~State()
+State::
+~State()
 {}
 
-void State::init()
+void State::
+init()
 {
     Command* initCommand = onInit();
     if (0 != initCommand) {
         initCommand->execute();
     }
+}
+
+Command* State::
+command()
+{
+    return 0;
+}
+
+Command* State::
+onInit()
+{
+    return 0;
 }
 
 } // namespace Core

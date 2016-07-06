@@ -42,7 +42,8 @@ private:
     Game& operator=(const Game&) = delete;
 
 public:
-    static Game* getInstance(Frame* frame = 0, Base::InputHandler* inputHandler = 0);
+    static Game* getInstance(Frame* frame = 0,
+            Base::InputHandler* inputHandler = 0);
     static bool deleteInstance();
 
 public:

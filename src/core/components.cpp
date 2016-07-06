@@ -12,7 +12,8 @@ namespace Core
 template<>
 ViewPort* Base::Singleton<ViewPort>::m_s_instance = 0;
 
-ViewPort::ViewPort()
+ViewPort::
+ViewPort()
     : m_movingArea()
 {
     setWidth(UserUnit(1200));
@@ -20,14 +21,29 @@ ViewPort::ViewPort()
     setPosition(m_movingArea.position());
 }
 
-void ViewPort::target(LogicObject* object)
+void ViewPort::
+target(LogicObject* object)
 {
     assert(0 != object);
     object->addObserver(this);
     onNotify();
 }
 
-void ViewPort::aim()
+void ViewPort::
+setMovingArea(Rectangle area)
+{
+    m_movingArea = area;
+    setPosition(area.position());
+}
+
+Rectangle ViewPort::
+movingArea() const
+{
+    return m_movingArea;
+}
+
+void ViewPort::
+aim()
 {
     assert(0 != target());
     Position p(target()->position().x() - middleX()
@@ -43,13 +59,33 @@ void ViewPort::aim()
     }
 }
 
-void ViewPort::onNotify()
+EngineUnit ViewPort::
+middleX() const
+{
+    return (right() - left()) / 2;
+}
+
+EngineUnit ViewPort::
+middleY() const
+{
+    return (top() - bottom()) / 2;
+}
+
+const LogicObject* ViewPort::
+target() const
+{
+    return static_cast<const LogicObject*>(subject());
+}
+
+void ViewPort::
+onNotify()
 {
     aim();
     notify();
 }
 
-Physics::Physics()
+Physics::
+Physics()
     : m_grounds()
 {
     registerCallback<Core::ObjectCollision>(
@@ -60,7 +96,63 @@ Physics::Physics()
                 , &Physics::onCollisionExit));
 }
 
-void Physics::update()
+float Physics::
+gravityScale() const
+{
+    return m_gravityScale;
+}
+
+void Physics::
+setGravityScale(float gravityScale)
+{
+    m_gravityScale = gravityScale;
+}
+
+Vector Physics::
+velocity() const
+{
+    return m_velocity;
+}
+
+void Physics::
+setVelocity(const Vector& velocity)
+{
+    m_velocity = velocity;
+}
+
+void Physics::
+addVelocity(const Vector& velocity)
+{
+    m_velocity += velocity;
+}
+
+void Physics::
+applyGravity(const Vector& gravity)
+{
+    if (isOnSurface()) {
+        return;
+    }
+    m_velocity += gravity * m_gravityScale;
+}
+
+void Physics::
+stopX()
+{
+    Vector v = m_velocity;
+    v.setX(0);
+    setVelocity(v);
+}
+
+void Physics::
+stopY()
+{
+    Vector v = m_velocity;
+    v.setY(0);
+    setVelocity(v);
+}
+
+void Physics::
+update()
 {
     assert(0 != Component::parent());
     Position position = Component::parent()->position();
@@ -70,7 +162,8 @@ void Physics::update()
     }
 }
 
-void Physics::onCollisionEnter(Base::Event* e)
+void Physics::
+onCollisionEnter(Base::Event* e)
 {
     ObjectCollision* oc = ObjectCollision::cast(e);
     assert(0 != oc);
@@ -99,7 +192,8 @@ void Physics::onCollisionEnter(Base::Event* e)
     }
 }
 
-void Physics::onCollisionExit(Base::Event* e)
+void Physics::
+onCollisionExit(Base::Event* e)
 {
     ObjectCollision* oc = ObjectCollision::cast(e);
     assert(0 != oc);
@@ -115,10 +209,18 @@ void Physics::onCollisionExit(Base::Event* e)
     }
 }
 
-void Collider::onNotify()
+bool Physics::
+isOnSurface()
+{
+    return m_grounds.size();
+}
+
+void Collider::
+onNotify()
 {}
 
-bool Collider::isTrigger(const LogicObject* object) const
+bool Collider::
+isTrigger(const LogicObject* object) const
 {
     return (isTrigger()
             || std::find(m_triggerObjects.begin()
@@ -126,12 +228,63 @@ bool Collider::isTrigger(const LogicObject* object) const
                 , object) != m_triggerObjects.end());
 }
 
-Position Collider::position() const
+Position Collider::
+position() const
 {
     return parent()->position() + m_offset;
 }
 
-void Collider::addTriggerObject(const LogicObject* object)
+Rectangle Collider::
+rect() const
+{
+    return Rectangle(m_width, m_height, position());
+}
+
+void Collider::
+setOffset(Position offset)
+{
+    m_offset = offset;
+}
+
+void Collider::
+setOffset(UserUnit x, UserUnit y)
+{
+    m_offset = Position(x, y);
+}
+
+void Collider::
+setSizes(UserUnit width, UserUnit height)
+{
+    m_width = width;
+    m_height = height;
+    scaleSizes();
+}
+
+UserUnit Collider::
+width() const
+{
+    return m_width;
+}
+
+UserUnit Collider::
+height() const
+{
+    return m_height;
+}
+
+bool Collider::
+isTrigger() const
+{
+    return m_isTrigger;
+}
+
+void Collider::
+trigger(bool isTrigger)
+{
+    m_isTrigger = isTrigger;
+}
+void Collider::
+addTriggerObject(const LogicObject* object)
 {
     if (std::find(m_triggerObjects.begin()
                 , m_triggerObjects.end()
@@ -140,7 +293,8 @@ void Collider::addTriggerObject(const LogicObject* object)
     }
 }
 
-void Collider::removeTriggerObject(const LogicObject* object)
+void Collider::
+removeTriggerObject(const LogicObject* object)
 {
     assert(0 != parent());
     assert(0 != parent()->parent());
@@ -150,13 +304,85 @@ void Collider::removeTriggerObject(const LogicObject* object)
     m_triggerObjects.remove(object);
 }
 
-void Collider::onParentSet()
+void Collider::
+onParentSet()
 {
     m_scaleFactor = parent()->scale();
     scaleSizes();
 }
 
-void TextureRenderer::init()
+void Collider::
+scaleSizes()
+{
+    m_width = m_width * float(m_scaleFactor);
+    m_height = m_height * float(m_scaleFactor);
+}
+
+void TextureRenderer::
+setSizes(UserUnit w, UserUnit h)
+{
+    m_width = w;
+    m_height = h;
+}
+
+UserUnit TextureRenderer::
+width() const
+{
+    return m_width;
+}
+
+UserUnit TextureRenderer::
+height() const
+{
+    return m_height;
+}
+
+Rectangle TextureRenderer::
+rect() const
+{
+    return Rectangle(m_width, m_height, m_position)
+        .scaled(scaleFactor());
+}
+
+void TextureRenderer::
+setStateNumber(int numberOfStates)
+{
+    m_numberOfStates = numberOfStates;
+}
+
+HorizontalDirection TextureRenderer::
+direction() const
+{
+    return m_direction;
+}
+
+float TextureRenderer::
+scaleFactor() const
+{
+    return m_scaleFactor;
+}
+
+void TextureRenderer::
+setDirection(HorizontalDirection d)
+{
+    m_direction = d;
+    notify();
+}
+
+int TextureRenderer::
+state() const
+{
+    return static_cast<int>(m_state);
+}
+
+Position TextureRenderer::
+objectPosition() const
+{
+    return parent()->position();
+}
+
+void TextureRenderer::
+init()
 {
     assert(0 != parent());
     if (0 != parent()->parent()) {
@@ -167,19 +393,22 @@ void TextureRenderer::init()
     notify();
 }
 
-void TextureRenderer::onParentSet()
+void TextureRenderer::
+onParentSet()
 {
     m_scaleFactor = parent()->scale();
 }
 
-void TextureRenderer::onNotify()
+void TextureRenderer::
+onNotify()
 {
     assert(0 != parent());
     m_position = parent()->position();
     notify();
 }
 
-void TextureRenderer::setState(int state)
+void TextureRenderer::
+setState(int state)
 {
     assert(0 < state);
     assert(m_numberOfStates > state);
@@ -187,13 +416,38 @@ void TextureRenderer::setState(int state)
     notify();
 }
 
-void ArrayObject::init()
+void ArrayObject::
+init()
 {
     Collider* c = parent()->component<Collider>();
     if (0 != c) {
         c->setSizes(c->width() * m_columns, c->height() * m_rows);
     }
     // TODO add gui part
+}
+
+int ArrayObject::
+rows() const
+{
+    return m_rows;
+}
+
+void ArrayObject::
+setRows(int rows)
+{
+    m_rows = rows;
+}
+
+int ArrayObject::
+columns() const
+{
+    return m_columns;
+}
+
+void ArrayObject::
+setColumns(int columns)
+{
+    m_columns = columns;
 }
 
 } // namespace Core

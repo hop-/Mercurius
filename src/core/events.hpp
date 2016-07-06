@@ -26,26 +26,10 @@ private:
 public:
     KeyEvent(InputManager::Key keyCode,
              Mode mode,
-             Modifier modifier = Modifier::None)
-    : m_keyCode(keyCode)
-    , m_mode(mode)
-    , m_modifier(modifier)
-    {}
-
-    inline InputManager::Key key() const
-    {
-        return m_keyCode;
-    }
-
-    inline Mode mode() const
-    {
-        return m_mode;
-    }
-
-    inline Modifier modifier() const
-    {
-        return m_modifier;
-    }
+             Modifier modifier = Modifier::None);
+    InputManager::Key key() const;
+    Mode mode() const;
+    Modifier modifier() const;
 };
 
 class MouseClickEvent
@@ -62,32 +46,11 @@ private:
     Mode m_mode;
 
 public:
-    MouseClickEvent(int x, int y, Button button, Mode mode)
-        : m_x(x)
-        , m_y(y)
-        , m_button(button)
-        , m_mode(mode)
-    {}
-
-    inline int x() const
-    {
-        return m_x;
-    }
-
-    inline int y() const
-    {
-        return m_y;
-    }
-
-    inline Button button() const
-    {
-        return m_button;
-    }
-
-    inline Mode mode() const
-    {
-        return m_mode;
-    }
+    MouseClickEvent(int x, int y, Button button, Mode mode);
+    int x() const;
+    int y() const;
+    Button button() const;
+    Mode mode() const;
 };
 
 class ObjectCollision
@@ -107,53 +70,13 @@ public:
     ObjectCollision(ObjectPair pair, Status status);
     Direction getCollisionSide(const LogicObject* object) const;
     const LogicObject* another(const LogicObject* object) const;
-
-    inline const LogicObject* first() const
-    {
-        return m_objects.first;
-    }
-
-    inline const LogicObject* second() const
-    {
-        return m_objects.second;
-    }
-
-    inline bool contains(const LogicObject* object) const
-    {
-        return (m_objects.first == object || m_objects.second == object);
-    }
-
-    inline bool isTrigger() const
-    {
-        return m_isTrigger;
-    }
-
-    inline Status status() const
-    {
-        return m_status;
-    }
-
-    inline Direction directionForFirst() const
-    {
-        return m_collisionDirection;
-    }
-
-    inline Direction directionForSecond() const
-    {
-        switch (m_collisionDirection) {
-        case Direction::Left:
-            return Direction::Right;
-        case Direction::Right:
-            return Direction::Left;
-        case Direction::Up:
-            return Direction::Down;
-        case Direction::Down:
-            return Direction::Up;
-        case Direction::None:
-            return Direction::None;
-        }
-        return Direction::None;
-    }
+    const LogicObject* first() const;
+    const LogicObject* second() const;
+    bool contains(const LogicObject* object) const;
+    bool isTrigger() const;
+    Status status() const;
+    Direction directionForFirst() const;
+    Direction directionForSecond() const;
 };
 
 class QuitEvent
@@ -167,11 +90,7 @@ class OnSurface
 
 public:
     OnSurface(const LogicObject* object);
-
-    inline const LogicObject* object() const
-    {
-        return m_object;
-    }
+    const LogicObject* object() const;
 
 private:
     OnSurface(const OnSurface&) = delete;
@@ -185,11 +104,7 @@ class OnAir
 
 public:
     OnAir(const LogicObject* object);
-
-    inline const LogicObject* object() const
-    {
-        return m_object;
-    }
+    const LogicObject* object() const;
 
 private:
     OnAir(const OnAir&) = delete;

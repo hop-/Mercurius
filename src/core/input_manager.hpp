@@ -2,7 +2,6 @@
 #define _CORE_INPUT_MANAGER_HPP_
 
 #include <map>
-#include <cassert>
 
 namespace Core
 {

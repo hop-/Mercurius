@@ -26,7 +26,8 @@ public:
      * @note p should be valid pointer
      */
     virtual ~ObjectsFactory() = default;
-    virtual Base::Object* create(const MML::MMLObject* m, Base::Object* p = 0) const = 0;
+    virtual Base::Object* create(const MML::MMLObject* m,
+            Base::Object* p = 0) const = 0;
 };
 
 } // namespace core

@@ -25,50 +25,21 @@ public:
     bool intersects(const Rectangle& rect) const;
     bool contacts(const Rectangle& rect) const;
 
+public:
     EngineUnit right() const;
     EngineUnit left() const;
     EngineUnit top() const;
     EngineUnit bottom() const;
 
-    inline const EngineUnit& width() const
-    {
-        return m_width;
-    }
-
-    inline const EngineUnit& height() const
-    {
-        return m_height;
-    }
-
-    inline const Position& position() const
-    {
-        return m_position;
-    }
-
-    inline void setWidth(const EngineUnit& width)
-    {
-        m_width = width;
-    }
-
-    inline void setHeight(const EngineUnit& height)
-    {
-        m_height = height;
-    }
-
-    inline void setPosition(const Position& position)
-    {
-        m_position = position;
-    }
-
-    inline void setX(const EngineUnit& x)
-    {
-        m_position.setX(x);
-    }
-
-    inline void setY(const EngineUnit& y)
-    {
-        m_position.setY(y);
-    }
+public:
+    const EngineUnit& width() const;
+    const EngineUnit& height() const;
+    const Position& position() const;
+    void setWidth(const EngineUnit& width);
+    void setHeight(const EngineUnit& height);
+    void setPosition(const Position& position);
+    void setX(const EngineUnit& x);
+    void setY(const EngineUnit& y);
 };
 
 } // namespace Core

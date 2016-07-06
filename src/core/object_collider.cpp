@@ -10,31 +10,36 @@
 namespace Core
 {
 
-ObjectCollider::ObjectCollider()
+ObjectCollider::
+ObjectCollider()
     : m_quadTree(0, Rectangle(0, 0, Position(0, 0)))
     , m_contactedPairs()
     , m_collidedPairs()
 {}
 
-ObjectCollider::ObjectCollider(Rectangle bounds)
+ObjectCollider::
+ObjectCollider(Rectangle bounds)
     : m_quadTree(0, bounds)
     , m_contactedPairs()
     , m_collidedPairs()
 {}
 
-void ObjectCollider::setBounds(Rectangle bounds)
+void ObjectCollider::
+setBounds(Rectangle bounds)
 {
     m_quadTree.setBounds(bounds);
 }
 
-void ObjectCollider::insert(const LogicObject* object)
+void ObjectCollider::
+insert(const LogicObject* object)
 {
     assert(0 != object);
     assert(0 != object->component<Collider>());
     m_quadTree.insert(object->component<Collider>());
 }
 
-void ObjectCollider::update(LogicObject* object, Position p)
+void ObjectCollider::
+update(LogicObject* object, Position p)
 {
     //TODO performance improvement
     assert(0 != object);
@@ -123,14 +128,16 @@ void ObjectCollider::update(LogicObject* object, Position p)
     m_collidedPairs.unique();
 }
 
-void ObjectCollider::remove(const LogicObject* object)
+void ObjectCollider::
+remove(const LogicObject* object)
 {
     assert(0 != object);
     assert(0 != object->component<Collider>());
     m_quadTree.remove(object->component<Collider>());
 }
 
-void ObjectCollider::throwCollisionEvents()
+void ObjectCollider::
+throwCollisionEvents()
 {
     for (Pairs::iterator pair = m_contactedPairs.begin()
             ; pair != m_contactedPairs.end()
@@ -162,7 +169,8 @@ void ObjectCollider::throwCollisionEvents()
     m_collidedPairs.clear();
 }
 
-bool ObjectCollider::areCollided(const LogicObject* o1
+bool ObjectCollider::
+areCollided(const LogicObject* o1
         , const LogicObject* o2) const
 {
     Pair p1{o1, o2};

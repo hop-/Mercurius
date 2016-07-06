@@ -32,49 +32,19 @@ public:
 
     virtual ~Layer();
 
+public:
     static unsigned maxId();
-
-    inline unsigned id() const
-    {
-        return m_id;
-    }
-
-    inline void stop(bool stop)
-    {
-        m_stopped = stop;
-    }
-
-    inline void hide(bool hide)
-    {
-        m_hidden = hide;
-    }
-
-    inline void ignoreEvents(bool ignoreEvents)
-    {
-        m_ignoreEvent = ignoreEvents;
-    }
-
-    inline bool isStopped() const
-    {
-        return m_stopped;
-    }
-
-    inline const Logic* logic() const
-    {
-        return m_logic;
-    }
-
-    inline Gui* gui()
-    {
-        return m_gui;
-    }
-
+    unsigned id() const;
+    void stop(bool stop);
+    void hide(bool hide);
+    void ignoreEvents(bool ignoreEvents);
+    bool isStopped() const;
+    const Logic* logic() const;
+    Gui* gui();
     bool addGuiObject(GuiObject*);
     bool addLogicObject(LogicObject*);
     void aimTo(LogicObject*);
-
     virtual void initObjectPost();
-
     Command* getCommand(Event* event);
     bool processEvent(Event*);
     void update();

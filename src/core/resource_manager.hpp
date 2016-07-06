@@ -22,17 +22,17 @@ public:
         Resource(std::string fileName);
         ~Resource();
 
-        inline std::string fileLocation() const
+        std::string fileLocation() const
         {
             return m_fileLocation;
         }
 
-        inline const char* buffer() const
+        const char* buffer() const
         {
             return m_buffer;
         }
 
-        inline int size() const
+        int size() const
         {
             return m_size;
         }
@@ -65,25 +65,10 @@ public:
 
 public:
     void load();
-    inline Resource texture(const std::string& name) const
-    {
-        return m_textures.at(name);
-    }
-
-    inline Resource mainMML() const
-    {
-        return m_mmls.at(m_mainMML);
-    }
-
-    inline Resource mml(const std::string& name) const
-    {
-        return m_mmls.at(name);
-    }
-
-    inline Resource sound(const std::string& name) const
-    {
-        return m_sounds.at(name);
-    }
+    Resource texture(const std::string& name) const;
+    Resource mainMML() const;
+    Resource mml(const std::string& name) const;
+    Resource sound(const std::string& name) const;
 
 private:
     friend class Base::Singleton<ResourceManager>;

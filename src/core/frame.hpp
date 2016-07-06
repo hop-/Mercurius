@@ -41,40 +41,16 @@ public:
     void setFPS(int fps);
     void setLayersViewMode(LayersViewMode m);
     LayersViewMode layersViewMode() const;
-
-    inline int width() const
-    {
-        return m_width;
-    }
-
-    inline int height() const
-    {
-        return m_height;
-    }
-
-    inline const unsigned& msPerUpdate() const
-    {
-        return m_msPerUpdate;
-    }
+    int width() const;
+    int height() const;
+    const unsigned& msPerUpdate() const;
 
 protected:
     virtual void show() = 0;
     virtual void draw(const GuiObject* object) = 0;
-
-    inline void setMsPerUpdate(const unsigned& ms)
-    {
-        m_msPerUpdate = ms;
-    }
-
-    inline void setWidth(int w)
-    {
-        m_width = w;
-    }
-
-    inline void setHeight(int h)
-    {
-        m_height = h;
-    }
+    void setMsPerUpdate(const unsigned& ms);
+    void setWidth(int w);
+    void setHeight(int h);
 };
 
 } // namespace Core

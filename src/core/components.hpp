@@ -39,36 +39,15 @@ private:
 public:
     void target(LogicObject* object);
 
-    inline void setMovingArea(Rectangle area)
-    {
-        m_movingArea = area;
-        setPosition(area.position());
-    }
-
-    Rectangle movingArea() const
-    {
-        return m_movingArea;
-    }
-
+    void setMovingArea(Rectangle area);
+    Rectangle movingArea() const;
     void onNotify();
 
 private:
     void aim();
-
-    inline EngineUnit middleX() const
-    {
-        return (right() - left()) / 2;
-    }
-
-    inline EngineUnit middleY() const
-    {
-        return (top() - bottom()) / 2;
-    }
-
-    inline const LogicObject* target() const
-    {
-         return static_cast<const LogicObject*>(subject());
-    }
+    EngineUnit middleX() const;
+    EngineUnit middleY() const;
+    const LogicObject* target() const;
 
 private:
     friend class Base::Singleton<ViewPort>;
@@ -87,62 +66,21 @@ public:
 
 public:
     void init() {}
-
-    inline float gravityScale() const
-    {
-        return m_gravityScale;
-    }
-
-    inline void setGravityScale(float gravityScale)
-    {
-        m_gravityScale = gravityScale;
-    }
-
-    inline Vector velocity() const
-    {
-        return m_velocity;
-    }
-
-    inline void setVelocity(const Vector& velocity)
-    {
-        m_velocity = velocity;
-    }
-
-    inline void addVelocity(const Vector& velocity)
-    {
-        m_velocity += velocity;
-    }
-
-    inline void applyGravity(const Vector& gravity)
-    {
-        if (isOnSurface()) {
-            return;
-        }
-        m_velocity += gravity * m_gravityScale;
-    }
-
-    inline void stopX()
-    {
-        Vector v = m_velocity;
-        v.setX(0);
-        setVelocity(v);
-    }
-
-    inline void stopY()
-    {
-        Vector v = m_velocity;
-        v.setY(0);
-        setVelocity(v);
-    }
+    float gravityScale() const;
+    void setGravityScale(float gravityScale);
+    Vector velocity() const;
+    void setVelocity(const Vector& velocity);
+    void addVelocity(const Vector& velocity);
+    void applyGravity(const Vector& gravity);
+    void stopX();
+    void stopY();
 
 private:
     void update();
     void onCollisionEnter(Base::Event* e);
     void onCollisionExit(Base::Event* e);
 
-    bool isOnSurface() {
-        return m_grounds.size();
-    }
+    bool isOnSurface();
 };
 
 class Collider
@@ -163,57 +101,18 @@ public:
     void removeTriggerObject(const LogicObject* object);
     bool isTrigger(const LogicObject* object) const;
     Position position() const;
-
-    inline Rectangle rect() const
-    {
-        return Rectangle(m_width, m_height, position());
-    }
-
-    inline void setOffset(Position offset)
-    {
-        m_offset = offset;
-    }
-
-    inline void setOffset(UserUnit x, UserUnit y)
-    {
-        m_offset = Position(x, y);
-    }
-
-    inline void setSizes(UserUnit width, UserUnit height)
-    {
-        m_width = width;
-        m_height = height;
-        scaleSizes();
-    }
-
-    inline UserUnit width() const
-    {
-        return m_width;
-    }
-
-    inline UserUnit height() const
-    {
-        return m_height;
-    }
-
-    inline bool isTrigger() const
-    {
-        return m_isTrigger;
-    }
-
-    inline void trigger(bool isTrigger)
-    {
-        m_isTrigger = isTrigger;
-    }
+    Rectangle rect() const;
+    void setOffset(Position offset);
+    void setOffset(UserUnit x, UserUnit y);
+    void setSizes(UserUnit width, UserUnit height);
+    UserUnit width() const;
+    UserUnit height() const;
+    bool isTrigger() const;
+    void trigger(bool isTrigger);
 
 private:
     void onParentSet();
-
-    void scaleSizes()
-    {
-        m_width = m_width * float(m_scaleFactor);
-        m_height = m_height * float(m_scaleFactor);
-    }
+    void scaleSizes();
 };
 
 class TextureRenderer
@@ -232,59 +131,16 @@ public:
     // TODO add some useful functions
     void setState(int state);
     virtual void onNotify() override;
-
-    inline void setSizes(UserUnit w, UserUnit h)
-    {
-        m_width = w;
-        m_height = h;
-    }
-
-    inline UserUnit width() const
-    {
-        return m_width;
-    }
-
-    inline UserUnit height() const
-    {
-        return m_height;
-    }
-
-    inline Rectangle rect() const
-    {
-        return Rectangle(m_width, m_height, m_position)
-            .scaled(scaleFactor());
-    }
-
-    inline void setStateNumber(int numberOfStates)
-    {
-        m_numberOfStates = numberOfStates;
-    }
-
-    inline HorizontalDirection direction() const
-    {
-        return m_direction;
-    }
-
-    inline float scaleFactor() const
-    {
-        return m_scaleFactor;
-    }
-
-    inline void setDirection(HorizontalDirection d)
-    {
-        m_direction = d;
-        notify();
-    }
-
-    inline int state() const
-    {
-        return static_cast<int>(m_state);
-    }
-
-    inline Position objectPosition() const
-    {
-        return parent()->position();
-    }
+    void setSizes(UserUnit w, UserUnit h);
+    UserUnit width() const;
+    UserUnit height() const;
+    Rectangle rect() const;
+    void setStateNumber(int numberOfStates);
+    HorizontalDirection direction() const;
+    float scaleFactor() const;
+    void setDirection(HorizontalDirection d);
+    int state() const;
+    Position objectPosition() const;
 
 private:
     void init();
@@ -298,25 +154,10 @@ class ArrayObject
     int m_columns = 1;
 
 public:
-    inline int rows() const
-    {
-        return m_rows;
-    }
-
-    inline void setRows(int rows)
-    {
-        m_rows = rows;
-    }
-
-    inline int columns() const
-    {
-        return m_columns;
-    }
-
-    inline void setColumns(int columns)
-    {
-        m_columns = columns;
-    }
+    int rows() const;
+    void setRows(int rows);
+    int columns() const;
+    void setColumns(int columns);
 
 private:
     void init();

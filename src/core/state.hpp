@@ -22,26 +22,15 @@ class State
 public:
     State();
     virtual ~State();
-
     void init() final;
-
-    virtual Command* command()
-    {
-        return 0;
-    }
+    virtual Command* command();
 
 protected:
-    virtual Command* onInit()
-    {
-        return 0;
-    }
+    virtual Command* onInit();
 
 protected:
-    virtual void onKeyEvent(Base::Event*)
-    {}
-
-    virtual void onObjectCollision(Base::Event*)
-    {}
+    virtual void onKeyEvent(Base::Event*) {}
+    virtual void onObjectCollision(Base::Event*) {}
 };
 
 } // namespace Core

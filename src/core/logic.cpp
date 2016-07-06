@@ -7,14 +7,16 @@
 namespace Core
 {
 
-void Logic::update()
+void Logic::
+update()
 {
     applyPowers();
     updateLogicObjects();
     m_collider.throwCollisionEvents();
 }
 
-void Logic::applyPowers()
+void Logic::
+applyPowers()
 {
     for (auto* p: Powers::children()) {
         assert(0 != p);
@@ -25,7 +27,8 @@ void Logic::applyPowers()
     }
 }
 
-void Logic::updateLogicObjects()
+void Logic::
+updateLogicObjects()
 {
     for (auto* object : LogicObjects::children()) {
         assert(0 != object);
@@ -33,42 +36,48 @@ void Logic::updateLogicObjects()
     }
 }
 
-Logic::Logic()
+Logic::
+Logic()
     : m_collider()
 {
     createViewPortObject();
     m_collider.setBounds(m_viewPort->component<ViewPort>()->movingArea()); // TODO tmp solution
 }
 
-Logic::~Logic()
-{
-}
+Logic::
+~Logic()
+{}
 
-void Logic::init()
+void Logic::
+init()
 {
     Powers::addObject(new Gravity()); // TODO create using MML
     Base::ContainerObject<LogicObject>::init();
     Base::ContainerObject<NaturalPower>::init();
 }
 
-const std::vector<LogicObject*>& Logic::objects() const
+const std::vector<LogicObject*>& Logic::
+objects() const
 {
     return Base::ContainerObject<LogicObject>::childrenConst();
 }
 
-bool Logic::addLogicObject(LogicObject* object)
+bool Logic::
+addLogicObject(LogicObject* object)
 {
     assert(0 != object);
     return Base::ContainerObject<LogicObject>::addObject(object);
 }
 
-const LogicObject* Logic::viewPort() const
+const LogicObject* Logic::
+viewPort() const
 {
     assert(0 != m_viewPort);
     return m_viewPort;
 }
 
-void Logic::addToViewPort(LogicObject* object)
+void Logic::
+addToViewPort(LogicObject* object)
 {
     assert(0 != object);
     TextureRenderer* objectTR = object->component<TextureRenderer>();
@@ -80,14 +89,16 @@ void Logic::addToViewPort(LogicObject* object)
     }
 }
 
-const ViewPort* Logic::viewPortComponent() const
+const ViewPort* Logic::
+viewPortComponent() const
 {
     assert(0 != m_viewPort);
     assert(0 != m_viewPort->component<ViewPort>());
     return m_viewPort->component<ViewPort>();
 }
 
-void Logic::onObjectAdding(const LogicObject* object)
+void Logic::
+onObjectAdding(const LogicObject* object)
 {
     assert(0 != object);
     Collider* collider = object->component<Collider>();
@@ -96,25 +107,29 @@ void Logic::onObjectAdding(const LogicObject* object)
     }
 }
 
-void Logic::updateObject(LogicObject* object, Position p)
+void Logic::
+updateObject(LogicObject* object, Position p)
 {
     m_collider.update(object, p);
 }
 
-void Logic::createViewPortObject()
+void Logic::
+createViewPortObject()
 {
     m_viewPort = new LogicObject();
     ViewPort* component = ViewPort::getInstance();
     m_viewPort->addComponent(component);
 }
 
-void Logic::aimTo(LogicObject* l)
+void Logic::
+aimTo(LogicObject* l)
 {
     assert(0 != l);
     m_viewPort->component<ViewPort>()->target(l);
 }
 
-bool Logic::checkCollision(const LogicObject* o1
+bool Logic::
+checkCollision(const LogicObject* o1
         , const LogicObject* o2) const
 {
     return m_collider.areCollided(o1, o2);

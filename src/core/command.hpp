@@ -14,13 +14,10 @@ private:
     LogicObject* m_object;
 
 public:
-    Command(LogicObject* o)
-        : m_object(o)
-    {
-        assert(0 != m_object);
-    }
-
+    Command(LogicObject* o);
     virtual ~Command() = default;
+
+public:
     virtual void execute() = 0;
 
 private:
@@ -28,10 +25,7 @@ private:
     Command(const Command&) = delete;
 
 protected:
-    inline LogicObject* object()
-    {
-        return m_object;
-    }
+    LogicObject* object();
 };
 
 } // namespace Core

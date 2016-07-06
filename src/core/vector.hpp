@@ -16,26 +16,10 @@ public:
     Vector(EngineUnit magnitude, float angle);
 
 public:
-    inline const EngineUnit& x() const
-    {
-        return m_x;
-    }
-
-    inline const EngineUnit& y() const
-    {
-        return m_y;
-    }
-
-    inline void setX(EngineUnit x)
-    {
-        m_x = x;
-    }
-
-    inline void setY(EngineUnit y)
-    {
-        m_y = y;
-    }
-
+    const EngineUnit& x() const;
+    const EngineUnit& y() const;
+    void setX(EngineUnit x);
+    void setY(EngineUnit y);
     EngineUnit magnitude() const;
     float angle() const;
     float angleInRadians() const;

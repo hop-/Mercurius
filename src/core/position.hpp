@@ -17,26 +17,12 @@ public:
     Position();
 
 public:
-    inline const EngineUnit& x() const
-    {
-        return m_x;
-    }
+    const EngineUnit& x() const;
+    const EngineUnit& y() const;
+    void setX(const EngineUnit& x);
+    void setY(const EngineUnit& y);
 
-    inline const EngineUnit& y() const
-    {
-        return m_y;
-    }
-
-    inline void setX(const EngineUnit& x)
-    {
-        m_x = x;
-    }
-
-    inline void setY(const EngineUnit& y)
-    {
-        m_y = y;
-    }
-
+public:
     Position operator-(const Position& p) const;
     Position operator+(const Position& p) const;
     Position operator*(float f) const;

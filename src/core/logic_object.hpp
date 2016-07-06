@@ -31,17 +31,8 @@ public:
         LogicObject* m_parent = 0;
 
     public:
-        inline LogicObject* parent() const
-        {
-            return m_parent;
-        }
-
-        inline void setParent(LogicObject* parent)
-        {
-            m_parent = parent;
-            onParentSet();
-        }
-
+        LogicObject* parent() const; // TODO return type is not const
+        void setParent(LogicObject* parent);
         void onNotify(){}
 
     protected:
@@ -79,7 +70,7 @@ private:
     Components m_components;
     Position m_position;
     State* m_currentState = 0;
-    float m_weight = 0;
+    float m_weight = 0; // TODO need to be removed
     std::string m_typeName = "";
     float m_scale = 1;
 
@@ -91,56 +82,19 @@ public:
     void changeState(State* oldState, State* newState);
     void removeState(State* state);
     void requestNewPosition(Position p);
+    std::string typeName() const;
+    void setTypeName(const std::string& typeName);
+    Position position() const;
+    void setPosition(Position p);
+    float scale() const;
+    void setScale(float scale);
+    void setPosition(UserUnit x, UserUnit y);
+    float weight() const;       // TODO remove
+    void setWeight(float w);    //TODO remove
 
-    inline std::string typeName() const
-    {
-        return m_typeName;
-    }
-
-    inline void setTypeName(const std::string& typeName)
-    {
-        m_typeName = typeName;
-    }
-
-    inline Position position() const
-    {
-        return m_position;
-    }
-
-    inline void setPosition(Position p)
-    {
-        m_position = p;
-        notify();
-    }
-
-    inline float scale() const
-    {
-        return m_scale;
-    }
-
-    inline void setScale(float scale)
-    {
-        m_scale = scale;
-    }
-
-    inline float weight() const
-    {
-        return m_weight;
-    }
-
-    inline void setWeight(float w)
-    {
-        m_weight = w;
-        notify();
-    }
-
-    inline void setPosition(UserUnit x, UserUnit y)
-    {
-        setPosition(Position(x, y));
-    }
-
+public:
     template <class T>
-    inline T* component() const
+    T* component() const
     {
         Components::const_iterator i = m_components.find(T::type);
         if (i == m_components.end()) {
