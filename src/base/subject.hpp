@@ -13,10 +13,7 @@ class Subject
     std::list<Observer*> m_observersToNotify;
 
 protected:
-    Subject()
-        : m_observersToNotify()
-    {}
-
+    Subject();
     virtual ~Subject() = default;
 
 public:

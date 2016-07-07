@@ -8,8 +8,7 @@ class Utility
 {
 public:
     template<class... T>
-    static void ignoreUnused(T&&...)
-    {}
+    static void ignoreUnused(T&&...) {}
 };
 
 } // end of namespace Base

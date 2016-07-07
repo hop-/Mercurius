@@ -6,22 +6,26 @@
 namespace Base
 {
 
-EventManager::Events EventManager::m_deleteEvents;
+EventManager::
+Events EventManager::m_deleteEvents;
 
-void EventManager::process(Base::Event* e)
+void EventManager::
+process(Base::Event* e)
 {
     assert(0 != e);
     e->trigger();
     delete e;
 }
 
-void EventManager::processDeleteEvent(Base::Event* e)
+void EventManager::
+processDeleteEvent(Base::Event* e)
 {
     assert(0 != e);
     m_deleteEvents.push_back(e);
 }
 
-void EventManager::processAllDeleteEvents()
+void EventManager::
+processAllDeleteEvents()
 {
     for(auto e: m_deleteEvents) {
         process(e);

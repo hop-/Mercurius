@@ -15,23 +15,11 @@ private:
     Object* m_object;
 
 public:
-    DeleteEvent(Object* o)
-        : m_object(o)
-    {
-        assert(0 != m_object);
-    }
-
-    virtual ~DeleteEvent()
-    {
-        assert(0 == m_object);
-    }
+    DeleteEvent(Object* o);
+    virtual ~DeleteEvent();
 
 public:
-    void trigger() override final
-    {
-        delete m_object;
-        m_object = 0;
-    }
+    void trigger() override final;
 
 private:
     DeleteEvent(const DeleteEvent&) = delete;

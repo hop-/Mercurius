@@ -16,22 +16,11 @@ class Delegate
 public:
     virtual void invoke(Event*) = 0;
     virtual ~Delegate() = default;
-
-    inline void activate()
-    {
-        m_isNotActive = false;
-    }
-
-    inline void deactivate()
-    {
-        m_isNotActive = true;
-    }
+    void activate();
+    void deactivate();
 
 protected:
-    inline bool isNotActive() const
-    {
-        return m_isNotActive;
-    }
+    bool isNotActive() const;
 };
 
 template <class T>

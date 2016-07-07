@@ -7,7 +7,13 @@
 namespace Base
 {
 
-void Subject::notify()
+Subject::
+Subject()
+    : m_observersToNotify()
+{}
+
+void Subject::
+notify()
 {
     for (Observer* observer : m_observersToNotify) {
         assert(0 != observer);
@@ -15,14 +21,16 @@ void Subject::notify()
     }
 }
 
-void Subject::addObserver(Observer* observer)
+void Subject::
+addObserver(Observer* observer)
 {
     assert(0 != observer);
     m_observersToNotify.push_back(observer);
     observer->setSubject(this);
 }
 
-void Subject::removeObserver(Observer* observer)
+void Subject::
+removeObserver(Observer* observer)
 {
     assert(0 != observer);
     if (observer->subject() != this) {
