@@ -22,19 +22,27 @@ SDL_Color Gui::m_color = {0, 0, 0, 0};
 unsigned Gui::m_previousTicks = 0;
 
 #ifdef M_NO_DEBUG
-void Gui::init()
+
+void Gui::
+init()
 {}
 
-void Gui::drawRect(SDL_Renderer*, const SDL_Rect*)
+void Gui::
+drawRect(SDL_Renderer*, const SDL_Rect*)
 {}
 
-void Gui::drawBody(SDL_Renderer*, const Core::GuiObject*, int)
+void Gui::
+drawBody(SDL_Renderer*, const Core::GuiObject*, int)
 {}
 
-void Gui::showFPS(SDL_Renderer*, unsigned)
+void Gui::
+showFPS(SDL_Renderer*, unsigned)
 {}
+
 #else
-void Gui::init()
+
+void Gui::
+init()
 {
     TTF_Init();
     TTF_CloseFont(m_font);
@@ -42,7 +50,8 @@ void Gui::init()
     m_inited = true;
 }
 
-void Gui::drawRect(SDL_Renderer* rend, const SDL_Rect* rect)
+void Gui::
+drawRect(SDL_Renderer* rend, const SDL_Rect* rect)
 {
     SDL_SetRenderDrawColor(rend, 0xFF, 0x00, 0x00, 0x00);
     SDL_RenderDrawRect(rend, rect);
@@ -50,7 +59,8 @@ void Gui::drawRect(SDL_Renderer* rend, const SDL_Rect* rect)
 }
 
 // TODO
-void Gui::drawBody(SDL_Renderer* rend, const Core::GuiObject* o, int hh)
+void Gui::
+drawBody(SDL_Renderer* rend, const Core::GuiObject* o, int hh)
 {
     Core::TextureRenderer* t =
         static_cast<Core::TextureRenderer*>(o->subject());
@@ -67,7 +77,8 @@ void Gui::drawBody(SDL_Renderer* rend, const Core::GuiObject* o, int hh)
     drawRect(rend, &sdlRect);
 }
 
-void Gui::showFPS(SDL_Renderer* rend, unsigned ticks)
+void Gui::
+showFPS(SDL_Renderer* rend, unsigned ticks)
 {
     assert(m_inited);
     assert(m_font);
@@ -92,5 +103,7 @@ void Gui::showFPS(SDL_Renderer* rend, unsigned ticks)
     SDL_DestroyTexture(txtr);
     SDL_FreeSurface(sfc);
 }
+
 #endif
+
 } // namespace Debug

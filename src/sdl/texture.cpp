@@ -8,7 +8,8 @@ namespace Sdl
 
 std::map<std::string, SDL_Texture*> Texture::m_textures;
 
-void Texture::initTexture(SDL_Renderer* r, std::string path)
+void Texture::
+initTexture(SDL_Renderer* r, std::string path)
 {
     if (m_textures.find(path) != m_textures.end()) {
         texture = m_textures[path];

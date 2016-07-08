@@ -33,7 +33,8 @@ inline SDL_RendererFlip flip(Core::HorizontalDirection dir) {
 
 }  // unknown
 
-void GuiObject::init()
+void GuiObject::
+init()
 {
     assert(0 != parent());
     assert(0 != parent<Core::Gui>()->frame());
@@ -47,7 +48,8 @@ void GuiObject::init()
     assert(0 != subject());
 }
 
-void GuiObject::onNotify()
+void GuiObject::
+onNotify()
 {
     Core::GuiObject::onNotify();
     updateDestRect();
@@ -55,22 +57,26 @@ void GuiObject::onNotify()
     changeSourceRect();
 }
 
-void GuiObject::updateDirection()
+void GuiObject::
+updateDirection()
 {
     m_texture.flip = flip(direction());
 }
 
-void GuiObject::updateDestRect()
+void GuiObject::
+updateDestRect()
 {
     m_texture.destinationRect = toSDL(rect(), scale(), scaleFactor());
 }
 
-void GuiObject::changeSourceRect()
+void GuiObject::
+changeSourceRect()
 {
     m_texture.sourceRect.x = width() * state();
 }
 
-GuiObject::GuiObject(const std::string& texture)
+GuiObject::
+GuiObject(const std::string& texture)
     : Core::GuiObject()
     , m_texture()
 {

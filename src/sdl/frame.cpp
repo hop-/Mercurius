@@ -31,14 +31,16 @@ SDL_WindowFlags toSDLScreenMode(Core::Frame::ScreenMode m)
 
 } // unnamed namespace
 
-Frame::Frame()
+Frame::
+Frame()
     : Core::Frame()
     , m_window(0)
     , m_renderer(0)
 {
 }
 
-Frame::~Frame()
+Frame::
+~Frame()
 {
     assert(0 != m_window);
     SDL_DestroyWindow(m_window);
@@ -49,7 +51,8 @@ Frame::~Frame()
     SDL_Quit(); // This call may be risky need further investigation
 }
 
-void Frame::init()
+void Frame::
+init()
 {
     assert(0 == m_window);
     assert(0 == m_renderer);
@@ -75,7 +78,8 @@ void Frame::init()
     assert(0 != m_renderer);
 }
 
-void Frame::correctResolution()
+void Frame::
+correctResolution()
 {
     int w, h;
     SDL_GetWindowSize(m_window, &w, &h);
@@ -83,12 +87,14 @@ void Frame::correctResolution()
     setHeight(h);
 }
 
-void Frame::clear()
+void Frame::
+clear()
 {
     SDL_RenderClear(m_renderer);
 }
 
-SDL_Rect* Frame::mapToFrame(SDL_Rect& r, int id)
+SDL_Rect* Frame::
+mapToFrame(SDL_Rect& r, int id)
 {
     SDL_Rect* rect = 0;
     switch(layersViewMode()) {
@@ -107,7 +113,8 @@ SDL_Rect* Frame::mapToFrame(SDL_Rect& r, int id)
     return rect;
 }
 
-SDL_Rect* Frame::mapToActive(SDL_Rect& r, int id)
+SDL_Rect* Frame::
+mapToActive(SDL_Rect& r, int id)
 {
     Core::Game* game = Core::Game::getInstance();
     assert(0 != game);
@@ -117,7 +124,8 @@ SDL_Rect* Frame::mapToActive(SDL_Rect& r, int id)
     return &r;
 }
 
-SDL_Rect* Frame::mapToList(SDL_Rect& r, int id)
+SDL_Rect* Frame::
+mapToList(SDL_Rect& r, int id)
 {
     SDL_Rect* rect = new SDL_Rect(r);
     const int screenWidth = width();
@@ -130,11 +138,13 @@ SDL_Rect* Frame::mapToList(SDL_Rect& r, int id)
     return rect;
 }
 
-/*SDL_Rect* Frame::mapToGrid(SDL_Rect& r, int id)
+/*SDL_Rect* Frame::
+mapToGrid(SDL_Rect& r, int id)
 {
 }*/
 
-void Frame::draw(const Core::GuiObject* object)
+void Frame::
+draw(const Core::GuiObject* object)
 {
     assert(0 != object);
     const GuiObject* sdlObject = static_cast<const GuiObject*>(object);
@@ -160,7 +170,8 @@ void Frame::draw(const Core::GuiObject* object)
     Debug::Gui::drawRect(m_renderer, dest_rect);
 }
 
-void Frame::show()
+void Frame::
+show()
 {
     Debug::Gui::showFPS(m_renderer, SDL_GetTicks());
     SDL_RenderPresent(m_renderer);

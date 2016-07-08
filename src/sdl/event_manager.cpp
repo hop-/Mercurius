@@ -32,7 +32,8 @@ Core::KeyEvent::Modifier getModifier(SDL_Event event)
 
 } // end of unnamed namespace
 
-void InputHandler::catchUserInput()
+void InputHandler::
+catchUserInput()
 {
     SDL_Event event;
     Core::InputManager::Key k;
@@ -73,12 +74,14 @@ void InputHandler::catchUserInput()
     }
 }
 
-void InputHandler::delay(unsigned ms)
+void InputHandler::
+delay(unsigned ms)
 {
     SDL_Delay(ms);
 }
 
-unsigned InputHandler::getTicks()
+unsigned InputHandler::
+getTicks()
 {
     return SDL_GetTicks();
 }
