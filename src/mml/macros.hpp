@@ -12,6 +12,6 @@ public: \
             const MMLAttribute* attr = getAttribute(ATTR); \
             assert(0 != attr); \
             return attr->getValue<TYPE>(); \
-    } 
+    }
 
 #endif // _MML_MACROS_HPP_

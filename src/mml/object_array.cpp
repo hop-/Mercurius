@@ -3,7 +3,8 @@
 namespace MML
 {
 
-ObjectArray::ObjectArray(const std::string& n)
+ObjectArray::
+ObjectArray(const std::string& n)
     : DrawableObject(n)
     , m_allowColunms(true)
     , m_allowRows(true)
@@ -12,22 +13,26 @@ ObjectArray::ObjectArray(const std::string& n)
     addAttribute(new MMLAttribute("columns", 1));
 }
 
-void ObjectArray::allowColumns(bool status)
+void ObjectArray::
+allowColumns(bool status)
 {
     m_allowColunms = status;
 }
 
-void ObjectArray::allowRows(bool status)
+void ObjectArray::
+allowRows(bool status)
 {
     m_allowRows = status;
 }
 
-bool ObjectArray::columnsAreAllowed() const
+bool ObjectArray::
+columnsAreAllowed() const
 {
     return m_allowColunms;
 }
 
-bool ObjectArray::rowsAreAllowed() const
+bool ObjectArray::
+rowsAreAllowed() const
 {
     return m_allowRows;
 }
