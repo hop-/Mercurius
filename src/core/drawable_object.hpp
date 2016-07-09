@@ -3,6 +3,8 @@
 
 #include "rectangle.hpp"
 
+#include <string>
+
 namespace Core
 {
 

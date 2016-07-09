@@ -1,5 +1,7 @@
 #include "drawable_object.hpp"
 
+#include <cassert>
+
 namespace Core
 {
 
@@ -47,6 +49,7 @@ rectForState(unsigned s) const
 {
     assert(s != 0);
     assert(s < m_rows * m_columns);
+    return Rectangle();
 }
 
 } // end of namespace Core
