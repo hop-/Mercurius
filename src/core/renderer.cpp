@@ -14,6 +14,12 @@ Renderer(Frame* f)
     m_drawingArea = Rectangle(m_frame->width(), m_frame->height(), Position(0, 0));
 }
 
+Frame* Renderer::
+frame()
+{
+    return m_frame;
+}
+
 void Renderer::
 setDrawingArea(Rectangle rect)
 {

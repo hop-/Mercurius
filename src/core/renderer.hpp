@@ -39,6 +39,9 @@ public:
      */
     void drawObject(const GuiObject* g);
 
+protected:
+    Frame* frame();
+
 private:
     Renderer(const Renderer&) = delete;
     Renderer& operator=(const Renderer&) = delete;
