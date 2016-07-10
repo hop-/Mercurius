@@ -34,14 +34,34 @@ class ViewPort
     Rectangle m_movingArea;
 
 private:
+    /**
+     * @brief Constructor to ViewPort component
+     */
     ViewPort();
 
 public:
+    /**
+     * @brief Sets target object for aim to
+     * @param object pointer to LogicObject
+     */
     void target(LogicObject* object);
 
+    /**
+     * @brief Sets moving area where view port can move
+     * @param area Rectangle where view port can move
+     */
     void setMovingArea(Rectangle area);
+
+    /**
+     * @brief Returns moving area
+     * @return Rectangle
+     */
     Rectangle movingArea() const;
-    void onNotify();
+
+    /**
+     * @brief Notify function
+     */
+    void onNotify() override;
 
 private:
     void aim();
@@ -62,17 +82,57 @@ class Physics
     std::list<const LogicObject*> m_grounds;
 
 public:
+    /**
+     * @brief Constructor to Physics Component
+     */
     Physics();
 
 public:
+    // init function empty
     void init() {}
+
+    /**
+     * @brief Returns gravity sacling factor
+     */
     float gravityScale() const;
+
+    /**
+     * @brief Sets gravity scaling factor
+     * @param gravityScale float
+     */
     void setGravityScale(float gravityScale);
+
+    /**
+     * @brief Returns velocity of object
+     */
     Vector velocity() const;
+
+    /**
+     * @brief Sets velocity of object
+     * @param velocity Vector of velocity
+     */
     void setVelocity(const Vector& velocity);
+
+    /**
+     * @brief Adds velocity to the objects velosity
+     * @param velocity Vector of velocity to add
+     */
     void addVelocity(const Vector& velocity);
+
+    /**
+     * @brief Applies gravity to the object
+     * @param gravity Vector of gravity
+     */
     void applyGravity(const Vector& gravity);
+
+    /**
+     * @brief Sets 0 the X component of velocity
+     */
     void stopX();
+
+    /**
+     * @brief Sets 0 the Y component of velocity
+     */
     void stopY();
 
 private:
@@ -96,18 +156,77 @@ class Collider
     float m_scaleFactor = 1;
 
 public:
-    void onNotify();
+    /**
+     * @brief Colliders notify function
+     */
+    void onNotify() override;
+
+    /**
+     * @brief Adds new trigger object to trigger objects list
+     * @param object valid const pointer to LogicObject
+     */
     void addTriggerObject(const LogicObject* object);
+
+    /**
+     * @brief Removes object form trigger objects list
+     * @param object valid const pointer to LogicObject
+     */
     void removeTriggerObject(const LogicObject* object);
+
+    /**
+     * @brief Checks if given object is on tirgger objects list
+     * @param object valid const pointer to LogicObject
+     */
     bool isTrigger(const LogicObject* object) const;
+
+    /**
+     * @brief Returns Position of collider (object)
+     */
     Position position() const;
+
+    /**
+     * @brief Return rectangle of collider
+     */
     Rectangle rect() const;
+
+    /**
+     * @brief Sets offset of collider from ojbect
+     * @param offset Position of collider if Object position is origin
+     */
     void setOffset(Position offset);
+
+    /**
+     * @brief Sets offset of collider from ojbect
+     * @param x UserUnit X position of collider if Object position is origin
+     * @param y UserUnit Y position of collider if Object position is origin
+     */
     void setOffset(UserUnit x, UserUnit y);
+
+    /**
+     * @brief Set Colliders sizes (width, height)
+     * @param width UserUnit colliders width
+     * @param height UserUnit colliders width
+     */
     void setSizes(UserUnit width, UserUnit height);
+
+    /**
+     * @brief Returns colliders width
+     */
     UserUnit width() const;
+
+    /**
+     * @brief Returns colliders height
+     */
     UserUnit height() const;
+
+    /**
+     * @brief Checks if collider is trigger type
+     */
     bool isTrigger() const;
+
+    /**
+     * @brief Sets the weather Collider is trigger or not
+     */
     void trigger(bool isTrigger);
 
 private:
@@ -129,17 +248,69 @@ class TextureRenderer
 
 public:
     // TODO add some useful functions
+    /**
+     * @brief Sets the state (drawing state)
+     * @param state int
+     */
     void setState(int state);
-    virtual void onNotify() override;
+
+    /**
+     * @brief Notify function
+     */
+    void onNotify() override;
+
+    /**
+     * @brief Sets the sizes of Texture
+     * @param w UserUnit width
+     * @param h UserUnit height
+     */
     void setSizes(UserUnit w, UserUnit h);
+
+    /**
+     * @brief Returns textureRenderes width
+     */
     UserUnit width() const;
+
+    /**
+     * @brief Returns textureRenderes height
+     */
     UserUnit height() const;
+
+    /**
+     * @brief Returns rectangle of textureRenderes
+     */
     Rectangle rect() const;
+
+    /**
+     * @brief Sets the number of states
+     * @param numberOfStates int number of states
+     */
     void setStateNumber(int numberOfStates);
+
+    /**
+     * @brief Returns direction of texture
+     */
     HorizontalDirection direction() const;
+
+    /**
+     * @brief Returns scaling factor
+     */
     float scaleFactor() const;
+
+    /**
+     * @brief Sets dirrection of texture
+     * @param d HorizontalDirection
+     */
     void setDirection(HorizontalDirection d);
+
+    /**
+     * @brief Returns state
+     */
     int state() const;
+
+    /**
+     * @brief Returns object position
+     */
     Position objectPosition() const;
 
 private:
@@ -154,9 +325,24 @@ class ArrayObject
     int m_columns = 1;
 
 public:
+    /**
+     * @brief Returns number of rows
+     */
     int rows() const;
+
+    /**
+     * @brief Sets number of rows
+     */
     void setRows(int rows);
+
+    /**
+     * @brief Returns number of colunms
+     */
     int columns() const;
+
+    /**
+     * @brief Sets number of coluums
+     */
     void setColumns(int columns);
 
 private:

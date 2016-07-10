@@ -14,10 +14,19 @@ private:
     LogicObject* m_object;
 
 public:
+    /**
+     * @brief Base class for commands
+     * @param o pointer to logic object
+    */
+
+    // TODO investigate, as to me LogicObject should not pass to Base Command
     Command(LogicObject* o);
     virtual ~Command() = default;
 
 public:
+    /**
+     * @brief Executes command pure virtual
+     */
     virtual void execute() = 0;
 
 private:
