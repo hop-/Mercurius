@@ -9,6 +9,30 @@
 namespace Core
 {
 
+Position Transform::
+position() const
+{
+    return m_position;
+}
+
+float Transform::
+scaleFactor() const
+{
+    return m_scale;
+}
+
+void Transform::
+setPosition(Position p)
+{
+    m_position = p;
+}
+
+void Transform::
+setScaleFactor(float s)
+{
+    m_scale = s;
+}
+
 template<>
 ViewPort* Base::Singleton<ViewPort>::m_s_instance = 0;
 

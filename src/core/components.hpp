@@ -25,6 +25,36 @@ class Event;
 namespace Core
 {
 
+class Transform
+    : public LogicObject::ComponentCreator<Transform>
+{
+    Position m_position = Position();
+    float m_scale = 1;
+
+public:
+    /**
+     * @brief Returns position
+     */
+    Position position() const;
+
+    /**
+     * @brief Returns scaling factor
+     */
+    float scaleFactor() const;
+
+    /**
+     * @brief Sets position
+     * @param p new Position
+     */
+    void setPosition(Position p);
+
+    /**
+     * @brief Sets scaleFactor
+     * @param s float new scale factor
+     */
+    void setScaleFactor(float s);
+};
+
 class ViewPort
     : public Base::Singleton<ViewPort>
     , public LogicObject::ComponentCreator<ViewPort>

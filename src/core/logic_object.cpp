@@ -68,14 +68,16 @@ setTypeName(const std::string& typeName)
 Position LogicObject::
 position() const
 {
-    return m_position;
+    assert(component<Transform>());
+    return component<Transform>()->position();
 }
 
 void LogicObject::
 setPosition(Position p)
 {
-    m_position = p;
-    notify();
+    assert(component<Transform>());
+    component<Transform>()->setPosition(p);
+    notify(); // TODO correct notifying
 }
 
 void LogicObject::
@@ -87,13 +89,15 @@ setPosition(UserUnit x, UserUnit y)
 float LogicObject::
 scale() const
 {
-    return m_scale;
+    assert(component<Transform>());
+    return component<Transform>()->scaleFactor();
 }
 
 void LogicObject::
 setScale(float scale)
 {
-    m_scale = scale;
+    assert(component<Transform>());
+    component<Transform>()->setScaleFactor(scale);
 }
 
 float LogicObject::
@@ -149,7 +153,6 @@ requestNewPosition(Position p)
 LogicObject::
 LogicObject()
     : m_components()
-    , m_position(Position())
 {}
 
 LogicObject::

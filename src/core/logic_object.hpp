@@ -35,6 +35,12 @@ public:
         void setParent(LogicObject* parent);
         void onNotify(){}
 
+        template <class T>
+        T* component()
+        {
+            return m_parent->component<T>();
+        }
+
     protected:
         virtual void update() {};
         virtual void init() {};
@@ -67,12 +73,12 @@ private:
 
 private:
     typedef std::map<int, Component*> Components;
+
+private:
     Components m_components;
-    Position m_position;
     State* m_currentState = 0;
     float m_weight = 0; // TODO need to be removed
     std::string m_typeName = "";
-    float m_scale = 1;
 
 public:
     void update();
