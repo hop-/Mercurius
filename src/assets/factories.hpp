@@ -30,6 +30,15 @@ public:
                          Base::Object* p) const override;
 };
 
+class BeingFactory
+    : public Core::ObjectsFactory
+{
+public:
+    /// Reimplemented interface
+    Base::Object* create(const MML::MMLObject* mml,
+                         Base::Object* p) const override;
+};
+
 class DudeFactory
     : public Core::ObjectsFactory
 {

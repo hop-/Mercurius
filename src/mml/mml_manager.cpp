@@ -5,6 +5,7 @@
 #include "background.hpp"
 #include "config.hpp"
 #include "mml_box.hpp"
+#include "being.hpp"
 #include "dude.hpp"
 #include "door.hpp"
 #include "switch.hpp"
@@ -79,6 +80,7 @@ registerTypes()
     // All types should be registerd in this function
     m_types["layer"] = new MMLLayer::LayerFactory();
     m_types["box"] = new MMLBox::BoxFactory();
+    m_types["being"] = new Being::Factory();
     m_types["dude"] = new Dude::Factory();
     m_types["door"] = new Door::Factory();
     m_types["switch"] = new Switch::Factory();

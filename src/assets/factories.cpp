@@ -1,6 +1,7 @@
 #include "factories.hpp"
 #include "background.hpp"
 #include "box.hpp"
+#include "being.hpp"
 #include "dude.hpp"
 #include "door.hpp"
 #include "switch.hpp"
@@ -10,6 +11,7 @@
 #include "type_manager.hpp"
 
 #include <mml/mml_box.hpp>
+#include <mml/being.hpp>
 #include <mml/mml_layer.hpp>
 #include <mml/background.hpp>
 #include <mml/dude.hpp>
@@ -55,6 +57,18 @@ create(const MML::MMLObject* mml, Base::Object* p) const
     Core::Layer* l = dynamic_cast<Core::Layer*>(p);
     assert(0 != l);
     return new Box(box, l);
+}
+
+Base::Object* BeingFactory::
+create(const MML::MMLObject* mml, Base::Object* p) const
+{
+    assert(0 != mml);
+    assert(0 != p);
+    const MML::Being* b = dynamic_cast<const MML::Being*>(mml);
+    assert(0 != b);
+    Core::Layer* l = dynamic_cast<Core::Layer*>(p);
+    assert(0 != l);
+    return new Being(b, l);
 }
 
 Base::Object* DudeFactory::

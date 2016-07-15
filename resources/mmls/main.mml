@@ -98,6 +98,17 @@ texture: resources/textures/box.png;
 
 }
 
+being {
+
+name: being1;
+width: 70;
+height: 70;
+weight: 20;
+position: 700, 600;
+texture: resources/textures/being.png;
+
+}
+
 dude {
 
 name: player;

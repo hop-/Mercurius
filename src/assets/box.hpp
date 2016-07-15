@@ -8,7 +8,8 @@
 namespace Assets
 {
 
-class Box : public Object
+class Box
+    : public Object
 {
 public:
     Box(const MML::MMLBox* b, Core::Layer* l);
