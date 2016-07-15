@@ -592,4 +592,57 @@ onToggle(Base::Event* e)
     OWNER()->changeState(this, new SwitchState(!m_status));
 }
 
+EnemyMove::
+EnemyMove(Core::HorizontalDirection direction)
+    : m_direction(direction)
+{
+    assert(m_direction != Core::HorizontalDirection::None);
+    registerCallback<Core::ObjectCollision>(
+            new Base::DelegateCreator<EnemyMove>(this
+                , &EnemyMove::onObjectCollision));
+}
+
+Core::Command* EnemyMove::
+onInit()
+{
+    // TODO return command to change texture and set direction
+    assert(0 != OWNER());
+    assert(0 != OWNER()->component<Core::TextureRenderer>());
+    OWNER()->component<Core::TextureRenderer>()->setDirection(m_direction);
+    return 0;
+}
+
+Core::Command* EnemyMove::
+command()
+{
+    Core::Direction d;
+    if (m_direction == Core::HorizontalDirection::Left) {
+        d = Core::Direction::Left;
+    } else {
+        d = Core::Direction::Right;
+    }
+    return new ApplyMovement(OWNER(), 500, d);
+}
+
+void EnemyMove::
+onObjectCollision(Base::Event* e)
+{
+    Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
+    assert(0 != oc);
+    if (oc->isTrigger() || !oc->contains(OWNER())) {
+        return;
+    }
+    Core::Direction direction = Core::Direction::Left;
+    if (Core::HorizontalDirection::Left == m_direction) {
+        direction = Core::Direction::Right;
+    }
+    if (oc->getCollisionSide(OWNER()) == direction) {
+        if (Core::HorizontalDirection::Left == m_direction) {
+            changeState(new EnemyMove(Core::HorizontalDirection::Right));
+        } else {
+            changeState(new EnemyMove(Core::HorizontalDirection::Left));
+        }
+    }
+}
+
 } // namespace Assets

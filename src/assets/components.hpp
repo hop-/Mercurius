@@ -90,6 +90,13 @@ private:
     void move(Core::Position p);
 };
 
+class BeingController
+    : public Core::LogicObject::ComponentCreator<BeingController>
+{
+public:
+    void init() override;
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_COMPONENTS_HPP_

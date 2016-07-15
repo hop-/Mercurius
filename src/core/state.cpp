@@ -1,6 +1,7 @@
 #include "state.hpp"
 #include "command.hpp"
 #include "events.hpp"
+#include "logic_object.hpp"
 
 namespace Core
 {
@@ -37,6 +38,24 @@ Command* State::
 onInit()
 {
     return 0;
+}
+
+void State::
+addState(State* newState)
+{
+    parent<Core::LogicObject>()->addState(newState);
+}
+
+void State::
+changeState(State* newState)
+{
+    parent<Core::LogicObject>()->changeState(this, newState);
+}
+
+void State::
+removeState(State* state)
+{
+    parent<Core::LogicObject>()->removeState(state);
 }
 
 } // namespace Core

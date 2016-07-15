@@ -212,6 +212,22 @@ private:
     void onToggle(Base::Event* e);
 };
 
+class EnemyMove
+    : public Core::State
+{
+    Core::HorizontalDirection m_direction;
+
+public:
+    EnemyMove(Core::HorizontalDirection direction);
+
+public:
+    Core::Command* onInit() override;
+    Core::Command* command() override;
+
+private:
+    void onObjectCollision(Base::Event* e);
+};
+
 } // namespace Assets
 
 #endif //_ASSETS_STATES_HPP_

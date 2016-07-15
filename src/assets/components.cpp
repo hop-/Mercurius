@@ -13,14 +13,16 @@
 namespace Assets
 {
 
-LadderZone::LadderZone()
+LadderZone::
+LadderZone()
 {
     registerCallback<Core::ObjectCollision>(
             new Base::DelegateCreator<LadderZone>(this
                 , &LadderZone::onObjectCollision));
 }
 
-void LadderZone::onObjectCollision(Base::Event* e)
+void LadderZone::
+onObjectCollision(Base::Event* e)
 {
     Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
     assert(0 != oc);
@@ -38,14 +40,16 @@ void LadderZone::onObjectCollision(Base::Event* e)
     }
 }
 
-DoorZone::DoorZone()
+DoorZone::
+DoorZone()
 {
     registerCallback<Core::ObjectCollision>(
             new Base::DelegateCreator<DoorZone>(this
                 , &DoorZone::onObjectCollision));
 }
 
-void DoorZone::onObjectCollision(Base::Event* e)
+void DoorZone::
+onObjectCollision(Base::Event* e)
 {
     Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
     assert(0 != oc);
@@ -58,14 +62,16 @@ void DoorZone::onObjectCollision(Base::Event* e)
               , (oc->status() == Core::ObjectCollision::Status::Attached)));
 }
 
-SwitchZone::SwitchZone()
+SwitchZone::
+SwitchZone()
 {
     registerCallback<Core::ObjectCollision>(
             new Base::DelegateCreator<SwitchZone>(this
                 , &SwitchZone::onObjectCollision));
 }
 
-void SwitchZone::onObjectCollision(Base::Event* e)
+void SwitchZone::
+onObjectCollision(Base::Event* e)
 {
     Core::ObjectCollision* oc = Core::ObjectCollision::cast(e);
     assert(0 != oc);
@@ -78,14 +84,16 @@ void SwitchZone::onObjectCollision(Base::Event* e)
               , (oc->status() == Core::ObjectCollision::Status::Attached)));
 }
 
-PlatformZone::PlatformZone()
+PlatformZone::
+PlatformZone()
 {
     registerCallback<MakeTriggerForPlatforms>(
             new Base::DelegateCreator<PlatformZone>(this
                 , &PlatformZone::makeTrigger));
 }
 
-void PlatformZone::makeTrigger(Base::Event* e)
+void PlatformZone::
+makeTrigger(Base::Event* e)
 {
     MakeTriggerForPlatforms* mt = MakeTriggerForPlatforms::cast(e);
     assert(0 != mt);
@@ -99,19 +107,22 @@ void PlatformZone::makeTrigger(Base::Event* e)
     }
 }
 
-void CameraFollower::init()
+void CameraFollower::
+init()
 {
     Core::ViewPort::getInstance()->addObserver(this);
 }
 
-void CameraFollower::onNotify()
+void CameraFollower::
+onNotify()
 {
     Core::ViewPort* vp = static_cast<Core::ViewPort*>(subject());
     assert(0 != vp);
     move(vp->position());
 }
 
-void CameraFollower::move(Core::Position p)
+void CameraFollower::
+move(Core::Position p)
 {
     Core::Position dp = p - m_viewPortLastPosition;
     m_viewPortLastPosition = p;
@@ -121,6 +132,13 @@ void CameraFollower::move(Core::Position p)
     moveVector.setY(dp.y() * m_velocityScaleY);
     parentPosition.move(moveVector);
     //parent()->setPosition(parentPosition); // TODO seg fault
+}
+
+
+void BeingController::
+init()
+{
+    parent()->addState(new EnemyMove(Core::HorizontalDirection::Left));
 }
 
 } // namespace Assets

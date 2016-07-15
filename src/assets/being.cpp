@@ -1,4 +1,5 @@
 #include "being.hpp"
+#include "components.hpp"
 
 namespace Assets
 {
@@ -13,6 +14,7 @@ setupLogicObject()
 {
     addPhysics();
     addCollider();
+    addComponent(new BeingController());
 }
 
 } // namespace Assets

@@ -29,6 +29,11 @@ protected:
     virtual Command* onInit();
 
 protected:
+    void addState(State* newState);
+    void changeState(State* newState);
+    void removeState(State* state);
+
+protected:
     virtual void onKeyEvent(Base::Event*) {}
     virtual void onObjectCollision(Base::Event*) {}
 };
