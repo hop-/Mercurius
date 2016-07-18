@@ -17,6 +17,7 @@ namespace Core
 {
 
 class Logic;
+class Transform;
 
 class LogicObject
     : public Base::ContainerObject<State>
@@ -45,6 +46,10 @@ public:
         virtual void update() {};
         virtual void init() {};
         virtual void onParentSet() {};
+
+    protected:
+        Logic* logic();
+        Transform* transform();
     };
 
 public:
@@ -87,7 +92,6 @@ public:
     void addState(State* newState);
     void changeState(State* oldState, State* newState);
     void removeState(State* state);
-    void requestNewPosition(Position p);
     std::string typeName() const;
     void setTypeName(const std::string& typeName);
     Position position() const;

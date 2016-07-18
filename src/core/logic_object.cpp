@@ -1,5 +1,6 @@
 #include "logic_object.hpp"
 #include "logic.hpp"
+#include "components.hpp"
 #include "command.hpp"
 
 #include <base/utility.hpp>
@@ -18,6 +19,21 @@ setParent(LogicObject* parent)
 {
     m_parent = parent;
     onParentSet();
+}
+
+Logic* LogicObject::Component::
+logic()
+{
+    assert(0 != parent());
+    assert(0 != parent()->parent<Logic>());
+    return parent()->parent<Logic>();
+}
+
+Transform* LogicObject::Component::
+transform()
+{
+    assert(0 != component<Transform>());
+    return component<Transform>();
 }
 
 void LogicObject::
@@ -141,13 +157,6 @@ initObject()
         assert(0 != pair.second);
         pair.second->init();
     }
-}
-
-void LogicObject::
-requestNewPosition(Position p)
-{
-    assert(0 != parent<Logic>());
-    parent<Logic>()->updateObject(this, p);
 }
 
 LogicObject::

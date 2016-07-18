@@ -24,7 +24,9 @@ public:
     float angle() const;
     float angleInRadians() const;
     void setAngle(float angle);
+    bool isMoving(Direction d) const;
 
+public:
     Vector& operator+=(const Vector& vector);
     Vector& operator*=(const float& multiplier);
 };

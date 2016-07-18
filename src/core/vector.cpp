@@ -73,6 +73,29 @@ setAngle(float angle)
     m_y = m * std::sin(angle *_PI / 180);
 }
 
+bool Vector::
+isMoving(Direction d) const
+{
+    switch (d) {
+        case Direction::Left:
+            return (x() < 0);
+            break;
+        case Direction::Right:
+            return (x() > 0);
+            break;
+        case Direction::Up:
+            return (y() > 0);
+            break;
+        case Direction::Down:
+            return (y() < 0);
+            break;
+        case Direction::None:
+        default:
+            return (x() == 0 && y() == 0);
+            break;
+    }
+}
+
 Vector& Vector::
 operator+=(const Vector& vector)
 {

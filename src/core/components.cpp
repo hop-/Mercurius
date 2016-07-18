@@ -182,7 +182,7 @@ update()
     Position position = Component::parent()->position();
     if (m_velocity.magnitude() != 0) {
         position.move(m_velocity);
-        Component::parent()->requestNewPosition(position);
+        logic()->updateObject(Component::parent(), position);
     }
 }
 

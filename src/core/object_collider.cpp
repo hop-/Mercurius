@@ -52,22 +52,17 @@ update(LogicObject* object, Position p)
     m_quadTree.insert(c);
     EngineUnit maxDX = 0;
     for (const auto* collider : m_quadTree.retreive(c)) {
-        LogicObject* collided = collider->parent();
-        if (collided == object
-                || !collider->rect().intersects(c->rect())) {
+        LogicObject* collidedObject = collider->parent();
+        if (collidedObject == object || !collider->rect().intersects(c->rect())) {
             continue;
         }
-        m_collidedPairs.push_back(Pair{object, collided});
-        if (!c->isTrigger(collided) && !collider->isTrigger(object)) {
+        m_collidedPairs.push_back(Pair{object, collidedObject});
+        if (!c->isTrigger(collidedObject) && !collider->isTrigger(object)) {
             EngineUnit dX;
             if (p.x() - pOld.x() > 0) {
-                // moved right
-                dX = c->rect().right()
-                    - collider->rect().left();
+                dX = c->rect().right() - collider->rect().left();
             } else {
-                // moved left
-                dX = collider->rect().right()
-                    - c->rect().left();
+                dX = collider->rect().right() - c->rect().left();
             }
             if (maxDX < dX) {
                 maxDX = dX;
@@ -84,22 +79,17 @@ update(LogicObject* object, Position p)
     m_quadTree.insert(c);
     EngineUnit maxDY = 0;
     for (const auto* collider : m_quadTree.retreive(c)) {
-        LogicObject* collided = collider->parent();
-        if (collided == object
-                || !collider->rect().intersects(c->rect())) {
+        LogicObject* collidedObject = collider->parent();
+        if (collidedObject == object || !collider->rect().intersects(c->rect())) {
             continue;
         }
-        m_collidedPairs.push_back(Pair{object, collided});
-        if (!c->isTrigger(collided) && !collider->isTrigger(object)) {
+        m_collidedPairs.push_back(Pair{object, collidedObject});
+        if (!c->isTrigger(collidedObject) && !collider->isTrigger(object)) {
             EngineUnit dy;
             if (p.y() - pOld.y() > 0) {
-                // moved up
-                dy = c->rect().top()
-                    - collider->rect().bottom();
+                dy = c->rect().top() - collider->rect().bottom();
             } else {
-                // moved down
-                dy = collider->rect().top()
-                    - c->rect().bottom();
+                dy = collider->rect().top() - c->rect().bottom();
             }
             if (maxDY < dy) {
                 maxDY = dy;
@@ -113,9 +103,11 @@ update(LogicObject* object, Position p)
     }
     m_quadTree.remove(c);
     object->setPosition(p);
-    Physics* ph = object->component<Physics>();
+    m_quadTree.insert(c);
+    m_collidedPairs.unique();
     // TODO: need to move to the other place
     // stopping moving in collided direction
+    Physics* ph = object->component<Physics>();
     if (ph != 0) {
         if (maxDX != 0) {
             ph->stopX();
@@ -124,8 +116,6 @@ update(LogicObject* object, Position p)
             ph->stopY();
         }
     }
-    m_quadTree.insert(c);
-    m_collidedPairs.unique();
 }
 
 void ObjectCollider::
