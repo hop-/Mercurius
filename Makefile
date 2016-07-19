@@ -31,20 +31,18 @@ DEPS_D := $(OBJS_D:.o=.d)
 # setting colored output
 INTERACTIVE := $(shell [ -t 0 ] && echo 1)
 NOCOLORS := 0
-ifdef INTERACTIVE
-    NOCOLORS := $(shell tput colors 2> /dev/null)
-    ifeq ($(shell test $(NOCOLORS) -ge 8 2> /dev/null; echo $$?), 0)
-        BOLD := $(shell tput bold)
-        RCOLOR := $(shell tput sgr0)
-        BLACK := $(shell tput setaf 0)
-        RED := $(shell tput setaf 1)
-        GREEN := $(shell tput setaf 2)
-        YELLOW := $(shell tput setaf 3)
-        BLUE := $(shell tput setaf 4)
-        MAGENTA := $(shell tput setaf 5)
-        CYAN := $(shell tput setaf 6)
-        WHITE := $(shell tput setaf 7)
-    endif
+NOCOLORS := $(shell tput colors 2> /dev/null)
+ifeq ($(shell test $(NOCOLORS) -ge 8 2> /dev/null; echo $$?), 0)
+    BOLD := $(shell tput bold)
+    RCOLOR := $(shell tput sgr0)
+    BLACK := $(shell tput setaf 0)
+    RED := $(shell tput setaf 1)
+    GREEN := $(shell tput setaf 2)
+    YELLOW := $(shell tput setaf 3)
+    BLUE := $(shell tput setaf 4)
+    MAGENTA := $(shell tput setaf 5)
+    CYAN := $(shell tput setaf 6)
+    WHITE := $(shell tput setaf 7)
 endif
 
 # exporting variables
