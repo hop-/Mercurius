@@ -57,7 +57,6 @@ addComponent(Component* component)
 {
     assert(component != 0);
     component->setParent(this); // automatically set parent
-    addObserver(component);
     m_components.insert(Components::value_type(component->getType()
                 , component));
 }
@@ -93,7 +92,6 @@ setPosition(Position p)
 {
     assert(component<Transform>());
     component<Transform>()->setPosition(p);
-    notify(); // TODO correct notifying
 }
 
 void LogicObject::

@@ -25,6 +25,7 @@ void Transform::
 setPosition(Position p)
 {
     m_position = p;
+    notify();
 }
 
 void Transform::
@@ -49,7 +50,7 @@ void ViewPort::
 target(LogicObject* object)
 {
     assert(0 != object);
-    object->addObserver(this);
+    object->addObserverToComponent<Transform>(this);
     onNotify();
 }
 
@@ -98,7 +99,8 @@ middleY() const
 const LogicObject* ViewPort::
 target() const
 {
-    return static_cast<const LogicObject*>(subject());
+    assert(0 != dynamic_cast<const Component*>(subject()));
+    return static_cast<const Component*>(subject())->parent();
 }
 
 void ViewPort::
@@ -238,10 +240,6 @@ isOnSurface()
 {
     return m_grounds.size();
 }
-
-void Collider::
-onNotify()
-{}
 
 bool Collider::
 isTrigger(const LogicObject* object) const
@@ -412,9 +410,8 @@ init()
     if (0 != parent()->parent()) {
         dynamic_cast<Logic*>(parent()->parent())->addToViewPort(parent());
     }
-    assert(0 != parent());
-    m_position = parent()->position();
-    notify();
+    addObserverToComponent<Transform>(this);
+    onNotify();
 }
 
 void TextureRenderer::

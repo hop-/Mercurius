@@ -59,7 +59,6 @@ class ViewPort
     : public Base::Singleton<ViewPort>
     , public LogicObject::ComponentCreator<ViewPort>
     , public Rectangle
-    , public Base::Subject
 {
     Rectangle m_movingArea;
 
@@ -187,11 +186,6 @@ class Collider
 
 public:
     /**
-     * @brief Colliders notify function
-     */
-    void onNotify() override;
-
-    /**
      * @brief Adds new trigger object to trigger objects list
      * @param object valid const pointer to LogicObject
      */
@@ -266,7 +260,6 @@ private:
 
 class TextureRenderer
     : public LogicObject::ComponentCreator<TextureRenderer>
-    , public Base::Subject
 {
     unsigned m_state = 0;
     int m_numberOfStates = 1;
@@ -277,7 +270,11 @@ class TextureRenderer
     EngineUnit m_height = 0;
 
 public:
-    // TODO add some useful functions
+    /**
+     * @brief Initializing component
+     */
+    void init() override;
+
     /**
      * @brief Sets the state (drawing state)
      * @param state int
@@ -344,7 +341,9 @@ public:
     Position objectPosition() const;
 
 private:
-    void init();
+    /**
+     * @brief Function which calls when parent is already set
+     */
     void onParentSet();
 };
 

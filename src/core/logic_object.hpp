@@ -21,12 +21,12 @@ class Transform;
 
 class LogicObject
     : public Base::ContainerObject<State>
-    , public Base::Subject
 {
 public:
     class Component
         : public Base::TypedBase
         , public Base::Observer
+        , public Base::Subject
     {
         friend class LogicObject;
         LogicObject* m_parent = 0;
@@ -46,6 +46,12 @@ public:
         virtual void update() {};
         virtual void init() {};
         virtual void onParentSet() {};
+
+        template <class T>
+        void addObserverToComponent(Base::Observer* o)
+        {
+            parent()->addObserverToComponent<T>(o);
+        }
 
     protected:
         Logic* logic();
@@ -111,6 +117,16 @@ public:
             return 0;
         }
         return static_cast<T*>(i->second);
+    }
+
+public:
+    template <class T>
+    void addObserverToComponent(Base::Observer* o)
+    {
+        Component* c = component<T>();
+        if (0 != c) {
+            c->addObserver(o);
+        }
     }
 };
 
