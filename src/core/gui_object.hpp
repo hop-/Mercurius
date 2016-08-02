@@ -29,7 +29,7 @@ class GuiObject
     HorizontalDirection m_direction = HorizontalDirection::Right;
 
 protected:
-    GuiObject();
+    GuiObject(TextureRenderer* textureRenderer);
 
 public:
     virtual ~GuiObject() = default;

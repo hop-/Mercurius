@@ -76,8 +76,8 @@ changeSourceRect()
 }
 
 GuiObject::
-GuiObject(const std::string& texture)
-    : Core::GuiObject()
+GuiObject(Core::TextureRenderer* textureRenderer, const std::string& texture)
+    : Core::GuiObject(textureRenderer)
     , m_texture()
 {
     setTextureLocation(texture);

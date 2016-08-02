@@ -16,7 +16,7 @@ class GuiObject
     Texture m_texture;
 
 public:
-    GuiObject(const std::string&);
+    GuiObject(Core::TextureRenderer* textureRenderer, const std::string&);
 
 public:
     void init();

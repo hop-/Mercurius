@@ -33,13 +33,12 @@ addGuiObject()
     assert(0 == m_guiObject);
     assert(0 != m_drawableObject);
     assert(0 != m_logicObject);
-    m_guiObject = new Sdl::GuiObject(m_drawableObject->texture());
-    m_guiObject->setPriority(m_drawableObject->priority());
     Core::TextureRenderer* textureRenderer = new Core::TextureRenderer();
     textureRenderer->setSizes(m_drawableObject->width()
             , m_drawableObject->height());
     m_logicObject->addComponent(textureRenderer);
-    textureRenderer->addObserver(m_guiObject);
+    m_guiObject = new Sdl::GuiObject(textureRenderer, m_drawableObject->texture());
+    m_guiObject->setPriority(m_drawableObject->priority());
     m_guiObject->setDimensions(m_drawableObject->width() // TODO use Textu-
             , m_drawableObject->height()                 // ureRendrer dim-
             , textureRenderer->scaleFactor());           // ensions

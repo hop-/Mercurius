@@ -8,10 +8,12 @@ namespace Core
 {
 
 GuiObject::
-GuiObject()
+GuiObject(TextureRenderer* textureRenderer)
     : m_textureLocation()
     , m_rect()
-{}
+{
+    textureRenderer->addObserver(this);
+}
 
 void GuiObject::
 setDimensions(UserUnit w, UserUnit h, float scale)
