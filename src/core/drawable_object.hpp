@@ -10,25 +10,21 @@ namespace Core
 
 class DrawableObject
 {
-private:
-    const std::string m_path;
-    unsigned m_width;
-    unsigned m_height;
-    unsigned m_rows;
-    unsigned m_columns;
+public:
+    enum States {running, jumping, climbing}; // need to be reviewed
 
 public:
     /**
-     * @brief Base class for drawable object
+     * @brief Constructer of drawable object
      * @param p path to the texture
      * @param w widht of texture
      * @param h height of texture
-     * @param r numbers of rows in texture, by default is 1
-     * @param r numbers of columns in texture, by default is 1
+     * @param fw widht of frames in texture
+     * @param fh height of frames in texture
      */
     DrawableObject(const std::string& p,
                    unsigned w, unsigned h,
-                   unsigned r = 1, unsigned c = 1);
+                   unsigned fw, unsigned fh);
 
 public:
     /// Return width of the texture
@@ -37,20 +33,34 @@ public:
     /// Return height of the texture
     unsigned height() const;
 
-    /// Return numbers of row
-    unsigned rows() const;
-
-    /// Return numbers of columns
-    unsigned columns() const;
+public:
+    /**
+     * @brief Sets passed state positions 
+     * @param s state for which to set positions
+     * @param tx top x, real top x will be counted by m_frame_width * tx
+     * @param ty top y, real top y will be counted by m_frame_height * ty
+     * @param bx bottom x ...
+     * @param by bottom y ...
+     */
+    void setStatePositions(States s,
+                           unsigned tx,
+                           unsigned ty,
+                           unsigned bx,
+                           unsigned by);
 
 public:
     /**
-     * @brief Return rectangle of passed state
-     * @param s state id
-     * @pre s <= rows() * columns(), s != 0
+     * @brief Return next frame rect for given state
+     * @param s state for which to return next frame rect
      */
-    Rectangle rectForState(unsigned s) const;
+    Rectangle getNextFrameForState(States s);
 
+private:
+    const std::string m_path;
+    unsigned m_texture_width;
+    unsigned m_texture_height;
+    unsigned m_frame_width;
+    unsigned m_frame_height;
 };
 
 } // end of namespace Core

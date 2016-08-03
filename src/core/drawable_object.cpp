@@ -8,48 +8,28 @@ namespace Core
 DrawableObject::
 DrawableObject(const std::string& p,
                unsigned w, unsigned h,
-               unsigned r, unsigned c)
+               unsigned fw, unsigned fh)
     : m_path(p)
-    , m_width(w), m_height(h)
-    , m_rows(r), m_columns(c)
+    , m_texture_width(w), m_texture_height(h)
+    , m_frame_width(fw), m_frame_height(fh)
 {
     assert(!m_path.empty());
     assert(w != 0);
     assert(h != 0);
-    assert(r != 0);
-    assert(c != 0);
+    assert(fw != 0);
+    assert(fh != 0);
 }
 
 unsigned DrawableObject::
 width() const
 {
-    return m_width;
+    return m_texture_width;
 }
 
 unsigned DrawableObject::
 height() const
 {
-    return m_height;
-}
-
-unsigned DrawableObject::
-rows() const
-{
-    return m_rows;
-}
-
-unsigned DrawableObject::
-columns() const
-{
-    return m_columns;
-}
-
-Rectangle DrawableObject::
-rectForState(unsigned s) const
-{
-    assert(s != 0);
-    assert(s < m_rows * m_columns);
-    return Rectangle();
+    return m_texture_height;
 }
 
 } // end of namespace Core

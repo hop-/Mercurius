@@ -394,7 +394,7 @@ public:
      * @brief Sets frame rate
      * @param rate int new frame rate
      */
-    setFrameRate(int rate);
+     void setFrameRate(int rate);
 
     //setState(state) //animation state
     // TODO add needed functionality
