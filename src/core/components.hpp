@@ -378,6 +378,28 @@ private:
     void init();
 };
 
+class Animator
+    : public LogicObject::ComponentCreator<Animator>
+{
+    unsigned m_frameDelay = 1;
+
+public:
+    /**
+     * @brief constructor to Animator class
+     */
+    Animator();
+
+public:
+    /**
+     * @brief Sets frame rate
+     * @param rate int new frame rate
+     */
+    setFrameRate(int rate);
+
+    //setState(state) //animation state
+    // TODO add needed functionality
+};
+
 } // namespace Core
 
 #endif //_CORE_COMPONENTS_HPP_
