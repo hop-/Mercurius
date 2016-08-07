@@ -3,6 +3,7 @@
 #include "frame.hpp"
 #include "logic.hpp"
 #include "events.hpp"
+#include "animation_controller.hpp"
 
 #include <base/event_manager.hpp>
 
@@ -469,6 +470,20 @@ void ArrayObject::
 setColumns(int columns)
 {
     m_columns = columns;
+}
+
+void Animator::
+setController(AnimationController* c)
+{
+    assert(0 != c);
+    m_controller = c;
+}
+
+void Animator::
+update()
+{
+    assert(0 != m_controller);
+    m_controller->update();
 }
 
 } // namespace Core

@@ -16,9 +16,11 @@
 namespace Core
 {
 
-Game* Game::m_instance = 0;
+Game* Game::
+m_instance = 0;
 
-Game* Game::getInstance(Frame* frame, Base::InputHandler* inputHandler)
+Game* Game::
+getInstance(Frame* frame, Base::InputHandler* inputHandler)
 {
     if (frame != 0 && inputHandler != 0 && m_instance == 0) {
         m_instance = new Game(frame, inputHandler);
@@ -26,7 +28,8 @@ Game* Game::getInstance(Frame* frame, Base::InputHandler* inputHandler)
     return m_instance;
 }
 
-bool Game::deleteInstance()
+bool Game::
+deleteInstance()
 {
     if (m_instance == 0) {
         return false;
@@ -36,7 +39,8 @@ bool Game::deleteInstance()
     return true;
 }
 
-Game::Game(Frame* frame, Base::InputHandler* inputHandler)
+Game::
+Game(Frame* frame, Base::InputHandler* inputHandler)
     : m_frame(frame)
     , m_inputHandler(inputHandler)
     , m_layers()
@@ -46,7 +50,8 @@ Game::Game(Frame* frame, Base::InputHandler* inputHandler)
     QuitEvent::registerCallback(new Base::DelegateCreator<Game>(this, &Game::quit));
 }
 
-Game::~Game()
+Game::
+~Game()
 {
     assert(0 != m_frame);
     assert(0 != m_inputHandler);
@@ -64,7 +69,8 @@ Game::~Game()
     // TODO remove callback
 }
 
-void Game::mainLoop()
+void Game::
+mainLoop()
 {
     assert(0 != m_inputHandler);
     ViewPort::getInstance()->setMovingArea(mapRect()); // TODO. Moving area should be updated for each layer
@@ -112,7 +118,8 @@ void Game::mainLoop()
     }
 }
 
-void Game::start()
+void Game::
+start()
 {
     assert(0 != m_frame);
     m_frame->init();
@@ -123,12 +130,14 @@ void Game::start()
     mainLoop();
 }
 
-void Game::pushLayer(Layer* layer)
+void Game::
+pushLayer(Layer* layer)
 {
     m_layers.push_back(layer);
 }
 
-Rectangle Game::mapRect()
+Rectangle Game::
+mapRect()
 {
     EngineUnit x1, x2, y1, y2;
     bool firstTime = true;
@@ -170,33 +179,45 @@ Rectangle Game::mapRect()
     return Rectangle(x2 - x1, y2 - y1, Position(x1, y1));
 }
 
-int Game::activeLayerId() const
+int Game::
+activeLayerId() const
 {
     return m_activeLayerId;
 }
 
-void Game::popLayer()
+void Game::
+popLayer()
 {
     return m_layers.pop_back();
 }
 
-const Frame* Game::frame() const
+const Frame* Game::
+frame() const
 {
     assert(0 != m_frame);
     return m_frame;
 }
 
-const Game::Layers& Game::layers() const
+const Game::Layers& Game::
+layers() const
 {
     return m_layers;
 }
 
-Base::InputHandler* Game::inputHandler()
+unsigned Game::
+getTicks()
+{
+    return getInstance()->inputHandler()->getTicks();
+}
+
+Base::
+InputHandler* Game::inputHandler()
 {
     return m_inputHandler;
 }
 
-void Game::quit(Base::Event*)
+void Game::
+quit(Base::Event*)
 {
     m_isRunning = false;
 }

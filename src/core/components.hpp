@@ -25,6 +25,8 @@ class Event;
 namespace Core
 {
 
+class AnimationController;
+
 class Transform
     : public LogicObject::ComponentCreator<Transform>
 {
@@ -381,23 +383,20 @@ private:
 class Animator
     : public LogicObject::ComponentCreator<Animator>
 {
-    unsigned m_frameDelay = 1;
+    AnimationController* m_controller;
 
 public:
     /**
-     * @brief constructor to Animator class
+     * @brief Sets controller
+     * @param c pointer to AnimationController
      */
-    Animator();
+    void setController(AnimationController* c);
 
-public:
+private:
     /**
-     * @brief Sets frame rate
-     * @param rate int new frame rate
+     * @brief Overrided update function
      */
-     void setFrameRate(int rate);
-
-    //setState(state) //animation state
-    // TODO add needed functionality
+    void update() override;
 };
 
 } // namespace Core

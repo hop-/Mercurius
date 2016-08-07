@@ -59,6 +59,9 @@ public:
     Rectangle mapRect();
     int activeLayerId() const;
 
+public:
+    static unsigned getTicks();
+
 private:
     void mainLoop();
     void quit(Base::Event*);
