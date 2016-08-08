@@ -43,6 +43,11 @@ public:
      */
     virtual void update(unsigned ticks);
 
+    /**
+     * @brief Resets state
+     */
+    void reset(unsigned ticks);
+
 public:
     /**
      * @brief Sets begin position

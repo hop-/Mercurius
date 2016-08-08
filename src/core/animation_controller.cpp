@@ -60,6 +60,7 @@ changeState(unsigned id)
         return;
     }
     m_currentState = id;
+    m_states[m_currentState]->reset(Game::getTicks());
 }
 
 int AnimationController::

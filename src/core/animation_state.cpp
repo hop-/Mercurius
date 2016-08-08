@@ -28,6 +28,13 @@ update(unsigned ticks)
 }
 
 void AnimationState::
+reset(unsigned ticks)
+{
+    m_currentFrame = 0;
+    m_previousTicks = ticks;
+}
+
+void AnimationState::
 setBeginPosition(unsigned x, unsigned y)
 {
     m_beginPositionInTexture = BeginPosition(x, y);
