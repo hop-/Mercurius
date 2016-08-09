@@ -26,13 +26,13 @@ public:
      * @brief Removes state with name from controller
      * @param name stirng state name
      */
-    void removeState(std::string name);
+    void removeState(const std::string& name);
 
     /**
      * @brief Changes current state to state with name
      * @param name stirng state name
      */
-    void changeState(std::string name);
+    void changeState(const std::string& name);
 
 public:
     /**
@@ -41,23 +41,9 @@ public:
     void update();
 
 private:
-    /**
-     * @brief Removes state with ID from controller
-     * @param id unsigned int state id in controller
-     */
     void removeState(unsigned id);
-
-    /**
-     * @brief Changes current state to ID
-     * @param id unsigned int state id in controller
-     */
     void changeState(unsigned id);
-
-    /**
-     * @brief Returns ID of state with given name, -1 if not found
-     * @param name stirng state name
-     */
-    int stateID(std::string name) const;
+    int stateID(const std::string& name) const;
 };
 
 } // namespace Core

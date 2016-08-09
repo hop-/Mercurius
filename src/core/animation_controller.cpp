@@ -15,7 +15,7 @@ addState(AnimationState* state)
 }
 
 void AnimationController::
-removeState(std::string name)
+removeState(const std::string& name)
 {
     int id = stateID(name);
     if (id < 0) {
@@ -25,7 +25,7 @@ removeState(std::string name)
 }
 
 void AnimationController::
-changeState(std::string name)
+changeState(const std::string& name)
 {
     int id = stateID(name);
     if (id < 0) {
@@ -64,7 +64,7 @@ changeState(unsigned id)
 }
 
 int AnimationController::
-stateID(std::string name) const
+stateID(const std::string& name) const
 {
     for (unsigned id = 0; id < m_states.size(); ++id) {
         if (m_states[id]->name() == name) {
