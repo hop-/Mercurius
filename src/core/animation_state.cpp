@@ -4,9 +4,14 @@ namespace Core
 {
 
 AnimationState::
-AnimationState(const std::string& name)
+AnimationState(const std::string& name, Position beginPosition, unsigned numberOfFrames, bool isLooped, unsigned fps)
     :m_name(name)
-    , m_beginPositionInTexture(0, 0)
+    , m_beginPositionInTexture(beginPosition)
+    , m_frames(numberOfFrames)
+    , m_currentFrame(0)
+    , m_isloop(isLooped)
+    , m_cycleCount(1)
+    , m_frameDelay(1000 / fps)
 {}
 
 std::string AnimationState::
@@ -24,7 +29,7 @@ update(unsigned ticks)
     unsigned deltaTicks = ticks - m_previousTicks;
     m_previousTicks = ticks;
     int framesToPass = deltaTicks / m_frameDelay;
-    nextState(framesToPass);
+    nextFrame(framesToPass);
 }
 
 void AnimationState::
@@ -32,18 +37,6 @@ reset(unsigned ticks)
 {
     m_currentFrame = 0;
     m_previousTicks = ticks;
-}
-
-void AnimationState::
-setPosition(unsigned x, unsigned y)
-{
-    m_beginPositionInTexture = Position(x, y);
-}
-
-void AnimationState::
-setNumberOfFrames(unsigned n)
-{
-    m_frames = n;
 }
 
 unsigned AnimationState::
@@ -66,12 +59,6 @@ currentFramePosition() const
     return p;
 }
 
-void AnimationState::
-setLoop(bool l)
-{
-    m_isloop = l;
-}
-
 bool AnimationState::
 isLooped() const
 {
@@ -85,13 +72,7 @@ setCountOfCycles(unsigned count)
 }
 
 void AnimationState::
-setFrameRate(unsigned fps)
-{
-    m_frameDelay = 1000 / fps;
-}
-
-void AnimationState::
-nextState(unsigned n)
+nextFrame(unsigned n)
 {
     if (n == 0) {
         return;

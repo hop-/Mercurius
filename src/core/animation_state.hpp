@@ -8,23 +8,29 @@ namespace Core
 
 class AnimationState
 {
+public:
     using Position = std::pair<unsigned, unsigned>;
 
+private:
     const std::string m_name;
     Position m_beginPositionInTexture; // TODO need to be discused
-    unsigned m_frames = 0;
-    unsigned m_currentFrame = 0;
-    bool m_isloop = true;
-    unsigned m_cycleCount = 1;
-    unsigned m_frameDelay = 1;
+    unsigned m_frames;
+    unsigned m_currentFrame;
+    bool m_isloop;
+    unsigned m_cycleCount;
+    unsigned m_frameDelay;
     unsigned m_previousTicks = 0;
 
 public:
     /**
      * @brief Constructor to animation state
      * @param name const string reference name of animation state
+     * @param beginPosition begin position of state in texture array
+     * @param numberOfFrame unsigned number of frame
+     * @param isLooped bool weather state looped or not
+     * @param fps unsigned rate of frame
      */
-    AnimationState(const std::string& name);
+    AnimationState(const std::string& name, Position beginPosition, unsigned numberOfFrame, bool isLooped, unsigned fps);
 
     /**
      * @brief Virtual destructor to animation state
@@ -50,19 +56,6 @@ public:
 
 public:
     /**
-     * @brief Sets begin position
-     * @param x unsigned int X position
-     * @param y unsigned int Y position
-     */
-    void setPosition(unsigned x, unsigned y);
-
-    /**
-     * @brief Sets number of frames
-     * @param n unsigned number of states
-     */
-    void setNumberOfFrames(unsigned n);
-
-    /**
      * @brief Gets number of frames
      */
     unsigned numberOfFrames() const;
@@ -78,11 +71,6 @@ public:
     Position currentFramePosition() const;
 
     /**
-     * @brief Sets the state type (loop or not)
-     */
-    void setLoop(bool l);
-
-    /**
      * @brief Checks if state looped or not
      */
     bool isLooped() const;
@@ -93,18 +81,8 @@ public:
      */
     void setCountOfCycles(unsigned count);
 
-    /**
-     * @brief Sets rate of frames
-     * @param fps unsigned frame per second
-     */
-    void setFrameRate(unsigned fps);
-
 private:
-    /**
-     * @brief Changes current state to the next state
-     * @param n unsigned next n-th states;
-     */
-    void nextState(unsigned n);
+    void nextFrame(unsigned n);
 };
 
 } // namespace Core
