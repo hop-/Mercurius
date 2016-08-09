@@ -8,10 +8,10 @@ namespace Core
 
 class AnimationState
 {
-    using BeginPosition = std::pair<unsigned, unsigned>;
+    using Position = std::pair<unsigned, unsigned>;
 
     const std::string m_name;
-    BeginPosition m_beginPositionInTexture; // TODO need to be discused
+    Position m_beginPositionInTexture; // TODO need to be discused
     unsigned m_frames = 0;
     unsigned m_currentFrame = 0;
     bool m_isloop = true;
@@ -54,7 +54,7 @@ public:
      * @param x unsigned int X position
      * @param y unsigned int Y position
      */
-    void setBeginPosition(unsigned x, unsigned y);
+    void setPosition(unsigned x, unsigned y);
 
     /**
      * @brief Sets number of frames
@@ -71,6 +71,11 @@ public:
      * @brief Gets current frame
      */
     unsigned currentFrame() const;
+
+    /**
+     * @brief Gets position of current state in texture
+     */
+    Position currentFramePosition() const;
 
     /**
      * @brief Sets the state type (loop or not)

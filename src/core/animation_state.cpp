@@ -35,9 +35,9 @@ reset(unsigned ticks)
 }
 
 void AnimationState::
-setBeginPosition(unsigned x, unsigned y)
+setPosition(unsigned x, unsigned y)
 {
-    m_beginPositionInTexture = BeginPosition(x, y);
+    m_beginPositionInTexture = Position(x, y);
 }
 
 void AnimationState::
@@ -56,6 +56,14 @@ unsigned AnimationState::
 currentFrame() const
 {
     return m_currentFrame;
+}
+
+AnimationState::Position AnimationState::
+currentFramePosition() const
+{
+    Position p = m_beginPositionInTexture;
+    p.second = p.second + m_currentFrame;
+    return p;
 }
 
 void AnimationState::
