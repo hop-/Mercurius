@@ -11,15 +11,12 @@ namespace Core
 class DrawableObject
 {
 public:
-    enum States {running, jumping, climbing}; // need to be reviewed
-
-public:
     /**
      * @brief Constructer of drawable object
      * @param p path to the texture
-     * @param w widht of texture
+     * @param w width of texture
      * @param h height of texture
-     * @param fw widht of frames in texture
+     * @param fw width of frames in texture
      * @param fh height of frames in texture
      */
     DrawableObject(const std::string& p,
@@ -35,25 +32,11 @@ public:
 
 public:
     /**
-     * @brief Sets passed state positions 
-     * @param s state for which to set positions
-     * @param tx top x, real top x will be counted by m_frame_width * tx
-     * @param ty top y, real top y will be counted by m_frame_height * ty
-     * @param bx bottom x ...
-     * @param by bottom y ...
+     * @brief Sets frame
+     * @param x position
+     * @param y position
      */
-    void setStatePositions(States s,
-                           unsigned tx,
-                           unsigned ty,
-                           unsigned bx,
-                           unsigned by);
-
-public:
-    /**
-     * @brief Return next frame rect for given state
-     * @param s state for which to return next frame rect
-     */
-    Rectangle getNextFrameForState(States s);
+    void setFrame(int x, int y);
 
 private:
     const std::string m_path;
