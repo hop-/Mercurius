@@ -3,16 +3,17 @@
 #include "mml_registery.hpp"
 
 #include "background.hpp"
-#include "config.hpp"
-#include "mml_box.hpp"
 #include "being.hpp"
-#include "dude.hpp"
+#include "mml_box.hpp"
+#include "config.hpp"
 #include "door.hpp"
-#include "switch.hpp"
+#include "dude.hpp"
 #include "ground.hpp"
-#include "platform.hpp"
 #include "ladder.hpp"
 #include "mml_layer.hpp"
+#include "platform.hpp"
+#include "switch.hpp"
+#include "texture.hpp"
 
 #include <algorithm>
 #include <utility>
@@ -82,6 +83,7 @@ registerTypes()
     m_types["background"] = new Background::BackgroundFactory();
     m_types["ladder"] = new Ladder::Factory();
     m_types["config"] = new Config::Factory();
+    m_types["texture"] = new Texture::Factory();
 }
 
 void MMLManager::
