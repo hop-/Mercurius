@@ -4,7 +4,8 @@ namespace Core
 {
 
 AnimationState::
-AnimationState(const std::string& name, Position beginPosition, unsigned numberOfFrames, bool isLooped, unsigned fps)
+AnimationState(const std::string& name, Position beginPosition,
+        unsigned numberOfFrames, bool isLooped, unsigned fps)
     :m_name(name)
     , m_beginPositionInTexture(beginPosition)
     , m_frames(numberOfFrames)
@@ -14,7 +15,7 @@ AnimationState(const std::string& name, Position beginPosition, unsigned numberO
     , m_frameDelay(1000 / fps)
 {}
 
-std::string AnimationState::
+const std::string& AnimationState::
 name() const
 {
     return m_name;

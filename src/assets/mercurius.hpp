@@ -9,7 +9,7 @@
 
 namespace MML {
 
-class MMLObject;
+class Config;
 
 }
 
@@ -38,7 +38,7 @@ private:
     static Configs m_configs;
 
 private:
-    static void addConfig(const MML::MMLObject*);
+    static void addConfig(const MML::Config*);
     static void loadConfigs();
     static void loadLayers(Core::Game&, Core::Frame*);
 };

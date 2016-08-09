@@ -30,7 +30,11 @@ public:
      * @param isLooped bool weather state looped or not
      * @param fps unsigned rate of frame
      */
-    AnimationState(const std::string& name, Position beginPosition, unsigned numberOfFrame, bool isLooped, unsigned fps);
+    AnimationState(const std::string& name,
+                   Position beginPosition,
+                   unsigned numberOfFrame,
+                   bool isLooped,
+                   unsigned fps);
 
     /**
      * @brief Virtual destructor to animation state
@@ -41,7 +45,7 @@ public:
     /**
      * @brief Gets name of state
      */
-    std::string name() const;
+    const std::string& name() const;
 
     /**
      * @brief Updates state

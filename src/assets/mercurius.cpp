@@ -7,6 +7,7 @@
 #include <core/objects_factory.hpp>
 #include <core/layer.hpp>
 #include <mml/config.hpp>
+#include <mml/mml_layer.hpp>
 #include <mml/mml_manager.hpp>
 #include <mml/mml_registery.hpp>
 #include <sdl/event_manager.hpp>
@@ -53,9 +54,12 @@ loadConfigs()
     m->loadData("resources/mmls/config.mml");
     MML::MMLRegistery* registery = m->getRegistery();
     assert(0 != registery);
-    for(MML::MMLRegistery::iterator i = registery->begin();
-                                    i != registery->end(); ++i) {
-        MML::MMLObject* config = *i;
+    typedef std::vector<MML::Config*> Configs;
+    Configs configs;
+    registery->getObjects(configs);
+    for(Configs::iterator i = configs.begin();
+                          i != configs.end(); ++i) {
+        MML::Config* config = *i;
         assert(0 != config);
         addConfig(config);
     }
@@ -70,12 +74,15 @@ loadLayers(Core::Game& game, Core::Frame* frame)
     assert(0 != m);
     assert(0 != frame);
     m->loadData("resources/mmls/main.mml");
-    MML::MMLRegistery* layer_registery = m->getLayerRegistery();
-    assert(0 != layer_registery);
+    MML::MMLRegistery* r = m->getRegistery();
+    assert(0 != r);
+    typedef std::vector<MML::MMLLayer*> Layers;
+    Layers layers;
+    r->getObjects(layers);
     TypeManager* tm = TypeManager::getInstance();
     assert(0 != tm);
-    for(MML::MMLRegistery::iterator i = layer_registery->begin();
-                                    i != layer_registery->end(); ++i) {
+    for(Layers::iterator i = layers.begin();
+                         i != layers.end(); ++i) {
         MML::MMLObject* layer = *i;
         assert(0 != layer);
         const Core::ObjectsFactory* f = tm->getFactory(layer->getType());
@@ -91,10 +98,8 @@ loadLayers(Core::Game& game, Core::Frame* frame)
 }
 
 void Mercurius::
-addConfig(const MML::MMLObject* config)
+addConfig(const MML::Config* c)
 {
-    assert(0 != config);
-    const MML::Config* c = dynamic_cast<const MML::Config*>(config);
     assert(0 != c);
     Config* newConfig = new Config();
     newConfig->m_screenMode = c->screenMode();

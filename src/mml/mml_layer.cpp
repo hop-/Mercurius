@@ -19,21 +19,11 @@ MMLLayer(const std::string& n)
     setType("layer");
     addAttribute(new MMLAttribute("visible", false));
     addAttribute(new MMLAttribute("stopped", false));
-    MMLManager* m = MMLManager::getInstance();
-    assert(0 != m);
-    MMLRegistery* r = m->getLayerRegistery();
-    assert(0 != r);
-    r->addObject(this);
 }
 
 MMLLayer::
 ~MMLLayer()
 {
-    MMLManager* m = MMLManager::getInstance();
-    assert(0 != m);
-    MMLRegistery* r = m->getLayerRegistery();
-    assert(0 != r);
-    r->removeObject(this);
 }
 
 } // MML

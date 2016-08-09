@@ -27,7 +27,6 @@ MMLManager::
 MMLManager()
      : Base::Singleton<MMLManager>()
      , m_registery(new MMLRegistery())
-     , m_layer_registery(new MMLRegistery())
      , m_types()
 {
     registerTypes();
@@ -37,25 +36,19 @@ MMLManager::
 ~MMLManager()
 {
     cleanTypeRegistery();
-    assert(0 != m_layer_registery);
     assert(0 != m_registery);
-    std::vector<MMLObject*> layers;
-    std::for_each(m_layer_registery->begin(),
-                  m_layer_registery->end(),
-                  [&](MMLObject* o) {
-                        assert(0 != o);
-                        layers.push_back(o);
-                  });
-    std::for_each(layers.begin(),
-                  layers.end(),
+    std::vector<MMLLayer*> objects;
+    m_registery->getObjects(objects);
+    std::for_each(objects.begin(),
+                  objects.end(),
                   [](MMLObject* o) {
                         assert(0 != o);
                         delete o;
                   });
-    delete m_layer_registery;
-    m_layer_registery = 0;
     delete m_registery;
     m_registery = 0;
+    objects.clear();
+    assert(objects.empty());
     MMLParser::deleteInstance();
 }
 
@@ -103,12 +96,6 @@ MMLRegistery* MMLManager::
 getRegistery()
 {
     return m_registery;
-}
-
-MMLRegistery* MMLManager::
-getLayerRegistery()
-{
-    return m_layer_registery;
 }
 
 }
