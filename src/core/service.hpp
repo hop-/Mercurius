@@ -1,7 +1,7 @@
 #ifndef _CORE_SERVICE_HPP_
 #define _CORE_SERVICE_HPP_
 
-#include <base/singltone.hpp>
+#include <base/singleton.hpp>
 
 namespace Core {
 
@@ -9,14 +9,28 @@ template <typename T>
 class Service : public Base::Singleton<T>
 {
 public:
-    Service();
+    Service()
+    {
+        // TODO register service in controller
+    }
 
 public:
-    virtual ~Service();
+    virtual ~Service()
+    {
+        // TODO unregister service from controller
+    }
 
 public:
-    void load();
-    void shut_down();
+    void load()
+    {
+        register_dependencies();
+        start();
+    }
+
+    void shut_down()
+    {
+        // TODO stop from controller by checking dependencies
+    }
 
 protected:
     virtual void start() = 0;
@@ -26,9 +40,6 @@ public:
     virtual void register_dependencies()
     {}
 };
-
-template <typename T>
-T* Service::m_s_instance = 0;
 
 } // end of namespace Core
 

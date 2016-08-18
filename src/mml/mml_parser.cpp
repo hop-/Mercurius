@@ -20,9 +20,6 @@ static const char open_value = ':';
 static const char close_value = ';';
 static const char comma_value = ',';
 
-template<>
-MMLParser* Base::Singleton<MMLParser>::m_s_instance = 0;
-
 MMLParser::
 MMLParser()
     : Base::Singleton<MMLParser>()

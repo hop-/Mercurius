@@ -5,9 +5,6 @@
 namespace Assets
 {
 
-template <>
-TypeManager* Base::Singleton<TypeManager>::m_s_instance = 0;
-
 TypeManager::
 TypeManager()
     : Base::Singleton<TypeManager>()

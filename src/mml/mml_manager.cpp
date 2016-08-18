@@ -21,9 +21,6 @@
 namespace MML
 {
 
-template<>
-MMLManager* Base::Singleton<MMLManager>::m_s_instance = 0;
-
 MMLManager::
 MMLManager()
      : Base::Singleton<MMLManager>()

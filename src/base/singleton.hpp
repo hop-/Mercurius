@@ -41,6 +41,9 @@ public:
 
 };
 
+template <typename T>
+T* Singleton<T>::m_s_instance = 0;
+
 } // end of namespace Base
 
 #endif // _BASE_SINGLETON_HPP_
