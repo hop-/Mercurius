@@ -28,6 +28,9 @@ public:
     virtual ~Controller();
 
 public:
+    void initCornerStone();
+
+public:
     bool registerService(Service*);
     bool registerDependency(int, int);
     void unregisterService(int);

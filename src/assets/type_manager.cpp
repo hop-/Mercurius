@@ -1,16 +1,37 @@
 #include "type_manager.hpp"
-
 #include "factories.hpp"
+
+#include <mml/mml_manager.hpp>
 
 namespace Assets
 {
 
 TypeManager::
 TypeManager()
-    : Base::Singleton<TypeManager>()
+    : Core::SingletonService<TypeManager>()
     , m_factories()
 {
+}
+
+void TypeManager::
+start()
+{
     registerTypes();
+}
+
+void TypeManager::
+stop()
+{
+    for (auto i : m_factories) {
+        delete i.second;
+    }
+    m_factories.clear();
+}
+
+void TypeManager::
+registerDependencies()
+{
+    requireDependency<MML::MMLManager>();
 }
 
 void TypeManager::

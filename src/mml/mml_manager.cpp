@@ -23,15 +23,40 @@ namespace MML
 
 MMLManager::
 MMLManager()
-     : Base::Singleton<MMLManager>()
+     : Core::SingletonService<MMLManager>()
      , m_registery(new MMLRegistery())
      , m_types()
 {
-    registerTypes();
 }
 
 MMLManager::
 ~MMLManager()
+{
+}
+
+bool MMLManager::
+loadData(const std::string& f)
+{
+    MMLParser* p = MMLParser::getInstance();
+    assert(0 != p);
+    return p->parseFile(f);
+}
+
+MMLManager::Factory* MMLManager::
+getTypeFactory(const std::string& n)
+{
+    Types::iterator i = m_types.find(n);
+    return i != m_types.end() ? i->second : 0;
+}
+
+void MMLManager::
+start()
+{
+    registerTypes();
+}
+
+void MMLManager::
+stop()
 {
     cleanTypeRegistery();
     assert(0 != m_registery);
@@ -48,21 +73,6 @@ MMLManager::
     objects.clear();
     assert(objects.empty());
     MMLParser::deleteInstance();
-}
-
-bool MMLManager::
-loadData(const std::string& f)
-{
-    MMLParser* p = MMLParser::getInstance();
-    assert(0 != p);
-    return p->parseFile(f);
-}
-
-MMLManager::Factory* MMLManager::
-getTypeFactory(const std::string& n)
-{
-    Types::iterator i = m_types.find(n);
-    return i != m_types.end() ? i->second : 0;
 }
 
 void MMLManager::

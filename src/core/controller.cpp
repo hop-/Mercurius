@@ -26,8 +26,14 @@ Controller::
 Controller()
     : m_services()
     , m_dependency_map()
-    , m_corner_stone_creating(true)
+    , m_corner_stone_creating(false)
 {
+}
+
+void Controller::
+initCornerStone()
+{
+    m_corner_stone_creating = true;
     CornerStone::getInstance();
     m_corner_stone_creating = false;
 }

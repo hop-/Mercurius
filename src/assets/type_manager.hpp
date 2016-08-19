@@ -1,7 +1,7 @@
 #ifndef _ASSETS_TYPE_MANAGER_HPP_
 #define _ASSETS_TYPE_MANAGER_HPP_
 
-#include <base/singleton.hpp>
+#include <core/service.hpp>
 
 #include <map>
 #include <string>
@@ -14,7 +14,7 @@ class ObjectsFactory;
 namespace Assets
 {
 
-class TypeManager : public Base::Singleton<TypeManager>
+class TypeManager : public Core::SingletonService<TypeManager>
 {
 private:
     typedef std::map<std::string, Core::ObjectsFactory*> Factories;
@@ -22,6 +22,13 @@ private:
 
 public:
     const Core::ObjectsFactory* getFactory(const std::string& type) const;
+
+private:
+    virtual void registerDependencies();
+
+private:
+    virtual void start();
+    virtual void stop();
 
 private:
     TypeManager();

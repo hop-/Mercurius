@@ -1,6 +1,7 @@
 #ifndef _ASSETS_MERCURIUS_HPP_
 #define _ASSETS_MERCURIUS_HPP_
 
+#include <core/application.hpp>
 #include <core/frame.hpp>
 #include <core/game.hpp>
 #include <core/input_manager.hpp>
@@ -16,31 +17,16 @@ class Config;
 namespace Assets
 {
 
-class Mercurius
+class Mercurius : public Core::Application
 {
 public:
     static void start();
 
-private:
-    struct Config
-    {
-        Core::Frame::ScreenMode m_screenMode;
-        int m_fps;
-        int m_width;
-        int m_height;
-        bool m_isDefault;
-        Core::InputManager::Key m_mapping[256];
-    };
+public:
+    virtual void startServices();
 
-private:
-    typedef Core::InputManager::Key Key;
-    typedef std::vector<Config*> Configs;
-    static Configs m_configs;
+    virtual ~Mercurius();
 
-private:
-    static void addConfig(const MML::Config*);
-    static void loadConfigs();
-    static void loadLayers(Core::Game&, Core::Frame*);
 };
 
 } // namespace Assets

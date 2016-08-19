@@ -3,7 +3,7 @@
 
 #include "mml_object.hpp"
 
-#include <base/singleton.hpp>
+#include <core/service.hpp>
 
 #include <map>
 #include <string>
@@ -13,7 +13,7 @@ namespace MML
 
 class MMLRegistery;
 
-class MMLManager : public Base::Singleton<MMLManager>
+class MMLManager : public Core::SingletonService<MMLManager>
 {
 private:
     MMLRegistery* m_registery;
@@ -30,6 +30,10 @@ public:
 
 public:
     MMLRegistery* getRegistery();
+
+public:
+    virtual void start();
+    virtual void stop();
 
 private:
     Factory* getTypeFactory(const std::string&);

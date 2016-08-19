@@ -9,7 +9,8 @@
 int main(int argc, char** argv)
 {
     try {
-        Assets::Mercurius::start();
+        Assets::Mercurius m;
+        m.play();
     } catch (const Base::Exception& e) {
         std::cerr<<e.what()<<std::endl;
     }

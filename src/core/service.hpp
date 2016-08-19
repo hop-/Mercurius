@@ -69,10 +69,16 @@ class SingletonService : public Core::Service
                 , public Base::Singleton<T>
 {
 public:
-    SingletonService()
-        : Service()
+    static T* getInstance()
     {
-        load();
+        T* s = Base::Singleton<T>::getInstance();
+        static bool is_instantiated = false;
+        if (!is_instantiated) {
+            assert(0 != s);
+            s->load();
+            is_instantiated = true;
+        }
+        return s;
     }
 
 protected:
@@ -81,7 +87,7 @@ protected:
     {
         Controller* c = Controller::getInstance();
         assert(0 != c);
-        c->registerDependency(D::getInstance()->getType(), getType());
+        return c->registerDependency(D::getInstance()->getType(), getType());
     }
 };
 
