@@ -17,3 +17,4 @@ objs_rc-d/
 # ignore all tmp backup files
 *~
 .*.swp
+.*.swo
