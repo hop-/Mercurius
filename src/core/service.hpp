@@ -3,42 +3,55 @@
 
 #include "controller.hpp"
 
+#include <base/typed_base.hpp>
+#include <base/singleton.hpp>
+
 namespace Core {
 
 class Service : public Base::TypedBase
 {
+private:
+    Base::TypedBase::ID m_id;
+
+    enum State {stopped = 0, starting, started, max};
+    State m_current_state = stopped;
+
 public:
     Service()
+        : m_id()
     {
+        Controller* c = Controller::getInstance();
+        assert(0 != c);
+        c->registerService(this);
         // TODO register service in controller
     }
 
 public:
     virtual ~Service()
     {
-        // TODO unregister service from controller
+        Controller* c = Controller::getInstance();
+        assert(0 != c);
+        c->unregisterService(getType());
     }
 
 public:
-    void load()
-    {
-        register_dependencies();
-        start();
-    }
-
-    void shut_down()
-    {
-        // TODO stop from controller by checking dependencies
-    }
-
-public:
-    virtual int getType()
+    virtual int getType() const
     {
         return m_id;
     }
 
 protected:
-    virtual void register_dependencies()
+    void load()
+    {
+        assert(m_current_state == stopped);
+        m_current_state = starting;
+        registerDependencies();
+        start();
+        m_current_state = started;
+    }
+
+private:
+    virtual void registerDependencies()
     {}
 
 protected:
@@ -46,20 +59,29 @@ protected:
     virtual void stop() = 0;
 
 private:
-    Base::TypedBase::ID m_id;
+    friend class Controller;
+
+public:
 };
 
 template <typename T>
-class Singleton : public Service
+class SingletonService : public Core::Service
                 , public Base::Singleton<T>
 {
+public:
+    SingletonService()
+        : Service()
+    {
+        load();
+    }
+
 protected:
-    template <typename D, typename S = T>
-    static bool create_dependency()
+    template <typename D>
+    bool requireDependency()
     {
         Controller* c = Controller::getInstance();
         assert(0 != c);
-        c->register_dependecy(S::getInstance(), D::getInstance());
+        c->registerDependency(D::getInstance()->getType(), getType());
     }
 };
 
