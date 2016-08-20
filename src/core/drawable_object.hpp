@@ -33,17 +33,21 @@ public:
 public:
     /**
      * @brief Sets frame
-     * @param x position
-     * @param y position
+     * @param column unsigned int position
+     * @param row unsigned int position
      */
-    void setFrame(int x, int y);
+    void setFrame(unsigned column, unsigned row);
 
 private:
     const std::string m_path;
-    unsigned m_texture_width;
-    unsigned m_texture_height;
-    unsigned m_frame_width;
-    unsigned m_frame_height;
+    unsigned m_textureWidth;
+    unsigned m_textureHeight;
+    unsigned m_frameWidth;
+    unsigned m_frameHeight;
+    unsigned m_currentFrameColumn;
+    unsigned m_currentFrameRow;
+    unsigned m_maxColumns;
+    unsigned m_maxRows;
 };
 
 } // end of namespace Core
