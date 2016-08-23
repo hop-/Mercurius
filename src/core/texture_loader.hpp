@@ -3,7 +3,8 @@
 
 #include "service.hpp"
 
-#include <vector>
+#include <string>
+#include <map>
 
 namespace Core
 {
@@ -13,9 +14,17 @@ class DrawableObject;
 class TextureLoader
     : public SingletonService<TextureLoader>
 {
-    using DrawableObjects = std::vector<DrawableObject*>;
+    using DrawableObjects = std::map<const std::string, DrawableObject*>;
 
     DrawableObjects m_drawableObjects = DrawableObjects();
+
+public:
+    DrawableObject* drawableObject(const std::string& name); // Maybe need to
+                                                             // move to the new
+                                                             // class which will
+                                                             // contains all
+                                                             // DrawableObjects and
+                                                             // will be singleton
 
 private:
     void start() override;

@@ -5,8 +5,22 @@
 #include <mml/mml_registery.hpp>
 #include <mml/texture.hpp>
 
+#include <debug/log.hpp>
+
+#include <vector>
+
 namespace Core
 {
+
+DrawableObject* TextureLoader::
+drawableObject(const std::string& name)
+{
+    try {
+        return m_drawableObjects.at(name);
+    } catch (std::out_of_range) {
+        return 0;
+    }
+}
 
 void TextureLoader::
 start()
@@ -32,10 +46,10 @@ loadTextures()
     for (const auto& texture : textures) {
         auto mr = texture->size();
         auto fr = texture->frameSize();
-        m_drawableObjects.push_back(new DrawableObject(
+        m_drawableObjects[texture->getName()] = new DrawableObject(
                     texture->path()
                     , mr.first, mr.second
-                    , fr.first, fr.second));
+                    , fr.first, fr.second);
     }
 }
 
