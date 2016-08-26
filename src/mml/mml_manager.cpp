@@ -14,6 +14,7 @@
 #include "platform.hpp"
 #include "switch.hpp"
 #include "texture.hpp"
+#include "animation.hpp"
 
 #include <algorithm>
 #include <utility>
@@ -91,6 +92,7 @@ registerTypes()
     m_types["ladder"] = new Ladder::Factory();
     m_types["config"] = new Config::Factory();
     m_types["texture"] = new Texture::Factory();
+    m_types["animation"] = new Animation::Factory();
 }
 
 void MMLManager::

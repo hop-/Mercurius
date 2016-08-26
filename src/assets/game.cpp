@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-#include <core/texture_loader.hpp>
+#include <core/data_manager.hpp>
 
 namespace Assets
 {
@@ -36,7 +36,7 @@ registerDependencies()
 {
     requireDependency<MML::MMLManager>();
     requireDependency<TypeManager>();
-    requireDependency<Core::TextureLoader>();
+    requireDependency<Core::DataManager>();
 }
 
 void Game::

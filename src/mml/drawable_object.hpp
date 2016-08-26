@@ -24,6 +24,7 @@ public:
     ATTRIBUTE_INTERFACE(int, "priority", priority);
     ATTRIBUTE_INTERFACE(bool, "aimed", aimed); // TODO TMP
     ATTRIBUTE_INTERFACE(std::string, "texture", texture);
+    ATTRIBUTE_INTERFACE(std::string, "animation", animation);
 };
 
 } // namespae MML

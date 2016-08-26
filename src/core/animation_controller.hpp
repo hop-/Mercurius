@@ -12,8 +12,8 @@ class AnimationState;
 class AnimationController
 {
     using States = std::vector<AnimationState*>;
-    States m_states;
-    unsigned m_currentState;
+    States m_states = States();
+    unsigned m_currentState = 0;
 
 public:
     /**

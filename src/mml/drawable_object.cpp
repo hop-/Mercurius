@@ -17,6 +17,7 @@ DrawableObject(const std::string& name)
     addAttribute(new
             MMLAttribute("offset", MMLAttribute::Pair(0.0f, 0.0f)));
     addAttribute(new MMLAttribute("texture", std::string("")));
+    addAttribute(new MMLAttribute("animation", std::string("")));
 }
 
 } // namespace MML
