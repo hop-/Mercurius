@@ -24,13 +24,15 @@ public:
             bool_t,
             int_pair_t,
             screen_mode_t,
-            pair_t
+            pair_t,
+            string_list_t
         };
 
     public:
         typedef std::pair<int, int> IntPair;
         typedef std::pair<float, float> Pair;
         typedef Core::Frame::ScreenMode ScreenMode;
+        typedef std::vector<std::string> StringList;
 
     public:
         AttrHolder(const std::string& v)
@@ -82,6 +84,13 @@ public:
         }
 
     public:
+        AttrHolder(StringList v)
+            : m_stringList(v)
+            , m_type(string_list_t)
+        {
+        }
+
+    public:
         AttrHolder(const AttrHolder& a)
             : m_string(a.m_string)
             , m_int(a.m_int)
@@ -90,6 +99,7 @@ public:
             , m_intPair(a.m_intPair)
             , m_pair(a.m_pair)
             , m_screenMode(a.m_screenMode)
+            , m_stringList(a.m_stringList)
             , m_type(a.m_type)
         {
         }
@@ -107,6 +117,7 @@ public:
             m_intPair = a.m_intPair;
             m_pair = a.m_pair;
             m_screenMode = a.m_screenMode;
+            m_stringList = a.m_stringList;
             m_type = a.m_type;
             return *this;
         }
@@ -146,6 +157,11 @@ public:
             return m_screenMode;
         }
 
+        operator StringList() const
+        {
+            return m_stringList;
+        }
+
     public:
         Type getType() const
         {
@@ -160,6 +176,7 @@ public:
         IntPair m_intPair = IntPair(0, 0);
         Pair m_pair = Pair(0.0f, 0.0f);
         ScreenMode m_screenMode = ScreenMode::fullScreenFit;
+        StringList m_stringList = StringList();
         Type m_type;
     };
 

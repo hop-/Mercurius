@@ -52,6 +52,13 @@ MMLAttribute(const std::string& n, Core::Frame::ScreenMode v)
 }
 
 MMLAttribute::
+MMLAttribute(const std::string& n, MMLAttribute::StringList v)
+    :m_name(n)
+{
+    m_private = new MMLAttributePrivate(v, this);
+}
+
+MMLAttribute::
 ~MMLAttribute()
 {
     assert(0 != m_private);

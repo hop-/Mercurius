@@ -119,6 +119,7 @@ scale: 1;
 position: 25, 200;
 aimed: true;
 texture: resources/textures/dude.png;
+animationList: stand, run, jump;
 
 }
 

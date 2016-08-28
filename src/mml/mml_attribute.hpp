@@ -20,6 +20,7 @@ public:
     typedef std::pair<int, int> IntPair;
     typedef std::pair<float, float> Pair;
     typedef Core::Frame::ScreenMode ScreenMode;
+    typedef std::vector<std::string> StringList;
 
 public:
     MMLAttribute(const MMLAttribute&);
@@ -30,6 +31,7 @@ public:
     MMLAttribute(const std::string& n, IntPair);
     MMLAttribute(const std::string& n, Pair);
     MMLAttribute(const std::string& n, ScreenMode v);
+    MMLAttribute(const std::string& n, StringList v);
     virtual ~MMLAttribute();
 
     MMLAttribute& operator=(const MMLAttribute&);

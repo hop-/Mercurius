@@ -3,6 +3,8 @@
 #include "mml_attribute.hpp"
 #include "mml_manager.hpp"
 
+#include <debug/log.hpp>
+
 #include <cassert>
 #include <cctype>
 #include <algorithm>
@@ -232,6 +234,17 @@ MMLAttribute::ScreenMode toScreenMode(const std::string& v)
     }
 }
 
+MMLAttribute::StringList toStringList(const std::string& v)
+{
+    std::istringstream iss(v);
+    std::string value;
+    MMLAttribute::StringList stringList;
+    while (std::getline(iss, value, comma_value)) {
+        stringList.push_back(value);
+    }
+    return stringList;
+}
+
 }
 
 void MMLParser::
@@ -267,6 +280,9 @@ parseMMLValue(const std::string& attr_value, MMLAttribute* attr)
         // Pair
         attr->setValue(toPair(attr_value));
         break;
+    case 7:
+        // StringList
+        attr->setValue(toStringList(attr_value));
     default:
         break;
     }
