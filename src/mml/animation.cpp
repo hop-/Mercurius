@@ -14,9 +14,10 @@ Animation(const std::string& name)
     : MMLObject(name)
 {
     setType("animation");
-    addAttribute(new MMLAttribute("size", MMLAttribute::IntPair(0, 0)));
-    addAttribute(new MMLAttribute("frameSize", MMLAttribute::IntPair(0, 0)));
-    addAttribute(new MMLAttribute("path", std::string()));
+    addAttribute(new MMLAttribute("position", MMLAttribute::IntPair(0,0)));
+    addAttribute(new MMLAttribute("frameCount", int(0)));
+    addAttribute(new MMLAttribute("loop", bool(false)));
+    addAttribute(new MMLAttribute("fps", int(60)));
 }
 
 } // end of namespace MML

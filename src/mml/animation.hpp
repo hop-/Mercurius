@@ -21,10 +21,10 @@ public:
     Animation(const std::string& name);
 
 public:
-    // TODO add correct set of attributes
-    ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "size", size);
-    ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "frameSize", frameSize);
-    ATTRIBUTE_INTERFACE(std::string, "path", path);
+    ATTRIBUTE_INTERFACE(MMLAttribute::IntPair, "position", position);
+    ATTRIBUTE_INTERFACE(int, "frameCount", frameCount);
+    ATTRIBUTE_INTERFACE(bool, "loop", loop);
+    ATTRIBUTE_INTERFACE(int, "fps", fps);
 };
 
 } // namespace MML

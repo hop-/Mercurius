@@ -1,5 +1,9 @@
 animation {
 
-name: a1;
+name: run;
+position: 0, 1;
+frameCount: 10;
+loop: ture;
+fps: 10;
 
 }

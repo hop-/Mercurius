@@ -1,6 +1,6 @@
 #include "data_manager.hpp"
 #include "drawable_object.hpp"
-#include "animation_controller.hpp"
+#include "animation_state.hpp"
 
 #include <mml/mml_manager.hpp>
 #include <mml/mml_registery.hpp>
@@ -24,11 +24,11 @@ drawableObject(const std::string& name)
     }
 }
 
-AnimationController* DataManager::
-animationController(const std::string& name)
+AnimationState* DataManager::
+animationState(const std::string& name)
 {
     try {
-        return m_animationControllers.at(name);
+        return m_animationStates.at(name);
     } catch (std::out_of_range) {
         return 0;
     }
@@ -84,9 +84,13 @@ loadAnimations()
     std::vector<MML::Animation*> animations;
     registery->getObjects(animations);
     for (const auto& animation : animations) {
-        AnimationController* ac = new AnimationController;
-        // TODO configure AnimationController
-        m_animationControllers[animation->getName()] = ac;
+        std::string name = animation->getName();
+        m_animationStates[name] =
+            new AnimationState(name
+                    , animation->position()
+                    , animation->frameCount()
+                    , animation->loop()
+                    , animation->fps());
     }
 }
 
