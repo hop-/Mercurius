@@ -5,7 +5,7 @@
 #include <mml/mml_manager.hpp>
 #include <mml/mml_registery.hpp>
 #include <mml/texture.hpp>
-#include <mml/Animation.hpp>
+#include <mml/animation.hpp>
 
 #include <debug/log.hpp>
 
