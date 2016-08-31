@@ -43,6 +43,7 @@ protected:
     virtual void addPhysics();
     virtual void addComponent(Core::LogicObject::Component* c);
     virtual void addState(Core::State* state);
+    virtual void addAnimation();
 
     const MML::DrawableObject* drawableObject() const;
     Core::Layer* layer();

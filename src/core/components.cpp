@@ -469,11 +469,11 @@ setColumns(int columns)
     m_columns = columns;
 }
 
-void Animator::
-setController(AnimationController* c)
+Animator::
+Animator(AnimationController* c)
+    : m_controller(c)
 {
     assert(0 != c);
-    m_controller = c;
 }
 
 void Animator::

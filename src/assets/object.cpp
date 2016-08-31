@@ -4,6 +4,9 @@
 #include <core/layer.hpp>
 #include <core/rectangle.hpp>
 #include <core/position.hpp>
+#include <core/animation_controller.hpp>
+#include <core/data_manager.hpp>
+
 #include <mml/drawable_object.hpp>
 #include <sdl/gui_object.hpp>
 
@@ -83,6 +86,7 @@ addCollider(bool trigger)
                 m_drawableObject->offset().second);
     collider->trigger(trigger);
     m_logicObject->addComponent(collider);
+    addAnimation();
 }
 
 void Object::
@@ -109,6 +113,20 @@ addState(Core::State* state)
     m_logicObject->addObject(state);
 }
 
+void Object::
+addAnimation()
+{
+    auto animations = m_drawableObject->animationList();
+    if (0 == animations.size()) {
+        return;
+    }
+    Core::AnimationController* controller = new Core::AnimationController;
+    for (const auto& name : animations) {
+        assert(0 != Core::DataManager::animationState(name));
+        controller->addState(Core::DataManager::animationState(name));
+    }
+    addComponent(new Core::Animator(controller));
+}
 
 const MML::DrawableObject* Object::
 drawableObject() const

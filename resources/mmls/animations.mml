@@ -1,6 +1,26 @@
 animation {
 
+name: stand;
+position: 0, 1;
+frameCount: 10;
+loop: ture;
+fps: 10;
+
+}
+
+animation {
+
 name: run;
+position: 0, 1;
+frameCount: 10;
+loop: ture;
+fps: 10;
+
+}
+
+animation {
+
+name: jump;
 position: 0, 1;
 frameCount: 10;
 loop: ture;

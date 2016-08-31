@@ -387,16 +387,20 @@ class Animator
 
 public:
     /**
-     * @brief Sets controller
+     * @brief constructor
      * @param c pointer to AnimationController
      */
-    void setController(AnimationController* c);
+    Animator(AnimationController* c);
 
 private:
     /**
      * @brief Overrided update function
      */
     void update() override;
+
+private:
+    Animator(const Animator&) = delete;
+    Animator& operator=(const Animator&) = delete;
 };
 
 } // namespace Core

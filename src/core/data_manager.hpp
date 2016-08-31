@@ -22,8 +22,12 @@ class DataManager
     AnimationStates m_animationStates = AnimationStates();
 
 public:
-    DrawableObject* drawableObject(const std::string& name);
-    AnimationState* animationState(const std::string& name);
+    static DrawableObject* drawableObject(const std::string& name);
+    static AnimationState* animationState(const std::string& name);
+
+private:
+    DrawableObject* getDrawableObject(const std::string& name);
+    AnimationState* getAnimationState(const std::string& name);
 
 private:
     void registerDependencies() override;

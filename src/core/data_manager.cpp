@@ -17,6 +17,17 @@ namespace Core
 DrawableObject* DataManager::
 drawableObject(const std::string& name)
 {
+    return getInstance()->getDrawableObject(name);
+}
+AnimationState* DataManager::
+animationState(const std::string& name)
+{
+    return getInstance()->getAnimationState(name);
+}
+
+DrawableObject* DataManager::
+getDrawableObject(const std::string& name)
+{
     try {
         return m_drawableObjects.at(name);
     } catch (std::out_of_range) {
@@ -25,7 +36,7 @@ drawableObject(const std::string& name)
 }
 
 AnimationState* DataManager::
-animationState(const std::string& name)
+getAnimationState(const std::string& name)
 {
     try {
         return m_animationStates.at(name);
