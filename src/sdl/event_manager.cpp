@@ -24,6 +24,7 @@ Core::KeyEvent::Modifier getModifier(SDL_Event event)
             break;
         case KMOD_ALT:
             m = Core::KeyEvent::Modifier::Alt;
+            break;
         default:
             m = Core::KeyEvent::Modifier::None;
     }

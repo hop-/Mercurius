@@ -30,7 +30,7 @@ getDrawableObject(const std::string& name)
 {
     try {
         return m_drawableObjects.at(name);
-    } catch (std::out_of_range) {
+    } catch (std::out_of_range const&) {
         return 0;
     }
 }
@@ -40,7 +40,7 @@ getAnimationState(const std::string& name)
 {
     try {
         return m_animationStates.at(name);
-    } catch (std::out_of_range) {
+    } catch (std::out_of_range const&) {
         return 0;
     }
 }
